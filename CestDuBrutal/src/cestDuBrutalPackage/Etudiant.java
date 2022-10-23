@@ -1,6 +1,8 @@
+package cestDuBrutalPackage;
 
 public class Etudiant {
-    private String type;
+    //eclipse
+	private String type;
     private int ects=30;
     private int force;
     private int dexterite;
@@ -41,5 +43,4 @@ public class Etudiant {
     public void setResistance(int newResistance){this.resistance= newResistance;}
     public void setConstitution(int newConstisution){this.constitution= newConstisution;}
     public void setInitiative(int newInitiative){this.initiative= newInitiative;}
-
 }
