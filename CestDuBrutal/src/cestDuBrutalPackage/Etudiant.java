@@ -29,6 +29,7 @@ public class Etudiant {
     }
 
     //getter
+    
     public String getType(){return this.type;}
     public int getEcts(){return this.ects;}
     public int getForce(){return this.force;}
