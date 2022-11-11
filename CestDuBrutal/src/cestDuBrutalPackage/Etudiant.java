@@ -10,7 +10,6 @@ public class Etudiant {
     private int constitution;
     private int initiative;
     /*private Strategie strategie;*/
-//commentaire test
     
     // constructeur
     public Etudiant(String type, int ects, int force, int dexterite, int resistance,
