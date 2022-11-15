@@ -45,6 +45,10 @@ public class Partie {
         partie = Partie.getInstance();
         partie.getConnection();// ne fonctionne que après un getInstance 
         
+        // création des joueurs
+        
+        Joueur j1 = new Joueur();
+        
 
     }
 }
