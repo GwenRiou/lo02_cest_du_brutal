@@ -21,21 +21,39 @@ public class Joueur {
     private Programme programme;
     private String userName;
     private Programme programmeBase = Programme.ISI;
-    private ArrayList<Etudiant> listeEtudiants;
+    private ArrayList<Etudiant> studentList;
     
     public Joueur() {
         this.points = points;
         this.userName = "";
-        this.listeEtudiants = new ArrayList <Etudiant>();
+        this.studentList = new ArrayList <Etudiant>();
     }
 
     public Joueur(Programme programme, String name) {
         this.points = points;
         this.programme = programme;
         this.userName = name;
-        this.listeEtudiants = new ArrayList <Etudiant>();
+        this.studentList = new ArrayList <Etudiant>();
     }
 
+    public void createStudentList() {
+        // creer le maiter du gobit
+        Etudiant etuMaitre = new Etudiant("Maitre",2,2,2,10,2);
+        studentList.add(etuMaitre);
+        
+        //crer les soldats élites
+        for(int i=0 ; i <= 4; i++){
+            Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2);
+            studentList.add(etuElite);            
+        }
+        
+        //creer lest étudiants de basse
+        for(int i=0 ; i <= 4; i++){
+            Etudiant etuNormal = new Etudiant("Elite",2,2,2,10,2);
+            studentList.add(etuNormal);            
+        }
+    }
+    
     // Getter & Setter
     public int getPoints() {
         return points;

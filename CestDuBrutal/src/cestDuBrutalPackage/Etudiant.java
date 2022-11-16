@@ -2,8 +2,9 @@ package cestDuBrutalPackage;
 import java.lang.Math;
 
 public class Etudiant implements Strategie{
-    //eclipse
-	private String type;
+    
+	
+    private String type;
     private int ects=30;
     private int force;
     private int dexterite;
@@ -11,20 +12,23 @@ public class Etudiant implements Strategie{
     private int constitution;
     private int initiative;
     private enumStrategie strategie;
-    /*private Strategie strategie;*/
     
-    // constructeur
-    public Etudiant(String type, int ects, int force, int dexterite, int resistance,
-                   int constitution, int initiative /* Strategie strategie*/) {
+
+    // constructeur 
+    //ects = 30 pour tous les étudiants donc pas dans l'appel construction
+    public Etudiant(String type, int force, int dexterite, 
+            int resistance, int constitution, int initiative) {
         this.type = type;
-        this.ects=ects;
-        this.force =force;
-        this.dexterite=dexterite;
-        this.resistance=resistance;
-        this.constitution=constitution;
-        this.initiative=initiative;
-        //this.strategie=strategie;
+        this.ects = ects;
+        this.force = force;
+        this.dexterite = dexterite;
+        this.resistance = resistance;
+        this.constitution = constitution;
+        this.initiative = initiative;
+        this.strategie = strategie;
     }
+    
+    
     //TODO do we make a string tostring?
     public void displayCaracteristics(){
         System.out.println(getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative());
