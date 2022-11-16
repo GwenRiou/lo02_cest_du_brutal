@@ -10,7 +10,6 @@ public class Partie {
     private void Partie(){ // constructeur en Private car singleton
         this.etape=0;
         this.finDePartie= false;
-        
     }
     
     public static Partie getInstance() { //--> méthode qui va appeler le constructeur si besoin
@@ -27,6 +26,15 @@ public class Partie {
     // Regarde si l'objet Partie a été crée
     public void getConnection() {
         System.out.println("You have now a Partie going");
+    }
+    
+    
+    public static String getUserInput(String message) {
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println(message);
+        
+        String userInput = myObj.nextLine();  // Read user input
+        return userInput;  // Output user input
     }
     
     //setter & getter
@@ -51,14 +59,10 @@ public class Partie {
         Joueur j1 = new Joueur();
         Joueur j2 = new Joueur();
         
-        j1.setUserName("Xuan");
-        j2.setUserName("Odette"); 
+        j1.setUserName("Xuan"); 
+        String nom = getUserInput("Enter username");
+        j2.setUserName(nom);
         
-        //lire un input de l'utilisateur
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter username");
-
-        j2.setUserName(myObj.nextLine());   // Read user input
-        System.out.println("Username is: " + j2.getUserName());  // Output user input
+        System.out.println(j2.getUserName());
     }
 }
