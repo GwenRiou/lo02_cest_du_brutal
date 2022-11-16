@@ -82,19 +82,51 @@ public class Partie {
         
         System.out.println("Le joueur 1 s'appelle " +partie.getListJ());
         //methode pour mettre un nom de joueur
-       /* j2.setUserName(getUserInput("Enter username"));       
+        
+        /*
+         j2.setUserName(getUserInput("Enter username"));       
         System.out.println("Le joueur 1 s'appelle " +j1.getUserName());      
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
-        
+        */
         
         // test avec l'armée d'un joueur
         j2.createStudentList();
-        //chercher à afficher tout les étudiants 
+        j2.displayAllStudent();
         
         
-        // test sur un étudiant ( sans joueur)
-        Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2);
-        System.out.println(etuElite.toString());*/
+        
+       /*Répartition des points 
+        
+        */
+        //un joueur choisit un étudiant selon sont index/numero        
+        int number = Integer.parseInt(getUserInput("Enter le numéro de l'étudiant choisit"));
+        Etudiant etuTest = j2.getStudent(number);
+        
+        String Characteristics = getUserInput("Enter la caractéristique a modifié");
+        int pointsAttribuee = Integer.parseInt(getUserInput("Enter le nombre de points attribue"));
+        j2.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
+        j2.setPoints(pointsAttribuee);
+               
+        System.out.println(etuTest);
+        
+        j2.displayAllStudent();
+        
+        /*
+         * 
+         * mForcePlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { // fonction déclenchée sur le clic du bouton
+                //augmente la force
+                if (points > 0) {
+                    mPopUp_force.setText("Force : " + (soldat.getForce() + 1));
+                    displayforce(typeSoldat, 1, (soldat.getForce() + 1));
+                } else points = 0;
+            }
+        });
+        
+        *
+        */
+        
         
     }
 }

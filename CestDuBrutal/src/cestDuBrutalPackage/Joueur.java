@@ -28,13 +28,7 @@ public class Joueur {
         this.userName = "";
         this.studentList = new ArrayList <Etudiant>();
     }
-
-    public Joueur(Programme programme, String name) {
-        this.points = points;
-        this.programme = programme;
-        this.userName = name;
-        this.studentList = new ArrayList <Etudiant>();
-    }
+    
 
     public void createStudentList() {
         // creer le maiter du gobit
@@ -42,18 +36,49 @@ public class Joueur {
         studentList.add(etuMaitre);
         
         //crer les soldats élites
-        for(int i=0 ; i <= 4; i++){
+        for(int i=0 ; i < 4; i++){
             Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2);
             studentList.add(etuElite);            
         }
         
         //creer lest étudiants de basse
-        for(int i=0 ; i <= 4; i++){
-            Etudiant etuNormal = new Etudiant("Elite",2,2,2,10,2);
+        for(int i=0 ; i < 15; i++){
+            Etudiant etuNormal = new Etudiant("Base",0,0,0,0,0);
             studentList.add(etuNormal);            
         }
     }
     
+    public void displayAllStudent() {
+
+        ListIterator<Etudiant> iter = studentList.listIterator();
+            
+        while (iter.hasNext()) {
+            System.out.println("L'etudiant n°" + iter.nextIndex() + " a " + iter.next());
+        }
+    }
+    
+    // return l'étudiant choisit
+    public Etudiant getStudent(int index) {
+        Etudiant etu = studentList.get(index);
+        return etu;
+    }
+    
+    public void modifyCharacteristics(Etudiant etu,String car, int pointsAttribuee) {
+        if (pointsAttribuee>this.points) {
+            System.out.println("Vous n 'avez pas assez de points pour cette modification");
+        }else {
+            //Voir si on peut pas faire une méthode au lieu de présicé pour chaque caractéristique
+            switch(car) {
+                case "Force":
+                    // regarde si on se retrouve pas avec des points négatifs
+                    etu.setForce(etu.getForce()+pointsAttribuee);                    
+                  break;
+                default:
+                    System.out.println("La caractéristique n'est pas définit");
+              }
+
+        }
+    }
     // Getter & Setter
     public int getPoints() {
         return points;

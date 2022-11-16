@@ -29,14 +29,11 @@ public class Etudiant implements Strategie{
     }
     
     
-    //TODO do we make a string tostring?
     public String toString() {
         StringBuffer sb = new StringBuffer ("L'Etudiant ");
-        
-        sb.append("est de type");
         sb.append(this.type);
-        sb.append("avec PV : ");
-        sb.append(this.resistance);
+        sb.append(" a PV : ");
+        sb.append(this.ects);
         sb.append(", Force : ");
         sb.append(this.force);
         sb.append(", Dexterite : ");
@@ -58,8 +55,8 @@ public class Etudiant implements Strategie{
 
     
     
-    private void attack(Etudiant target) {}
-    private void heal(Etudiant target) {}
+    private void attack(Etudiant target) {} //TODO a définir
+    private void heal(Etudiant target) {} //TODO a définir
     
     private void agir(Etudiant target) {
         if (this.strategie == strategie.OFFENSIVE) {
