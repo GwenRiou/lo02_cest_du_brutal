@@ -53,6 +53,7 @@ public class Partie {
         j1.setUserName("Xuan");
         j2.setUserName("Gwen"); 
         
+        //test
         System.out.println(j1.getUserName());
         
         System.out.println(j1.getPoints());
