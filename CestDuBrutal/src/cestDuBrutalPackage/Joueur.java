@@ -25,7 +25,6 @@ public class Joueur {
     
     public Joueur() {
         this.points = points;
-        this.programme = Programme.ISI;
         this.userName = "";
         this.listeEtudiants = new ArrayList <Etudiant>();
     }
