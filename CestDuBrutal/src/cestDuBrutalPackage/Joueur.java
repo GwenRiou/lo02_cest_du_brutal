@@ -21,17 +21,20 @@ public class Joueur {
     private Programme programme;
     private String userName;
     private Programme programmeBase = Programme.ISI;
+    private ArrayList<Etudiant> listeEtudiants;
     
     public Joueur() {
         this.points = points;
         this.programme = Programme.ISI;
         this.userName = "";
+        this.listeEtudiants = new ArrayList <Etudiant>();
     }
 
     public Joueur(Programme programme, String name) {
         this.points = points;
         this.programme = programme;
         this.userName = name;
+        this.listeEtudiants = new ArrayList <Etudiant>();
     }
 
     // Getter & Setter

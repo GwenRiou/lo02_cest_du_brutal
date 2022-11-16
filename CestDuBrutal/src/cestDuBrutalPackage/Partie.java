@@ -1,4 +1,5 @@
 package cestDuBrutalPackage;
+import java.util.*;
 
 public class Partie {
     private static Partie partieObject;
@@ -51,13 +52,13 @@ public class Partie {
         Joueur j2 = new Joueur();
         
         j1.setUserName("Xuan");
-        j2.setUserName("Gwen"); 
+        j2.setUserName("Odette"); 
         
-        //test
-        System.out.println(j1.getUserName());
-        
-        System.out.println(j1.getPoints());
-        j1.updatePoints(100);
-        System.out.println(j1.getPoints());
+        //lire un input de l'utilisateur
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Enter username");
+
+        j2.setUserName(myObj.nextLine());   // Read user input
+        System.out.println("Username is: " + j2.getUserName());  // Output user input
     }
 }
