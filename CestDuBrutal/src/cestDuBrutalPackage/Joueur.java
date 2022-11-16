@@ -20,8 +20,8 @@ public class Joueur {
     private int points = 400;
     private Programme programme;
     private String userName;
-    private Programme programmeBase = Programme.ISI;
-    private ArrayList<Etudiant> studentList;
+    //private Programme programmeBase = Programme.ISI;
+    private ArrayList<Etudiant> studentList; // car on va chercher les étu par leur index
     
     public Joueur() {
         this.points = points;

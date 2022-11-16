@@ -3,13 +3,16 @@ import java.util.*;
 
 public class Partie {
     private static Partie partieObject;
+    
     private int etape;
-    private boolean finDePartie;
+    private boolean finDePartie;    
+    private ArrayList<Joueur> listJ;
     
     
-    private void Partie(){ // constructeur en Private car singleton
+    private Partie(){ // constructeur en Private car singleton Et pas en void :)
         this.etape=0;
         this.finDePartie= false;
+        this.listJ = new ArrayList<Joueur>();        
     }
     
     public static Partie getInstance() { //--> mÃ©thode qui va appeler le constructeur si besoin
@@ -28,6 +31,11 @@ public class Partie {
         System.out.println("You now have a Partie going");
     }
     
+    //Ajoute 1 joueur à la partie
+    public void addPlayer(Joueur joueur){
+        listJ.add(joueur);
+    }
+    
     
     public static String getUserInput(String message) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
@@ -42,6 +50,14 @@ public class Partie {
         this.etape=etape;
     }
     
+    public ArrayList<Joueur> getListJ() {
+        return listJ;
+    }
+
+    public void setListJ(ArrayList<Joueur> listJ) {
+        this.listJ = listJ;
+    }
+
     public int getEtape() {
         return this.etape;
     }
@@ -58,22 +74,27 @@ public class Partie {
         
         Joueur j1 = new Joueur();
         Joueur j2 = new Joueur();
-
+        
         j1.setUserName("Xuan"); 
         
+        partie.addPlayer(j1);
+        partie.addPlayer(j2);
+        
+        System.out.println("Le joueur 1 s'appelle " +partie.getListJ());
         //methode pour mettre un nom de joueur
-        j2.setUserName(getUserInput("Enter username"));       
+       /* j2.setUserName(getUserInput("Enter username"));       
         System.out.println("Le joueur 1 s'appelle " +j1.getUserName());      
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
         
         
         // test avec l'armée d'un joueur
         j2.createStudentList();
+        //chercher à afficher tout les étudiants 
         
         
         // test sur un étudiant ( sans joueur)
         Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2);
-        System.out.println(etuElite.toString());
+        System.out.println(etuElite.toString());*/
         
     }
 }
