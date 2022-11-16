@@ -30,8 +30,30 @@ public class Etudiant implements Strategie{
     
     
     //TODO do we make a string tostring?
+    public String toString() {
+        StringBuffer sb = new StringBuffer ("L'Etudiant ");
+        
+        sb.append("est de type");
+        sb.append(this.type);
+        sb.append("avec PV : ");
+        sb.append(this.resistance);
+        sb.append(", Force : ");
+        sb.append(this.force);
+        sb.append(", Dexterite : ");
+        sb.append(this.dexterite);
+        sb.append(", Resistance : ");
+        sb.append(this.resistance);
+        sb.append(", Constitution : ");
+        sb.append(this.constitution);
+        sb.append(", Initiative : ");
+        sb.append(this.initiative);
+        sb.append(", Stratégie : ");
+        //sb.append(getStraterie); TODO
+            
+        return sb.toString();
+        }
     public void displayCaracteristics(){
-        System.out.println(getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative());
+        System.out.println(getType()+getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative());
     }
 
     

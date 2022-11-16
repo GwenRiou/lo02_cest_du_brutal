@@ -61,12 +61,19 @@ public class Partie {
 
         j1.setUserName("Xuan"); 
         
-      //methode pour mettre un nom de joueur
+        //methode pour mettre un nom de joueur
         j2.setUserName(getUserInput("Enter username"));       
         System.out.println("Le joueur 1 s'appelle " +j1.getUserName());      
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
         
+        
+        // test avec l'armée d'un joueur
         j2.createStudentList();
+        
+        
+        // test sur un étudiant ( sans joueur)
+        Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2);
+        System.out.println(etuElite.toString());
         
     }
 }
