@@ -45,6 +45,19 @@ public class Partie {
         partie = Partie.getInstance();
         partie.getConnection();// ne fonctionne que aprÃ¨s un getInstance 
         
-
+        // création des joueurs
+        
+        Joueur j1 = new Joueur();
+        Joueur j2 = new Joueur();
+        
+        j1.setUserName("Xuan");
+        j2.setUserName("Gwen"); 
+        
+        //test
+        System.out.println(j1.getUserName());
+        
+        System.out.println(j1.getPoints());
+        j1.updatePoints(100);
+        System.out.println(j1.getPoints());
     }
 }
