@@ -59,6 +59,7 @@ public class Partie {
         Joueur j1 = new Joueur();
         Joueur j2 = new Joueur();
         
+        //methode pour mettre un nom de joueur
         j1.setUserName("Xuan"); 
         String nom = getUserInput("Enter username");
         j2.setUserName(nom);
