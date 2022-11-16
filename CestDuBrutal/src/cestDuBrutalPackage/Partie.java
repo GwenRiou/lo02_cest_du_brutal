@@ -48,7 +48,15 @@ public class Partie {
         // création des joueurs
         
         Joueur j1 = new Joueur();
+        Joueur j2 = new Joueur();
         
-
+        j1.setUserName("Xuan");
+        j2.setUserName("Gwen"); 
+        
+        System.out.println(j1.getUserName());
+        
+        System.out.println(j1.getPoints());
+        j1.updatePoints(100);
+        System.out.println(j1.getPoints());
     }
 }
