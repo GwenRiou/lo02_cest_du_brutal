@@ -1,6 +1,7 @@
 package cestDuBrutalPackage;
+import java.lang.Math;
 
-public class Etudiant {
+public class Etudiant implements Strategie{
     //eclipse
 	private String type;
     private int ects=30;
@@ -9,6 +10,7 @@ public class Etudiant {
     private int resistance;
     private int constitution;
     private int initiative;
+    private enumStrategie strategie;
     /*private Strategie strategie;*/
     
     // constructeur
@@ -23,12 +25,41 @@ public class Etudiant {
         this.initiative=initiative;
         //this.strategie=strategie;
     }
-
+    //TODO do we make a string tostring?
     public void displayCaracteristics(){
         System.out.println(getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative());
     }
 
-    //getter
+    
+    
+    private void attack(Etudiant target) {}
+    private void heal(Etudiant target) {}
+    
+    private void agir(Etudiant target) {
+        if (this.strategie == strategie.OFFENSIVE) {
+            attack(target);
+        }
+        else if (this.strategie == strategie.DEFENSIVE) {
+            heal(target);
+        }
+        else if (this.strategie == strategie.RANDOM) {
+            if(Math.random()>0.5) {
+                attack(target);
+            }
+            else {
+                heal(target);
+            }
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    //getters & setters
+    
     public String getType(){return this.type;}
     public int getEcts(){return this.ects;}
     public int getForce(){return this.force;}
@@ -42,4 +73,6 @@ public class Etudiant {
     public void setResistance(int newResistance){this.resistance= newResistance;}
     public void setConstitution(int newConstisution){this.constitution= newConstisution;}
     public void setInitiative(int newInitiative){this.initiative= newInitiative;}
+    
+
 }

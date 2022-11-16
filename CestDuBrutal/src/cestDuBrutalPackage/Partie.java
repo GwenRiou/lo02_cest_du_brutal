@@ -15,7 +15,7 @@ public class Partie {
     
     public static Partie getInstance() { //--> méthode qui va appeler le constructeur si besoin
         
-        //create objet if it's not already created
+        //create object if it's not already created
         if(partieObject == null) {
             partieObject = new Partie();
         }
@@ -26,7 +26,7 @@ public class Partie {
     
     // Regarde si l'objet Partie a été crée
     public void getConnection() {
-        System.out.println("You have now a Partie going");
+        System.out.println("You now have a Partie going");
     }
     
     //setter & getter
