@@ -6,13 +6,13 @@ public class Partie {
     private boolean finDePartie;
     
     
-    private void Parite(){ // constructeur en Private car singleton
+    private void Partie(){ // constructeur en Private car singleton
         this.etape=0;
         this.finDePartie= false;
         
     }
     
-    public static Partie getInstance() { //--> méthode qui va appeler le constructeur si besoin
+    public static Partie getInstance() { //--> mÃ©thode qui va appeler le constructeur si besoin
         
         //create objet if it's not already created
         if(partieObject == null) {
@@ -23,7 +23,7 @@ public class Partie {
         return partieObject;
     }
     
-    // Regarde si l'objet Partie a été crée
+    // Regarde si l'objet Partie a Ã©tÃ© crÃ©e
     public void getConnection() {
         System.out.println("You have now a Partie going");
     }
@@ -40,10 +40,10 @@ public class Partie {
     //THE MAIN
     public static void main(String[] args) {
         
-        //Création de la partie
+        //CrÃ©ation de la partie
         Partie partie;
         partie = Partie.getInstance();
-        partie.getConnection();// ne fonctionne que après un getInstance 
+        partie.getConnection();// ne fonctionne que aprÃ¨s un getInstance 
         
         // création des joueurs
         
