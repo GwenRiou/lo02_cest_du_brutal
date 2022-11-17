@@ -64,41 +64,60 @@ public class Joueur {
     }
     
     
-    public void modifyCharacteristics(Etudiant etu,String car, int pointsAttribuee) {
+    public int modifyCharacteristics(Etudiant etu,String car, int pointsAttribuee) {   
+        // methode retourne 0 si on ne peut pas faire la modification
         if (pointsAttribuee>=this.points) {
             System.out.println("Vous n 'avez pas assez de points pour cette modification");
+            return 0;
         }else {
             //Voir si on peut pas faire une méthode au lieu de présicé pour chaque caractéristique
-            switch(car) {
+            switch(car) { 
                 case "Force":
                     int force = etu.getForce();
                     if(force+pointsAttribuee>=0) { //TODO il doit avoit un pb ici
                         etu.setForce(force+pointsAttribuee);  
-                    } else    System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");             
-                  break;
+                        return 1;
+                    } else {
+                        System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");   
+                        return 0;
+                    }
+                 // pas de break car on sort de la boucle avant 
                 case "Dexterite":
                     if(etu.getDexterite()+pointsAttribuee>=0) {                   
                         etu.setDexterite(etu.getDexterite()+pointsAttribuee);
-                    }else    System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");    
-                  break;
+                        return 1;
+                    }else  {
+                        System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");    
+                        return 0;
+                    }
                 case "Resistance":
                     if(etu.getResistance()+pointsAttribuee>=0) {                   
                         etu.setResistance(etu.getResistance()+pointsAttribuee);
-                    }else    System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");    
-                  break;
+                        return 1;
+                    }else    {
+                        System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");   
+                        return 0;
+                    }
                 case "Constitution":
                     if(etu.getConstitution()+pointsAttribuee>=0) {                   
                         etu.setConstitution(etu.getConstitution()+pointsAttribuee);
-                    }else    System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");    
-                  break;
+                        return 1;
+                    }else {
+                        System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");    
+                        return 0;
+                    }
                 case "Initiative":
                     if(etu.getInitiative()+pointsAttribuee>=0) {                   
                         etu.setInitiative(etu.getInitiative()+pointsAttribuee);
-                    }else    System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");    
-                  break;
+                        return 1;
+                    }else  {
+                        System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");   
+                        return 0;
+                    }
                  
                 default:
                     System.out.println("La caractéristique entrée n'est pas définit, vérifier l'ortographe");
+                    return 0;
               }
 
         }

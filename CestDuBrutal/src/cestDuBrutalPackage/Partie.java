@@ -50,19 +50,15 @@ public class Partie {
                 String Characteristics = getUserInput("Enter la caractéristique a modifié");        
                 int pointsAttribuee = getUserInputInt("Enter le nombre de points attribue");
                 
-                j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
-                j.setPoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif à eu lieu ou non
+               int retour =  j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
+                if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif à eu lieu ou non
                 
                 choisirAutreEtu = getUserInput("Voulez vous passez à un autre étudiant ? Y/N");
             }
             // TODO regarder si l'utilisateur entre une caractéristique valable avant de continuer 
-            
+            System.out.println("Il reste "+j.getPoints()+" points");
             etapeSuivante = getUserInput("Voulez vous passez à l'étape suivante ? Y/N");// TODO methode qui ignore si l'entré n'est pas = Y ou =N
-        }
-        /*     
-        System.out.println(etuTest);
-        System.out.println(j);*/
-        
+        }        
     }
     
     //Methode pour Lire les inputs
@@ -92,7 +88,7 @@ public class Partie {
     }
     public static int getUserIndex(String message, int size) {
         int num = -5;
-        System.out.println("la liste à pour taille" + size );   
+        System.out.println("choisiser un nombre entre 0 et " + size );   
         while(num>size|| num<0) {            
             num = getUserInputInt(message);            
         }             
@@ -129,38 +125,30 @@ public class Partie {
         
         Joueur j1 = new Joueur();
         Joueur j2 = new Joueur();
-        
-        j1.setUserName("Xuan"); 
-        
+               
         partie.addPlayer(j1);
         partie.addPlayer(j2);
         
-        System.out.println("Le joueur 1 s'appelle " +partie.getListJ());
-        //methode pour mettre un nom de joueur
-        
-        /*
+        j1.setUserName("Xuan");        
+        //methode pour mettre un nom de joueur      
          j2.setUserName(getUserInput("Enter username"));       
-        System.out.println("Le joueur 1 s'appelle " +j1.getUserName());      
+        System.out.println("Le joueur 1 s'appelle " +j1.getUserName());    
+        
+        
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
-        */
+        
         
         // test avec l'armée d'un joueur
         j2.createStudentList();
-        //j2.displayAllStudent();
+        j2.displayAllStudent();
         
         
         
        /*Répartition des points 
         * ça va devenir une méthode de Partie 
-        */
+        */        
         
-        /*
-         *  getUserIndex return l'index d'un élément d'une liste donnée
-         *  demande à l'utilisateur jusqu'à avoir un index valable 
-         */      
-        
-        partie.repartitionPoints(j2);
-        
+        partie.repartitionPoints(j2);        
         j2.displayAllStudent();
         
         
