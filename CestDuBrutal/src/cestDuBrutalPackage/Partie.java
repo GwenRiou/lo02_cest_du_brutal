@@ -75,8 +75,7 @@ public class Partie {
             String input = getUserInput(message);
             try 
             { 
-                int num = Integer.parseInt(input); 
-                
+                int num = Integer.parseInt(input);                 
                 return num;
             }  
             catch (NumberFormatException e)  
@@ -145,9 +144,8 @@ public class Partie {
         
         
        /*Répartition des points 
-        * ça va devenir une méthode de Partie 
         */        
-        
+        //TODO attention il y a pas de points max pour les caractéristiques ( c'est demander dans le sujet mais je l'ai pas encore fait)
         partie.repartitionPoints(j2);        
         j2.displayAllStudent();
         

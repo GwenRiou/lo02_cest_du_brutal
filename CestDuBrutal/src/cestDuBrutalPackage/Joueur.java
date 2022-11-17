@@ -66,52 +66,57 @@ public class Joueur {
     
     public int modifyCharacteristics(Etudiant etu,String car, int pointsAttribuee) {   
         // methode retourne 0 si on ne peut pas faire la modification
-        if (pointsAttribuee>=this.points) {
+        if (pointsAttribuee>this.points) {
             System.out.println("Vous n 'avez pas assez de points pour cette modification");
             return 0;
         }else {
             //Voir si on peut pas faire une méthode au lieu de présicé pour chaque caractéristique
             switch(car) { 
                 case "Force":
-                    int force = etu.getForce();
-                    if(force+pointsAttribuee>=0) { //TODO il doit avoit un pb ici
-                        etu.setForce(force+pointsAttribuee);  
+                    int newForce = etu.getForce()+pointsAttribuee;
+                    //regarder si la nouvelle force est bien <=10 et >=0
+                    if(newForce>=0 && newForce<=10) { 
+                        etu.setForce(newForce);  
                         return 1;
                     } else {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");   
+                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");   
                         return 0;
                     }
                  // pas de break car on sort de la boucle avant 
                 case "Dexterite":
-                    if(etu.getDexterite()+pointsAttribuee>=0) {                   
-                        etu.setDexterite(etu.getDexterite()+pointsAttribuee);
+                    int newDexterite = etu.getDexterite()+pointsAttribuee;
+                    if(newDexterite>=0 && newDexterite<=10) {                   
+                        etu.setDexterite(newDexterite);
                         return 1;
                     }else  {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");    
+                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");    
                         return 0;
                     }
                 case "Resistance":
-                    if(etu.getResistance()+pointsAttribuee>=0) {                   
-                        etu.setResistance(etu.getResistance()+pointsAttribuee);
+                    int newResistance = etu.getResistance()+pointsAttribuee;
+                    if(newResistance>=0 && newResistance<=10) {                   
+                        etu.setResistance(newResistance);
                         return 1;
                     }else    {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");   
+                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");   
                         return 0;
                     }
                 case "Constitution":
-                    if(etu.getConstitution()+pointsAttribuee>=0) {                   
-                        etu.setConstitution(etu.getConstitution()+pointsAttribuee);
+                    int newConstitution = etu.getConstitution()+pointsAttribuee;
+                    if(newConstitution>=0 && newConstitution<=10) {                   
+                        etu.setConstitution(newConstitution);
                         return 1;
                     }else {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");    
+                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");    
                         return 0;
                     }
                 case "Initiative":
-                    if(etu.getInitiative()+pointsAttribuee>=0) {                   
-                        etu.setInitiative(etu.getInitiative()+pointsAttribuee);
+                    int newInitiative =etu.getInitiative()+pointsAttribuee;
+                    if(newInitiative>=0 && newInitiative<=10) {                   
+                        etu.setInitiative(newInitiative);
                         return 1;
                     }else  {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques négatives");   
+                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");   
                         return 0;
                     }
                  
