@@ -96,10 +96,13 @@ public class Partie {
         
         
        /*Répartition des points 
-        
+        * ça va devenir une méthode de Partie 
         */
-        //un joueur choisit un étudiant selon sont index/numero        
+        //un joueur choisit un étudiant selon sont index/numero
+        
+        //TODO faire une boucle tant que getUserInput n'est pas un integer
         int number = Integer.parseInt(getUserInput("Enter le numéro de l'étudiant choisit"));
+        
         Etudiant etuTest = j2.getStudent(number);
         
         String Characteristics = getUserInput("Enter la caractéristique a modifié");
@@ -108,24 +111,11 @@ public class Partie {
         j2.setPoints(pointsAttribuee);
                
         System.out.println(etuTest);
+        System.out.println(j2);
         
-        j2.displayAllStudent();
+        //j2.displayAllStudent();
         
-        /*
-         * 
-         * mForcePlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { // fonction déclenchée sur le clic du bouton
-                //augmente la force
-                if (points > 0) {
-                    mPopUp_force.setText("Force : " + (soldat.getForce() + 1));
-                    displayforce(typeSoldat, 1, (soldat.getForce() + 1));
-                } else points = 0;
-            }
-        });
         
-        *
-        */
         
         
     }

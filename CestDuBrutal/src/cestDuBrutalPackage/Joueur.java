@@ -63,6 +63,7 @@ public class Joueur {
         return etu;
     }
     
+    
     public void modifyCharacteristics(Etudiant etu,String car, int pointsAttribuee) {
         if (pointsAttribuee>this.points) {
             System.out.println("Vous n 'avez pas assez de points pour cette modification");
@@ -70,15 +71,49 @@ public class Joueur {
             //Voir si on peut pas faire une méthode au lieu de présicé pour chaque caractéristique
             switch(car) {
                 case "Force":
-                    // regarde si on se retrouve pas avec des points négatifs
-                    etu.setForce(etu.getForce()+pointsAttribuee);                    
+                    int force = etu.getForce();
+                    if(force+pointsAttribuee>=0) {
+                        etu.setForce(force+pointsAttribuee);  
+                    } else    System.out.println("Vous n'avez pas assez de points pour faire cette modification");             
                   break;
+                case "Dexterite":
+                    if(etu.getDexterite()+pointsAttribuee>=0) {                   
+                        etu.setDexterite(etu.getDexterite()+pointsAttribuee);
+                    }else    System.out.println("Vous n'avez pas assez de points pour faire cette modification");    
+                  break;
+                case "Resistance":
+                    if(etu.getResistance()+pointsAttribuee>=0) {                   
+                        etu.setResistance(etu.getResistance()+pointsAttribuee);
+                    }else    System.out.println("Vous n'avez pas assez de points pour faire cette modification");    
+                  break;
+                case "Constitution":
+                    if(etu.getConstitution()+pointsAttribuee>=0) {                   
+                        etu.setConstitution(etu.getConstitution()+pointsAttribuee);
+                    }else    System.out.println("Vous n'avez pas assez de points pour faire cette modification");    
+                  break;
+                case "Initiative":
+                    if(etu.getInitiative()+pointsAttribuee>=0) {                   
+                        etu.setInitiative(etu.getInitiative()+pointsAttribuee);
+                    }else    System.out.println("Vous n'avez pas assez de points pour faire cette modification");    
+                  break;
+                 
                 default:
                     System.out.println("La caractéristique n'est pas définit");
               }
 
         }
     }
+    public String toString() {
+        StringBuffer sb = new StringBuffer ("Le Joueur ");
+        sb.append(this.userName);
+        sb.append(" appartient au Programme");
+        //sb.append((String)this.Programme);TODO
+        sb.append(" et a  : ");
+        sb.append(this.points);
+        sb.append(" points ");
+        
+        return sb.toString();
+        }
     // Getter & Setter
     public int getPoints() {
         return points;
