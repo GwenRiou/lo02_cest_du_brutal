@@ -3,13 +3,16 @@ import java.util.*;
 
 public class Partie {
     private static Partie partieObject;
+    
     private int etape;
-    private boolean finDePartie;
+    private boolean finDePartie;    
+    private ArrayList<Joueur> listJ;
     
     
-    private void Partie(){ // constructeur en Private car singleton
+    private Partie(){ // constructeur en Private car singleton Et pas en void :)
         this.etape=0;
         this.finDePartie= false;
+        this.listJ = new ArrayList<Joueur>();        
     }
     
     public static Partie getInstance() { //--> mÃ©thode qui va appeler le constructeur si besoin
@@ -23,12 +26,42 @@ public class Partie {
         return partieObject;
     }
     
-    // Regarde si l'objet Partie a Ã©tÃ© crÃ©e
+    // Regarde si l'objet Partie a deja un instance 
     public void getConnection() {
         System.out.println("You now have a Partie going");
     }
     
+    //Ajoute 1 joueur à la partie
+    public void addPlayer(Joueur joueur){
+        listJ.add(joueur);
+    }
+    public void repartitionPoints(Joueur j) {
+        System.out.println("Vous allez pouvoir attribuer vos points à vos étudiants :) ");        
+        
+        String etapeSuivante = "N";
+        while (!"Y".equals(etapeSuivante)){
+            
+            System.out.print("Choisisez votre étudiant" );
+            int index = getUserIndex("Enter le numéro de l'étudiant choisit",j.getStudentList().size()-1);        
+            Etudiant etuTest = j.getStudent(index);
+            String choisirAutreEtu ="N";
+            while (!"Y".equals(choisirAutreEtu)){
+                
+                String Characteristics = getUserInput("Enter la caractéristique a modifié");        
+                int pointsAttribuee = getUserInputInt("Enter le nombre de points attribue");
+                
+               int retour =  j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
+                if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif à eu lieu ou non
+                
+                choisirAutreEtu = getUserInput("Voulez vous passez à un autre étudiant ? Y/N");
+            }
+            // TODO regarder si l'utilisateur entre une caractéristique valable avant de continuer 
+            System.out.println("Il reste "+j.getPoints()+" points");
+            etapeSuivante = getUserInput("Voulez vous passez à l'étape suivante ? Y/N");// TODO methode qui ignore si l'entré n'est pas = Y ou =N
+        }        
+    }
     
+    //Methode pour Lire les inputs
     public static String getUserInput(String message) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         System.out.println(message);
@@ -37,11 +70,45 @@ public class Partie {
         return userInput;  // Output user input
     }
     
+    public static int getUserInputInt(String message) {        
+        while(1==1) { // Attention boucle infini
+            String input = getUserInput(message);
+            try 
+            { 
+                int num = Integer.parseInt(input); 
+                
+                return num;
+            }  
+            catch (NumberFormatException e)  
+            { 
+                System.out.println(input + " n'est pas un numbre"); 
+            }   
+        }        
+        
+    }
+    public static int getUserIndex(String message, int size) {
+        int num = -5;
+        System.out.println("choisiser un nombre entre 0 et " + size );   
+        while(num>size|| num<0) {            
+            num = getUserInputInt(message);            
+        }             
+        return num;
+    }
+           
+    
     //setter & getter
     public void setEtape(int etape) {
         this.etape=etape;
     }
     
+    public ArrayList<Joueur> getListJ() {
+        return listJ;
+    }
+
+    public void setListJ(ArrayList<Joueur> listJ) {
+        this.listJ = listJ;
+    }
+
     public int getEtape() {
         return this.etape;
     }
@@ -58,12 +125,34 @@ public class Partie {
         
         Joueur j1 = new Joueur();
         Joueur j2 = new Joueur();
+               
+        partie.addPlayer(j1);
+        partie.addPlayer(j2);
         
-        //methode pour mettre un nom de joueur
-        j1.setUserName("Xuan"); 
-        String nom = getUserInput("Enter username");
-        j2.setUserName(nom);
+        j1.setUserName("Xuan");        
+        //methode pour mettre un nom de joueur      
+         j2.setUserName(getUserInput("Enter username"));       
+        System.out.println("Le joueur 1 s'appelle " +j1.getUserName());    
         
-        System.out.println(j2.getUserName());
+        
+        System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
+        
+        
+        // test avec l'armée d'un joueur
+        j2.createStudentList();
+        j2.displayAllStudent();
+        
+        
+        
+       /*Répartition des points 
+        * ça va devenir une méthode de Partie 
+        */        
+        
+        partie.repartitionPoints(j2);        
+        j2.displayAllStudent();
+        
+        
+        
+        
     }
 }
