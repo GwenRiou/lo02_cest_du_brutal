@@ -26,7 +26,7 @@ public class Partie {
         return partieObject;
     }
     
-    // Regarde si l'objet Partie a Ã©tÃ© crÃ©e
+    // Regarde si l'objet Partie a deja un instance 
     public void getConnection() {
         System.out.println("You now have a Partie going");
     }
@@ -35,8 +35,37 @@ public class Partie {
     public void addPlayer(Joueur joueur){
         listJ.add(joueur);
     }
+    public void repartitionPoints(Joueur j) {
+        System.out.println("Vous allez pouvoir attribuer vos points à vos étudiants :) ");        
+        
+        String etapeSuivante = "N";
+        while (!"Y".equals(etapeSuivante)){
+            
+            System.out.print("Choisisez votre étudiant" );
+            int index = getUserIndex("Enter le numéro de l'étudiant choisit",j.getStudentList().size()-1);        
+            Etudiant etuTest = j.getStudent(index);
+            String choisirAutreEtu ="N";
+            while (!"Y".equals(choisirAutreEtu)){
+                
+                String Characteristics = getUserInput("Enter la caractéristique a modifié");        
+                int pointsAttribuee = getUserInputInt("Enter le nombre de points attribue");
+                
+                j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
+                j.setPoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif à eu lieu ou non
+                
+                choisirAutreEtu = getUserInput("Voulez vous passez à un autre étudiant ? Y/N");
+            }
+            // TODO regarder si l'utilisateur entre une caractéristique valable avant de continuer 
+            
+            etapeSuivante = getUserInput("Voulez vous passez à l'étape suivante ? Y/N");// TODO methode qui ignore si l'entré n'est pas = Y ou =N
+        }
+        /*     
+        System.out.println(etuTest);
+        System.out.println(j);*/
+        
+    }
     
-    
+    //Methode pour Lire les inputs
     public static String getUserInput(String message) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         System.out.println(message);
@@ -44,6 +73,32 @@ public class Partie {
         String userInput = myObj.nextLine();  // Read user input
         return userInput;  // Output user input
     }
+    
+    public static int getUserInputInt(String message) {        
+        while(1==1) { // Attention boucle infini
+            String input = getUserInput(message);
+            try 
+            { 
+                int num = Integer.parseInt(input); 
+                
+                return num;
+            }  
+            catch (NumberFormatException e)  
+            { 
+                System.out.println(input + " n'est pas un numbre"); 
+            }   
+        }        
+        
+    }
+    public static int getUserIndex(String message, int size) {
+        int num = -5;
+        System.out.println("la liste à pour taille" + size );   
+        while(num>size|| num<0) {            
+            num = getUserInputInt(message);            
+        }             
+        return num;
+    }
+           
     
     //setter & getter
     public void setEtape(int etape) {
@@ -91,29 +146,22 @@ public class Partie {
         
         // test avec l'armée d'un joueur
         j2.createStudentList();
-        j2.displayAllStudent();
+        //j2.displayAllStudent();
         
         
         
        /*Répartition des points 
         * ça va devenir une méthode de Partie 
         */
-        //un joueur choisit un étudiant selon sont index/numero
         
-        //TODO faire une boucle tant que getUserInput n'est pas un integer
-        int number = Integer.parseInt(getUserInput("Enter le numéro de l'étudiant choisit"));
+        /*
+         *  getUserIndex return l'index d'un élément d'une liste donnée
+         *  demande à l'utilisateur jusqu'à avoir un index valable 
+         */      
         
-        Etudiant etuTest = j2.getStudent(number);
+        partie.repartitionPoints(j2);
         
-        String Characteristics = getUserInput("Enter la caractéristique a modifié");
-        int pointsAttribuee = Integer.parseInt(getUserInput("Enter le nombre de points attribue"));
-        j2.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
-        j2.setPoints(pointsAttribuee);
-               
-        System.out.println(etuTest);
-        System.out.println(j2);
-        
-        //j2.displayAllStudent();
+        j2.displayAllStudent();
         
         
         
