@@ -5,6 +5,7 @@ public class Etudiant implements Strategie{
     
 	
     private String type;
+    private int id;
     private int ects=30;
     private int force;
     private int dexterite;
@@ -30,7 +31,9 @@ public class Etudiant implements Strategie{
     
     
     public String toString() {
-        StringBuffer sb = new StringBuffer ("L'Etudiant ");
+        StringBuffer sb = new StringBuffer ("L'Etudiant n° ");
+        sb.append(this.id);
+        sb.append(" et de type : " );
         sb.append(this.type);
         sb.append(" a PV : ");
         sb.append(this.ects);
@@ -48,7 +51,9 @@ public class Etudiant implements Strategie{
         //sb.append(getStraterie); TODO
             
         return sb.toString();
-        }
+    }
+
+
     public void displayCaracteristics(){
         System.out.println(getType()+getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative());
     }
@@ -90,12 +95,14 @@ public class Etudiant implements Strategie{
     public int getResistance(){return this.resistance;}
     public int getConstitution(){return this.constitution;}
     public int getInitiative(){return this.initiative;}
+    public int getId() {return id;}
     
     public void setForce(int newForce){this.force=newForce;}
     public void setDexterite(int newDexterite){this.dexterite= newDexterite;}
     public void setResistance(int newResistance){this.resistance= newResistance;}
     public void setConstitution(int newConstisution){this.constitution= newConstisution;}
     public void setInitiative(int newInitiative){this.initiative= newInitiative;}
+    public void setId(int id) {this.id = id;}
     
 
 }
