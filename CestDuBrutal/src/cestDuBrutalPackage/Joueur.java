@@ -4,15 +4,15 @@ import java.util.*;
 /**
  * 
  * @author rioug
- *         Tester si le joueur 2 à un le même nom que le joueur 1 avant de
+ *         Tester si le joueur 2 Ã  un le mÃªme nom que le joueur 1 avant de
  *         l'autoriser le nom
- *         Implémentation:
- *         création d’un variable static qui compte le nombre de joueur
+ *         ImplÃ©mentation:
+ *         crÃ©ation dâ€™un variable static qui compte le nombre de joueur
  *         setUsername en Private
- *         Si le joueur veut créer un nom : la méthode regardé : le numéro du
+ *         Si le joueur veut crÃ©er un nom : la mÃ©thode regardÃ© : le numÃ©ro du
  *         joueur
- *         si c’est le joueur 1 on autorise tout --> appel de la fonction setter
- *         si c’est le joueur 2 --> regarde si le nom du joueur 1 à le même nom et
+ *         si câ€™est le joueur 1 on autorise tout --> appel de la fonction setter
+ *         si câ€™est le joueur 2 --> regarde si le nom du joueur 1 Ã  le mÃªme nom et
  *         si oui on demande un autre non si non on appel setter
  * 
  */
@@ -21,7 +21,7 @@ public class Joueur /*extends  Reserve*/{
     private Programme programme;
     private String userName;
     //private Programme programmeBase = Programme.ISI;
-    private ArrayList<Etudiant> studentList; // car on va chercher les étu par leur index
+    private ArrayList<Etudiant> studentList; // car on va chercher les Ã©tu par leur index
     private Reserve reserve = new Reserve();
     
     public Joueur() {
@@ -36,13 +36,13 @@ public class Joueur /*extends  Reserve*/{
         Etudiant etuMaitre = new Etudiant("Maitre",2,2,2,10,2);
         studentList.add(etuMaitre);
         
-        //crer les soldats élites
+        //crer les soldats Ã©lites
         for(int i=0 ; i < 4; i++){
             Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2);
             studentList.add(etuElite);            
         }
         
-        //creer lest étudiants de basse
+        //creer lest Ã©tudiants de basse
         for(int i=0 ; i < 15; i++){
             Etudiant etuNormal = new Etudiant("Base",0,0,0,0,0);
             studentList.add(etuNormal);            
@@ -50,7 +50,7 @@ public class Joueur /*extends  Reserve*/{
         setIdForArmy();
        
     }
-    private void setIdForArmy() {// parcour la liste et seID des étudiants
+    private void setIdForArmy() {// parcour la liste et seID des Ã©tudiants
         
         System.out.println(" List :");
         
@@ -67,11 +67,11 @@ public class Joueur /*extends  Reserve*/{
             
         while (iter.hasNext()) {
             System.out.println(iter.next());
-            //System.out.println("L'etudiant n°" + iter.nextIndex() + " a " + iter.next());
+            //System.out.println("L'etudiant nÂ°" + iter.nextIndex() + " a " + iter.next());
         }
     }
     
-    // return l'étudiant choisit
+    // return l'Ã©tudiant choisit
     public Etudiant getStudent(int index) {
         Etudiant etu = studentList.get(index);
         return etu;
@@ -84,7 +84,7 @@ public class Joueur /*extends  Reserve*/{
             System.out.println("Vous n 'avez pas assez de points pour cette modification");
             return 0;
         }else {
-            //Voir si on peut pas faire une méthode au lieu de présicé pour chaque caractéristique
+            //Voir si on peut pas faire une mÃ©thode au lieu de prÃ©sicÃ© pour chaque caractÃ©ristique
             switch(car) { 
                 case "Force":
                     int newForce = etu.getForce()+pointsAttribuee;
@@ -93,7 +93,7 @@ public class Joueur /*extends  Reserve*/{
                         etu.setForce(newForce);  
                         return 1;
                     } else {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");   
+                        System.out.println("Vous ne pouvez pas avoir de caractÃ©ristiques >=10 ou <=0");   
                         return 0;
                     }
                  // pas de break car on sort de la boucle avant 
@@ -103,7 +103,7 @@ public class Joueur /*extends  Reserve*/{
                         etu.setDexterite(newDexterite);
                         return 1;
                     }else  {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");    
+                        System.out.println("Vous ne pouvez pas avoir de caractÃ©ristiques >=10 ou <=0");    
                         return 0;
                     }
                 case "Resistance":
@@ -112,7 +112,7 @@ public class Joueur /*extends  Reserve*/{
                         etu.setResistance(newResistance);
                         return 1;
                     }else    {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");   
+                        System.out.println("Vous ne pouvez pas avoir de caractÃ©ristiques >=10 ou <=0");   
                         return 0;
                     }
                 case "Constitution":
@@ -121,7 +121,7 @@ public class Joueur /*extends  Reserve*/{
                         etu.setConstitution(newConstitution);
                         return 1;
                     }else {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");    
+                        System.out.println("Vous ne pouvez pas avoir de caractÃ©ristiques >=10 ou <=0");    
                         return 0;
                     }
                 case "Initiative":
@@ -130,12 +130,12 @@ public class Joueur /*extends  Reserve*/{
                         etu.setInitiative(newInitiative);
                         return 1;
                     }else  {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");   
+                        System.out.println("Vous ne pouvez pas avoir de caractÃ©ristiques >=10 ou <=0");   
                         return 0;
                     }
                  
                 default:
-                    System.out.println("La caractéristique entrée n'est pas définit, vérifier l'ortographe");
+                    System.out.println("La caractÃ©ristique entrÃ©e n'est pas dÃ©finit, vÃ©rifier l'ortographe");
                     return 0;
               }
 
@@ -175,12 +175,16 @@ public class Joueur /*extends  Reserve*/{
     public Programme getProgramme() {
         return programme;
     }
+    
+    public void setProgramme(String programme) {
+        this.programme = Programme.valueOf(programme.toUpperCase());
+    }
 
     public String getUserName() {
         return userName;
     }
 
-    // Implémentation plus complexe possible cf doc idée
+    // ImplÃ©mentation plus complexe possible cf doc idÃ©e
     public void setUserName(String userName) {
         this.userName = userName;
     }
