@@ -12,13 +12,16 @@ public class Etudiant implements Strategie{
     private int resistance;
     private int constitution;
     private int initiative;
+    
+    private int belongsTo ; // set 1 pour j1 et set à 2 pour j2
+    
     private enumStrategie strategie;
     
 
     // constructeur 
     //ects = 30 pour tous les étudiants donc pas dans l'appel construction
     public Etudiant(String type, int force, int dexterite, 
-            int resistance, int constitution, int initiative) {
+            int resistance, int constitution, int initiative,int idJoueur) {
         this.type = type;
         this.ects = ects;
         this.force = force;
@@ -26,6 +29,7 @@ public class Etudiant implements Strategie{
         this.resistance = resistance;
         this.constitution = constitution;
         this.initiative = initiative;
+        this.belongsTo = idJoueur;
         this.strategie = strategie;
     }
     

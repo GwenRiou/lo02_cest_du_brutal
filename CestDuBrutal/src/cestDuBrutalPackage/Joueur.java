@@ -31,20 +31,20 @@ public class Joueur /*extends  Reserve*/{
     }
     
 
-    public void createStudentList() {
+    public void createStudentList(int idJoueur) {
         // creer le maiter du gobit
-        Etudiant etuMaitre = new Etudiant("Maitre",2,2,2,10,2);
+        Etudiant etuMaitre = new Etudiant("Maitre",2,2,2,10,2,idJoueur);
         studentList.add(etuMaitre);
         
         //crer les soldats élites
         for(int i=0 ; i < 4; i++){
-            Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2);
+            Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2,idJoueur);
             studentList.add(etuElite);            
         }
         
         //creer lest étudiants de basse
         for(int i=0 ; i < 15; i++){
-            Etudiant etuNormal = new Etudiant("Base",0,0,0,0,0);
+            Etudiant etuNormal = new Etudiant("Base",0,0,0,0,0,idJoueur);
             studentList.add(etuNormal);            
         }
         setIdForArmy();
@@ -141,6 +141,12 @@ public class Joueur /*extends  Reserve*/{
 
         }
     }
+    
+    // Mise en reserve
+    public void putInReserve(Etudiant etu) {
+        reserve.affecterReserve(etu);
+    }
+    
     public String toString() {
         StringBuffer sb = new StringBuffer ("Le Joueur ");
         sb.append(this.userName);

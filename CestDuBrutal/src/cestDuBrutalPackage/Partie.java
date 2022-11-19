@@ -35,15 +35,23 @@ public class Partie {
     public void addPlayer(Joueur joueur){
         listJ.add(joueur);
     }
+    
+    // Choit un étudiant TODO à mettre dans la class joueur ?
+    public Etudiant selectStudent(Joueur j) {
+        System.out.print("Choisisez votre étudiant" );
+        int index = getUserIndex("Enter le numéro de l'étudiant choisit",j.getStudentList().size()-1);        
+        Etudiant etuTest = j.getStudent(index);
+        return etuTest;
+    }
+    
     public void repartitionPoints(Joueur j) {
         System.out.println("Vous allez pouvoir attribuer vos points à vos étudiants :) ");        
         
         String etapeSuivante = "N";
         while (!"Y".equals(etapeSuivante)){
             
-            System.out.print("Choisisez votre étudiant" );
-            int index = getUserIndex("Enter le numéro de l'étudiant choisit",j.getStudentList().size()-1);        
-            Etudiant etuTest = j.getStudent(index);
+            Etudiant etuTest= selectStudent(j);            
+            
             String choisirAutreEtu ="N";
             while (!"Y".equals(choisirAutreEtu)){
                 
@@ -61,7 +69,12 @@ public class Partie {
         }        
     }
     
-    //Methode pour Lire les inputs
+ // Mise en reserve
+    public void putInReserve(Joueur j,Etudiant etu) {
+        j.putInReserve(etu);
+    }
+    
+    //Methodes pour Lire les inputs
     public static String getUserInput(String message) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         System.out.println(message);
@@ -138,16 +151,25 @@ public class Partie {
         
         
         // test avec l'armée d'un joueur
-        j2.createStudentList();
+        j2.createStudentList(2);
         j2.displayAllStudent();
         
         
         
        /*Répartition des points 
         */        
-        //TODO attention il y a pas de points max pour les caractéristiques ( c'est demander dans le sujet mais je l'ai pas encore fait)
+        
         partie.repartitionPoints(j2);        
         j2.displayAllStudent();
+        
+        //
+        System.out.print("Selectioner les étudiants à mettre dans la reserve");
+        /*
+         * Mettre une valeur max à la reserve
+         * whilde dans la methode jusque la reserve soit pleine 
+         * test pour voir si l'étudiant est enleve de la liste des étudiant du joueur ( c'est bien l'objetif)
+         */
+        j2.putInReserve(partie.selectStudent(j2)); // c'est moche que la gestion des input soit dans Partie
         
         
         
