@@ -98,7 +98,7 @@ public class Etudiant implements Strategie{
     public int getId() {return id;}
     public enumStrategie getStrategie() {return strategie;}
     
-    
+  
     public void setForce(int newForce){this.force=newForce;}
     public void setDexterite(int newDexterite){this.dexterite= newDexterite;}
     public void setResistance(int newResistance){this.resistance= newResistance;}
