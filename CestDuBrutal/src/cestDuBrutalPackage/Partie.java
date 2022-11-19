@@ -31,33 +31,33 @@ public class Partie {
         System.out.println("You now have a Partie going");
     }
     
-    //Ajoute 1 joueur à la partie
+    //Ajoute 1 joueur ï¿½ la partie
     public void addPlayer(Joueur joueur){
         listJ.add(joueur);
     }
     public void repartitionPoints(Joueur j) {
-        System.out.println("Vous allez pouvoir attribuer vos points à vos étudiants :) ");        
+        System.out.println("Vous allez pouvoir attribuer vos points a vos etudiants :) ");        
         
         String etapeSuivante = "N";
         while (!"Y".equals(etapeSuivante)){
             
-            System.out.print("Choisisez votre étudiant" );
-            int index = getUserIndex("Enter le numéro de l'étudiant choisit",j.getStudentList().size()-1);        
+            System.out.print("Choisissez votre etudiant" );
+            int index = getUserIndex("Enter le numero de l'etudiant choisit",j.getStudentList().size()-1);        
             Etudiant etuTest = j.getStudent(index);
             String choisirAutreEtu ="N";
             while (!"Y".equals(choisirAutreEtu)){
                 
-                String Characteristics = getUserInput("Enter la caractéristique a modifié");        
-                int pointsAttribuee = getUserInputInt("Enter le nombre de points attribue");
+                String Characteristics = getUserInput("Enter la caracteristique a modifier");        
+                int pointsAttribuee = getUserInputInt("Enter le nombre de points Ã  attribuer");
                 
                int retour =  j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
-                if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif à eu lieu ou non
+                if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif ï¿½ eu lieu ou non
                 
-                choisirAutreEtu = getUserInput("Voulez vous passez à un autre étudiant ? Y/N");
+                choisirAutreEtu = getUserInput("Voulez vous passer a un autre etudiant ? Y/N").toUpperCase();
             }
-            // TODO regarder si l'utilisateur entre une caractéristique valable avant de continuer 
+            // TODO regarder si l'utilisateur entre une caractï¿½ristique valable avant de continuer 
             System.out.println("Il reste "+j.getPoints()+" points");
-            etapeSuivante = getUserInput("Voulez vous passez à l'étape suivante ? Y/N");// TODO methode qui ignore si l'entré n'est pas = Y ou =N
+            etapeSuivante = getUserInput("Voulez vous passer a l'etape suivante ? Y/N").toUpperCase();// TODO methode qui ignore si l'entrï¿½ n'est pas = Y ou =N
         }        
     }
     
@@ -80,14 +80,14 @@ public class Partie {
             }  
             catch (NumberFormatException e)  
             { 
-                System.out.println(input + " n'est pas un numbre"); 
+                System.out.println("Erreur: "+ input + " n'est pas un nombre"); 
             }   
         }        
         
     }
     public static int getUserIndex(String message, int size) {
         int num = -5;
-        System.out.println("choisiser un nombre entre 0 et " + size );   
+        System.out.println("choisissez un nombre entre 0 et " + size );   
         while(num>size|| num<0) {            
             num = getUserInputInt(message);            
         }             
@@ -120,7 +120,7 @@ public class Partie {
         partie = Partie.getInstance();
         partie.getConnection();// ne fonctionne que aprÃ¨s un getInstance 
         
-        // création des joueurs
+        // crï¿½ation des joueurs
         
         Joueur j1 = new Joueur();
         Joueur j2 = new Joueur();
@@ -137,15 +137,15 @@ public class Partie {
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
         
         
-        // test avec l'armée d'un joueur
+        // test avec l'armï¿½e d'un joueur
         j2.createStudentList();
         j2.displayAllStudent();
         
         
         
-       /*Répartition des points 
+       /*Rï¿½partition des points 
         */        
-        //TODO attention il y a pas de points max pour les caractéristiques ( c'est demander dans le sujet mais je l'ai pas encore fait)
+        //TODO attention il y a pas de points max pour les caractï¿½ristiques ( c'est demander dans le sujet mais je l'ai pas encore fait)
         partie.repartitionPoints(j2);        
         j2.displayAllStudent();
         
