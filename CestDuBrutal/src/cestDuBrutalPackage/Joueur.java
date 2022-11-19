@@ -86,7 +86,7 @@ public class Joueur /*extends  Reserve*/{
         }else {
             //Voir si on peut pas faire une méthode au lieu de présicé pour chaque caractéristique
             switch(car) { 
-                case "Force":
+                case "Force","force":
                     int newForce = etu.getForce()+pointsAttribuee;
                     //regarder si la nouvelle force est bien <=10 et >=0
                     if(newForce>=0 && newForce<=10) { 
@@ -145,7 +145,7 @@ public class Joueur /*extends  Reserve*/{
         StringBuffer sb = new StringBuffer ("Le Joueur ");
         sb.append(this.userName);
         sb.append(" appartient au Programme");
-        //sb.append((String)this.Programme);TODO
+        sb.append((String)this.getProgrammeString());
         sb.append(" et a  : ");
         sb.append(this.points);
         sb.append(" points ");
@@ -171,10 +171,13 @@ public class Joueur /*extends  Reserve*/{
     public void setPoints(int points) {
         this.points = points;
     }
-
+    
+    //returns programme as an enum
     public Programme getProgramme() {
         return programme;
     }
+    //returns programme but as a string
+    public String getProgrammeString() {return programme.toString();}
     
     public void setProgramme(String programme) {
         this.programme = Programme.valueOf(programme.toUpperCase());
