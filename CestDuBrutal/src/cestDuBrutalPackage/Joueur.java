@@ -81,7 +81,7 @@ public class Joueur /*extends  Reserve*/{
     public int modifyCharacteristics(Etudiant etu,String car, int pointsAttribuee) {   
         // methode retourne 0 si on ne peut pas faire la modification
         if (pointsAttribuee>this.points) {
-            System.out.println("Vous n 'avez pas assez de points pour cette modification");
+            System.out.println("Vous n'avez pas assez de points pour cette modification");
             return 0;
         }else {
             //Voir si on peut pas faire une méthode au lieu de présicé pour chaque caractéristique
@@ -93,7 +93,7 @@ public class Joueur /*extends  Reserve*/{
                         etu.setForce(newForce);  
                         return 1;
                     } else {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");   
+                        System.out.println("Chaque caracteristique doit etre compris entre 0 et 10");   
                         return 0;
                     }
                  // pas de break car on sort de la boucle avant 
@@ -103,7 +103,7 @@ public class Joueur /*extends  Reserve*/{
                         etu.setDexterite(newDexterite);
                         return 1;
                     }else  {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");    
+                        System.out.println("Chaque caracteristique doit etre compris entre 0 et 10");    
                         return 0;
                     }
                 case "Resistance":
@@ -112,7 +112,7 @@ public class Joueur /*extends  Reserve*/{
                         etu.setResistance(newResistance);
                         return 1;
                     }else    {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");   
+                        System.out.println("Chaque caracteristique doit etre compris entre 0 et 10");   
                         return 0;
                     }
                 case "Constitution":
@@ -121,7 +121,7 @@ public class Joueur /*extends  Reserve*/{
                         etu.setConstitution(newConstitution);
                         return 1;
                     }else {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");    
+                        System.out.println("Chaque caracteristique doit etre compris entre 0 et 10");    
                         return 0;
                     }
                 case "Initiative":
@@ -130,12 +130,12 @@ public class Joueur /*extends  Reserve*/{
                         etu.setInitiative(newInitiative);
                         return 1;
                     }else  {
-                        System.out.println("Vous ne pouvez pas avoir de caractéristiques >=10 ou <=0");   
+                        System.out.println("Chaque caracteristique doit etre compris entre 0 et 10");   
                         return 0;
                     }
                  
                 default:
-                    System.out.println("La caractéristique entrée n'est pas définit, vérifier l'ortographe");
+                    System.out.println("La caractéristique entrée n'est pas définie, vérifiez l'ortographe");
                     return 0;
               }
 

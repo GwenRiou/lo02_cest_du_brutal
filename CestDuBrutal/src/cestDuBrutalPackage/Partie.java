@@ -28,7 +28,7 @@ public class Partie {
     
     // Regarde si l'objet Partie a deja un instance 
     public void getConnection() {
-        System.out.println("You now have a Partie going");
+        System.out.println("You now have a Partie running");
     }
     
     //Ajoute 1 joueur � la partie
