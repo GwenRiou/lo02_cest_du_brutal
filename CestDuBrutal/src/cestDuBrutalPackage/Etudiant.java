@@ -19,7 +19,7 @@ public class Etudiant implements Strategie{
     
 
     // constructeur 
-    //ects = 30 pour tous les étudiants donc pas dans l'appel construction
+    //ects = 30 pour tous les ï¿½tudiants donc pas dans l'appel construction
     public Etudiant(String type, int force, int dexterite, 
             int resistance, int constitution, int initiative,int idJoueur) {
         this.type = type;
@@ -35,7 +35,7 @@ public class Etudiant implements Strategie{
     
     
     public String toString() {
-        StringBuffer sb = new StringBuffer ("L'Etudiant n° ");
+        StringBuffer sb = new StringBuffer ("L'Etudiant nï¿½ ");
         sb.append(this.id);
         sb.append(" et de type : " );
         sb.append(this.type);
@@ -51,7 +51,7 @@ public class Etudiant implements Strategie{
         sb.append(this.constitution);
         sb.append(", Initiative : ");
         sb.append(this.initiative);
-        sb.append(", Stratégie : ");
+        sb.append(", Stratï¿½gie : ");
         //sb.append(getStraterie); TODO
             
         return sb.toString();
@@ -64,8 +64,8 @@ public class Etudiant implements Strategie{
 
     
     
-    private void attack(Etudiant target) {} //TODO a définir
-    private void heal(Etudiant target) {} //TODO a définir
+    private void attack(Etudiant target) {} //TODO a dï¿½finir
+    private void heal(Etudiant target) {} //TODO a dï¿½finir
     
     private void agir(Etudiant target) {
         if (this.strategie == strategie.OFFENSIVE) {
@@ -100,13 +100,17 @@ public class Etudiant implements Strategie{
     public int getConstitution(){return this.constitution;}
     public int getInitiative(){return this.initiative;}
     public int getId() {return id;}
+    public enumStrategie getStrategie() {return strategie;}
     
+  
     public void setForce(int newForce){this.force=newForce;}
     public void setDexterite(int newDexterite){this.dexterite= newDexterite;}
     public void setResistance(int newResistance){this.resistance= newResistance;}
     public void setConstitution(int newConstisution){this.constitution= newConstisution;}
     public void setInitiative(int newInitiative){this.initiative= newInitiative;}
     public void setId(int id) {this.id = id;}
+    public void setStrategie(String strategie) {this.strategie = enumStrategie.valueOf(strategie.toUpperCase());}
+
     
 
 }
