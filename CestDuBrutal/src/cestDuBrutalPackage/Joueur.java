@@ -16,17 +16,18 @@ import java.util.*;
  *         si oui on demande un autre non si non on appel setter
  * 
  */
-public class Joueur {
+public class Joueur /*extends  Reserve*/{
     private int points = 400;
     private Programme programme;
     private String userName;
     //private Programme programmeBase = Programme.ISI;
     private ArrayList<Etudiant> studentList; // car on va chercher les étu par leur index
+    private Reserve reserve = new Reserve();
     
     public Joueur() {
         this.points = points;
         this.userName = "";
-        this.studentList = new ArrayList <Etudiant>();
+        this.studentList = new ArrayList <Etudiant>();        
     }
     
 
@@ -46,6 +47,18 @@ public class Joueur {
             Etudiant etuNormal = new Etudiant("Base",0,0,0,0,0);
             studentList.add(etuNormal);            
         }
+        setIdForArmy();
+       
+    }
+    private void setIdForArmy() {// parcour la liste et seID des étudiants
+        
+        System.out.println(" List :");
+        
+
+        for (ListIterator<Etudiant> it = studentList.listIterator(); it.hasNext();) {
+             Etudiant s = it.next();
+             s.setId(it.previousIndex());            
+        }
     }
     
     public void displayAllStudent() {
@@ -53,7 +66,8 @@ public class Joueur {
         ListIterator<Etudiant> iter = studentList.listIterator();
             
         while (iter.hasNext()) {
-            System.out.println("L'etudiant n°" + iter.nextIndex() + " a " + iter.next());
+            System.out.println(iter.next());
+            //System.out.println("L'etudiant n°" + iter.nextIndex() + " a " + iter.next());
         }
     }
     
