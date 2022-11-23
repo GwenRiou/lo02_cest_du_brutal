@@ -13,7 +13,7 @@ public class Etudiant implements Strategie{
     private int constitution;
     private int initiative;
     
-    private int belongsTo ; // set 1 pour j1 et set à 2 pour j2
+    private int belongsTo ; // set 1 pour j1 et set ï¿½ 2 pour j2
     
     private enumStrategie strategie;
     
@@ -52,7 +52,7 @@ public class Etudiant implements Strategie{
         sb.append(", Initiative : ");
         sb.append(this.initiative);
         sb.append(", Stratï¿½gie : ");
-        sb.append(this.getStrategieString());
+        sb.append(this.strategie);
             
         return sb.toString();
     }
