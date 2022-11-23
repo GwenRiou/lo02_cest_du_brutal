@@ -15,7 +15,7 @@ public class Partie {
         this.listJ = new ArrayList<Joueur>();        
     }
     
-    public static Partie getInstance() { //--> mÃ©thode qui va appeler le constructeur si besoin
+    public static Partie getInstance() { //--> mÃƒÂ©thode qui va appeler le constructeur si besoin
         
         //create object if it's not already created
         if(partieObject == null) {
@@ -28,44 +28,46 @@ public class Partie {
     
     // Regarde si l'objet Partie a deja un instance 
     public void getConnection() {
-        System.out.println("You now have a Partie going");
+        System.out.println("You now have a Partie running");
     }
     
-    //Ajoute 1 joueur à la partie
+    //Ajoute 1 joueur Ã¯Â¿Â½ la partie
     public void addPlayer(Joueur joueur){
         listJ.add(joueur);
     }
     
-    // Choit un étudiant TODO à mettre dans la class joueur ?
+    // Choit un Ã©tudiant TODO Ã  mettre dans la class joueur ?
     public Etudiant selectStudent(Joueur j) {
-        System.out.print("Choisisez votre étudiant" );
-        int index = getUserIndex("Enter le numéro de l'étudiant choisit",j.getStudentList().size()-1);        
+        System.out.print("Choisisez votre Ã©tudiant" );
+        int index = getUserIndex("Enter le numÃ©ro de l'Ã©tudiant choisit",j.getStudentList().size()-1);        
         Etudiant etuTest = j.getStudent(index);
         return etuTest;
     }
     
     public void repartitionPoints(Joueur j) {
-        System.out.println("Vous allez pouvoir attribuer vos points à vos étudiants :) ");        
+        System.out.println("Vous allez pouvoir attribuer vos points a vos etudiants :) ");        
         
         String etapeSuivante = "N";
         while (!"Y".equals(etapeSuivante)){
             
+
             Etudiant etuTest= selectStudent(j);            
             
+
             String choisirAutreEtu ="N";
             while (!"Y".equals(choisirAutreEtu)){
                 
-                String Characteristics = getUserInput("Enter la caractéristique a modifié");        
-                int pointsAttribuee = getUserInputInt("Enter le nombre de points attribue");
+                String Characteristics = getUserInput("Enter la caracteristique a modifier");        
+                int pointsAttribuee = getUserInputInt("Enter le nombre de points ÃƒÂ  attribuer");
                 
                int retour =  j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
-                if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif à eu lieu ou non
+                if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif Ã¯Â¿Â½ eu lieu ou non
                 
-                choisirAutreEtu = getUserInput("Voulez vous passez à un autre étudiant ? Y/N");
+                choisirAutreEtu = getUserInput("Voulez vous passer a un autre etudiant ? Y/N").toUpperCase();
             }
-            // TODO regarder si l'utilisateur entre une caractéristique valable avant de continuer 
+            // TODO regarder si l'utilisateur entre une caractÃ¯Â¿Â½ristique valable avant de continuer 
             System.out.println("Il reste "+j.getPoints()+" points");
-            etapeSuivante = getUserInput("Voulez vous passez à l'étape suivante ? Y/N");// TODO methode qui ignore si l'entré n'est pas = Y ou =N
+            etapeSuivante = getUserInput("Voulez vous passer a l'etape suivante ? Y/N").toUpperCase();// TODO methode qui ignore si l'entrÃ¯Â¿Â½ n'est pas = Y ou =N
         }        
     }
     
@@ -93,14 +95,14 @@ public class Partie {
             }  
             catch (NumberFormatException e)  
             { 
-                System.out.println(input + " n'est pas un numbre"); 
+                System.out.println("Erreur: "+ input + " n'est pas un nombre"); 
             }   
         }        
         
     }
     public static int getUserIndex(String message, int size) {
         int num = -5;
-        System.out.println("choisiser un nombre entre 0 et " + size );   
+        System.out.println("choisissez un nombre entre 0 et " + size );   
         while(num>size|| num<0) {            
             num = getUserInputInt(message);            
         }             
@@ -128,12 +130,12 @@ public class Partie {
     //THE MAIN
     public static void main(String[] args) {
         
-        //CrÃ©ation de la partie
+        //CrÃƒÂ©ation de la partie
         Partie partie;
         partie = Partie.getInstance();
-        partie.getConnection();// ne fonctionne que aprÃ¨s un getInstance 
+        partie.getConnection();// ne fonctionne que aprÃƒÂ¨s un getInstance 
         
-        // création des joueurs
+        // crÃ¯Â¿Â½ation des joueurs
         
         Joueur j1 = new Joueur();
         Joueur j2 = new Joueur();
@@ -150,24 +152,27 @@ public class Partie {
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
         
         
-        // test avec l'armée d'un joueur
+
+        // test avec l'armÃ©e d'un joueur
         j2.createStudentList(2);
+
         j2.displayAllStudent();
         
         
         
-       /*Répartition des points 
+       /*RÃ¯Â¿Â½partition des points 
         */        
-        
+
+
         partie.repartitionPoints(j2);        
         j2.displayAllStudent();
         
         //
-        System.out.print("Selectioner les étudiants à mettre dans la reserve");
+        System.out.print("Selectioner les Ã©tudiants Ã  mettre dans la reserve");
         /*
-         * Mettre une valeur max à la reserve
+         * Mettre une valeur max Ã  la reserve
          * whilde dans la methode jusque la reserve soit pleine 
-         * test pour voir si l'étudiant est enleve de la liste des étudiant du joueur ( c'est bien l'objetif)
+         * test pour voir si l'Ã©tudiant est enleve de la liste des Ã©tudiant du joueur ( c'est bien l'objetif)
          */
         j2.putInReserve(partie.selectStudent(j2)); // c'est moche que la gestion des input soit dans Partie
         

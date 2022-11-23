@@ -52,14 +52,14 @@ public class Etudiant implements Strategie{
         sb.append(", Initiative : ");
         sb.append(this.initiative);
         sb.append(", Strat�gie : ");
-        //sb.append(getStraterie); TODO
+        sb.append(this.getStrategieString());
             
         return sb.toString();
     }
 
 
     public void displayCaracteristics(){
-        System.out.println(getType()+getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative());
+        System.out.println(getType()+getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative()+getStrategieString());
     }
 
     
@@ -101,6 +101,7 @@ public class Etudiant implements Strategie{
     public int getInitiative(){return this.initiative;}
     public int getId() {return id;}
     public enumStrategie getStrategie() {return strategie;}
+    public String getStrategieString() {return strategie.toString();}
     
   
     public void setForce(int newForce){this.force=newForce;}
