@@ -97,7 +97,7 @@ public class Joueur /*extends  Reserve*/{
                         return 0;
                     }
                  // pas de break car on sort de la boucle avant 
-                case "Dexterite":
+                case "Dexterite","dexterite":
                     int newDexterite = etu.getDexterite()+pointsAttribuee;
                     if(newDexterite>=0 && newDexterite<=10) {                   
                         etu.setDexterite(newDexterite);
@@ -106,7 +106,7 @@ public class Joueur /*extends  Reserve*/{
                         System.out.println("Chaque caracteristique doit etre compris entre 0 et 10");    
                         return 0;
                     }
-                case "Resistance":
+                case "Resistance","resistance":
                     int newResistance = etu.getResistance()+pointsAttribuee;
                     if(newResistance>=0 && newResistance<=10) {                   
                         etu.setResistance(newResistance);
@@ -115,7 +115,7 @@ public class Joueur /*extends  Reserve*/{
                         System.out.println("Chaque caracteristique doit etre compris entre 0 et 10");   
                         return 0;
                     }
-                case "Constitution":
+                case "Constitution","consitution":
                     int newConstitution = etu.getConstitution()+pointsAttribuee;
                     if(newConstitution>=0 && newConstitution<=10) {                   
                         etu.setConstitution(newConstitution);
@@ -124,7 +124,7 @@ public class Joueur /*extends  Reserve*/{
                         System.out.println("Chaque caracteristique doit etre compris entre 0 et 10");    
                         return 0;
                     }
-                case "Initiative":
+                case "Initiative","initiative":
                     int newInitiative =etu.getInitiative()+pointsAttribuee;
                     if(newInitiative>=0 && newInitiative<=10) {                   
                         etu.setInitiative(newInitiative);
