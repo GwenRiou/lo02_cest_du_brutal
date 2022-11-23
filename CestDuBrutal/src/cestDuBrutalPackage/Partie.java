@@ -15,7 +15,7 @@ public class Partie {
         this.listJ = new ArrayList<Joueur>();        
     }
     
-    public static Partie getInstance() { //--> méthode qui va appeler le constructeur si besoin
+    public static Partie getInstance() { //--> mÃ©thode qui va appeler le constructeur si besoin
         
         //create object if it's not already created
         if(partieObject == null) {
@@ -31,37 +31,52 @@ public class Partie {
         System.out.println("You now have a Partie running");
     }
     
-    //Ajoute 1 joueur � la partie
+    //Ajoute 1 joueur ï¿½ la partie
     public void addPlayer(Joueur joueur){
         listJ.add(joueur);
     }
+    
+    // Choit un étudiant TODO à mettre dans la class joueur ?
+    public Etudiant selectStudent(Joueur j) {
+        System.out.print("Choisisez votre étudiant" );
+        int index = getUserIndex("Enter le numéro de l'étudiant choisit",j.getStudentList().size()-1);        
+        Etudiant etuTest = j.getStudent(index);
+        return etuTest;
+    }
+    
     public void repartitionPoints(Joueur j) {
         System.out.println("Vous allez pouvoir attribuer vos points a vos etudiants :) ");        
         
         String etapeSuivante = "N";
         while (!"Y".equals(etapeSuivante)){
             
-            System.out.print("Choisissez votre etudiant" );
-            int index = getUserIndex("Enter le numero de l'etudiant choisit",j.getStudentList().size()-1);        
-            Etudiant etuTest = j.getStudent(index);
+
+            Etudiant etuTest= selectStudent(j);            
+            
+
             String choisirAutreEtu ="N";
             while (!"Y".equals(choisirAutreEtu)){
                 
                 String Characteristics = getUserInput("Enter la caracteristique a modifier");        
-                int pointsAttribuee = getUserInputInt("Enter le nombre de points à attribuer");
+                int pointsAttribuee = getUserInputInt("Enter le nombre de points Ã  attribuer");
                 
                int retour =  j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
-                if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif � eu lieu ou non
+                if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif ï¿½ eu lieu ou non
                 
                 choisirAutreEtu = getUserInput("Voulez vous passer a un autre etudiant ? Y/N").toUpperCase();
             }
-            // TODO regarder si l'utilisateur entre une caract�ristique valable avant de continuer 
+            // TODO regarder si l'utilisateur entre une caractï¿½ristique valable avant de continuer 
             System.out.println("Il reste "+j.getPoints()+" points");
-            etapeSuivante = getUserInput("Voulez vous passer a l'etape suivante ? Y/N").toUpperCase();// TODO methode qui ignore si l'entr� n'est pas = Y ou =N
+            etapeSuivante = getUserInput("Voulez vous passer a l'etape suivante ? Y/N").toUpperCase();// TODO methode qui ignore si l'entrï¿½ n'est pas = Y ou =N
         }        
     }
     
-    //Methode pour Lire les inputs
+ // Mise en reserve
+    public void putInReserve(Joueur j,Etudiant etu) {
+        j.putInReserve(etu);
+    }
+    
+    //Methodes pour Lire les inputs
     public static String getUserInput(String message) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         System.out.println(message);
@@ -115,12 +130,12 @@ public class Partie {
     //THE MAIN
     public static void main(String[] args) {
         
-        //Création de la partie
+        //CrÃ©ation de la partie
         Partie partie;
         partie = Partie.getInstance();
-        partie.getConnection();// ne fonctionne que après un getInstance 
+        partie.getConnection();// ne fonctionne que aprÃ¨s un getInstance 
         
-        // cr�ation des joueurs
+        // crï¿½ation des joueurs
         
         Joueur j1 = new Joueur();
         Joueur j2 = new Joueur();
@@ -137,17 +152,29 @@ public class Partie {
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
         
         
-        // test avec l'arm�e d'un joueur
-        j2.createStudentList();
+
+        // test avec l'armée d'un joueur
+        j2.createStudentList(2);
+
         j2.displayAllStudent();
         
         
         
-       /*R�partition des points 
+       /*Rï¿½partition des points 
         */        
-        //TODO attention il y a pas de points max pour les caract�ristiques ( c'est demander dans le sujet mais je l'ai pas encore fait)
+
+
         partie.repartitionPoints(j2);        
         j2.displayAllStudent();
+        
+        //
+        System.out.print("Selectioner les étudiants à mettre dans la reserve");
+        /*
+         * Mettre une valeur max à la reserve
+         * whilde dans la methode jusque la reserve soit pleine 
+         * test pour voir si l'étudiant est enleve de la liste des étudiant du joueur ( c'est bien l'objetif)
+         */
+        j2.putInReserve(partie.selectStudent(j2)); // c'est moche que la gestion des input soit dans Partie
         
         
         

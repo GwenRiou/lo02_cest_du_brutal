@@ -13,7 +13,7 @@ public class Reserve extends Zone {
     
     
    public boolean isEmpty() {
-       return listeEtudiantsReserve.isEmpty();
+       return listeEtudiantsReserve.isEmpty(); 
    }
     
     public void affecterReserve(Etudiant etudiant) {
@@ -22,6 +22,6 @@ public class Reserve extends Zone {
     
     //TODO    /!\ Ã  changer: ID Ã©tudiant 
     public void removeReserve(Etudiant etudiant) {
-        listeEtudiantsReserve.remove(etudiant); // on va faire des copies , je pense que laisse la liste des étu dans le joueur est une bonne idée
+        listeEtudiantsReserve.remove(etudiant); 
     }
 }
