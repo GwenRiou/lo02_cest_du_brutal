@@ -21,7 +21,7 @@ public class ZoneCombat extends Zone {
     
     //instanciation
     public ZoneCombat() {
-        
+        super("zoneCombat");
     }
     
     public void affecterZone(Etudiant etudiant) {

@@ -7,8 +7,8 @@ public class Partie {
     private int etape;
     private boolean finDePartie;    
     private ArrayList<Joueur> listJ;
-    
-    
+        
+
     private Partie(){ // constructeur en Private car singleton Et pas en void :)
         this.etape=0;
         this.finDePartie= false;
@@ -91,6 +91,26 @@ public class Partie {
         }
     }
     
+   //===============================================================================================
+   //Mise en zones
+    public void affecterEtudiantsZone(Joueur j) {
+        while (j.getStudentList().size()!=0) {
+            while() {
+                String userInput = getUserInput("Entrez l'étudiant à affecter, entrez 'afficher' pour afficher la liste d'Etudiants");
+                try {
+                int studentID = Integer.parseInt(userInput); 
+                }
+                catch (NumberFormatException e){
+                    if (userInput.equals("afficher")) {
+                        j.displayAllStudent();
+                    }
+                }
+            }
+            Zone.displayAllZones();
+            getUserInput("");     //TODO    
+        }
+    }
+    
     //Methodes pour Lire les inputs
     public static String getUserInput(String message) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
@@ -159,7 +179,7 @@ public class Partie {
         partie.addPlayer(j1);
         partie.addPlayer(j2);
         
-        j1.setUserName("Xuan");        
+        j1.setUserName("Gwen lol");        
         //methode pour mettre un nom de joueur      
          j2.setUserName(getUserInput("Enter username"));       
         System.out.println("Le joueur 1 s'appelle " +j1.getUserName());    
@@ -176,24 +196,33 @@ public class Partie {
         
         
         
-       /*Rï¿½partition des points 
+       /*Repartition des points 
         */        
 
-
-       // partie.repartitionPoints(j2);        
-        j2.displayAllStudent();
+        
+        //partie.repartitionPoints(j2);        
+        //j2.displayAllStudent();
         
         //
-        System.out.print("Selectioner les étudiants à mettre dans la reserve");
+        System.out.print("Selectioner les étudiants à mettre dans la reserve \n");
         /*
          * Mettre une valeur max à la reserve
          * whilde dans la methode jusque la reserve soit pleine 
          * test pour voir si l'étudiant est enleve de la liste des étudiant du joueur ( c'est bien l'objetif)
          */
-        partie.putInReserve(j2);
+        //partie.putInReserve(j2);
        // j2.putInReserve(partie.selectStudent(j2)); // c'est moche que la gestion des input soit dans Partie
         
-        j2.displayReserveStudent();
+        //j2.displayReserveStudent();
+        
+        
+        //repartition des etudiants dans les zones
+       //initier les zones
+        
+        Zone.setZones();
+        partie.affecterEtudiantsZone(j2);
+        
+        
         
         
         

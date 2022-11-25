@@ -30,7 +30,7 @@ public class Etudiant implements Strategie{
         this.constitution = constitution;
         this.initiative = initiative;
         this.belongsTo = idJoueur;
-        this.strategie = strategie;
+        this.strategie = enumStrategie.RANDOM;
     }
     
     
