@@ -37,11 +37,16 @@ public class Partie {
     }
     
     // Choit un étudiant TODO à mettre dans la class joueur ?
-    public Etudiant selectStudent(Joueur j) {
-        System.out.print("Choisisez votre étudiant" );
-        int index = getUserIndex("Enter le numéro de l'étudiant choisit",j.getStudentList().size()-1);        
-        Etudiant etuTest = j.getStudent(index);
-        return etuTest;
+    public Etudiant selectStudent(Joueur j)throws StudentNotFoundInList{
+        
+            ArrayList<Etudiant>  l= j.getStudentList();
+            System.out.print("Choisisez votre étudiant" );        
+            int id = getUserInputInt("Enter le numero de l'etudiant choisit");     
+            for (ListIterator<Etudiant> it = l.listIterator(); it.hasNext();) {
+                 Etudiant s = it.next();
+                 if(s.getId()==id) return j.getStudent(it.previousIndex());            
+            }
+            throw new StudentNotFoundInList();          
     }
     
     public void repartitionPoints(Joueur j) {
@@ -49,31 +54,41 @@ public class Partie {
         
         String etapeSuivante = "N";
         while (!"Y".equals(etapeSuivante)){
-            
-
-            Etudiant etuTest= selectStudent(j);            
-            
-
-            String choisirAutreEtu ="N";
-            while (!"Y".equals(choisirAutreEtu)){
+            try {
+                Etudiant etuTest= selectStudent(j);         
+                String choisirAutreEtu ="N";
+                while (!"Y".equals(choisirAutreEtu)){
+                    
+                    String Characteristics = getUserInput("Enter la caracteristique a modifier");        
+                    int pointsAttribuee = getUserInputInt("Enter le nombre de points Ã  attribuer");
+                    
+                   int retour =  j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
+                    if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif ï¿½ eu lieu ou non
+                    
+                    choisirAutreEtu = getUserInput("Voulez vous passer a un autre etudiant ? Y/N").toUpperCase();
+                }
+                // TODO regarder si l'utilisateur entre une caracteristique valable avant de continuer 
+                System.out.println("Il reste "+j.getPoints()+" points");
+                etapeSuivante = getUserInput("Voulez vous passer a l'etape suivante ? Y/N").toUpperCase();// TODO methode qui ignore si l'entrï¿½ n'est pas = Y ou =N
                 
-                String Characteristics = getUserInput("Enter la caracteristique a modifier");        
-                int pointsAttribuee = getUserInputInt("Enter le nombre de points Ã  attribuer");
-                
-               int retour =  j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
-                if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif ï¿½ eu lieu ou non
-                
-                choisirAutreEtu = getUserInput("Voulez vous passer a un autre etudiant ? Y/N").toUpperCase();
+            }catch(StudentNotFoundInList e) {
+                System.out.print(e.getMessage());
             }
-            // TODO regarder si l'utilisateur entre une caractï¿½ristique valable avant de continuer 
-            System.out.println("Il reste "+j.getPoints()+" points");
-            etapeSuivante = getUserInput("Voulez vous passer a l'etape suivante ? Y/N").toUpperCase();// TODO methode qui ignore si l'entrï¿½ n'est pas = Y ou =N
         }        
     }
     
  // Mise en reserve
-    public void putInReserve(Joueur j,Etudiant etu) {
-        j.putInReserve(etu);
+    public void putInReserve(Joueur j) {
+        
+        while(j.getReserve().size()<5) {
+               
+            try {
+                Etudiant etu = selectStudent(j);
+                j.putInReserve(etu);
+            }catch(StudentNotFoundInList e) {
+                System.out.print(e.getMessage());
+            }
+        }
     }
     
     //Methodes pour Lire les inputs
@@ -87,6 +102,7 @@ public class Partie {
     
     public static int getUserInputInt(String message) {        
         while(1==1) { // Attention boucle infini
+            
             String input = getUserInput(message);
             try 
             { 
@@ -164,7 +180,7 @@ public class Partie {
         */        
 
 
-        partie.repartitionPoints(j2);        
+       // partie.repartitionPoints(j2);        
         j2.displayAllStudent();
         
         //
@@ -174,8 +190,10 @@ public class Partie {
          * whilde dans la methode jusque la reserve soit pleine 
          * test pour voir si l'étudiant est enleve de la liste des étudiant du joueur ( c'est bien l'objetif)
          */
-        j2.putInReserve(partie.selectStudent(j2)); // c'est moche que la gestion des input soit dans Partie
+        partie.putInReserve(j2);
+       // j2.putInReserve(partie.selectStudent(j2)); // c'est moche que la gestion des input soit dans Partie
         
+        j2.displayReserveStudent();
         
         
         
