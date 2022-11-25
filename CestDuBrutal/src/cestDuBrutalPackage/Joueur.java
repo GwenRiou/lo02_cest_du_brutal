@@ -70,6 +70,15 @@ public class Joueur /*extends  Reserve*/{
             //System.out.println("L'etudiant n°" + iter.nextIndex() + " a " + iter.next());
         }
     }
+    public void displayReserveStudent() {
+
+        ListIterator<Etudiant> iter = this.reserve.getListeEtudiantsReserve().listIterator();
+            
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
+            //System.out.println("L'etudiant n°" + iter.nextIndex() + " a " + iter.next());
+        }
+    }
     
     // return l'étudiant choisit
     public Etudiant getStudent(int index) {
@@ -144,6 +153,7 @@ public class Joueur /*extends  Reserve*/{
     
     // Mise en reserve
     public void putInReserve(Etudiant etu) {
+        this.studentList.remove(etu);// Enl�ve l'�tudiant de la liste 
         reserve.affecterReserve(etu);
     }
     
@@ -161,7 +171,7 @@ public class Joueur /*extends  Reserve*/{
    
 
 
-    // Getter & Setter
+    // --------------------------------Getter & Setter--------------------------------
     public ArrayList<Etudiant> getStudentList() {
         return studentList;
     }
@@ -196,6 +206,9 @@ public class Joueur /*extends  Reserve*/{
     // Implémentation plus complexe possible cf doc idée
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+    public ArrayList<Etudiant> getReserve() {
+        return reserve.getListeEtudiantsReserve();
     }
 
     public void updatePoints(int pointsAenlever) {

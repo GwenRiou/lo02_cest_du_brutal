@@ -1,6 +1,7 @@
 package cestDuBrutalPackage;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class Reserve extends Zone {
     
@@ -10,9 +11,13 @@ public class Reserve extends Zone {
     public Reserve() {
         
     }
+
     
     
-   public boolean isEmpty() {
+
+
+
+public boolean isEmpty() {
        return listeEtudiantsReserve.isEmpty(); 
    }
     
@@ -24,4 +29,11 @@ public class Reserve extends Zone {
     public void removeReserve(Etudiant etudiant) {
         listeEtudiantsReserve.remove(etudiant); 
     }
+  //Getter & setter
+    public ArrayList<Etudiant> getListeEtudiantsReserve() {
+         return listeEtudiantsReserve;
+     }
+     public void setListeEtudiantsReserve(ArrayList<Etudiant> listeEtudiantsReserve) {
+         this.listeEtudiantsReserve = listeEtudiantsReserve;
+     }
 }
