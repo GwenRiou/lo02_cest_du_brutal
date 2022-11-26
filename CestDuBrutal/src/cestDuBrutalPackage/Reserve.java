@@ -5,11 +5,10 @@ import java.util.ListIterator;
 
 public class Reserve extends Zone {
     
-    ArrayList <Etudiant> listeEtudiantsReserve = new ArrayList <Etudiant>();
    
     //instantiation
     public Reserve() {
-        
+     super("Reserve");
     }
 
     
@@ -18,22 +17,23 @@ public class Reserve extends Zone {
 
 
 public boolean isEmpty() {
-       return listeEtudiantsReserve.isEmpty(); 
+       return this.etuDansZone.isEmpty(); 
    }
     
     public void affecterReserve(Etudiant etudiant) {
-        listeEtudiantsReserve.add(etudiant);
+        this.etuDansZone.add(etudiant);
     }
     
     //TODO    /!\ à changer: ID étudiant 
     public void removeReserve(Etudiant etudiant) {
-        listeEtudiantsReserve.remove(etudiant); 
+        this.etuDansZone.remove(etudiant); 
     }
   //Getter & setter
     public ArrayList<Etudiant> getListeEtudiantsReserve() {
-         return listeEtudiantsReserve;
+         return this.etuDansZone;
      }
      public void setListeEtudiantsReserve(ArrayList<Etudiant> listeEtudiantsReserve) {
-         this.listeEtudiantsReserve = listeEtudiantsReserve;
+         this.etuDansZone = listeEtudiantsReserve;
      }
+     public int getNombreEtuReserve() {return this.etuDansZone.size();}
 }

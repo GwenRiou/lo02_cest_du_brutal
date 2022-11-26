@@ -13,7 +13,7 @@ public class Etudiant implements Strategie{
     private int constitution;
     private int initiative;
     
-    private int belongsTo ; // set 1 pour j1 et set � 2 pour j2
+    private Joueur belongsTo ; // set 1 pour j1 et set � 2 pour j2
     
     private enumStrategie strategie;
     
@@ -21,7 +21,7 @@ public class Etudiant implements Strategie{
     // constructeur 
     //ects = 30 pour tous les �tudiants donc pas dans l'appel construction
     public Etudiant(String type, int force, int dexterite, 
-            int resistance, int constitution, int initiative,int idJoueur) {
+            int resistance, int constitution, int initiative,Joueur idJoueur) {
         this.type = type;
         this.ects = ects;
         this.force = force;
@@ -30,7 +30,7 @@ public class Etudiant implements Strategie{
         this.constitution = constitution;
         this.initiative = initiative;
         this.belongsTo = idJoueur;
-        this.strategie = strategie;
+        this.strategie = enumStrategie.RANDOM;
     }
     
     
@@ -56,6 +56,9 @@ public class Etudiant implements Strategie{
             
         return sb.toString();
     }
+
+
+    
 
 
     public void displayCaracteristics(){
@@ -102,6 +105,8 @@ public class Etudiant implements Strategie{
     public int getId() {return id;}
     public enumStrategie getStrategie() {return strategie;}
     public String getStrategieString() {return strategie.toString();}
+    public Joueur getBelongsTo() {return belongsTo;
+    }
     
   
     public void setForce(int newForce){this.force=newForce;}
