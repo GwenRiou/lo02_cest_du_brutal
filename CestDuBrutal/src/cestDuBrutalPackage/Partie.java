@@ -106,7 +106,7 @@ public class Partie {
     }
     
    //Mise en zones
-    public void affecterEtudiantsZone(Joueur j) {//make sure this includes the reserve.
+    public void affecterEtudiantZone(Joueur j) {//make sure this includes the reserve.
         while (j.getStudentList().size()!=0) {
             boolean entryIsntValid = true;
             while(entryIsntValid) {
@@ -245,7 +245,7 @@ public class Partie {
         */
         
         Zone.setZones();
-        partie.affecterEtudiantsZone(j2);    //TODO affecter depuis la réserve vers les zones, sachant que la reserve n'est pas dans la liste de zones
+        partie.affecterEtudiantZone(j2);    //TODO affecter depuis la réserve vers les zones, sachant que la reserve n'est pas dans la liste de zones
         
         
         
