@@ -33,6 +33,10 @@ public class Etudiant implements Strategie{
         this.strategie = enumStrategie.RANDOM;
     }
     
+    public Etudiant() {
+        
+    }
+    
     
     public String toString() {
         StringBuffer sb = new StringBuffer ("L'Etudiant n� ");

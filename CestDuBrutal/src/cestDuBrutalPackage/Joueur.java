@@ -16,7 +16,7 @@ import java.util.*;
  *         si oui on demande un autre non si non on appel setter
  * 
  */
-public class Joueur /*extends  Reserve*/{
+public class Joueur {
     private int points = 400;
     private Programme programme;
     private String userName;
@@ -57,7 +57,7 @@ public class Joueur /*extends  Reserve*/{
 
         for (ListIterator<Etudiant> it = studentList.listIterator(); it.hasNext();) {
              Etudiant s = it.next();
-             s.setId(it.previousIndex());            
+             s.setId(it.previousIndex()+1);            
         }
     }
     
@@ -156,7 +156,10 @@ public class Joueur /*extends  Reserve*/{
         this.studentList.remove(etu);// Enl�ve l'�tudiant de la liste 
         reserve.affecterReserve(etu);
     }
-    
+    //remove student from list
+    public void removeStudentFromList(Etudiant etu) {
+        this.studentList.remove(etu);
+    }
     public String toString() {
         StringBuffer sb = new StringBuffer ("Le Joueur ");
         sb.append(this.userName);

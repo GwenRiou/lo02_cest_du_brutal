@@ -35,7 +35,7 @@ public class Zone {
                 Zone zoneTemp = it.next();
                 System.out.println(zoneTemp.getZoneName());
             }
-        }
+   }
     
         
     public static Zone getZone(int index) { // called inside another getZone() to fetch the Student at the given iterator
@@ -43,13 +43,12 @@ public class Zone {
         return zon;
     }
     
-    public Etudiant drawEtudiantDansZone(int index) {// called inside another getEtudiantDansZone() to fetch the Student at the given iterator and remove the old one
-        Etudiant etu = etuDansZone.get(index);
-        etuDansZone.remove(index);
+    public Etudiant drawEtudiantDansZone(int index) {// called inside another getEtudiantDansZone() to fetch the Student at the given iterator 
+        Etudiant etu = etuDansZone.get(index);         
         return etu;
     }
     public Etudiant drawEtudiantDansZone(Joueur j) throws StudentNotFoundInList{   //identical to getEtudiantDansZone except it    
-        ArrayList<Etudiant>  etulist= this.etuDansZone;
+        ArrayList<Etudiant>  etulist= this.etuDansZone;//
         boolean entryIsntValid = true;
         while (entryIsntValid) {
             try {//try finding a student in the zone
@@ -58,7 +57,7 @@ public class Zone {
                 for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //let's find the student
                     Etudiant s = it.next();
                     if((s.getId() == id) & j.equals(s.getBelongsTo())) {
-                        
+       
                         return drawEtudiantDansZone(it.previousIndex()); //return the student if the id condition is met
                     }
                     //if the id matches the student AND the student belongs to the player, return the student
@@ -71,12 +70,33 @@ public class Zone {
         throw new StudentNotFoundInList();
 
     }
+    public void removeStudentFromZone(Etudiant etu) {
+        etuDansZone.remove(etu);
+    }
+    
+    public static int allZoneNotEmpty() {
+        
+        Iterator<Zone> it =zoneList.iterator();
+        while(it.hasNext()){
+            Zone zoneTemp = it.next();
+            if(zoneTemp.getNombreEtu()==0) return 0;
+        }
+        return 1;
+    }
+    
+    public static void displayAllStudentInZones() {
+        Iterator<Zone> it =zoneList.iterator();
+        while(it.hasNext()){
+            Zone zoneTemp = it.next();
+            zoneTemp.getEtudiantDansZoneList();
+        }
+    }
 
     //getters
     public String getZoneName() {return zoneName;}
     public ControleZone getStrategie() {return enumControleZone;}
     public int getNombreEtu() {return this.etuDansZone.size();} 
-    public void getEtudiantDansZoneList(Joueur j) {
+    public void getEtudiantDansZoneList() {
         ArrayList<Etudiant>  etulist= this.etuDansZone;
         for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //scan through all students
             Etudiant s = it.next();
@@ -93,6 +113,7 @@ public class Zone {
     public static ArrayList<Zone> getZoneList() {return zoneList;}
     public void addEtudiantDansZone(Etudiant etudiant) {
         this.etuDansZone.add(etudiant);
+        System.out.println("L'etudiant a bien ete ajoute a la zone");
     }
     
     
