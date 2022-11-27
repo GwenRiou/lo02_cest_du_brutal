@@ -16,7 +16,7 @@ import java.util.*;
  *         si oui on demande un autre non si non on appel setter
  * 
  */
-public class Joueur /*extends  Reserve*/{
+public class Joueur {
     private int points = 400;
     private Programme programme;
     private String userName;
@@ -41,12 +41,12 @@ public class Joueur /*extends  Reserve*/{
             Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2,this);
             studentList.add(etuElite);            
         }
-        /*
+        
         //creer lest étudiants de basse
         for(int i=0 ; i < 15; i++){
             Etudiant etuNormal = new Etudiant("Base",0,0,0,0,0,this);
             studentList.add(etuNormal);            
-        }*/
+        }
         setIdForArmy();
        
     }
@@ -57,7 +57,7 @@ public class Joueur /*extends  Reserve*/{
 
         for (ListIterator<Etudiant> it = studentList.listIterator(); it.hasNext();) {
              Etudiant s = it.next();
-             s.setId(it.previousIndex());            
+             s.setId(it.previousIndex()+1);            
         }
     }
     
