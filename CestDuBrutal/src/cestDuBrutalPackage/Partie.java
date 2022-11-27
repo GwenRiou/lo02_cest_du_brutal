@@ -49,10 +49,10 @@ public class Partie {
             throw new StudentNotFoundInList();          
     }
     
-    public Zone selectZone()throws ZoneNotFoundInList{
+    public Zone selectZone(String id)throws ZoneNotFoundInList{
         
         ArrayList<Zone>  l= Zone.getZoneList();
-        String id = getUserInput("Choisissez une zone");     
+         
         for (ListIterator<Zone> it = l.listIterator(); it.hasNext();) {
              Zone z = it.next();
              if(z.getZoneName().toLowerCase().equals(id.toLowerCase())) {
@@ -106,19 +106,44 @@ public class Partie {
     }
     
    //Mise en zones
-    public void affecterEtudiantsZone(Joueur j) {//make sure this includes the reserve.
-        while (j.getStudentList().size()!=0) {
+    public void affecterEtudiantsZone(Joueur j) {
+        while (j.getStudentList().size()!=0 || Zone.allZoneNotEmpty()==0) {
             boolean entryIsntValid = true;
             while(entryIsntValid) {
                 try {
+                    Etudiant studentToMove = new Etudiant();
+                    Zone fromZone = new Zone ("zone vide");
                     System.out.println("Deplacer un etudiant de:");
                     Zone.displayAllZones();
-                    Zone fromZone = selectZone();
+                    System.out.println("le Camion");
+                    
+                    //On prend un etudiant dans une zone ou dans le camion
+                    String id = getUserInput("Choisissez une zone");
+                    if(id.equalsIgnoreCase("le camion")) {
+                        
+                        j.displayAllStudent();
+                        studentToMove = selectStudent(j);                            
+                        
+                    }else  { // choix une zone  
+
+                        fromZone = selectZone(id);//Choisit la zone                     
+                        fromZone.getEtudiantDansZoneList(); //Shows a list of students inside the zone                    
+                        studentToMove = fromZone.drawEtudiantDansZone(j);
+                    } 
+                    
+                    // on choisie la zone de deploiement & on d�polie l'etu choisi
                     System.out.println("Vers");
-                    Zone toZone = selectZone();//pas grave, tant pis s'il décide de le deplacer mettre la meme zone mdrr
-                    fromZone.getEtudiantDansZoneList(j); //Shows a list of students inside the zone
-                    Etudiant studentToMove = fromZone.drawEtudiantDansZone(j);
+                    String idToZone = getUserInput("Choisissez une zone");
+                    Zone toZone = selectZone(idToZone);//pas grave, tant pis s'il décide de le deplacer mettre la meme zone mdrr                                
                     toZone.addEtudiantDansZone(studentToMove);
+                    
+                    
+                    // on retire l'etu de la zone d'origine
+                    if(id.equalsIgnoreCase("le camion")) {
+                        j.removeStudentFromList(studentToMove);
+                    }else {
+                        fromZone.removeStudentFromZone(studentToMove);
+                    }
                     entryIsntValid = false;
                 }
                 catch (ZoneNotFoundInList e){
@@ -131,7 +156,9 @@ public class Partie {
             }
         }
             Zone.displayAllZones();
-            getUserInput("");     //TODO    
+            // affiche toutes les �tudiants par zones
+            Zone.displayAllStudentInZones();
+            System.out.println("la repartition dans les zones est fini");     //TODO    
     }
     
     
@@ -214,6 +241,8 @@ public class Partie {
         
 
         // test avec l'armée d'un joueur
+        
+//----------------ARMEE AVEC 5 ETU POUR TESTER PLUS FACILEMENT A ELEVER ATTENTION --------------------------------------------------------//
         j2.createStudentList();
 
         j2.displayAllStudent();
@@ -245,7 +274,7 @@ public class Partie {
         */
         
         Zone.setZones();
-        partie.affecterEtudiantsZone(j2);    //TODO affecter depuis la réserve vers les zones, sachant que la reserve n'est pas dans la liste de zones
+        partie.affecterEtudiantsZone(j2);    //TODO affecter depuis la réserve vers les zones, sachant que la reserve n'est pas dans la liste de zones 
         
         
         

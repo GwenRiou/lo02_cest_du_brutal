@@ -41,12 +41,12 @@ public class Joueur /*extends  Reserve*/{
             Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2,this);
             studentList.add(etuElite);            
         }
-        
+        /*
         //creer lest étudiants de basse
         for(int i=0 ; i < 15; i++){
             Etudiant etuNormal = new Etudiant("Base",0,0,0,0,0,this);
             studentList.add(etuNormal);            
-        }
+        }*/
         setIdForArmy();
        
     }
@@ -156,7 +156,10 @@ public class Joueur /*extends  Reserve*/{
         this.studentList.remove(etu);// Enl�ve l'�tudiant de la liste 
         reserve.affecterReserve(etu);
     }
-    
+    //remove student from list
+    public void removeStudentFromList(Etudiant etu) {
+        this.studentList.remove(etu);
+    }
     public String toString() {
         StringBuffer sb = new StringBuffer ("Le Joueur ");
         sb.append(this.userName);
