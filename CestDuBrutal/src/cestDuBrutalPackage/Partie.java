@@ -40,7 +40,7 @@ public class Partie {
     public Etudiant selectStudent(Joueur j)throws StudentNotFoundInList{
         
             ArrayList<Etudiant>  l= j.getStudentList();
-            System.out.print("Choisisez votre étudiant" );        
+            System.out.print("Choisisez votre Etudiant" );        
             int id = getUserInputInt("Entez le numero de l'etudiant choisi");     
             for (ListIterator<Etudiant> it = l.listIterator(); it.hasNext();) {
                  Etudiant s = it.next();
@@ -49,10 +49,10 @@ public class Partie {
             throw new StudentNotFoundInList();          
     }
     
-    public Zone selectZone()throws ZoneNotFoundInList{
+    public Zone selectZone(String id)throws ZoneNotFoundInList{
         
         ArrayList<Zone>  l= Zone.getZoneList();
-        String id = getUserInput("Choisissez une zone");     
+         
         for (ListIterator<Zone> it = l.listIterator(); it.hasNext();) {
              Zone z = it.next();
              if(z.getZoneName().toLowerCase().equals(id.toLowerCase())) {
@@ -65,25 +65,39 @@ public class Partie {
     
     public void repartitionPoints(Joueur j) {
         System.out.println("Vous allez pouvoir attribuer vos points a vos etudiants. ");        
-        
-        String etapeSuivante = "N";
-        while (!"Y".equals(etapeSuivante)){
+        int choix=-1;
+        while (choix!=4){
             try {
                 Etudiant etuTest= selectStudent(j);         
                 String choisirAutreEtu ="N";
-                while (!"Y".equals(choisirAutreEtu)){
+                choix=-1;
+                while (choix!=3 && choix!=4){
                     
                     String Characteristics = getUserInput("Enter la caracteristique a modifier");        
                     int pointsAttribuee = getUserInputInt("Enter le nombre de points a attribuer");
                     
-                   int retour =  j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
+                    int retour =  j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
                     if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif ï¿½ eu lieu ou non
                     
-                    choisirAutreEtu = getUserInput("Voulez vous passer a un autre etudiant ? Y/N").toUpperCase();
+                    choix=5;
+                    while(choix==5 ) {
+                        choix = getUserChoix("Pour continuer � modifier l'etudiant ? 1 Changer la strategie de l'etudiant ? 2 Passer a l'etudiant suivante ? 3  A l'etape suivante ? 4 Affichier tous les etudiants? 5 ",5);
+                        if (choix==5) {j.displayAllStudent();}
+                        if (choix==2) {
+                            try {
+                                choix=5;
+                                String Strategie = getUserInput("Enter la Strategie");
+                                etuTest.setStrategie(Strategie);
+                            }catch(IllegalArgumentException e) {
+                                System.out.println("La Strategie entre n'est pas valable, (OFFENSIVE,DEFENSIVE,RANDOM;) ");
+                            }                        
+                        }
+                    }
+                    
                 }
                 // TODO regarder si l'utilisateur entre une caracteristique valable avant de continuer 
                 System.out.println("Il reste "+j.getPoints()+" points");
-                etapeSuivante = getUserInput("Voulez vous passer a l'etape suivante ? Y/N").toUpperCase();// TODO methode qui ignore si l'entrï¿½ n'est pas = Y ou =N
+               
                 
             }catch(StudentNotFoundInList e) {
                 System.out.print(e.getMessage());
@@ -106,19 +120,44 @@ public class Partie {
     }
     
    //Mise en zones
-    public void affecterEtudiantZone(Joueur j) {//make sure this includes the reserve.
-        while (j.getStudentList().size()!=0) {
+    public void affecterEtudiantZone(Joueur j) {
+        while (j.getStudentList().size()!=0 || Zone.allZoneNotEmpty()==0) {
             boolean entryIsntValid = true;
             while(entryIsntValid) {
                 try {
+                    Etudiant studentToMove = new Etudiant();
+                    Zone fromZone = new Zone ("zone vide");
                     System.out.println("Deplacer un etudiant de:");
                     Zone.displayAllZones();
-                    Zone fromZone = selectZone();
+                    System.out.println("le Camion");
+                    
+                    //On prend un etudiant dans une zone ou dans le camion
+                    String id = getUserInput("Choisissez une zone");
+                    if(id.equalsIgnoreCase("le camion")) {
+                        
+                        j.displayAllStudent();
+                        studentToMove = selectStudent(j);                            
+                        
+                    }else  { // choix une zone  
+
+                        fromZone = selectZone(id);//Choisit la zone                     
+                        fromZone.getEtudiantDansZoneList(); //Shows a list of students inside the zone                    
+                        studentToMove = fromZone.drawEtudiantDansZone(j);
+                    } 
+                    
+                    // on choisie la zone de deploiement & on d�polie l'etu choisi
                     System.out.println("Vers");
-                    Zone toZone = selectZone();//pas grave, tant pis s'il décide de le deplacer mettre la meme zone mdrr
-                    fromZone.getEtudiantDansZoneList(j); //Shows a list of students inside the zone
-                    Etudiant studentToMove = fromZone.drawEtudiantDansZone(j);
+                    String idToZone = getUserInput("Choisissez une zone");
+                    Zone toZone = selectZone(idToZone);//pas grave, tant pis s'il décide de le deplacer mettre la meme zone mdrr                                
                     toZone.addEtudiantDansZone(studentToMove);
+                    
+                    
+                    // on retire l'etu de la zone d'origine
+                    if(id.equalsIgnoreCase("le camion")) {
+                        j.removeStudentFromList(studentToMove);
+                    }else {
+                        fromZone.removeStudentFromZone(studentToMove);
+                    }
                     entryIsntValid = false;
                 }
                 catch (ZoneNotFoundInList e){
@@ -131,7 +170,9 @@ public class Partie {
             }
         }
             Zone.displayAllZones();
-            getUserInput("");     //TODO    
+            // affiche toutes les �tudiants par zones
+            Zone.displayAllStudentInZones();
+            System.out.println("la repartition dans les zones est fini");     //TODO    
     }
     
     
@@ -160,10 +201,10 @@ public class Partie {
         }        
         
     }
-    public static int getUserIndex(String message, int size) {
+    public static int getUserChoix(String message, int max) {
         int num = -5;
-        System.out.println("choisissez un nombre entre 0 et " + size );   
-        while(num>size|| num<0) {            
+        System.out.println("choisissez un nombre entre 1 et " + max );   
+        while(num>max|| num<0) {            
             num = getUserInputInt(message);            
         }             
         return num;
@@ -213,39 +254,41 @@ public class Partie {
         
         
 
-        // test avec l'armée d'un joueur
+        //  l'armée d'un joueur
+        
         j2.createStudentList();
 
         j2.displayAllStudent();
         
         
         
-       /*Repartition des points 
+       //Repartition des points 
                 
 
         
         partie.repartitionPoints(j2);        
         j2.displayAllStudent();
         
-        //
+        
         System.out.print("Selectioner les étudiants à mettre dans la reserve \n");
-        *
+        /*
         * Mettre une valeur max à la reserve
         * whilde dans la methode jusque la reserve soit pleine 
         * test pour voir si l'étudiant est enleve de la liste des étudiant du joueur ( c'est bien l'objetif)
-        *
-        //partie.putInReserve(j2);
-            // j2.putInReserve(partie.selectStudent(j2)); // c'est moche que la gestion des input soit dans Partie
-        
-        //j2.displayReserveStudent();
+        */
+        partie.putInReserve(j2);
+            
+        System.out.println("Les etudiants dans la reserves sont : ");
+        j2.displayReserveStudent();
         
         
         //repartition des etudiants dans les zones
        //initier les zones
-        */
+        
         
         Zone.setZones();
-        partie.affecterEtudiantZone(j2);    //TODO affecter depuis la réserve vers les zones, sachant que la reserve n'est pas dans la liste de zones
+        partie.affecterEtudiantZone(j2);    //TODO affecter depuis la réserve vers les zones, sachant que la reserve n'est pas dans la liste de zones 
+
         
         
         
