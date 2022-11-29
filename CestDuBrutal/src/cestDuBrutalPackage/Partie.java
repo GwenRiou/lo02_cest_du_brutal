@@ -81,7 +81,7 @@ public class Partie {
                     
                     choix=5;
                     while(choix==5 ) {
-                        choix = getUserChoix("Pour continuer à modifier l'etudiant ? 1 Changer la strategie de l'etudiant ? 2 Passer a l'etudiant suivante ? 3  A l'etape suivante ? 4 Affichier tous les etudiants? 5 ",5);
+                        choix = getUserChoix("Pour continuer ï¿½ modifier l'etudiant ? 1 Changer la strategie de l'etudiant ? 2 Passer a l'etudiant suivante ? 3  A l'etape suivante ? 4 Affichier tous les etudiants? 5 ",5);
                         if (choix==5) {j.displayAllStudent();}
                         if (choix==2) {
                             try {
@@ -120,7 +120,7 @@ public class Partie {
     }
     
    //Mise en zones
-    public void affecterEtudiantsZone(Joueur j) {
+    public void affecterEtudiantZone(Joueur j) {
         while (j.getStudentList().size()!=0 || Zone.allZoneNotEmpty()==0) {
             boolean entryIsntValid = true;
             while(entryIsntValid) {
@@ -145,7 +145,7 @@ public class Partie {
                         studentToMove = fromZone.drawEtudiantDansZone(j);
                     } 
                     
-                    // on choisie la zone de deploiement & on dépolie l'etu choisi
+                    // on choisie la zone de deploiement & on dï¿½polie l'etu choisi
                     System.out.println("Vers");
                     String idToZone = getUserInput("Choisissez une zone");
                     Zone toZone = selectZone(idToZone);//pas grave, tant pis s'il dÃ©cide de le deplacer mettre la meme zone mdrr                                
@@ -170,7 +170,7 @@ public class Partie {
             }
         }
             Zone.displayAllZones();
-            // affiche toutes les étudiants par zones
+            // affiche toutes les ï¿½tudiants par zones
             Zone.displayAllStudentInZones();
             System.out.println("la repartition dans les zones est fini");     //TODO    
     }
@@ -287,7 +287,8 @@ public class Partie {
         
         
         Zone.setZones();
-        partie.affecterEtudiantsZone(j2);    //TODO affecter depuis la rÃ©serve vers les zones, sachant que la reserve n'est pas dans la liste de zones 
+        partie.affecterEtudiantZone(j2);    //TODO affecter depuis la rÃ©serve vers les zones, sachant que la reserve n'est pas dans la liste de zones 
+
         
         
         
