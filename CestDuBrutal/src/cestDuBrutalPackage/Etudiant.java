@@ -28,7 +28,7 @@ public class Etudiant implements Strategie{
         this.dexterite = dexterite;
         this.resistance = resistance;
         this.constitution = constitution;
-        this.initiative = initiative;
+        this.initiative = initiative; //(int) (Math.random()*100) //debug line
         this.belongsTo = idJoueur;
         this.strategie = enumStrategie.RANDOM;
     }
@@ -55,15 +55,13 @@ public class Etudiant implements Strategie{
         sb.append(this.constitution);
         sb.append(", Initiative : ");
         sb.append(this.initiative);
-        sb.append(", Strat�gie : ");
+        sb.append(", Strategie : ");
         sb.append(this.strategie);
             
         return sb.toString();
     }
-
-
     
-
+    
 
     public void displayCaracteristics(){
         System.out.println(getType()+getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative()+getStrategieString());

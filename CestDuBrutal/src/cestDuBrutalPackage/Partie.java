@@ -257,7 +257,7 @@ public class Partie {
         //  l'armée d'un joueur
         
         j2.createStudentList();
-
+        //Zone.sortStudentList(j2.getStudentList());//debug line
         j2.displayAllStudent();
         
         
