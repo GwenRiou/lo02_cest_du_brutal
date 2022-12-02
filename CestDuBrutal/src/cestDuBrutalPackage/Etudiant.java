@@ -69,8 +69,40 @@ public class Etudiant implements Strategie{
 
     
     
-    private void attack(Etudiant target) {} //TODO a d�finir
-    private void heal(Etudiant target) {} //TODO a d�finir
+    private void attack(Etudiant target) {
+        if (!target.belongsTo.equals(target.belongsTo)) {//excludes friendly fire
+            final int damageReference = 10;
+            double damageCoefficient = Math.max(0, Math.min(100, 10*this.force-5*target.resistance));
+            double y = Math.random();
+            int x = ((int) Math.random()*100);
+            if (x>0 && x<(40 + 3*this.dexterite)) {
+                target.ects -= (int) ((y*1+damageCoefficient)*damageReference);
+            }
+        }
+        
+        
+        
+        
+    } //TODO a d�finir
+    private void heal(Etudiant target) {//excludes healing enemies
+        if (target.belongsTo.equals(this.belongsTo)) {
+            int healAmount;
+            int x = ((int) Math.random()*100);
+            double y = Math.random()*0.6;//0<y<0,6
+            if (x>0 && x<(20 + 6*this.dexterite)) {
+                healAmount = (int) (10+target.constitution);
+                if (healAmount < (30 + target.constitution)) {
+                    target.ects +=healAmount;
+                }
+                else {
+                    target.ects += 30 + this.constitution;
+                }
+            }
+        }
+        
+            
+        
+    } //TODO a d�finir
     
     private void agir(Etudiant target) {
         if (this.strategie == strategie.OFFENSIVE) {
