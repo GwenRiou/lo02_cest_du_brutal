@@ -70,6 +70,14 @@ public class Zone {
         throw new StudentNotFoundInList();
 
     }
+    
+    
+    public static void sortStudentList(ArrayList<Etudiant> studentListToSort) {
+        studentListToSort.sort((etu1,etu2) -> etu2.getInitiative()-(etu1.getInitiative())); //j'ai pas cherché à comprendre en détail la syntaxe....
+    //TODO à tester
+    }
+    
+   
     public void removeStudentFromZone(Etudiant etu) {
         etuDansZone.remove(etu);
     }
