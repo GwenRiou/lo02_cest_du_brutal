@@ -205,6 +205,7 @@ public class Joueur {
     public String getUserName() {
         return userName;
     }
+    
 
     // Implémentation plus complexe possible cf doc idée
     public void setUserName(String userName) {
