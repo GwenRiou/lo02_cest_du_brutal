@@ -76,7 +76,7 @@ public class Etudiant implements Strategie{
             double y = Math.random();
             int x = ((int) Math.random()*100);
             if (x>0 && x<(40 + 3*this.dexterite)) {
-                target.ects -= (int) ((y*1+damageCoefficient)*damageReference);
+                target.ects -= (int) ((y*(1+damageCoefficient))*damageReference);
             }
         }
         
@@ -90,7 +90,7 @@ public class Etudiant implements Strategie{
             int x = ((int) Math.random()*100);
             double y = Math.random()*0.6;//0<y<0,6
             if (x>0 && x<(20 + 6*this.dexterite)) {
-                healAmount = (int) (10+target.constitution);
+                healAmount = (int) (y*(10+target.constitution));
                 if (healAmount < (30 + target.constitution)) {
                     target.ects +=healAmount;
                 }
