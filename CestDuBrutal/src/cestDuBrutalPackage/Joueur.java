@@ -207,8 +207,9 @@ public class Joueur {
     }
     
 
-    // Implémentation plus complexe possible cf doc idée
-    public void setUserName(String userName) {
+    // Implémentation plus complexe possible cf doc idée // c'est fait, on utilise des pointeurs vers les Joueurs mtn
+    @Deprecated
+    public void setUserName(String userName) {//jai mis déprécié pour l'identification fonctionnelle  mais on peut tjrs utiliser pour le nom du joueur :D
         this.userName = userName;
     }
     public ArrayList<Etudiant> getReserve() {
