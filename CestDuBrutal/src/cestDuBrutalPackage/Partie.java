@@ -149,6 +149,7 @@ public class Partie {
                     System.out.println("Vers");
                     String idToZone = getUserInput("Choisissez une zone");
                     Zone toZone = selectZone(idToZone);//pas grave, tant pis s'il décide de le deplacer mettre la meme zone mdrr                                
+                    studentToMove.setIsInZone(toZone);
                     toZone.addEtudiantDansZone(studentToMove);
                     
                     
@@ -227,7 +228,6 @@ public class Partie {
     public int getEtape() {
         return this.etape;
     }
-    
     //THE MAIN
     public static void main(String[] args) {
         
