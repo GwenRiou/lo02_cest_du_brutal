@@ -3,7 +3,7 @@ import java.util.*;//for EVERYTHIGN
 
 
 
-public class Zone extends Observable{
+public class Zone {
     private String zoneName;
     private ControleZone enumControleZone;
     protected ArrayList<Etudiant> etuDansZone;
@@ -11,7 +11,6 @@ public class Zone extends Observable{
     
     //constructeur
     public Zone(String zoneName) {
-        ZoneObserver observer = new ZoneObserver(this);
         this.etuDansZone = new ArrayList<Etudiant>();
         this.zoneName = zoneName;
     }
@@ -48,7 +47,7 @@ public class Zone extends Observable{
         Etudiant etu = etuDansZone.get(index);         
         return etu;
     }
-    public Etudiant drawEtudiantDansZone(Joueur j) throws StudentNotFoundInList{
+    public Etudiant drawEtudiantDansZone(Joueur j) throws StudentNotFoundInList{   //identical to getEtudiantDansZone except it    
         ArrayList<Etudiant>  etulist= this.etuDansZone;//
         boolean entryIsntValid = true;
         while (entryIsntValid) {
@@ -57,7 +56,8 @@ public class Zone extends Observable{
                 entryIsntValid = false;
                 for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //let's find the student
                     Etudiant s = it.next();
-                    if((s.getId() == id) & j.equals(s.getBelongsTo())) { //TODO set student isInZone to the zone hes affected in
+                    if((s.getId() == id) & j.equals(s.getBelongsTo())) {
+       
                         return drawEtudiantDansZone(it.previousIndex()); //return the student if the id condition is met
                     }
                     //if the id matches the student AND the student belongs to the player, return the student
@@ -74,6 +74,7 @@ public class Zone extends Observable{
     
     public static void sortStudentList(ArrayList<Etudiant> studentListToSort) {
         studentListToSort.sort((etu1,etu2) -> etu2.getInitiative()-(etu1.getInitiative())); //j'ai pas cherché à comprendre en détail la syntaxe....
+    //TODO à tester
     }
     
    
@@ -108,9 +109,9 @@ public class Zone extends Observable{
         for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //scan through all students
             Etudiant s = it.next();
             System.out.println(s);//use the tostring method to print the student's ids
-        }    
+        } 
+        
     }
-    public ArrayList<Etudiant> getEtuDansZoneArrayList() {return etuDansZone;}
     //setters
     public void setZoneName(String zoneName) {this.zoneName = zoneName;}
     public void setStrategie(String enumControleZone) {this.enumControleZone = ControleZone.valueOf(enumControleZone.toUpperCase());}
@@ -121,16 +122,6 @@ public class Zone extends Observable{
     public void addEtudiantDansZone(Etudiant etudiant) {
         this.etuDansZone.add(etudiant);
         System.out.println("L'etudiant a bien ete ajoute a la zone");
-    }
-
-    public void publicSetChanged() {
-        this.setChanged();
-    }
-    public void publicNotifyObservers() {
-        this.notifyObservers();
-    }
-    public void publicClearChanged() {
-        this.clearChanged();
     }
     
     
