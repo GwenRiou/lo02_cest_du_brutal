@@ -339,9 +339,10 @@ public class Partie {
         partie.affecterEtudiantZone(j2);    //TODO affecter depuis la réserve vers les zones, sachant que la reserve n'est pas dans la liste de zones 
         */
         j1.displayAllStudent();
+        j2.displayAllStudent();
         autoAffecterEtudiantZone(j1);
         autoAffecterEtudiantZone(j2);
-        //Zone.displayAllStudentInZones();
+        Zone.displayAllStudentInZones();
        
         
         Zone.melee();

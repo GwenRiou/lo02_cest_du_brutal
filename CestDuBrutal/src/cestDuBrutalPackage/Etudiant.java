@@ -82,13 +82,11 @@ public class Etudiant implements Strategie{
            enemyEtu = it.next();
            if(!enemyEtu.belongsTo.equals(this.belongsTo)) {
                enemyTeam.add(enemyEtu);
-               System.out.println("etu enemi"+enemyEtu);
            }
         }
         Iterator<Etudiant> it2 = enemyTeam.iterator();
         Etudiant target = enemyTeam.get(0);
         Etudiant etudiantTemp;
-        System.out.println(it2.hasNext());
         while(it2.hasNext()) {//scan for the student with the least HP
             etudiantTemp = it2.next();
             //System.out.println(target.id+"ects:"+target.ects+target.belongsTo.getUserName());
@@ -97,7 +95,7 @@ public class Etudiant implements Strategie{
             }
         }
         //attacking...
-        System.out.println(this.belongsTo.getUserName()+" : "+this.id+" Tente d'attaquer");
+        //System.out.println(this.belongsTo.getUserName()+" : "+this.id+" Tente d'attaquer");
         final int damageReference = 10;
         double damageCoefficient = Math.max(0, Math.min(100, 10*this.force-5*target.resistance));
         double y = Math.random();
@@ -105,13 +103,13 @@ public class Etudiant implements Strategie{
         int damageTaken = (int) ((y*(1+damageCoefficient))*damageReference);        
         if (x>0 && x<(40 + 3*this.dexterite)) {
             target.ects -= damageTaken;
-            System.out.println(target.getId()+"got attacked "+damageTaken+" HP by"+ this.id);
+            System.out.println(this.belongsTo.getUserName()+" : "+this.getId()+" attacks "+target.id+", dealing "+ damageTaken + "HP");
         }
         if (target.ects <= 0) {//kill student
             System.out.println(target.belongsTo.getUserName()+"'s etu #"+target.getId()+" was killed by"+this.id);//
             target.isInZone.getEtuDansZoneArrayList().remove(target);
             //=====count number of players alive
-            Zone.displayAllStudentInZones();
+            
             int studentCountj1 = 0;
             int studentCountj2 = 0;
             Iterator<Etudiant> iter = zone.getEtuDansZoneArrayList().iterator();

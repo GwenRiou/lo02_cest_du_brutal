@@ -44,12 +44,12 @@ public class Joueur {
         }
         
         //creer lest étudiants de basse==================disabled for debug======================
-        /*
+        
         for(int i=0 ; i < 15; i++){
             Etudiant etuNormal = new Etudiant("Base",0,0,0,0,0,this);
             studentList.add(etuNormal);            
         }
-        */
+        
 
         setIdForArmy();
        
