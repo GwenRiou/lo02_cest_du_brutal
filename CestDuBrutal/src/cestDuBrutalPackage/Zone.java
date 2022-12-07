@@ -73,7 +73,7 @@ public class Zone extends Observable{
     
     
     public static void sortStudentList(ArrayList<Etudiant> studentListToSort) {
-        studentListToSort.sort((etu1,etu2) -> etu2.getInitiative()-(etu1.getInitiative())); //j'ai pas cherché à comprendre en détail la syntaxe....
+        studentListToSort.sort((etu1,etu2) -> etu2.getInitiative()-(etu1.getInitiative())); //j'ai pas cherche a comprendre en détail la syntaxe....
     }
     
    
