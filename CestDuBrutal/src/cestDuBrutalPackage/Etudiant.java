@@ -59,6 +59,8 @@ public class Etudiant implements Strategie{
         sb.append(this.initiative);
         sb.append(", Strategie : ");
         sb.append(this.strategie);
+        sb.append(", Joueur : ");
+        sb.append(this.belongsTo.getUserName());
             
         return sb.toString();
     }
@@ -69,8 +71,6 @@ public class Etudiant implements Strategie{
         System.out.println(getType()+getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative()+getStrategieString());
     }
 
-    
-    
     private void attack(Zone zone) {//only attack student inside zone
         ArrayList<Etudiant> enemyTeam = new ArrayList<Etudiant>();
         Iterator<Etudiant> it = zone.getEtuDansZoneArrayList().iterator();
@@ -144,7 +144,7 @@ public class Etudiant implements Strategie{
         
     } 
     
-    private void agir(Etudiant target) {
+    public void agir(Etudiant target) {
         if (this.strategie == strategie.OFFENSIVE) {
             attack(target.isInZone);
         }

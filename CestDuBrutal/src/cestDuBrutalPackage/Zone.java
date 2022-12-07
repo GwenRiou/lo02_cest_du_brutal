@@ -5,9 +5,8 @@ import java.util.*;//for EVERYTHIGN
 
 public class Zone extends Observable{
     private String zoneName;
-    private ControleZone enumControleZone;
     protected ArrayList<Etudiant> etuDansZone;
-    private static ArrayList<Zone> zoneList = new ArrayList<Zone>();
+    private static ArrayList<ZoneCombat> zoneList = new ArrayList<ZoneCombat>();
     
     //constructeur
     public Zone(String zoneName) {
@@ -22,16 +21,17 @@ public class Zone extends Observable{
     }
     
     public static void setZones() {
-        zoneList.add(new Zone("La Bibliotheque"));
-        zoneList.add(new Zone("Le BDE"));
+        zoneList.add(new ZoneCombat("La Bibliotheque"));
+        zoneList.add(new ZoneCombat("Le BDE"));/*
+        -----------------------------------------------------------------------------------------------------Pour TESTER -------------------------------------------------
         zoneList.add(new Zone("Le Quartier Administratif"));
         zoneList.add(new Zone("Les Halles Industrielles"));
-        zoneList.add(new Zone("La Halle Sportive"));
+        zoneList.add(new Zone("La Halle Sportive"));*/
     }
     
     public static void displayAllZones(){
   
-            Iterator<Zone> it =zoneList.iterator();
+            Iterator<ZoneCombat> it =zoneList.iterator();
             while(it.hasNext()){
                 Zone zoneTemp = it.next();
                 System.out.println(zoneTemp.getZoneName());
@@ -83,7 +83,7 @@ public class Zone extends Observable{
     
     public static int allZoneNotEmpty() {
         
-        Iterator<Zone> it =zoneList.iterator();
+        Iterator<ZoneCombat> it =zoneList.iterator();
         while(it.hasNext()){
             Zone zoneTemp = it.next();
             if(zoneTemp.getNombreEtu()==0) return 0;
@@ -92,16 +92,31 @@ public class Zone extends Observable{
     }
     
     public static void displayAllStudentInZones() {
-        Iterator<Zone> it =zoneList.iterator();
+        Iterator<ZoneCombat> it =zoneList.iterator();
         while(it.hasNext()){
             Zone zoneTemp = it.next();
             zoneTemp.getEtudiantDansZoneList();
         }
     }
+    
+    public static void melee() {
+        Iterator<ZoneCombat> it =zoneList.iterator();
+        while(it.hasNext()){
+            ZoneCombat zoneTemp = it.next();
+            zoneTemp.combat();
+        }
+    }
+    
+    public static void initialiserZone() {// order the list of etu by initiative on every zone 
+        Iterator<ZoneCombat> it =zoneList.iterator();
+        while(it.hasNext()){
+            ZoneCombat zoneTemp = it.next();
+            zoneTemp.initialiser();
+        }
+    }
 
     //getters
     public String getZoneName() {return zoneName;}
-    public ControleZone getStrategie() {return enumControleZone;}
     public int getNombreEtu() {return this.etuDansZone.size();} 
     public void getEtudiantDansZoneList() {
         ArrayList<Etudiant>  etulist= this.etuDansZone;
@@ -113,11 +128,10 @@ public class Zone extends Observable{
     public ArrayList<Etudiant> getEtuDansZoneArrayList() {return etuDansZone;}
     //setters
     public void setZoneName(String zoneName) {this.zoneName = zoneName;}
-    public void setStrategie(String enumControleZone) {this.enumControleZone = ControleZone.valueOf(enumControleZone.toUpperCase());}
-    public static void setZoneList(ArrayList<Zone> zoneList) {Zone.zoneList = zoneList;}
+    public static void setZoneList(ArrayList<ZoneCombat> zoneList) {Zone.zoneList = zoneList;}
 
 
-    public static ArrayList<Zone> getZoneList() {return zoneList;}
+    public static ArrayList<ZoneCombat> getZoneList() {return zoneList;}
     public void addEtudiantDansZone(Etudiant etudiant) {
         this.etuDansZone.add(etudiant);
         System.out.println("L'etudiant a bien ete ajoute a la zone");

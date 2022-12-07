@@ -32,6 +32,7 @@ public class Joueur {
     
 
     public void createStudentList() {
+        
         // creer le maiter du gobit
         Etudiant etuMaitre = new Etudiant("Maitre",2,2,2,10,2,this);
         studentList.add(etuMaitre);
@@ -49,6 +50,7 @@ public class Joueur {
             studentList.add(etuNormal);            
         }
         */
+
         setIdForArmy();
        
     }

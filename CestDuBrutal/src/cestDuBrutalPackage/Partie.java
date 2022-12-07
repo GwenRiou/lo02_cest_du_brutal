@@ -5,14 +5,17 @@ public class Partie {
     private static Partie partieObject;
     
     private int etape;
+    private String treve;
     private boolean finDePartie;    
     private ArrayList<Joueur> listJ;
+    
         
 
     private Partie(){ // constructeur en Private car singleton Et pas en void :)
         this.etape=0;
         this.finDePartie= false;
-        this.listJ = new ArrayList<Joueur>();        
+        this.listJ = new ArrayList<Joueur>();    
+        this.treve=null;
     }
     
     public static Partie getInstance() { //--> mÃ©thode qui va appeler le constructeur si besoin
@@ -50,9 +53,9 @@ public class Partie {
     
     public Zone selectZone(String id)throws ZoneNotFoundInList{
         
-        ArrayList<Zone>  l= Zone.getZoneList();
+        ArrayList<ZoneCombat>  l= Zone.getZoneList();
          
-        for (ListIterator<Zone> it = l.listIterator(); it.hasNext();) {
+        for (ListIterator<ZoneCombat> it = l.listIterator(); it.hasNext();) {
              Zone z = it.next();
              if(z.getZoneName().toLowerCase().equals(id.toLowerCase())) {
                  return Zone.getZone(it.previousIndex());  //fails for some reason          
@@ -80,7 +83,7 @@ public class Partie {
                     
                     choix=5;
                     while(choix==5 ) {
-                        choix = getUserChoix("Pour continuer � modifier l'etudiant ? 1 Changer la strategie de l'etudiant ? 2 Passer a l'etudiant suivante ? 3  A l'etape suivante ? 4 Affichier tous les etudiants? 5 ",5);
+                        choix = getUserChoix("Pour continuer a modifier l'etudiant ? 1 Changer la strategie de l'etudiant ? 2 Passer a l'etudiant suivante ? 3  A l'etape suivante ? 4 Affichier tous les etudiants? 5 ",5);
                         if (choix==5) {j.displayAllStudent();}
                         if (choix==2) {
                             try {
@@ -174,6 +177,45 @@ public class Partie {
             Zone.displayAllStudentInZones();
             System.out.println("la repartition dans les zones est fini");     //TODO    
     }
+
+    
+    public void melee() {
+        
+    }
+    
+    public synchronized void declancherTreve(String nomZone, String etatDeControle) throws InterruptedException {
+        while(treve!=null) {// si la treve est en cour
+            
+            System.out.println(nomZone + "est en pose la treve est en cour");
+            this.wait();
+        }
+        if(etatDeControle.equalsIgnoreCase("0")) {// si la zone est controlee
+            System.out.println( "etat de la zone est "+etatDeControle);
+            System.out.println("La treve est en cours car cette zone " + Thread.currentThread().getName() + " a fini sont combat\n\n");
+            treve=etatDeControle;//
+            
+            System.out.println("On appel la treve");
+            treve(); // --------------------------------ajout de la tr�ve
+        }
+        
+            
+    }
+    
+    public void treve() {
+        Zone.initialiserZone(); 
+        System.out.println("C'est la tr�ve ");
+        treve=null;
+        
+        String input = "n";
+        while (!input.equalsIgnoreCase("y")) {
+            System.out.println("On fait des trucs de la tr�ve");
+            
+            input= getUserInput("Voulez vous finir la tr�ve");
+            if (input=="y") {
+                System.out.println("Fin de la tr�ve  on notify tous le monde !!");
+                notifyAll(); // on reprend le combat
+            }
+        }
     public void autoAffecterEtudiantZone(Joueur j) {
         while (j.getStudentList().size()!=0 || Zone.allZoneNotEmpty()==0) {
             boolean entryIsntValid = true;
@@ -310,6 +352,7 @@ public class Partie {
         //  l'armée d'un joueur
         j1.createStudentList();
         j2.createStudentList();
+
        //Repartition des points 
         //partie.repartitionPoints(j2);    
         //j1.displayAllStudent();
@@ -321,8 +364,6 @@ public class Partie {
         * Mettre une valeur max à la reserve
         * whilde dans la methode jusque la reserve soit pleine 
         * test pour voir si l'étudiant est enleve de la liste des étudiant du joueur ( c'est bien l'objetif)
-        
-        
         partie.putInReserve(j2);
         partie.putInReserve(j1); 
         */
@@ -332,11 +373,11 @@ public class Partie {
         //repartition des etudiants dans les zones
        //initier les zones
         
-        
+ */      
         Zone.setZones();
         partie.affecterEtudiantZone(j2);    //TODO affecter depuis la réserve vers les zones, sachant que la reserve n'est pas dans la liste de zones 
 
-        
+        Zone.melee();
         
         
         
