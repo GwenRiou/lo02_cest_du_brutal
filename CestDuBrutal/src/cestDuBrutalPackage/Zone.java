@@ -120,6 +120,7 @@ public class Zone extends Observable{
     public int getNombreEtu() {return this.etuDansZone.size();} 
     public void getEtudiantDansZoneList() {
         ArrayList<Etudiant>  etulist= this.etuDansZone;
+        System.out.println("\n==Etudiants dans "+this.zoneName+":==");
         for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //scan through all students
             Etudiant s = it.next();
             System.out.println(s);//use the tostring method to print the student's ids

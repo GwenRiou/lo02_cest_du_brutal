@@ -216,62 +216,21 @@ public class Partie {
                 notifyAll(); // on reprend le combat
             }
         }
-    public void autoAffecterEtudiantZone(Joueur j) {
-        while (j.getStudentList().size()!=0 || Zone.allZoneNotEmpty()==0) {
-            boolean entryIsntValid = true;
-            while(entryIsntValid) {
-                try {
-                    Etudiant studentToMove = new Etudiant();
-                    Zone fromZone = new Zone ("zone vide");
-                    System.out.println("Deplacer un etudiant de:");
-                    Zone.displayAllZones();
-                    System.out.println("Le camion");
-                    
-                    //On prend un etudiant dans une zone ou dans le camion
-                    String id = getUserInput("Choisissez une zone");
-                    if(id.equalsIgnoreCase("Le camion")) {
-                        
-                        j.displayAllStudent();
-                        studentToMove = selectStudent(j);                            
-                        
-                    }else  { // choix une zone  
-
-                        fromZone = selectZone(id);//Choisit la zone                     
-                        fromZone.getEtudiantDansZoneList(); //Shows a list of students inside the zone                    
-                        studentToMove = fromZone.drawEtudiantDansZone(j);
-                    }
-                    
-                    // on choisie la zone de deploiement & on d�polie l'etu choisi
-                    System.out.println("Vers");
-                    String idToZone = getUserInput("Choisissez une zone");
-                    Zone toZone = selectZone(idToZone);//pas grave, tant pis s'il décide de le deplacer mettre la meme zone mdrr                                
-                    studentToMove.setIsInZone(toZone);
-                    toZone.addEtudiantDansZone(studentToMove);
-                    
-                    
-                    // on retire l'etu de la zone d'origine
-                    if(id.equalsIgnoreCase("le camion")) {
-                        j.removeStudentFromList(studentToMove);
-                    }else {
-                        fromZone.removeStudentFromZone(studentToMove);
-                    }
-                    entryIsntValid = false;
-                }
-                catch (ZoneNotFoundInList e){
-                    System.out.println("Vous n'avez pas rentre une zone existante.");
-                }
-                catch (StudentNotFoundInList e) {
-                    System.out.println("Cet etudiant n'est pas dans cette zone.");
-                }
-                
-            }
-        }
-            Zone.displayAllZones();
-            // affiche toutes les �tudiants par zones
-            Zone.displayAllStudentInZones();
-            System.out.println("la repartition dans les zones est fini");     //TODO    
     }
-    
+    public static void autoAffecterEtudiantZone(Joueur j) {
+        System.out.println("========AutoAffect:"+j.getUserName()+"=======");
+        int i = 0;
+        while (j.getStudentList().size()!=1) {
+            i++;
+            i = i%Zone.getZoneList().size();
+            Etudiant studentToMove = j.getStudentList().get(1);//ite.next();
+            ZoneCombat toZone = Zone.getZoneList().get(i);
+            toZone.getEtuDansZoneArrayList().add(studentToMove);
+            studentToMove.setIsInZone(toZone);
+            j.getStudentList().remove(studentToMove);
+            System.out.println("AutoAffect vers:" + studentToMove.getIsInZone().getZoneName());
+        }
+    }
     //Methodes pour Lire les inputs
     public static String getUserInput(String message) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
@@ -343,17 +302,12 @@ public class Partie {
         //methode pour mettre un nom de joueur      
         j2.setUserName(getUserInput("Enter username"));       
         System.out.println("Le joueur 1 s'appelle " +j1.getUserName());    
-        
-        
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
-        
-        
-
         //  l'armée d'un joueur
         j1.createStudentList();
         j2.createStudentList();
 
-       //Repartition des points 
+        System.out.println("========REPARTITION DES POINTS=======");
         //partie.repartitionPoints(j2);    
         //j1.displayAllStudent();
         //j2.displayAllStudent();
@@ -364,20 +318,31 @@ public class Partie {
         * Mettre une valeur max à la reserve
         * whilde dans la methode jusque la reserve soit pleine 
         * test pour voir si l'étudiant est enleve de la liste des étudiant du joueur ( c'est bien l'objetif)
+        */
+        System.out.println("========MISE EN RESERVE=======");
+        /*
         partie.putInReserve(j2);
         partie.putInReserve(j1); 
-        */
+        
         j2.displayReserveStudent();
         
         
         //repartition des etudiants dans les zones
        //initier les zones
         
- */      
+        */      
+        
+        System.out.println("========DISTRIBUTION DES ETUDIANTS=======");
+        
         Zone.setZones();
+        /*
         partie.affecterEtudiantZone(j2);    //TODO affecter depuis la réserve vers les zones, sachant que la reserve n'est pas dans la liste de zones 
-
-        Zone.melee();
+        */
+        j1.displayAllStudent();
+        autoAffecterEtudiantZone(j1);
+        autoAffecterEtudiantZone(j2);
+        Zone.displayAllStudentInZones();
+        //Zone.melee();
         
         
         

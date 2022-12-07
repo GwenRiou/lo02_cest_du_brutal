@@ -32,6 +32,7 @@ public class Etudiant implements Strategie{
         this.initiative = (int) (Math.random()*100); //debug line
         this.belongsTo = idJoueur;
         this.strategie = enumStrategie.RANDOM;
+        this.isInZone = new Zone("le camion");
     }
     
     
@@ -61,6 +62,8 @@ public class Etudiant implements Strategie{
         sb.append(this.strategie);
         sb.append(", Joueur : ");
         sb.append(this.belongsTo.getUserName());
+        sb.append(",\nEst dans la zone: ");
+        sb.append(this.isInZone.getZoneName());
             
         return sb.toString();
     }
