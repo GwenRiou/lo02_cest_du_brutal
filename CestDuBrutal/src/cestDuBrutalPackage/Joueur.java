@@ -43,20 +43,18 @@ public class Joueur {
             studentList.add(etuElite);            
         }
         
+        //creer lest étudiants de basse==================disabled for debug======================
         /*
-        //creer lest étudiants de basse
         for(int i=0 ; i < 15; i++){
             Etudiant etuNormal = new Etudiant("Base",0,0,0,0,0,this);
             studentList.add(etuNormal);            
-        }*/
+        }
+        */
+
         setIdForArmy();
        
     }
-    private void setIdForArmy() {// parcour la liste et seID des étudiants
-        
-        System.out.println(" List :");
-        
-
+    private void setIdForArmy() {// parcourt la liste et seID des étudiants
         for (ListIterator<Etudiant> it = studentList.listIterator(); it.hasNext();) {
              Etudiant s = it.next();
              s.setId(it.previousIndex()+1);            
@@ -64,7 +62,7 @@ public class Joueur {
     }
     
     public void displayAllStudent() {
-
+        System.out.println("Etudiants de: "+this.userName);
         ListIterator<Etudiant> iter = studentList.listIterator();
             
         while (iter.hasNext()) {
@@ -73,7 +71,7 @@ public class Joueur {
         }
     }
     public void displayReserveStudent() {
-
+        System.out.println(this.userName + ": Les etudiants dans la reserves sont : ");
         ListIterator<Etudiant> iter = this.reserve.getListeEtudiantsReserve().listIterator();
             
         while (iter.hasNext()) {
@@ -210,7 +208,7 @@ public class Joueur {
     
 
     // Implémentation plus complexe possible cf doc idée // c'est fait, on utilise des pointeurs vers les Joueurs mtn
-    @Deprecated
+    
     public void setUserName(String userName) {//jai mis déprécié pour l'identification fonctionnelle  mais on peut tjrs utiliser pour le nom du joueur :D
         this.userName = userName;
     }

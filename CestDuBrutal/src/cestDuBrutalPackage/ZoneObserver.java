@@ -13,6 +13,7 @@ public class ZoneObserver implements Observer {
     }
     
     public void update(Observable obs, Object zon) {
+        System.out.println("someone has died");//debug===================
         if (zon instanceof Zone){
             Zone zoneToCount = (Zone) zon;
             //COUNT PLAYERS

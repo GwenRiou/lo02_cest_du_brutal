@@ -1,5 +1,6 @@
 package cestDuBrutalPackage;
 import java.lang.Math;
+import java.util.*;
 
 public class Etudiant implements Strategie{
     
@@ -24,11 +25,11 @@ public class Etudiant implements Strategie{
             int resistance, int constitution, int initiative,Joueur idJoueur) {
         this.type = type;
         this.ects = ects;
-        this.force = force;
-        this.dexterite = dexterite;
-        this.resistance = resistance;
-        this.constitution = constitution;
-        this.initiative = initiative; //(int) (Math.random()*100) //debug line
+        this.force = (int) (Math.random()*10);
+        this.dexterite = (int) (Math.random()*100);
+        this.resistance = (int) (Math.random()*100);
+        this.constitution = (int) (Math.random()*100);
+        this.initiative = (int) (Math.random()*100); //debug line
         this.belongsTo = idJoueur;
         this.strategie = enumStrategie.RANDOM;
     }
@@ -40,9 +41,9 @@ public class Etudiant implements Strategie{
     }
     
     public String toString() {
-        StringBuffer sb = new StringBuffer ("L'Etudiant n� ");
+        StringBuffer sb = new StringBuffer ("L'Etudiant n# ");
         sb.append(this.id);
-        sb.append(" et de type : " );
+        sb.append(" est de type : " );
         sb.append(this.type);
         sb.append(" a PV : ");
         sb.append(this.ects);
@@ -70,61 +71,92 @@ public class Etudiant implements Strategie{
         System.out.println(getType()+getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative()+getStrategieString());
     }
 
-    
-    
-    private void attack(Etudiant target, Zone zone) {//TODO only attack student inside zone
-        //Etudiant target = this.findAttackTarget(listEtu);
-        if (!this.belongsTo.equals(target.belongsTo)) {//excludes friendly fire  (&& this.isInZone.equals(target.isInZone)) but too intensive, prefer to check on call
-            final int damageReference = 10;
-            double damageCoefficient = Math.max(0, Math.min(100, 10*this.force-5*target.resistance));
-            double y = Math.random();
-            int x = ((int) Math.random()*100);
-            if (x>0 && x<(40 + 3*this.dexterite)) {
-                target.ects -= (int) ((y*(1+damageCoefficient))*damageReference);
+    private void attack(Zone zone) {//only attack student inside zone
+        ArrayList<Etudiant> enemyTeam = new ArrayList<Etudiant>();
+        Iterator<Etudiant> it = zone.getEtuDansZoneArrayList().iterator();
+        Etudiant enemyEtu;
+        while(it.hasNext()) {//insert all enemies into a list
+           enemyEtu = it.next();
+           if(!enemyEtu.belongsTo.equals(this.belongsTo)) {
+               enemyTeam.add(enemyEtu);
+           }
+        }
+        Iterator<Etudiant> it2 = enemyTeam.iterator();
+        Etudiant target = it2.next();
+        Etudiant etudiantTemp;
+        while(it.hasNext()) {//scan for the student with the least HP
+            etudiantTemp = it2.next();
+            if (etudiantTemp.ects<=target.ects) {
+                target = etudiantTemp;
             }
-            if (target.ects <= 0) {//kill student
-                target.isInZone.getEtuDansZoneArrayList().remove(target);
-                //=====EXPERIMENTAL PART=======
-                zone.publicSetChanged();
-                zone.publicNotifyObservers();//notify observers when a student dies
-                zone.publicClearChanged();
-            }
+        }
+        //attacking...
+        final int damageReference = 10;
+        double damageCoefficient = Math.max(0, Math.min(100, 10*this.force-5*target.resistance));
+        double y = Math.random();
+        int x = ((int) Math.random()*100);
+        if (x>0 && x<(40 + 3*this.dexterite)) {
+            target.ects -= (int) ((y*(1+damageCoefficient))*damageReference);
+        }
+        if (target.ects <= 0) {//kill student
+            target.isInZone.getEtuDansZoneArrayList().remove(target);
+            //=====EXPERIMENTAL PART=======
+            zone.publicSetChanged();
+            zone.publicNotifyObservers();//notify observers when a student dies
+            zone.publicClearChanged();
+        
         }   
     } 
     
-    private void heal(Etudiant target) {//TODO only attack student inside zone
-        if (this.belongsTo.equals(target.belongsTo)) {//excludes healing enemies
-            int healAmount;
-            int x = ((int) Math.random()*100);
-            double y = Math.random()*0.6;//0<y<0,6
-            if (x>0 && x<(20 + 6*this.dexterite)) {
-                healAmount = (int) (y*(10+target.constitution));
-                if (healAmount < (30 + target.constitution)) {
-                    target.ects +=healAmount;
-                }
-                else {
-                    target.ects += 30 + this.constitution;
-                }
+    private void heal(Zone zone) {//only attack student inside zone
+        ArrayList<Etudiant> allyTeam = new ArrayList<Etudiant>();
+        Iterator<Etudiant> it = zone.getEtuDansZoneArrayList().iterator();
+        Etudiant allyEtu;
+        while(it.hasNext()) {//insert all enemies into a list
+            allyEtu = it.next();
+           if(allyEtu.belongsTo.equals(this.belongsTo)) {
+               allyTeam.add(allyEtu);
+           }
+        }
+        Iterator<Etudiant> it2 = allyTeam.iterator();
+        Etudiant target = it2.next();
+        Etudiant etudiantTemp;
+        while(it.hasNext()) {//scan for the student with the least HP
+            etudiantTemp = it2.next();
+            if (etudiantTemp.ects<=target.ects) {
+                target = etudiantTemp;
             }
         }
+        //healing...
+        int healAmount;
+        int x = ((int) Math.random()*100);
+        double y = Math.random()*0.6;//0<y<0,6
+        if (x>0 && x<(20 + 6*this.dexterite)) {
+            healAmount = (int) (y*(10+target.constitution));
+            if (healAmount < (30 + target.constitution)) {
+                target.ects +=healAmount;
+            }
+            else {
+                target.ects += 30 + this.constitution;
+            }
+        }     
         
-            
         
     } 
     
     public void agir(Etudiant target) {
         if (this.strategie == strategie.OFFENSIVE) {
-            attack(target, target.isInZone);
+            attack(target.isInZone);
         }
         else if (this.strategie == strategie.DEFENSIVE) {
-            heal(target);
+            heal(this.isInZone);
         }
         else if (this.strategie == strategie.RANDOM) {
             if(Math.random()>0.5) {
-                attack(target, target.isInZone);
+                attack(target.isInZone);
             }
             else {
-                heal(target);
+                heal(this.isInZone);
             }
         }
         
