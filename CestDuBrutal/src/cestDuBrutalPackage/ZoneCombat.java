@@ -26,37 +26,44 @@ public class ZoneCombat extends Zone implements Runnable{
             
     public void run() {
         initialiser();
+        Zone.displayAllStudentInZones();
+        int i = 0;
         while(controleZone ==ControleZone.DISPUTE) {   // on se bat si la zone n'est pas contorlee     
-            try {
+            try { 
                     
                 //action d'un combat
                 
-                // on test si la zone est controlée --> si oui, controleZone=0 et appel de la depose message avec "0"
-                // on ne crer pas de méthode car plusieurs thread y aurait accès au même moment
-                
-                
+                // on test si la zone est controlï¿½e --> si oui, controleZone=0 et appel de la depose message avec "0"
+                // on ne crer pas de mï¿½thode car plusieurs thread y aurait accï¿½s au mï¿½me moment       
+                this.etuDansZone.get(i).agir();//TODO DEPLACER A LA FIN DE LA LISTE apres agir
+                i++;
+                i = i%etuDansZone.size();
+                /*
                 
                 //methode pour regarder verifier si la zone est contorlee 
                 if(Math.random()>0.1) {// check si le combat est fini dans cette zone 
                     System.out.println("La zone "+Thread.currentThread().getName()+" n'est pas controlee");
-                    partie.declancherTreve(Thread.currentThread().getName(), "Pas de trève");
+                    partie.declencherTreve(Thread.currentThread().getName(), "Pas de treve");
                     
                 }else {// la zone est controle
                     controleZone=ControleZone.CONTROLEPARJOUEUR1;
-                    partie.declancherTreve(Thread.currentThread().getName(), "0");             
-                }       
+                    partie.declencherTreve(Thread.currentThread().getName(), "0");             
+                }   */    
                 
                 
                         
-                //Affiche l'état de la zone // c'est optionnel 
-                if (controleZone ==ControleZone.DISPUTE)
-                    System.out.println(Thread.currentThread().getName() + " n'est pas controlée (prod)");
-                else
+                //Affiche l'ï¿½tat de la zone // c'est optionnel 
+                if (controleZone ==ControleZone.DISPUTE) {
+                    partie.declencherTreve(Thread.currentThread().getName(), "Pas de treve");
+                    //System.out.println(Thread.currentThread().getName() + " n'est pas controlee (prod)");
+                }
+                else {
                     System.out.println(Thread.currentThread().getName() +  " est controlee (prod)");
+                    partie.declencherTreve(Thread.currentThread().getName(), "0");    
+                }
                 
-                
-                //sleep present pour ralentir l'éxecution 
-                Thread.sleep((long)(Math.random()*1000));               
+                //sleep present pour ralentir l'ï¿½xecution 
+                Thread.sleep((long)(Math.random()*0));               
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }           
@@ -72,5 +79,5 @@ public class ZoneCombat extends Zone implements Runnable{
     //getters
     private ControleZone getControleZone() {return this.controleZone;}
     //setters
-    private void setControleZone(ControleZone control) {this.controleZone = control;}
+    public void setControleZone(ControleZone control) {this.controleZone = control;}
 }

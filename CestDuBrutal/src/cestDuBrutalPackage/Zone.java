@@ -3,14 +3,13 @@ import java.util.*;//for EVERYTHIGN
 
 
 
-public class Zone extends Observable{
+public class Zone {
     private String zoneName;
     protected ArrayList<Etudiant> etuDansZone;
     private static ArrayList<ZoneCombat> zoneList = new ArrayList<ZoneCombat>();
     
     //constructeur
     public Zone(String zoneName) {
-        ZoneObserver observer = new ZoneObserver(this);
         this.etuDansZone = new ArrayList<Etudiant>();
         this.zoneName = zoneName;
     }
@@ -22,8 +21,9 @@ public class Zone extends Observable{
     
     public static void setZones() {
         zoneList.add(new ZoneCombat("La Bibliotheque"));
-        zoneList.add(new ZoneCombat("Le BDE"));/*
+        /*
         -----------------------------------------------------------------------------------------------------Pour TESTER -------------------------------------------------
+       zoneList.add(new ZoneCombat("Le BDE"));
         zoneList.add(new Zone("Le Quartier Administratif"));
         zoneList.add(new Zone("Les Halles Industrielles"));
         zoneList.add(new Zone("La Halle Sportive"));*/
@@ -137,7 +137,7 @@ public class Zone extends Observable{
         this.etuDansZone.add(etudiant);
         System.out.println("L'etudiant a bien ete ajoute a la zone");
     }
-
+    /*
     public void publicSetChanged() {
         this.setChanged();
     }
@@ -147,7 +147,7 @@ public class Zone extends Observable{
     public void publicClearChanged() {
         this.clearChanged();
     }
-    
+    */
     
 }
 
