@@ -58,7 +58,7 @@ public class ZoneCombat extends Zone implements Runnable{
                     //System.out.println(Thread.currentThread().getName() + " n'est pas controlee (prod)");
                 }
                 else {
-                    System.out.println(Thread.currentThread().getName() +  " est controlee (prod)");
+                    System.out.println(Thread.currentThread().getName() +  " est controlee");
                     partie.declencherTreve(Thread.currentThread().getName(), "0");    
                 }
                 
