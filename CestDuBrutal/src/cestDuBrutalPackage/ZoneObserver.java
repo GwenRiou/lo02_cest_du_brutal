@@ -33,7 +33,7 @@ public class ZoneObserver implements Observer {
         if (foundEmptyStudentList) {//if an empty student list is found, we trigger the treve
             foundEmptyStudentList = false;
             
-            //TODO treve                
+            //TODO observe si controle                 
         }
     }
 }

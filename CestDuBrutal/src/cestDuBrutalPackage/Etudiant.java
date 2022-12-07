@@ -58,6 +58,8 @@ public class Etudiant implements Strategie{
         sb.append(this.initiative);
         sb.append(", Strategie : ");
         sb.append(this.strategie);
+        sb.append(", Joueur : ");
+        sb.append(this.belongsTo.getUserName());
             
         return sb.toString();
     }
@@ -71,6 +73,7 @@ public class Etudiant implements Strategie{
     
     
     private void attack(Etudiant target, Zone zone) {//TODO only attack student inside zone
+        //Etudiant target = this.findAttackTarget(listEtu);
         if (!this.belongsTo.equals(target.belongsTo)) {//excludes friendly fire  (&& this.isInZone.equals(target.isInZone)) but too intensive, prefer to check on call
             final int damageReference = 10;
             double damageCoefficient = Math.max(0, Math.min(100, 10*this.force-5*target.resistance));
@@ -109,7 +112,7 @@ public class Etudiant implements Strategie{
         
     } 
     
-    private void agir(Etudiant target) {
+    public void agir(Etudiant target) {
         if (this.strategie == strategie.OFFENSIVE) {
             attack(target, target.isInZone);
         }

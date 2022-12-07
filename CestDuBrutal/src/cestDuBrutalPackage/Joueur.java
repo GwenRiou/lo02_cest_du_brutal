@@ -32,6 +32,7 @@ public class Joueur {
     
 
     public void createStudentList() {
+        
         // creer le maiter du gobit
         Etudiant etuMaitre = new Etudiant("Maitre",2,2,2,10,2,this);
         studentList.add(etuMaitre);
@@ -42,11 +43,12 @@ public class Joueur {
             studentList.add(etuElite);            
         }
         
+        /*
         //creer lest étudiants de basse
         for(int i=0 ; i < 15; i++){
             Etudiant etuNormal = new Etudiant("Base",0,0,0,0,0,this);
             studentList.add(etuNormal);            
-        }
+        }*/
         setIdForArmy();
        
     }
