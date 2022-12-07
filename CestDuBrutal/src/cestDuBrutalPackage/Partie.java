@@ -183,7 +183,7 @@ public class Partie {
         
     }
     
-    public synchronized void declancherTreve(String nomZone, String etatDeControle) throws InterruptedException {
+    public synchronized void declencherTreve(String nomZone, String etatDeControle) throws InterruptedException {
         while(treve!=null) {// si la treve est en cour
             
             System.out.println(nomZone + "est en pose la treve est en cour");
@@ -191,7 +191,7 @@ public class Partie {
         }
         if(etatDeControle.equalsIgnoreCase("0")) {// si la zone est controlee
             System.out.println( "etat de la zone est "+etatDeControle);
-            System.out.println("La treve est en cours car cette zone " + Thread.currentThread().getName() + " a fini sont combat\n\n");
+            System.out.println("La treve est en cours car cette zone " + Thread.currentThread().getName() + " a fini son combat\n\n");
             treve=etatDeControle;//
             
             System.out.println("On appel la treve");
@@ -298,9 +298,9 @@ public class Partie {
         partie.addPlayer(j1);
         partie.addPlayer(j2);
         
-        j1.setUserName("Gwen lol");        
+        j1.setUserName("Gwen");        
         //methode pour mettre un nom de joueur      
-        j2.setUserName(getUserInput("Enter username"));       
+        j2.setUserName("Xuan");       
         System.out.println("Le joueur 1 s'appelle " +j1.getUserName());    
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
         //  l'armée d'un joueur
@@ -341,8 +341,10 @@ public class Partie {
         j1.displayAllStudent();
         autoAffecterEtudiantZone(j1);
         autoAffecterEtudiantZone(j2);
-        Zone.displayAllStudentInZones();
-        //Zone.melee();
+        //Zone.displayAllStudentInZones();
+       
+        
+        Zone.melee();
         
         
         

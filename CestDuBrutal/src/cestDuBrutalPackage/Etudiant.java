@@ -26,10 +26,10 @@ public class Etudiant implements Strategie{
         this.type = type;
         this.ects = ects;
         this.force = (int) (Math.random()*10);
-        this.dexterite = (int) (Math.random()*100);
-        this.resistance = (int) (Math.random()*100);
-        this.constitution = (int) (Math.random()*100);
-        this.initiative = (int) (Math.random()*100); //debug line
+        this.dexterite = (int) (Math.random()*20);
+        this.resistance = (int) (Math.random()*20);
+        this.constitution = (int) (Math.random()*20);
+        this.initiative = (int) (Math.random()*20); //debug line
         this.belongsTo = idJoueur;
         this.strategie = enumStrategie.RANDOM;
         this.isInZone = new Zone("le camion");
@@ -62,8 +62,7 @@ public class Etudiant implements Strategie{
         sb.append(this.strategie);
         sb.append(", Joueur : ");
         sb.append(this.belongsTo.getUserName());
-        sb.append(",\nEst dans la zone: ");
-        sb.append(this.isInZone.getZoneName());
+        
             
         return sb.toString();
     }
@@ -74,7 +73,8 @@ public class Etudiant implements Strategie{
         System.out.println(getType()+getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative()+getStrategieString());
     }
 
-    private void attack(Zone zone) {//only attack student inside zone
+    private void attack(ZoneCombat zone) {//only attack student inside zone
+        
         ArrayList<Etudiant> enemyTeam = new ArrayList<Etudiant>();
         Iterator<Etudiant> it = zone.getEtuDansZoneArrayList().iterator();
         Etudiant enemyEtu;
@@ -82,33 +82,65 @@ public class Etudiant implements Strategie{
            enemyEtu = it.next();
            if(!enemyEtu.belongsTo.equals(this.belongsTo)) {
                enemyTeam.add(enemyEtu);
+               System.out.println("etu enemi"+enemyEtu);
            }
         }
         Iterator<Etudiant> it2 = enemyTeam.iterator();
-        Etudiant target = it2.next();
+        Etudiant target = enemyTeam.get(0);
         Etudiant etudiantTemp;
-        while(it.hasNext()) {//scan for the student with the least HP
+        System.out.println(it2.hasNext());
+        while(it2.hasNext()) {//scan for the student with the least HP
             etudiantTemp = it2.next();
+            //System.out.println(target.id+"ects:"+target.ects+target.belongsTo.getUserName());
             if (etudiantTemp.ects<=target.ects) {
-                target = etudiantTemp;
+                target = etudiantTemp; 
             }
         }
         //attacking...
+        System.out.println(this.belongsTo.getUserName()+" : "+this.id+" Tente d'attaquer");
         final int damageReference = 10;
         double damageCoefficient = Math.max(0, Math.min(100, 10*this.force-5*target.resistance));
         double y = Math.random();
-        int x = ((int) Math.random()*100);
+        int x = (int) (Math.random()*100);
+        int damageTaken = (int) ((y*(1+damageCoefficient))*damageReference);        
         if (x>0 && x<(40 + 3*this.dexterite)) {
-            target.ects -= (int) ((y*(1+damageCoefficient))*damageReference);
+            target.ects -= damageTaken;
+            System.out.println(target.getId()+"got attacked "+damageTaken+" HP by"+ this.id);
         }
         if (target.ects <= 0) {//kill student
+            System.out.println(target.belongsTo.getUserName()+"'s etu #"+target.getId()+" was killed by"+this.id);//
             target.isInZone.getEtuDansZoneArrayList().remove(target);
-            //=====EXPERIMENTAL PART=======
+            //=====count number of players alive
+            Zone.displayAllStudentInZones();
+            int studentCountj1 = 0;
+            int studentCountj2 = 0;
+            Iterator<Etudiant> iter = zone.getEtuDansZoneArrayList().iterator();
+            Etudiant etu;
+            do{//insert all enemies into a list
+               etu = iter.next();
+               if(etu.belongsTo.equals(Partie.getInstance().getListJ().get(1))) {
+                   studentCountj1++;
+                   //System.out.println(enemyEtu.belongsTo.getUserName()+"etu #"+enemyEtu.getId()+"enemy added");
+               }
+               else {
+                   studentCountj2++;
+               }
+            }while(iter.hasNext());
+            if (studentCountj1 == 0) {
+                zone.setControleZone(ControleZone.CONTROLEPARJOUEUR2);
+            }
+            else if(studentCountj2 == 0) {
+                zone.setControleZone(ControleZone.CONTROLEPARJOUEUR1);
+            }
+            
+            /*
             zone.publicSetChanged();
             zone.publicNotifyObservers();//notify observers when a student dies
             zone.publicClearChanged();
+            */
         
         }   
+        
     } 
     
     private void heal(Zone zone) {//only attack student inside zone
@@ -122,7 +154,7 @@ public class Etudiant implements Strategie{
            }
         }
         Iterator<Etudiant> it2 = allyTeam.iterator();
-        Etudiant target = it2.next();
+        Etudiant target = allyTeam.get(0);
         Etudiant etudiantTemp;
         while(it.hasNext()) {//scan for the student with the least HP
             etudiantTemp = it2.next();
@@ -131,8 +163,9 @@ public class Etudiant implements Strategie{
             }
         }
         //healing...
+        System.out.println(this.belongsTo.getUserName()+" : "+this.id+" Tente de soigner");
         int healAmount;
-        int x = ((int) Math.random()*100);
+        int x = (int) (Math.random()*100);
         double y = Math.random()*0.6;//0<y<0,6
         if (x>0 && x<(20 + 6*this.dexterite)) {
             healAmount = (int) (y*(10+target.constitution));
@@ -140,26 +173,31 @@ public class Etudiant implements Strategie{
                 target.ects +=healAmount;
             }
             else {
-                target.ects += 30 + this.constitution;
+                healAmount = 30 + this.constitution;
+                target.ects += healAmount;
             }
-        }     
-        
-        
+            System.out.println("etu #"+target.getId()+" Got healed "+healAmount+" HP!");
+        }
+        System.out.println(this.id+"");
     } 
     
-    public void agir(Etudiant target) {
+    public void agir() {
         if (this.strategie == strategie.OFFENSIVE) {
-            attack(target.isInZone);
+            attack((ZoneCombat)this.isInZone);
         }
         else if (this.strategie == strategie.DEFENSIVE) {
             heal(this.isInZone);
         }
         else if (this.strategie == strategie.RANDOM) {
             if(Math.random()>0.5) {
-                attack(target.isInZone);
+                
+                attack((ZoneCombat)this.isInZone);
+                
             }
             else {
+                
                 heal(this.isInZone);
+                
             }
         }
         
