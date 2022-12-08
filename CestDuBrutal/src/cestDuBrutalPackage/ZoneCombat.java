@@ -47,7 +47,7 @@ public class ZoneCombat extends Zone implements Runnable{
         int i = 0;
         while(controleZone == ControleZone.DISPUTE) {   // on se bat si la zone n'est pas contorlee     
             try { 
-                 //numAction++;
+                 numAction++;
                  if(numAction>500) {
                      numAction=0;
                      System.out.println("######################################################################################################");
