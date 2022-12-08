@@ -213,9 +213,9 @@ System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
                 }
             }
         }else {
-
+            Zone.interrupteAll();
             System.out.println("-------------La Partie est fini----------------------");
-            System.exit(0);
+            //System.exit(0);
         }
     }
     public static void autoAffecterEtudiantZone(Joueur j) {
@@ -343,6 +343,6 @@ System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
        
         
         Zone.melee();        
-        
+        System.out.println("exit(0)");
     }
 }
