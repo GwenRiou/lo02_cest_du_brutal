@@ -130,12 +130,6 @@ public class Etudiant implements Strategie{
             else if(studentCountj2 == 0) {
                 zone.setControleZone(ControleZone.CONTROLEPARJOUEUR1);
             }
-            
-            /*
-            zone.publicSetChanged();
-            zone.publicNotifyObservers();//notify observers when a student dies
-            zone.publicClearChanged();
-            */
         
         }   
         

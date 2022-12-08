@@ -20,15 +20,19 @@ public class ZoneCombat extends Zone implements Runnable{
         Thread t = new Thread(this, nom);
         t.start();
     }
+    
+    public void interrupted() {        
+            Thread.currentThread().interrupt();
+    }
+    
     public void initialiser() {
         this.sortStudentList(etuDansZone);
     }
             
     public void run() {
         initialiser();
-        Zone.displayAllStudentInZones();
         int i = 0;
-        while(controleZone ==ControleZone.DISPUTE) {   // on se bat si la zone n'est pas contorlee     
+        while(controleZone == ControleZone.DISPUTE) {   // on se bat si la zone n'est pas contorlee     
             try { 
                     
                 //action d'un combat
@@ -38,19 +42,6 @@ public class ZoneCombat extends Zone implements Runnable{
                 this.etuDansZone.get(i).agir();//TODO DEPLACER A LA FIN DE LA LISTE apres agir
                 i++;
                 i = i%etuDansZone.size();
-                /*
-                
-                //methode pour regarder verifier si la zone est contorlee 
-                if(Math.random()>0.1) {// check si le combat est fini dans cette zone 
-                    System.out.println("La zone "+Thread.currentThread().getName()+" n'est pas controlee");
-                    partie.declencherTreve(Thread.currentThread().getName(), "Pas de treve");
-                    
-                }else {// la zone est controle
-                    controleZone=ControleZone.CONTROLEPARJOUEUR1;
-                    partie.declencherTreve(Thread.currentThread().getName(), "0");             
-                }   */    
-                
-                
                         
                 //Affiche l'�tat de la zone // c'est optionnel 
                 if (controleZone ==ControleZone.DISPUTE) {
@@ -62,22 +53,20 @@ public class ZoneCombat extends Zone implements Runnable{
                     partie.declencherTreve(Thread.currentThread().getName(), "0");    
                 }
                 
-                //sleep present pour ralentir l'�xecution 
-                Thread.sleep((long)(Math.random()*0));               
+                //sleep present pour ralentir l'execution 
+                //Thread.sleep((long)(Math.random()*0));               
             } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
                 e.printStackTrace();
             }           
         }
     }
     
     
-    
-    public void verifierControle() {
-        
-    }
+
     
     //getters
-    private ControleZone getControleZone() {return this.controleZone;}
+    public ControleZone getControleZone() {return this.controleZone;}
     //setters
     public void setControleZone(ControleZone control) {this.controleZone = control;}
 }

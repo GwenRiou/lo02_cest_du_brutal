@@ -177,12 +177,6 @@ public class Partie {
             Zone.displayAllStudentInZones();
             System.out.println("la repartition dans les zones est fini");     //TODO    
     }
-
-    
-    public void melee() {
-        
-    }
-    
     public synchronized void declencherTreve(String nomZone, String etatDeControle) throws InterruptedException {
         while(treve!=null) {// si la treve est en cour
             
@@ -190,31 +184,38 @@ public class Partie {
             this.wait();
         }
         if(etatDeControle.equalsIgnoreCase("0")) {// si la zone est controlee
-            System.out.println( "etat de la zone est "+etatDeControle);
+            
             System.out.println("La treve est en cours car cette zone " + Thread.currentThread().getName() + " a fini son combat\n\n");
             treve=etatDeControle;//
             
             System.out.println("On appel la treve");
-            treve(); // --------------------------------ajout de la tr�ve
+            treve(); // --------------------------------ajout de la treve
         }
-        
-            
+                 
     }
     
     public void treve() {
-        Zone.initialiserZone(); 
-        System.out.println("C'est la tr�ve ");
-        treve=null;
-        
-        String input = "n";
-        while (!input.equalsIgnoreCase("y")) {
-            System.out.println("On fait des trucs de la tr�ve");
+        this.finDePartie = Zone.FinDePartie();
+System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
+        if(finDePartie==false) {
+            Zone.initialiserZone(); 
+            System.out.println("C'est la treve ");
+            treve=null;
             
-            input= getUserInput("Voulez vous finir la tr�ve");
-            if (input=="y") {
-                System.out.println("Fin de la tr�ve  on notify tous le monde !!");
-                notifyAll(); // on reprend le combat
+            String input = "n";
+            while (!input.equalsIgnoreCase("y")) {
+                System.out.println("On fait des trucs de la treve");
+                
+                input= getUserInput("Voulez vous finir la treve");
+                if (input=="y") {
+                    System.out.println("Fin de la treve  on notify tous le monde !!");
+                    notifyAll(); // on reprend le combat
+                }
             }
+        }else {
+
+            System.out.println("-------------La Partie est fini----------------------");
+            System.exit(0);
         }
     }
     public static void autoAffecterEtudiantZone(Joueur j) {
@@ -336,7 +337,7 @@ public class Partie {
         
         Zone.setZones();
         /*
-        partie.affecterEtudiantZone(j2);    //TODO affecter depuis la réserve vers les zones, sachant que la reserve n'est pas dans la liste de zones 
+        partie.affecterEtudiantZone(j2);  
         */
         j1.displayAllStudent();
         j2.displayAllStudent();
@@ -347,7 +348,7 @@ public class Partie {
         
         Zone.melee();
         
-        
+        System.out.println("LA PARTIE EST FINI");
         
         
     }
