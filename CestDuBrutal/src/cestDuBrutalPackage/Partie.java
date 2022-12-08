@@ -7,7 +7,7 @@ public class Partie {
     private int etape;
     private String treve;
     private boolean finDePartie;    
-    private ArrayList<Joueur> listJ;
+    private static ArrayList<Joueur> listJ;
     
         
 
@@ -275,6 +275,8 @@ System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
     public ArrayList<Joueur> getListJ() {
         return listJ;
     }
+    
+    public static String getNamePlayer(int j) { return listJ.get(j-1).getUserName(); }
 
     public void setListJ(ArrayList<Joueur> listJ) {
         this.listJ = listJ;
@@ -312,14 +314,8 @@ System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
         //partie.repartitionPoints(j2);    
         //j1.displayAllStudent();
         //j2.displayAllStudent();
+   
         
-        
-       
-        /*
-        * Mettre une valeur max à la reserve
-        * whilde dans la methode jusque la reserve soit pleine 
-        * test pour voir si l'étudiant est enleve de la liste des étudiant du joueur ( c'est bien l'objetif)
-        */
         System.out.println("========MISE EN RESERVE=======");
         /*
         partie.putInReserve(j2);
@@ -346,10 +342,7 @@ System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
         Zone.displayAllStudentInZones();
        
         
-        Zone.melee();
-        
-        System.out.println("LA PARTIE EST FINI");
-        
+        Zone.melee();        
         
     }
 }

@@ -136,8 +136,15 @@ public class Zone {
         }
         System.out.println("Le nombre de zone controle par j1 = "+ numZoneControlByPlayer1);
         System.out.println("Le nombre de zone controle par j2 = "+ numZoneControlByPlayer2);
-        if(numZoneControlByPlayer1>=numZoneToEndGame) {return true;};
-        if(numZoneControlByPlayer2>=numZoneToEndGame) {return true;};
+        if(numZoneControlByPlayer1>=numZoneToEndGame) {
+            System.out.println( Partie.getNamePlayer(1) +" a gagne");
+            return true;
+        }
+        if(numZoneControlByPlayer2>=numZoneToEndGame) {
+            System.out.println( Partie.getNamePlayer(2) +" a gagne");
+            
+            return true;
+        };
         return false;
         
     }
