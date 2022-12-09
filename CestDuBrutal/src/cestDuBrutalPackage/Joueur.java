@@ -219,7 +219,7 @@ public class Joueur {
     public void setUserName(String userName) {//jai mis déprécié pour l'identification fonctionnelle  mais on peut tjrs utiliser pour le nom du joueur :D
         this.userName = userName;
     }
-    public ArrayList<Etudiant> getReserve() {
+    public ArrayList<Etudiant> getReserveArrayList() {
         return reserve.getListeEtudiantsReserve();
     }
 
@@ -259,4 +259,5 @@ public class Joueur {
         this.setUserName(userName);
         this.programme = programme;
     }
+    public Reserve getReserve() {return reserve;}
 }
