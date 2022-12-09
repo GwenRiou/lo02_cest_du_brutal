@@ -33,6 +33,7 @@ public class ZoneCombat extends Zone implements Runnable{
     public void initialiser() {
         this.sortStudentList(etuDansZone);
     }
+    
     public void frenesie() {
         System.out.println("######################################################################################################");
         System.out.println("                                         FRENESIE                                                     ");
@@ -58,13 +59,10 @@ public class ZoneCombat extends Zone implements Runnable{
                  }
                 //action d'un combat
                 
-                // on test si la zone est controlï¿½e --> si oui, controleZone=0 et appel de la depose message avec "0"
-                // on ne crer pas de mï¿½thode car plusieurs thread y aurait accï¿½s au mï¿½me moment       
                 this.etuDansZone.get(i).agir();//TODO DEPLACER A LA FIN DE LA LISTE apres agir
                 i++;
                 i = i%etuDansZone.size();
                         
-                //Affiche l'ï¿½tat de la zone // c'est optionnel 
                 if (controleZone ==ControleZone.DISPUTE) {
                     partie.declencherTreve(this.controlePar,this, "Pas de treve");
                     //System.out.println(Thread.currentThread().getName() + " n'est pas controlee (prod)");
@@ -80,12 +78,19 @@ public class ZoneCombat extends Zone implements Runnable{
                 Thread.sleep((long)(Math.random()*20));               
             } catch (InterruptedException e) {
                 //e.printStackTrace();
-                break;
+                break;// on sort du while
             }           
         }
     }
     
-    
+    public boolean zoneWithTwoEtu(Joueur j) {
+        Iterator<Etudiant> it =etuDansZone.iterator();
+        while(it.hasNext()){
+            Etudiant etu = it.next();
+            if(etu.getBelongsTo()==j) return true; // on a un étudiant du joueur deux dedans
+        }
+        return false;
+    }
 
     
    

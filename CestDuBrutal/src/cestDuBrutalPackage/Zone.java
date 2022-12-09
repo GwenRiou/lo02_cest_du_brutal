@@ -22,6 +22,7 @@ public class Zone {
     public static void setZones() {
         zoneList.add(new ZoneCombat("La Bibliotheque"));
         zoneList.add(new ZoneCombat("Le BDE"));
+        
         zoneList.add(new ZoneCombat("Le Quartier Administratif"));
         /*
         -----------------------------------------------------------------------------------------------------Pour TESTER -------------------------------------------------
@@ -37,6 +38,7 @@ public class Zone {
                 Zone zoneTemp = it.next();
                 System.out.println("- " + zoneTemp.getZoneName());
             }
+
    }
     public static void displayControlledZones(Joueur j) {
         Iterator<ZoneCombat> it =zoneList.iterator();
@@ -48,6 +50,7 @@ public class Zone {
             }
         }
     }
+
     
     public static void displayActiveZones(Joueur j) {
         Iterator<ZoneCombat> it =zoneList.iterator();
@@ -93,7 +96,7 @@ public class Zone {
     
     
     public static void sortStudentList(ArrayList<Etudiant> studentListToSort) {
-        studentListToSort.sort((etu1,etu2) -> etu2.getInitiative()-(etu1.getInitiative())); //j'ai pas cherche a comprendre en détail la syntaxe....
+        studentListToSort.sort((etu1,etu2) -> etu2.getInitiative()-(etu1.getInitiative())); //j'ai pas cherche a comprendre en dÃ©tail la syntaxe....
     }
     
    
@@ -101,15 +104,22 @@ public class Zone {
         etuDansZone.remove(etu);
     }
     
-    public static int allZoneNotEmpty() {        
-        Iterator<ZoneCombat> it =zoneList.iterator();
+    public static boolean allZoneNotEmpty() {        
+        ListIterator<ZoneCombat> it =zoneList.listIterator();
         while(it.hasNext()){
             Zone zoneTemp = it.next();
-            if(zoneTemp.getNombreEtu()==0) return 0;
+            if(zoneTemp.getNombreEtu()==0) return false;// si on a une zone vide
         }
-        return 1;
+        return true;
     }
-    
+    public static boolean allZoneWithTwoStudent(Joueur j) {
+        ListIterator<ZoneCombat> it =zoneList.listIterator();
+        while(it.hasNext()){
+            ZoneCombat zoneTemp = it.next();
+            if(!zoneTemp.zoneWithTwoEtu(j)) return false; //si on a une zone ou il manque un étudiant du j2 
+        }
+        return true;
+    }
     public static void displayAllStudentInZones() {
         Iterator<ZoneCombat> it =zoneList.iterator();
         while(it.hasNext()){
@@ -167,9 +177,8 @@ public class Zone {
         return false;
         
     }
-    //getters
-    public String getZoneName() {return zoneName;}
-    public int getNombreEtu() {return this.etuDansZone.size();} 
+
+
     public void displayEtudiantDansZoneList() {
         ArrayList<Etudiant>  etulist= this.etuDansZone;
         System.out.println("\n==Etudiants dans "+this.zoneName+":==");
@@ -178,6 +187,18 @@ public class Zone {
             System.out.println(s);//use the tostring method to print the student's ids
         }    
     }
+    public void displayEtudiantDansZoneList(Joueur j) {
+        ArrayList<Etudiant>  etulist= this.etuDansZone;
+        System.out.println("\n==Etudiants dans "+this.zoneName+":==");
+        for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //scan through all students
+            Etudiant s = it.next();
+            if(s.getBelongsTo()==j) System.out.println(s);//use the tostring method to print the student's ids
+        }    
+    }
+    //getters
+    public String getZoneName() {return zoneName;}
+    public int getNombreEtu() {return this.etuDansZone.size();} 
+    
     public ArrayList<Etudiant> getEtuDansZoneArrayList() {return etuDansZone;}
     //setters
     public void setZoneName(String zoneName) {this.zoneName = zoneName;}

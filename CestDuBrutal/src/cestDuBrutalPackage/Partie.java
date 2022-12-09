@@ -18,7 +18,7 @@ public class Partie {
         this.treve=null;
     }
     
-    public static Partie getInstance() { //--> mÃ©thode qui va appeler le constructeur si besoin
+    public static Partie getInstance() { //--> mÃƒÂ©thode qui va appeler le constructeur si besoin
         
         //create object if it's not already created
         if(partieObject == null) {
@@ -34,7 +34,7 @@ public class Partie {
         System.out.println("You now have a Partie running");
     }
     
-    //Ajoute 1 joueur ï¿½ la partie
+    //Ajoute 1 joueur Ã¯Â¿Â½ la partie
     public void addPlayer(Joueur joueur){
         System.out.println("--Creation dun nouveau joueur--");
         listJ.add(joueur);
@@ -49,9 +49,6 @@ public class Partie {
         j2.identify("Gwen",Programme.A2I);
         
     }
-    
-    
-    // Choit un étudiant TODO à mettre dans la class joueur ?
     public Etudiant selectStudent(Joueur j)throws StudentNotFoundInList{
         
             ArrayList<Etudiant>  l= j.getStudentList();       
@@ -91,7 +88,7 @@ public class Partie {
                     int pointsAttribuee = getUserInputInt("Enter le nombre de points a attribuer");
                     
                     int retour =  j.modifyCharacteristics(etuTest,Characteristics,pointsAttribuee); 
-                    if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif ï¿½ eu lieu ou non
+                    if (retour==1) j.updatePoints(pointsAttribuee); // avoir un retour pour modifyCharacteristics pour savoir si la modif Ã¯Â¿Â½ eu lieu ou non
                     
                     choix=5;
                     while(choix==5 ) {
@@ -135,7 +132,10 @@ public class Partie {
     
    //Mise en zones
     public void affecterEtudiantZone(Joueur j) {
-        while (j.getStudentList().size()!=0 || Zone.allZoneNotEmpty()==0) {
+        boolean condition=false;
+        if(j.getId()==1) condition=Zone.allZoneNotEmpty();// condidtion pour que le j1 a un etu dasn chaque zone 
+        else condition=Zone.allZoneWithTwoStudent(j);// condition pour que le j2 a un etu dans chaque zone 
+        while (j.getStudentList().size()!=0 || !condition) {
             boolean entryIsntValid = true;
             while(entryIsntValid) {
                 try {
@@ -159,10 +159,12 @@ public class Partie {
                         studentToMove = fromZone.drawEtudiantDansZone(j);
                     } 
                     
-                    // on choisie la zone de deploiement & on d�polie l'etu choisi
+                    // on choisie la zone de deploiement & on dï¿½polie l'etu choisi
+
+                    
                     System.out.println("Vers");
                     String idToZone = getUserInput("Choisissez une zone");
-                    Zone toZone = selectZone(idToZone);//pas grave, tant pis s'il décide de le deplacer mettre la meme zone mdrr                                
+                    Zone toZone = selectZone(idToZone);//pas grave, tant pis s'il dÃ©cide de le deplacer mettre la meme zone mdrr                                
                     studentToMove.setIsInZone(toZone);
                     toZone.addEtudiantDansZone(studentToMove);
                     
@@ -183,9 +185,11 @@ public class Partie {
                 }
                 
             }
+            if(j.getId()==1) condition=Zone.allZoneNotEmpty();// condidtion pour que le j1 a un etu dasn chaque zone 
+            else condition=Zone.allZoneWithTwoStudent(j);// condition pour que le j2 a un etu dans chaque zone 
         }
             Zone.displayAllZones();
-            // affiche toutes les �tudiants par zones
+            // affiche toutes les ï¿½tudiants par zones
             Zone.displayAllStudentInZones();
             System.out.println("la repartition dans les zones est fini");     //TODO    
     }
@@ -244,8 +248,7 @@ public class Partie {
                                 if((input.equalsIgnoreCase("random")||input.equalsIgnoreCase("Offensive"))||input.equalsIgnoreCase("defensive")) {
                                     invalidEntry = false;
                                 }
-                            }
-                           
+                            }                    
                         }
                         studentToMove.setIsInZone(toZone);
                         toZone.addEtudiantDansZone(studentToMove);
@@ -293,11 +296,10 @@ public class Partie {
         
         this.finDePartie = Zone.FinDePartie();
         System.out.println("------La partie est-elle finie ? "+(finDePartie));
+        
         if(finDePartie==false) {
-            Zone.initialiserZone(); 
-            System.out.println("C'est la treve ");
-            treve=null;
-            
+            treve=null; // premier trucs
+            System.out.println("C'est la treve ");// on pourra l'enlevé
             int input = 0;
             while (!(input == 4)) {
                 //trucs de la treve
@@ -321,7 +323,6 @@ public class Partie {
                         Zone.initialiserZone();
                         notifyAll(); // on reprend le combat
                         break;
-                        
                 }
             }
         }else {
@@ -397,18 +398,19 @@ public class Partie {
     public int getEtape() {
         return this.etape;
     }
+    
     //THE MAIN
     public static void main(String[] args) {
         
-        //CrÃ©ation de la partie
+        //CrÃƒÂ©ation de la partie
         Partie partie;
         partie = Partie.getInstance();
         partie.getConnection();// ne fonctionne que apres un getInstance 
         
-        // crï¿½ation des joueurs
+        // crÃ¯Â¿Â½ation des joueurs
         
-        Joueur j1 = new Joueur();
-        Joueur j2 = new Joueur();
+        Joueur j1 = new Joueur(1);
+        Joueur j2 = new Joueur(2);
                
         //partie.addPlayer(j1);
         //partie.addPlayer(j2);
@@ -419,7 +421,7 @@ public class Partie {
             
         System.out.println("Le joueur 1 s'appelle " +j1.getUserName());    
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
-        //  l'armée d'un joueur
+        //  l'armÃ©e d'un joueur
         j1.createStudentList();
         j2.createStudentList();
 
@@ -444,10 +446,11 @@ public class Partie {
         
         System.out.println("========DISTRIBUTION DES ETUDIANTS=======");
         
-        Zone.setZones();
+        Zone.setZones();      
         
-        //partie.affecterEtudiantZone(j2);  
-        
+        partie.affecterEtudiantZone(j1);          
+        partie.affecterEtudiantZone(j2);  
+        /*        
         j1.displayAllStudent();
         j2.displayAllStudent();
         autoAffecterEtudiantZone(j1);
@@ -456,6 +459,6 @@ public class Partie {
        
         
         Zone.melee();        
-        System.out.println("exit(0)");
+        System.out.println("exit(0)");*/
     }
 }
