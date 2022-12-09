@@ -143,7 +143,7 @@ public class Partie {
                     }else  { // choix une zone  
 
                         fromZone = selectZone(id);//Choisit la zone                     
-                        fromZone.getEtudiantDansZoneList(); //Shows a list of students inside the zone                    
+                        fromZone.displayEtudiantDansZoneList(); //Shows a list of students inside the zone                    
                         studentToMove = fromZone.drawEtudiantDansZone(j);
                     } 
                     
@@ -177,10 +177,92 @@ public class Partie {
             Zone.displayAllStudentInZones();
             System.out.println("la repartition dans les zones est fini");     //TODO    
     }
-    public synchronized void declencherTreve(String nomZone, String etatDeControle) throws InterruptedException {
+    public void affecterEtudiantPendantTreve(Joueur j) {
+        boolean stayInLoop = true;
+        while (stayInLoop) {
+            boolean entryIsntValid = true;
+            while(entryIsntValid) {
+                try {
+                    Etudiant studentToMove = new Etudiant();
+                    ZoneCombat fromZone = new ZoneCombat ("zone vide");
+                    System.out.println("Deplacer un etudiant de:");
+                   //====================================================================================================
+                    Zone.displayControlledZones(j); 
+                    
+                    //On prend un etudiant dans une zone 
+                    boolean selectedZoneBelongsToUser = false;
+                    while(!selectedZoneBelongsToUser) {
+                        String id = getUserInput("Choisissez une zone");//TODO ne peut que etre une zone controllee  
+                        fromZone = (ZoneCombat) selectZone(id);//Choisit la zone,  
+                        if(fromZone.getControlePar()!=null) {
+                            if (fromZone.getControlePar().equals(j)) {
+                                selectedZoneBelongsToUser = true;
+                            }
+                            else{
+                                System.out.println("Vous ne controllez pas cette zone.");
+                            }
+                        }
+                        else{
+                            System.out.println("La zone n'est pas controllee");
+                        }
+                    }
+                    fromZone.displayEtudiantDansZoneList(); //Shows a list of students inside the zone                    
+                    studentToMove = fromZone.drawEtudiantDansZone(j);
+                    
+                    // on choisie la zone de deploiement & on d�polie l'etu choisi
+                    System.out.println("Vers");
+                    String idToZone = "";
+                    Zone.displayActiveZones(j);
+                    //pas grave, tant pis s'il décide de le deplacer mettre la meme zone mdrr                                
+                    boolean selectedZoneIsActive = false;
+                    while(!selectedZoneIsActive) {
+                        idToZone = getUserInput("Choisissez une zone");
+                        
+                        if(fromZone.getControlePar()!=null) {
+                            selectedZoneIsActive = true;
+                        }
+                    }
+                    Zone toZone = selectZone(idToZone);//Choisit la zone, 
+                    String input = Partie.getUserInput("Voulez-vous changer la stratégie de cet etudiant? (y/n)");
+                    if (input.equalsIgnoreCase("y")||input.equalsIgnoreCase("oui")) {
+                        stayInLoop = false;
+                        boolean invalidEntry = true;
+                        while(invalidEntry) { 
+                            System.out.println(input);
+                            input = Partie.getUserInput("Changez la strategie de "+ studentToMove.getStrategieString()+" vers:\n"
+                                        + "- Random\n"
+                                        + "- Offensive\n"
+                                        + "- Defensive");
+                            studentToMove.setStrategie(input);
+                            if((input.equalsIgnoreCase("random")||input.equalsIgnoreCase("Offensive"))||input.equalsIgnoreCase("defensive")) {
+                                invalidEntry = false;
+                            }
+                        }
+                       
+                    }
+                    studentToMove.setIsInZone(toZone);
+                    toZone.addEtudiantDansZone(studentToMove);
+                    fromZone.removeStudentFromZone(studentToMove); // on retire l'etu de la zone d'origine
+                    entryIsntValid = false;
+                    input = Partie.getUserInput("Voulez-vous continuer a affecter des etudiants? (y/n)");
+                    if (input.equalsIgnoreCase("n")||input.equalsIgnoreCase("non")) {
+                        stayInLoop = false;
+                    }
+                }
+                catch (ZoneNotFoundInList e){
+                    System.out.println("Vous n'avez pas rentre une zone existante.");
+                }
+                catch (StudentNotFoundInList e) {
+                    System.out.println("Cet etudiant n'est pas dans cette zone.");
+                }
+            }
+        }  
+    }
+    public synchronized void declencherTreve(Joueur gagnantTreve, ZoneCombat zone, String etatDeControle) throws InterruptedException {
+       
         while(treve!=null) {// si la treve est en cour
             
-            System.out.println(nomZone + "est en pose la treve est en cour");
+            System.out.println(zone.getZoneName() + "est en pause la treve est en cours");
             this.wait();
         }
         if(etatDeControle.equalsIgnoreCase("0")) {// si la zone est controlee
@@ -189,32 +271,44 @@ public class Partie {
             treve=etatDeControle;//
             
             System.out.println("On appel la treve");
-            treve(); // --------------------------------ajout de la treve
+            treve(gagnantTreve,zone); // --------------------------------ajout de la treve
         }
                  
     }
     
-    public void treve() {
+    public void treve(Joueur gagnantTreve, ZoneCombat zone) {
+        
         this.finDePartie = Zone.FinDePartie();
-System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
+        System.out.println("------La partie est d'elle finie ? "+(finDePartie));
         if(finDePartie==false) {
             Zone.initialiserZone(); 
             System.out.println("C'est la treve ");
             treve=null;
             
             String input = "n";
-            while (!input.equalsIgnoreCase("y")) {
-                System.out.println("On fait des trucs de la treve");
+            while (!input.equalsIgnoreCase("3")) {
+                //trucs de la treve
                 
-                input= getUserInput("Voulez vous finir la treve");
-                if (input=="y") {
-                    System.out.println("Fin de la treve  on notify tous le monde !!");
+                input= getUserInput(gagnantTreve.getUserName()+": Que voulez-vous faire? (entrez 1-4)\n"
+                        + "1. Affecter des etudiants des zones controlees\n"
+                        + "2. Affecter des reservistes sur des zones de combat\n"
+                        + "3. Visualiser le nombre de points ECTS par zone de combat\n"
+                        + "4. Continuer la bataille");
+                if (input.equals("1")) {
+                    this.affecterEtudiantPendantTreve(gagnantTreve);
+                }
+                else if (input.equals("2")) {
+                    
+                }
+                else if (input.equals("3")) {
+                    System.out.println("Retour au combat...");
                     notifyAll(); // on reprend le combat
+                    
                 }
             }
         }else {
             Zone.interrupteAll();
-            System.out.println("-------------La Partie est fini----------------------");
+            System.out.println("-------------La Partie est finie----------------------");
             //System.exit(0);
         }
     }
@@ -332,9 +426,9 @@ System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
         System.out.println("========DISTRIBUTION DES ETUDIANTS=======");
         
         Zone.setZones();
-        /*
-        partie.affecterEtudiantZone(j2);  
-        */
+        
+        //partie.affecterEtudiantZone(j2);  
+        
         j1.displayAllStudent();
         j2.displayAllStudent();
         autoAffecterEtudiantZone(j1);

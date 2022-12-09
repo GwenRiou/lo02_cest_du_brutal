@@ -116,7 +116,7 @@ public class Etudiant implements Strategie{
             Etudiant etu;
             do{//insert all enemies into a list
                etu = iter.next();
-               if(etu.belongsTo.equals(Partie.getInstance().getListJ().get(1))) {
+               if(etu.belongsTo.equals(Partie.getInstance().getListJ().get(0))) {
                    studentCountj1++;
                    //System.out.println(enemyEtu.belongsTo.getUserName()+"etu #"+enemyEtu.getId()+"enemy added");
                }
@@ -125,10 +125,10 @@ public class Etudiant implements Strategie{
                }
             }while(iter.hasNext());
             if (studentCountj1 == 0) {
-                zone.setControleZone(ControleZone.CONTROLEPARJOUEUR2);
+                zone.setControleZone(ControleZone.CONTROLEPARJOUEUR2,this.belongsTo);
             }
             else if(studentCountj2 == 0) {
-                zone.setControleZone(ControleZone.CONTROLEPARJOUEUR1);
+                zone.setControleZone(ControleZone.CONTROLEPARJOUEUR1,this.belongsTo);
             }
         
         }   
@@ -222,7 +222,14 @@ public class Etudiant implements Strategie{
     public void setConstitution(int newConstisution){this.constitution= newConstisution;}
     public void setInitiative(int newInitiative){this.initiative= newInitiative;}
     public void setId(int id) {this.id = id;}
-    public void setStrategie(String strategie) {this.strategie = enumStrategie.valueOf(strategie.toUpperCase());}
+    public void setStrategie(String strategie) {
+        try{
+            this.strategie = enumStrategie.valueOf(strategie.toUpperCase());
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("Veuillez entrer une strategie valide");
+        }
+    }
 
     
 

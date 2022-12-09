@@ -35,10 +35,29 @@ public class Zone {
             Iterator<ZoneCombat> it =zoneList.iterator();
             while(it.hasNext()){
                 Zone zoneTemp = it.next();
-                System.out.println(zoneTemp.getZoneName());
+                System.out.println("- " + zoneTemp.getZoneName());
             }
    }
+    public static void displayControlledZones(Joueur j) {
+        Iterator<ZoneCombat> it =zoneList.iterator();
+        while(it.hasNext()){
+            ZoneCombat zoneTemp = it.next();
+            if(zoneTemp.getControlePar() != null) {
+                if(zoneTemp.getControlePar().equals(j))
+                    System.out.println("- " + zoneTemp.getZoneName());
+            }
+        }
+    }
     
+    public static void displayActiveZones(Joueur j) {
+        Iterator<ZoneCombat> it =zoneList.iterator();
+        while(it.hasNext()){
+            ZoneCombat zoneTemp = it.next();
+            if(zoneTemp.getControlePar() == null) {
+                    System.out.println("- " + zoneTemp.getZoneName());
+            }
+        }
+    }
         
     public static Zone getZone(int index) { // called inside another getZone() to fetch the Student at the given iterator
         Zone zon = zoneList.get(index);
@@ -95,7 +114,7 @@ public class Zone {
         Iterator<ZoneCombat> it =zoneList.iterator();
         while(it.hasNext()){
             Zone zoneTemp = it.next();
-            zoneTemp.getEtudiantDansZoneList();
+            zoneTemp.displayEtudiantDansZoneList();
         }
     }
     
@@ -151,7 +170,7 @@ public class Zone {
     //getters
     public String getZoneName() {return zoneName;}
     public int getNombreEtu() {return this.etuDansZone.size();} 
-    public void getEtudiantDansZoneList() {
+    public void displayEtudiantDansZoneList() {
         ArrayList<Etudiant>  etulist= this.etuDansZone;
         System.out.println("\n==Etudiants dans "+this.zoneName+":==");
         for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //scan through all students
