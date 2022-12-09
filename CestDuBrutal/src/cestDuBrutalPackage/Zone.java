@@ -195,6 +195,17 @@ public class Zone {
             if(s.getBelongsTo()==j) System.out.println(s);//use the tostring method to print the student's ids
         }    
     }
+    
+    public static boolean displayECTSPerZone() {
+        ListIterator<ZoneCombat> it =zoneList.listIterator();
+        while(it.hasNext()){
+            ZoneCombat zoneTemp = it.next();
+            System.out.println("==Dans la zone "+zoneTemp.getZoneName()+":==");
+            zoneTemp.displayECTS();
+            }
+        return true;
+    }
+    
     //getters
     public String getZoneName() {return zoneName;}
     public int getNombreEtu() {return this.etuDansZone.size();} 

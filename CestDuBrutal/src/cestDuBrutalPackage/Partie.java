@@ -92,7 +92,7 @@ public class Partie {
                     
                     choix=5;
                     while(choix==5 ) {
-                        choix = getUserChoix("Pour continuer a modifier l'etudiant ? 1 Changer la strategie de l'etudiant ? 2 Passer a l'etudiant suivante ? 3  A l'etape suivante ? 4 Affichier tous les etudiants? 5 ",5);
+                        choix = getUserChoix("Pour continuer a modifier l'etudiant 1! Changer la strategie de l'etudiant 2! Passer a l'etudiant suivante 3!  A l'etape suivante 4! Affichier tous les etudiants 5! ",5);
                         if (choix==5) {j.displayAllStudent();}
                         if (choix==2) {
                             try {
@@ -143,7 +143,7 @@ public class Partie {
                     Zone fromZone = new Zone ("zone vide");
                     System.out.println("Deplacer un etudiant de:");
                     Zone.displayAllZones();
-                    System.out.println("Le camion");
+                    System.out.println("- Le camion");
                     
                     //On prend un etudiant dans une zone ou dans le camion
                     String id = getUserInput("Choisissez une zone");
@@ -164,7 +164,7 @@ public class Partie {
                     
                     System.out.println("Vers");
                     String idToZone = getUserInput("Choisissez une zone");
-                    Zone toZone = selectZone(idToZone);//pas grave, tant pis s'il dÃ©cide de le deplacer mettre la meme zone mdrr                                
+                    Zone toZone = selectZone(idToZone);                              
                     studentToMove.setIsInZone(toZone);
                     toZone.addEtudiantDansZone(studentToMove);
                     
@@ -310,13 +310,13 @@ public class Partie {
                         + "4. Continuer la bataille",4);
                 switch(input) {
                     case 1:
-                        this.affecterEtudiantPendantTreve(gagnantTreve);
+                        affecterEtudiantPendantTreve(gagnantTreve);
                         break;
                     case 2:
 						
                         break;
                     case 3:
-						
+                        Zone.displayECTSPerZone();
                         break;
                     case 4:
                         System.out.println("Retour au combat...");
@@ -447,10 +447,11 @@ public class Partie {
         System.out.println("========DISTRIBUTION DES ETUDIANTS=======");
         
         Zone.setZones();      
-        
+    /*    
         partie.affecterEtudiantZone(j1);          
         partie.affecterEtudiantZone(j2);  
-        /*        
+    */    
+        
         j1.displayAllStudent();
         j2.displayAllStudent();
         autoAffecterEtudiantZone(j1);
@@ -459,6 +460,6 @@ public class Partie {
        
         
         Zone.melee();        
-        System.out.println("exit(0)");*/
+        System.out.println("exit(0)");
     }
 }
