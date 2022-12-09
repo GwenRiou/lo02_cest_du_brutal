@@ -38,7 +38,7 @@ public class Joueur {
         studentList.add(etuMaitre);
         
         //crer les soldats Ã©lites
-        for(int i=0 ; i < 3; i++){//----------------------------------------------------------remettre à 4 apr_stest
+        for(int i=0 ; i < 4; i++){
             Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2,this);
             studentList.add(etuElite);            
         }

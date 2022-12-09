@@ -216,7 +216,7 @@ public class Partie {
                             } else System.out.println("Vous ne controllez pas cette zone.");
                         } else System.out.println("La zone n'est pas controllee");
                     }
-                    if (!(fromZone.etuDansZone.size()<2)) {
+                    if (!(fromZone.etuDansZone.size()<2)) {// il y a au moins une personne dans a la zone
                         fromZone.displayEtudiantDansZoneList(); //Shows a list of students inside the zone                    
                         studentToMove = fromZone.drawEtudiantDansZone(j);
                         
@@ -432,7 +432,7 @@ public class Partie {
    
         
         System.out.println("========MISE EN RESERVE=======");
-        /*
+        
         partie.putInReserve(j2);
         partie.putInReserve(j1); 
         
@@ -442,7 +442,7 @@ public class Partie {
         //repartition des etudiants dans les zones
        //initier les zones
         
-        */      
+             
         
         System.out.println("========DISTRIBUTION DES ETUDIANTS=======");
         
