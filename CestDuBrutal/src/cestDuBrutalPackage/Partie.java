@@ -123,7 +123,10 @@ public class Partie {
     
    //Mise en zones
     public void affecterEtudiantZone(Joueur j) {
-        while (j.getStudentList().size()!=0 || Zone.allZoneNotEmpty()==0) {
+        boolean condition=false;
+        if(j.getId()==1) condition=Zone.allZoneNotEmpty();// condidtion pour que le j1 a un etu dasn chaque zone 
+        else condition=Zone.allZoneWithTwoStudent(j);// condition pour que le j2 a un etu dans chaque zone 
+        while (j.getStudentList().size()!=0 || !condition) {
             boolean entryIsntValid = true;
             while(entryIsntValid) {
                 try {
@@ -143,11 +146,13 @@ public class Partie {
                     }else  { // choix une zone  
 
                         fromZone = selectZone(id);//Choisit la zone                     
-                        fromZone.getEtudiantDansZoneList(); //Shows a list of students inside the zone                    
+                        fromZone.displayEtudiantDansZoneList(); //Shows a list of students inside the zone                    
                         studentToMove = fromZone.drawEtudiantDansZone(j);
                     } 
                     
                     // on choisie la zone de deploiement & on dï¿½polie l'etu choisi
+
+                    
                     System.out.println("Vers");
                     String idToZone = getUserInput("Choisissez une zone");
                     Zone toZone = selectZone(idToZone);//pas grave, tant pis s'il dÃ©cide de le deplacer mettre la meme zone mdrr                                
@@ -171,6 +176,8 @@ public class Partie {
                 }
                 
             }
+            if(j.getId()==1) condition=Zone.allZoneNotEmpty();// condidtion pour que le j1 a un etu dasn chaque zone 
+            else condition=Zone.allZoneWithTwoStudent(j);// condition pour que le j2 a un etu dans chaque zone 
         }
             Zone.displayAllZones();
             // affiche toutes les ï¿½tudiants par zones
@@ -196,18 +203,20 @@ public class Partie {
     
     public void treve() {
         this.finDePartie = Zone.FinDePartie();
-System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
+        System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false)); // on pourra l'enlevé 
         if(finDePartie==false) {
-            Zone.initialiserZone(); 
-            System.out.println("C'est la treve ");
-            treve=null;
+            treve=null; // premier trucs
+            System.out.println("C'est la treve ");// on pourra l'enlevé
             
             String input = "n";
             while (!input.equalsIgnoreCase("y")) {
+                
                 System.out.println("On fait des trucs de la treve");
                 
                 input= getUserInput("Voulez vous finir la treve");
+                
                 if (input=="y") {
+                    Zone.initialiserZone(); // A faire à la fin de la treve
                     System.out.println("Fin de la treve  on notify tous le monde !!");
                     notifyAll(); // on reprend le combat
                 }
@@ -285,6 +294,7 @@ System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
     public int getEtape() {
         return this.etape;
     }
+    
     //THE MAIN
     public static void main(String[] args) {
         
@@ -295,8 +305,8 @@ System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
         
         // crÃ¯Â¿Â½ation des joueurs
         
-        Joueur j1 = new Joueur();
-        Joueur j2 = new Joueur();
+        Joueur j1 = new Joueur(1);
+        Joueur j2 = new Joueur(2);
                
         partie.addPlayer(j1);
         partie.addPlayer(j2);
@@ -331,10 +341,12 @@ System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
         
         System.out.println("========DISTRIBUTION DES ETUDIANTS=======");
         
-        Zone.setZones();
-        /*
+        Zone.setZones();      
+        
+        partie.affecterEtudiantZone(j1);          
         partie.affecterEtudiantZone(j2);  
-        */
+        /*
+        
         j1.displayAllStudent();
         j2.displayAllStudent();
         autoAffecterEtudiantZone(j1);
@@ -343,6 +355,6 @@ System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false));
        
         
         Zone.melee();        
-        System.out.println("exit(0)");
+        System.out.println("exit(0)");*/
     }
 }
