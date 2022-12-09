@@ -178,9 +178,6 @@ public class Zone {
         
     }
 
-    //getters
-    public String getZoneName() {return zoneName;}
-    public int getNombreEtu() {return this.etuDansZone.size();} 
 
     public void displayEtudiantDansZoneList() {
         ArrayList<Etudiant>  etulist= this.etuDansZone;
