@@ -2,7 +2,6 @@ package cestDuBrutalPackage;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.ListIterator;
 
 public class ZoneCombat extends Zone implements Runnable{
 
@@ -93,20 +92,7 @@ public class ZoneCombat extends Zone implements Runnable{
         return false;
     }
 
-    public void displayECTS() {
-        ArrayList<Etudiant>  etulist= this.etuDansZone;
-        int nbECTS=0;
-        int nbEtu=0;
-        for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //scan through all students
-            Etudiant s = it.next();
-            nbECTS+=s.getEcts();
-            nbEtu++;
-            
-        }    
-        System.out.println("nombre de credits ECTS "+nbECTS);
-        System.out.println("nombre d'etudiant dans la zone "+nbEtu);
-        System.out.println();
-    }
+    
    
 
     
