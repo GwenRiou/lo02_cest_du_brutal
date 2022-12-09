@@ -42,7 +42,7 @@ public class Partie {
     }
     
     public void autoAddPlayers(Joueur j1,Joueur j2){
-        System.out.println("--AutoAddPlayersV2.0 IS INITIALIZING, STAND THE FUCK BACK!!!--");
+        System.out.println("--AutoAddPlayersV2.0 IS INITIALIZING, STAND BACK!!!--");
         listJ.add(j1);
         j1.identify("Xuan",Programme.A2I);
         listJ.add(j2);
@@ -119,7 +119,7 @@ public class Partie {
  // Mise en reserve
     public void putInReserve(Joueur j) {
         System.out.print(j.getUserName()+": Selectioner les etudiants a mettre dans la reserve \n");
-        while(j.getReserve().size()<5) {
+        while(j.getReserveArrayList().size()<5) {
                
             try {
                 Etudiant etu = selectStudent(j);
@@ -155,7 +155,7 @@ public class Partie {
                     }else  { // choix une zone  
 
                         fromZone = selectZone(id);//Choisit la zone                     
-                        fromZone.displayEtudiantDansZoneList(); //Shows a list of students inside the zone                    
+                        fromZone.displayEtudiantDansZoneList(j); //Shows a list of students inside the zone                    
                         studentToMove = fromZone.drawEtudiantDansZone(j);
                     } 
                     
@@ -193,6 +193,59 @@ public class Partie {
             Zone.displayAllStudentInZones();
             System.out.println("la repartition dans les zones est fini");     //TODO    
     }
+    public void affecterEtudiantReserveTreve(Joueur j) {
+        if(j.getReserveArrayList().size() != 0) {
+            boolean stayInLoop = true;
+            while (stayInLoop) {
+                boolean entryIsntValid = true;
+                while(entryIsntValid) {
+                    try {
+                        Etudiant studentToMove = new Etudiant();
+                        Zone reserve = j.getReserve();
+                        System.out.println("Deplacer un etudiant depuis la reserve:");
+                       //====================================================================================================
+                        j.displayReserveStudent(); //Shows a list of students inside the reserve 
+                        
+                        //On prend un etudiant dans une zone 
+                        studentToMove = reserve.drawEtudiantDansZone(j);
+                        
+                        // on choisie la zone de deploiement & on d�polie l'etu choisi
+                        System.out.println("Vers");
+                        String idToZone = "";
+                        Zone.displayActiveZones(j);  
+                        ZoneCombat toZone = new ZoneCombat("");
+                        boolean selectedZoneIsActive = false;
+                        while(!selectedZoneIsActive) {
+                            idToZone = getUserInput("Choisissez une zone");
+                            toZone = (ZoneCombat) selectZone(idToZone);
+                            //Choisit la zone, 
+                            if(toZone.getControlePar()==null) {
+                                selectedZoneIsActive = true;
+                            }
+                        }
+                        studentToMove.setIsInZone(toZone);
+                        toZone.addEtudiantDansZone(studentToMove);
+                        reserve.removeStudentFromZone(studentToMove); // on retire l'etu de la zone d'origine
+                        entryIsntValid = false;
+                        String input = Partie.getUserInput("Voulez-vous continuer a affecter des etudiants? (y/n)");
+                        if (input.equalsIgnoreCase("n")||input.equalsIgnoreCase("non")) {
+                            stayInLoop = false;
+                        }
+                    }
+                    catch (ZoneNotFoundInList e){
+                        System.out.println("Vous n'avez pas rentre une zone existante.");
+                    }
+                    catch (StudentNotFoundInList e) {
+                        System.out.println("Cet etudiant n'est pas dans cette zone.");
+                    }
+                }
+            }
+        }
+        else {
+            System.out.println("La reserve est vide!");
+        }
+    }
+    
     public void affecterEtudiantPendantTreve(Joueur j) {
         boolean stayInLoop = true;
         while (stayInLoop) {
@@ -310,10 +363,10 @@ public class Partie {
                         + "4. Continuer la bataille",4);
                 switch(input) {
                     case 1:
-                        this.affecterEtudiantPendantTreve(gagnantTreve);
+                        affecterEtudiantPendantTreve(gagnantTreve);
                         break;
                     case 2:
-						
+						affecterEtudiantReserveTreve(gagnantTreve);
                         break;
                     case 3:
 						
@@ -432,7 +485,7 @@ public class Partie {
    
         
         System.out.println("========MISE EN RESERVE=======");
-        /*
+       
         partie.putInReserve(j2);
         partie.putInReserve(j1); 
         
@@ -442,15 +495,16 @@ public class Partie {
         //repartition des etudiants dans les zones
        //initier les zones
         
-        */      
+              
         
         System.out.println("========DISTRIBUTION DES ETUDIANTS=======");
         
         Zone.setZones();      
         
-        partie.affecterEtudiantZone(j1);          
-        partie.affecterEtudiantZone(j2);  
-        /*        
+        //partie.affecterEtudiantZone(j1);          
+        //partie.affecterEtudiantZone(j2);  
+        
+                
         j1.displayAllStudent();
         j2.displayAllStudent();
         autoAffecterEtudiantZone(j1);
@@ -459,6 +513,6 @@ public class Partie {
        
         
         Zone.melee();        
-        System.out.println("exit(0)");*/
+        System.out.println("exit(0)");
     }
 }
