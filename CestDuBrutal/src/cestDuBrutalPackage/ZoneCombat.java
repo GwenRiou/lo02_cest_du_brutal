@@ -35,6 +35,9 @@ public class ZoneCombat extends Zone implements Runnable{
     }
     
     public void frenesie() {
+        System.out.println("######################################################################################################");
+        System.out.println("                                         FRENESIE                                                     ");
+        System.out.println("######################################################################################################");
         Iterator<Etudiant> it =etuDansZone.iterator();
         while(it.hasNext()){
             Etudiant etu = it.next();
@@ -52,11 +55,7 @@ public class ZoneCombat extends Zone implements Runnable{
                  numAction++;
                  if(numAction>500) {
                      numAction=0;
-                     System.out.println("######################################################################################################");
-                     System.out.println("                                         FRENESIE                                                     ");
-                     System.out.println("######################################################################################################");
                      frenesie();
-                     
                  }
                 //action d'un combat
                 
