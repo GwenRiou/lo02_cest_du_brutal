@@ -8,6 +8,7 @@ public class ZoneCombat extends Zone implements Runnable{
     private ControleZone controleZone; // il renplacera la deuxieme ligne // CONTROLEPARJOUEUR1,CONTROLEPARJOUEUR2,DISPUTE;
     //private int controleZone; //0 controler par un joueur , 1 pas de controle
     private Partie partie;
+    private Joueur controlePar;
     Thread t ;
     int numAction;
     
@@ -51,7 +52,7 @@ public class ZoneCombat extends Zone implements Runnable{
                  if(numAction>500) {
                      numAction=0;
                      System.out.println("######################################################################################################");
-                     System.out.println("                                         FRENESIE                                                      ");
+                     System.out.println("                                         FRENESIE                                                     ");
                      System.out.println("######################################################################################################");
                      frenesie();
                      
@@ -66,12 +67,14 @@ public class ZoneCombat extends Zone implements Runnable{
                         
                 //Affiche l'�tat de la zone // c'est optionnel 
                 if (controleZone ==ControleZone.DISPUTE) {
-                    partie.declencherTreve(Thread.currentThread().getName(), "Pas de treve");
+                    partie.declencherTreve(this.controlePar,this, "Pas de treve");
                     //System.out.println(Thread.currentThread().getName() + " n'est pas controlee (prod)");
                 }
                 else {
-                    System.out.println(Thread.currentThread().getName() +  " est controlee");
-                    partie.declencherTreve(Thread.currentThread().getName(), "0");    
+                    
+                    System.out.println(this.getZoneName() +  " est controlee par "+ this.controlePar.getUserName());
+                    
+                    partie.declencherTreve(this.controlePar,this, "0");    
                 }
                 
                 //sleep present pour ralentir l'execution 
@@ -86,8 +89,14 @@ public class ZoneCombat extends Zone implements Runnable{
     
 
     
+   
+
+    
     //getters
     public ControleZone getControleZone() {return this.controleZone;}
+    public Joueur getControlePar() {return controlePar;}
     //setters
-    public void setControleZone(ControleZone control) {this.controleZone = control;}
+    public void setControleZone(ControleZone control,Joueur j) {this.controleZone = control;this.controlePar = j;}
+    public void setControlePar(Joueur controlePar) {this.controlePar = controlePar;}
+
 }

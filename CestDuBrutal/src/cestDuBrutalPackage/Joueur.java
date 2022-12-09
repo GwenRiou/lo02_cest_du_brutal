@@ -153,7 +153,7 @@ public class Joueur {
     
     // Mise en reserve
     public void putInReserve(Etudiant etu) {
-        this.studentList.remove(etu);// Enl�ve l'�tudiant de la liste 
+        this.studentList.remove(etu);// Enleve l'etudiant de la liste 
         reserve.affecterReserve(etu);
     }
     //remove student from list
