@@ -1,36 +1,61 @@
 package cestDuBrutalPackage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ZoneCombat extends Zone implements Runnable{
 
     private ControleZone controleZone; // il renplacera la deuxieme ligne // CONTROLEPARJOUEUR1,CONTROLEPARJOUEUR2,DISPUTE;
     //private int controleZone; //0 controler par un joueur , 1 pas de controle
     private Partie partie;
+    Thread t ;
+    int numAction;
     
 
     public ZoneCombat(String name) {
         super(name);
         this.controleZone=ControleZone.DISPUTE;
         this.partie= Partie.getInstance();
+        t = new Thread(this, name);
+        numAction=0;
     }
     
     public void combat() {
         String nom = getZoneName();
-        Thread t = new Thread(this, nom);
         t.start();
     }
+    
+    public void interrupted() {          
+            t.interrupt();
+    }
+    
     public void initialiser() {
         this.sortStudentList(etuDansZone);
+    }
+    public void frenesie() {
+        Iterator<Etudiant> it =etuDansZone.iterator();
+        while(it.hasNext()){
+            Etudiant etu = it.next();
+            etu.setStrategie("OFFENSIVE");
+            etu.setForce(etu.getForce()+100);
+        }
+        
     }
             
     public void run() {
         initialiser();
-        Zone.displayAllStudentInZones();
         int i = 0;
-        while(controleZone ==ControleZone.DISPUTE) {   // on se bat si la zone n'est pas contorlee     
+        while(controleZone == ControleZone.DISPUTE) {   // on se bat si la zone n'est pas contorlee     
             try { 
-                    
+                 numAction++;
+                 if(numAction>500) {
+                     numAction=0;
+                     System.out.println("######################################################################################################");
+                     System.out.println("                                         FRENESIE                                                      ");
+                     System.out.println("######################################################################################################");
+                     frenesie();
+                     
+                 }
                 //action d'un combat
                 
                 // on test si la zone est control�e --> si oui, controleZone=0 et appel de la depose message avec "0"
@@ -38,19 +63,6 @@ public class ZoneCombat extends Zone implements Runnable{
                 this.etuDansZone.get(i).agir();//TODO DEPLACER A LA FIN DE LA LISTE apres agir
                 i++;
                 i = i%etuDansZone.size();
-                /*
-                
-                //methode pour regarder verifier si la zone est contorlee 
-                if(Math.random()>0.1) {// check si le combat est fini dans cette zone 
-                    System.out.println("La zone "+Thread.currentThread().getName()+" n'est pas controlee");
-                    partie.declencherTreve(Thread.currentThread().getName(), "Pas de treve");
-                    
-                }else {// la zone est controle
-                    controleZone=ControleZone.CONTROLEPARJOUEUR1;
-                    partie.declencherTreve(Thread.currentThread().getName(), "0");             
-                }   */    
-                
-                
                         
                 //Affiche l'�tat de la zone // c'est optionnel 
                 if (controleZone ==ControleZone.DISPUTE) {
@@ -62,22 +74,20 @@ public class ZoneCombat extends Zone implements Runnable{
                     partie.declencherTreve(Thread.currentThread().getName(), "0");    
                 }
                 
-                //sleep present pour ralentir l'�xecution 
-                Thread.sleep((long)(Math.random()*0));               
+                //sleep present pour ralentir l'execution 
+                Thread.sleep((long)(Math.random()*20));               
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                break;
             }           
         }
     }
     
     
-    
-    public void verifierControle() {
-        
-    }
+
     
     //getters
-    private ControleZone getControleZone() {return this.controleZone;}
+    public ControleZone getControleZone() {return this.controleZone;}
     //setters
     public void setControleZone(ControleZone control) {this.controleZone = control;}
 }

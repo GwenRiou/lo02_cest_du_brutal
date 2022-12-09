@@ -82,8 +82,7 @@ public class Zone {
         etuDansZone.remove(etu);
     }
     
-    public static int allZoneNotEmpty() {
-        
+    public static int allZoneNotEmpty() {        
         Iterator<ZoneCombat> it =zoneList.iterator();
         while(it.hasNext()){
             Zone zoneTemp = it.next();
@@ -107,15 +106,48 @@ public class Zone {
             zoneTemp.combat();
         }
     }
+
+    public static void interrupteAll() {
+        Iterator<ZoneCombat> it =zoneList.iterator();
+        while(it.hasNext()){
+            ZoneCombat zoneTemp = it.next();
+            zoneTemp.interrupted();
+        }
+    }
     
     public static void initialiserZone() {// order the list of etu by initiative on every zone 
-        Iterator<ZoneCombat> it =zoneList.iterator();
+        Iterator<ZoneCombat> it = zoneList.iterator();
         while(it.hasNext()){
             ZoneCombat zoneTemp = it.next();
             zoneTemp.initialiser();
         }
     }
 
+    public static boolean FinDePartie() {
+        Iterator<ZoneCombat> it =zoneList.iterator();
+        int numZoneControlByPlayer1=0;
+        int numZoneControlByPlayer2=0;  
+        int numZoneToEndGame=((zoneList.size()/2)+1);
+        while(it.hasNext()){
+            ZoneCombat zoneTemp = it.next();
+            if(zoneTemp.getControleZone()==ControleZone.CONTROLEPARJOUEUR1) {numZoneControlByPlayer1++;};
+            
+            if(zoneTemp.getControleZone()==ControleZone.CONTROLEPARJOUEUR2) {numZoneControlByPlayer2++;};
+        }
+        System.out.println("Le nombre de zone controle par j1 = "+ numZoneControlByPlayer1);
+        System.out.println("Le nombre de zone controle par j2 = "+ numZoneControlByPlayer2);
+        if(numZoneControlByPlayer1>=numZoneToEndGame) {
+            System.out.println( Partie.getNamePlayer(1) +" a gagne");
+            return true;
+        }
+        if(numZoneControlByPlayer2>=numZoneToEndGame) {
+            System.out.println( Partie.getNamePlayer(2) +" a gagne");
+            
+            return true;
+        };
+        return false;
+        
+    }
     //getters
     public String getZoneName() {return zoneName;}
     public int getNombreEtu() {return this.etuDansZone.size();} 
@@ -138,17 +170,6 @@ public class Zone {
         this.etuDansZone.add(etudiant);
         System.out.println("L'etudiant a bien ete ajoute a la zone");
     }
-    /*
-    public void publicSetChanged() {
-        this.setChanged();
-    }
-    public void publicNotifyObservers() {
-        this.notifyObservers();
-    }
-    public void publicClearChanged() {
-        this.clearChanged();
-    }
-    */
     
 }
 
