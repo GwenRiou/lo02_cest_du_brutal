@@ -17,6 +17,7 @@ import java.util.*;
  * 
  */
 public class Joueur {
+    private int id;
     private int points = 400;
     private Programme programme;
     private String userName;
@@ -24,13 +25,13 @@ public class Joueur {
     private ArrayList<Etudiant> studentList; // car on va chercher les étu par leur index
     private Reserve reserve = new Reserve();
     
-    public Joueur() {
+    public Joueur(int id) {
+        this.id=id;
         this.points = points;
         this.userName = "";
         this.studentList = new ArrayList <Etudiant>();        
     }
     
-
     public void createStudentList() {
         
         // creer le maiter du gobit
@@ -38,17 +39,17 @@ public class Joueur {
         studentList.add(etuMaitre);
         
         //crer les soldats élites
-        for(int i=0 ; i < 4; i++){
+        for(int i=0 ; i < 3; i++){//----------------------------------------------------------remettre � 4 apr_stest
             Etudiant etuElite = new Etudiant("Elite",2,2,2,10,2,this);
             studentList.add(etuElite);            
         }
-        
+        /*
         //creer lest étudiants de basse==================disabled for debug======================
         
         for(int i=0 ; i < 15; i++){
             Etudiant etuNormal = new Etudiant("Base",0,0,0,0,0,this);
             studentList.add(etuNormal);            
-        }
+        }*/
         
 
         setIdForArmy();
@@ -190,7 +191,14 @@ public class Joueur {
     public void setPoints(int points) {
         this.points = points;
     }
-    
+    public int getId() {
+        return id;
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
     //returns programme as an enum
     public Programme getProgramme() {
         return programme;
