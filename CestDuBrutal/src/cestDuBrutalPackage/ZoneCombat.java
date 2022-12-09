@@ -88,7 +88,7 @@ public class ZoneCombat extends Zone implements Runnable{
         Iterator<Etudiant> it =etuDansZone.iterator();
         while(it.hasNext()){
             Etudiant etu = it.next();
-            if(etu.getBelongsTo()==j) return true; // on a un étudiant du joueur deux dedans
+            if(etu.getBelongsTo()==j) return true; // on a un ï¿½tudiant du joueur deux dedans
         }
         return false;
     }
