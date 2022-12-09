@@ -36,10 +36,19 @@ public class Partie {
     
     //Ajoute 1 joueur Ã¯Â¿Â½ la partie
     public void addPlayer(Joueur joueur){
+        System.out.println("--Creation dun nouveau joueur--");
         listJ.add(joueur);
+        joueur.identify();
     }
     
-    // Choit un Ã©tudiant TODO Ã  mettre dans la class joueur ?
+    public void autoAddPlayers(Joueur j1,Joueur j2){
+        System.out.println("--AutoAddPlayersV2.0 IS INITIALIZING, STAND THE FUCK BACK!!!--");
+        listJ.add(j1);
+        j1.identify("Xuan",Programme.A2I);
+        listJ.add(j2);
+        j2.identify("Gwen",Programme.A2I);
+        
+    }
     public Etudiant selectStudent(Joueur j)throws StudentNotFoundInList{
         
             ArrayList<Etudiant>  l= j.getStudentList();       
@@ -204,56 +213,56 @@ public class Partie {
                         if(fromZone.getControlePar()!=null) {
                             if (fromZone.getControlePar().equals(j)) {
                                 selectedZoneBelongsToUser = true;
-                            }
-                            else{
-                                System.out.println("Vous ne controllez pas cette zone.");
-                            }
-                        }
-                        else{
-                            System.out.println("La zone n'est pas controllee");
-                        }
+                            } else System.out.println("Vous ne controllez pas cette zone.");
+                        } else System.out.println("La zone n'est pas controllee");
                     }
-                    fromZone.displayEtudiantDansZoneList(); //Shows a list of students inside the zone                    
-                    studentToMove = fromZone.drawEtudiantDansZone(j);
-                    
-                    // on choisie la zone de deploiement & on dï¿½polie l'etu choisi
-                    System.out.println("Vers");
-                    String idToZone = "";
-                    Zone.displayActiveZones(j);
-                    //pas grave, tant pis s'il dÃ©cide de le deplacer mettre la meme zone mdrr                                
-                    boolean selectedZoneIsActive = false;
-                    while(!selectedZoneIsActive) {
-                        idToZone = getUserInput("Choisissez une zone");
+                    if (!(fromZone.etuDansZone.size()<2)) {
+                        fromZone.displayEtudiantDansZoneList(); //Shows a list of students inside the zone                    
+                        studentToMove = fromZone.drawEtudiantDansZone(j);
                         
-                        if(fromZone.getControlePar()!=null) {
-                            selectedZoneIsActive = true;
-                        }
-                    }
-                    Zone toZone = selectZone(idToZone);//Choisit la zone, 
-                    String input = Partie.getUserInput("Voulez-vous changer la stratÃ©gie de cet etudiant? (y/n)");
-                    if (input.equalsIgnoreCase("y")||input.equalsIgnoreCase("oui")) {
-                        stayInLoop = false;
-                        boolean invalidEntry = true;
-                        while(invalidEntry) { 
-                            System.out.println(input);
-                            input = Partie.getUserInput("Changez la strategie de "+ studentToMove.getStrategieString()+" vers:\n"
-                                        + "- Random\n"
-                                        + "- Offensive\n"
-                                        + "- Defensive");
-                            studentToMove.setStrategie(input);
-                            if((input.equalsIgnoreCase("random")||input.equalsIgnoreCase("Offensive"))||input.equalsIgnoreCase("defensive")) {
-                                invalidEntry = false;
+                        // on choisie la zone de deploiement & on d�polie l'etu choisi
+                        System.out.println("Vers");
+                        String idToZone = "";
+                        Zone.displayActiveZones(j);
+                        //pas grave, tant pis s'il décide de le deplacer mettre la meme zone mdrr                                
+                        boolean selectedZoneIsActive = false;
+                        while(!selectedZoneIsActive) {
+                            idToZone = getUserInput("Choisissez une zone");
+                            
+                            if(fromZone.getControlePar()!=null) {
+                                selectedZoneIsActive = true;
                             }
                         }
-                       
-                    }
-                    studentToMove.setIsInZone(toZone);
-                    toZone.addEtudiantDansZone(studentToMove);
-                    fromZone.removeStudentFromZone(studentToMove); // on retire l'etu de la zone d'origine
-                    entryIsntValid = false;
-                    input = Partie.getUserInput("Voulez-vous continuer a affecter des etudiants? (y/n)");
-                    if (input.equalsIgnoreCase("n")||input.equalsIgnoreCase("non")) {
+                        Zone toZone = selectZone(idToZone);//Choisit la zone, 
+                        String input = Partie.getUserInput("Voulez-vous changer la strategie de cet etudiant? (y/n)");
+                        if (input.equalsIgnoreCase("y")||input.equalsIgnoreCase("oui")) {
+                            stayInLoop = false;
+                            boolean invalidEntry = true;
+                            while(invalidEntry) { 
+                                System.out.println(input);
+                                input = Partie.getUserInput("Changez la strategie de "+ studentToMove.getStrategieString()+" vers:\n"
+                                            + "- Random\n"
+                                            + "- Offensive\n"
+                                            + "- Defensive");
+                                studentToMove.setStrategie(input);
+                                if((input.equalsIgnoreCase("random")||input.equalsIgnoreCase("Offensive"))||input.equalsIgnoreCase("defensive")) {
+                                    invalidEntry = false;
+                                }
+                            }                    
+                        }
+                        studentToMove.setIsInZone(toZone);
+                        toZone.addEtudiantDansZone(studentToMove);
+                        fromZone.removeStudentFromZone(studentToMove); // on retire l'etu de la zone d'origine
+                        entryIsntValid = false;
+                        input = Partie.getUserInput("Voulez-vous continuer a affecter des etudiants? (y/n)");
+                        if (input.equalsIgnoreCase("n")||input.equalsIgnoreCase("non")) {
+                            stayInLoop = false;
+                        }
+                    } 
+                    else {
+                        System.out.println("Vous devez avoir au moins un etudiant dans une zone controlee");
                         stayInLoop = false;
+                        entryIsntValid = false;
                     }
                 }
                 catch (ZoneNotFoundInList e){
@@ -286,34 +295,34 @@ public class Partie {
     public void treve(Joueur gagnantTreve, ZoneCombat zone) {
         
         this.finDePartie = Zone.FinDePartie();
-
-        System.out.println("------La partie est d'elle fini ?"+(finDePartie!=false)); // on pourra l'enlevé 
-
+        System.out.println("------La partie est-elle finie ? "+(finDePartie));
+        
         if(finDePartie==false) {
             treve=null; // premier trucs
             System.out.println("C'est la treve ");// on pourra l'enlevé
-            
-            String input = "n";
-
-            while (!input.equalsIgnoreCase("3")) {
+            int input = 0;
+            while (!(input == 4)) {
                 //trucs de la treve
-                
-                input= getUserInput(gagnantTreve.getUserName()+": Que voulez-vous faire? (entrez 1-4)\n"
+                input = getUserChoix(gagnantTreve.getUserName()+": Que voulez-vous faire? (entrez 1-4)\n"
                         + "1. Affecter des etudiants des zones controlees\n"
                         + "2. Affecter des reservistes sur des zones de combat\n"
                         + "3. Visualiser le nombre de points ECTS par zone de combat\n"
-                        + "4. Continuer la bataille");
-                if (input.equals("1")) {
-                    this.affecterEtudiantPendantTreve(gagnantTreve);
-                }
-                else if (input.equals("2")) {
-                    
-                }
-                else if (input.equals("3")) {
-                    System.out.println("Retour au combat...");
-                    Zone.initialiserZone(); // A faire à la fin de la treve
-                    notifyAll(); // on reprend le combat
-                    
+                        + "4. Continuer la bataille",4);
+                switch(input) {
+                    case 1:
+                        this.affecterEtudiantPendantTreve(gagnantTreve);
+                        break;
+                    case 2:
+						
+                        break;
+                    case 3:
+						
+                        break;
+                    case 4:
+                        System.out.println("Retour au combat...");
+                        Zone.initialiserZone();
+                        notifyAll(); // on reprend le combat
+                        break;
                 }
             }
         }else {
@@ -403,12 +412,13 @@ public class Partie {
         Joueur j1 = new Joueur(1);
         Joueur j2 = new Joueur(2);
                
-        partie.addPlayer(j1);
-        partie.addPlayer(j2);
+        //partie.addPlayer(j1);
+        //partie.addPlayer(j2);
+        partie.autoAddPlayers(j1, j2);
         
-        j1.setUserName("Gwen");        
-        //methode pour mettre un nom de joueur      
-        j2.setUserName("Xuan");       
+                
+        //methode pour mettre un nom de joueur   
+            
         System.out.println("Le joueur 1 s'appelle " +j1.getUserName());    
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
         //  l'armÃ©e d'un joueur
