@@ -454,60 +454,47 @@ public class Partie {
     
     //THE MAIN
     public static void main(String[] args) {
-        
+        System.out.println("=+=!!- C'EST DU BRUTAL V1.0 -!!=+=");
         //CrÃƒÂ©ation de la partie
         Partie partie;
         partie = Partie.getInstance();
         partie.getConnection();// ne fonctionne que apres un getInstance 
-        
-        // crÃ¯Â¿Â½ation des joueurs
-        
         Joueur j1 = new Joueur(1);
         Joueur j2 = new Joueur(2);
-               
-        //partie.addPlayer(j1);
-        //partie.addPlayer(j2);
-        partie.autoAddPlayers(j1, j2);
+        partie.addPlayer(j1);
+        partie.addPlayer(j2);//partie.autoAddPlayers(j1, j2);
         
-                
-        //methode pour mettre un nom de joueur   
-            
-        System.out.println("Le joueur 1 s'appelle " +j1.getUserName());    
+        Zone.setZones();  
+        
+        System.out.println("Le joueur 1 s'appelle " +j1.getUserName());   
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
-        //  l'armÃ©e d'un joueur
+        
         j1.createStudentList();
         j2.createStudentList();
 
         System.out.println("========REPARTITION DES POINTS=======");
-        //partie.repartitionPoints(j2);    
-        //j1.displayAllStudent();
-        //j2.displayAllStudent();
-   
-        
+        j1.displayAllStudent();
+        partie.repartitionPoints(j1);  
+        j2.displayAllStudent();
+        partie.repartitionPoints(j2); 
+       
         System.out.println("========MISE EN RESERVE=======");
-
-        partie.putInReserve(j2);
-        partie.putInReserve(j1); 
-        
+        j1.displayAllStudent();
+        partie.putInReserve(j1);
+        j1.displayReserveStudent();
+        System.out.println("\n");
+        j2.displayAllStudent();
+        partie.putInReserve(j2); 
         j2.displayReserveStudent();
-        
-        
-        //repartition des etudiants dans les zones
-       //initier les zones
         
         System.out.println("========DISTRIBUTION DES ETUDIANTS=======");
         
-        Zone.setZones();      
-
-    /*    
-        partie.affecterEtudiantZone(j1);          
-        partie.affecterEtudiantZone(j2);  
-    */    
-        
         j1.displayAllStudent();
+        partie.affecterEtudiantZone(j1);  
         j2.displayAllStudent();
-        autoAffecterEtudiantZone(j1);
-        autoAffecterEtudiantZone(j2);
+        partie.affecterEtudiantZone(j2);  
+        //autoAffecterEtudiantZone(j1);
+        //autoAffecterEtudiantZone(j2);
         Zone.displayAllStudentInZones();
        
         

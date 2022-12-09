@@ -230,7 +230,4 @@ public class Etudiant implements Strategie{
             System.out.println("Veuillez entrer une strategie valide");
         }
     }
-
-    
-
 }

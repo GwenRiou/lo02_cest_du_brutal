@@ -236,6 +236,9 @@ public class Joueur {
         else if(this.userName.equalsIgnoreCase("gwen")) {
             System.out.println("... beurk degeulasse D:   ....");
         }
+        else if(this.userName.equalsIgnoreCase("yves")) {
+            System.out.println("un tres tres beau prof (donnez nous 20 nous vous supplions)");
+        }
         boolean entryIsntValid = true;
         System.out.println("Entrez votre programme:\n"
                 + "- ISI\n"

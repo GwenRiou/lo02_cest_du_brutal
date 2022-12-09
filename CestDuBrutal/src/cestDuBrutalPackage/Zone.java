@@ -22,13 +22,9 @@ public class Zone {
     public static void setZones() {
         zoneList.add(new ZoneCombat("La Bibliotheque"));
         zoneList.add(new ZoneCombat("Le BDE"));
-        
         zoneList.add(new ZoneCombat("Le Quartier Administratif"));
-        /*
-        -----------------------------------------------------------------------------------------------------Pour TESTER -------------------------------------------------
-        
         zoneList.add(new ZoneCombat("Les Halles Industrielles"));
-        zoneList.add(new ZoneCombat("La Halle Sportive"));*/
+        zoneList.add(new ZoneCombat("La Halle Sportive"));
     }
     
     public static void displayAllZones(){
