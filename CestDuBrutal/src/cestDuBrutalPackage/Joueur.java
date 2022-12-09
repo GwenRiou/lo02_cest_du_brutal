@@ -20,7 +20,6 @@ public class Joueur {
     private int points = 400;
     private Programme programme;
     private String userName;
-    //private Programme programmeBase = Programme.ISI;
     private ArrayList<Etudiant> studentList; // car on va chercher les étu par leur index
     private Reserve reserve = new Reserve();
     
@@ -218,5 +217,38 @@ public class Joueur {
 
     public void updatePoints(int pointsAenlever) {
         this.points -= pointsAenlever;
+    }
+
+
+    public void identify() {
+        this.setUserName(Partie.getUserInput("Entrez votre nom"));
+        if (this.userName.equalsIgnoreCase("xuan")) {
+            System.out.println("!! Quel beau prenom :D !!");
+        }
+        else if(this.userName.equalsIgnoreCase("gwen")) {
+            System.out.println("... beurk degeulasse D:   ....");
+        }
+        boolean entryIsntValid = true;
+        System.out.println("Entrez votre programme:\n"
+                + "- ISI\n"
+                + "- RT\n"
+                + "- A2I\n"
+                + "- GI\n"
+                + "- GM\n"
+                + "- MTE\n"
+                + "- MM\n");
+        while (entryIsntValid) {
+            try {
+                this.setProgramme(Partie.getUserInput(""));
+                entryIsntValid = false;
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println("Veuillez entrer un programme valide");
+            }
+       }
+    }
+    public void identify(String userName,Programme programme) {
+        this.setUserName(userName);
+        this.programme = programme;
     }
 }
