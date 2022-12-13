@@ -474,9 +474,9 @@ public class Partie {
 
         System.out.println("========REPARTITION DES POINTS=======");
         j1.displayAllStudent();
-        partie.repartitionPoints(j1);  
+        //partie.repartitionPoints(j1);  
         j2.displayAllStudent();
-        partie.repartitionPoints(j2); 
+        //partie.repartitionPoints(j2); 
        
         System.out.println("========MISE EN RESERVE=======");
         j1.displayAllStudent();
@@ -489,12 +489,12 @@ public class Partie {
         
         System.out.println("========DISTRIBUTION DES ETUDIANTS=======");
         
-        j1.displayAllStudent();
-        partie.affecterEtudiantZone(j1);  
-        j2.displayAllStudent();
-        partie.affecterEtudiantZone(j2);  
-        //autoAffecterEtudiantZone(j1);
-        //autoAffecterEtudiantZone(j2);
+        //j1.displayAllStudent();
+        //partie.affecterEtudiantZone(j1);  
+        //j2.displayAllStudent();
+        //partie.affecterEtudiantZone(j2);  
+        autoAffecterEtudiantZone(j1);
+        autoAffecterEtudiantZone(j2);
         Zone.displayAllStudentInZones();
        
         
