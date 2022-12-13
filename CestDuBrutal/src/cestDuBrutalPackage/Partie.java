@@ -56,7 +56,6 @@ public class Partie {
             for (ListIterator<Etudiant> it = l.listIterator(); it.hasNext();) {
                  Etudiant s = it.next();
                  if(s.getId()==id) {
-                     System.out.println("\033[0;90m"+"l'etudiant a bien ete deplace\n"+"\033[0;0m");
                      return j.getStudent(it.previousIndex()); 
                  }
             }
@@ -132,6 +131,7 @@ public class Partie {
             try {
                 Etudiant etu = selectStudent(j);
                 j.putInReserve(etu);
+                System.out.println("\033[0;90m"+"l'etudiant n#"+etu.getId()+" a bien ete deplace vers la reserve\n"+"\033[0;0m");
             }catch(StudentNotFoundInList e) {
                 System.out.print(e.getMessage());
             }
@@ -464,7 +464,12 @@ public class Partie {
                 + "=+=!!- C'EST DU BRUTAL V1.1 -!!=+="+"\033[0;0m");
         //Creation de la partie
         String debug = getUserInput("Mode automatique? (pour debug) y/n ");
-        
+        if (debug.equalsIgnoreCase("Y")) {
+            System.out.println("\033[0;90m"+"Mode automatique actif\n"+"\033[0;0m");
+        }
+        else {
+            System.out.println("\033[0;90m"+"Mode automatique inactif\n"+"\033[0;0m");
+        }
         Partie partie;
         partie = Partie.getInstance();
         partie.getConnection();// ne fonctionne que apres un getInstance 
