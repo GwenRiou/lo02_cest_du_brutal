@@ -31,7 +31,7 @@ public class Partie {
     
     // Regarde si l'objet Partie a deja un instance 
     public void getConnection() {
-        System.out.println("You now have a Partie running");
+        //System.out.println("You now have a Partie running");
     }
     
     //Ajoute 1 joueur Ã¯Â¿Â½ la partie
@@ -52,10 +52,13 @@ public class Partie {
     public Etudiant selectStudent(Joueur j)throws StudentNotFoundInList{
         
             ArrayList<Etudiant>  l= j.getStudentList();       
-            int id = getUserInputInt("Entez le numero d'un etudiant");     
+            int id = getUserInputInt("Entrez le numero d'un etudiant");     
             for (ListIterator<Etudiant> it = l.listIterator(); it.hasNext();) {
                  Etudiant s = it.next();
-                 if(s.getId()==id) return j.getStudent(it.previousIndex());            
+                 if(s.getId()==id) {
+                     System.out.println("\033[0;90m"+"l'etudiant a bien ete deplace\n"+"\033[0;0m");
+                     return j.getStudent(it.previousIndex()); 
+                 }
             }
             throw new StudentNotFoundInList();          
     }
@@ -92,7 +95,12 @@ public class Partie {
                     
                     choix=5;
                     while(choix==5 ) {
-                        choix = getUserChoix("Pour continuer a modifier l'etudiant 1! Changer la strategie de l'etudiant 2! Passer a l'etudiant suivante 3!  A l'etape suivante 4! Affichier tous les etudiants 5! ",5);
+                        choix = getUserChoix(""
+                                + "1. Continuer a modifier l'etudiant\n"
+                                + "2. Changer la strategie de l'etudiant\n"
+                                + "3. Passer a l'etudiant suivant\n"
+                                + "4. Passer a l'etape suivante\n"
+                                + "5. Affichier tous les etudiants",5);
                         if (choix==5) {j.displayAllStudent();}
                         if (choix==2) {
                             try {
@@ -118,7 +126,7 @@ public class Partie {
     
  // Mise en reserve
     public void putInReserve(Joueur j) {
-        System.out.print(j.getUserName()+": Selectioner les etudiants a mettre dans la reserve \n");
+        System.out.print("\n"+"\033[0;1m"+j.getUserName()+": Selectionnez les 5 etudiants a mettre dans la reserve \n"+"\033[0;0m");
         while(j.getReserveArrayList().size()<5) {
                
             try {
@@ -331,36 +339,33 @@ public class Partie {
        
         while(treve!=null) {// si la treve est en cour
             
-            System.out.println(zone.getZoneName() + "est en pause la treve est en cours");
+            System.out.println(zone.getZoneName() + "declenche la treve");
             this.wait();
         }
         if(etatDeControle.equalsIgnoreCase("0")) {// si la zone est controlee
             
             System.out.println("La treve est en cours car cette zone " + Thread.currentThread().getName() + " a fini son combat\n\n");
             treve=etatDeControle;//
-            
-            System.out.println("On appel la treve");
+       
             treve(gagnantTreve,zone); // --------------------------------ajout de la treve
-        }
-                 
+        }       
     }
     
     public void treve(Joueur gagnantTreve, ZoneCombat zone) {
         
         this.finDePartie = Zone.FinDePartie();
-        System.out.println("------La partie est-elle finie ? "+(finDePartie));
         
         if(finDePartie==false) {
             treve=null; // premier trucs
-            System.out.println("C'est la treve ");// on pourra l'enlevé
+            System.out.println("\033[0;1m"+"==TREVE: UNE ZONE A ETE CONTROLEE=="+"\033[0;0m");// on pourra l'enlevé
             int input = 0;
             while (!(input == 4)) {
                 //trucs de la treve
-                input = getUserChoix(gagnantTreve.getUserName()+": Que voulez-vous faire? (entrez 1-4)\n"
-                        + "1. Affecter des etudiants des zones controlees\n"
-                        + "2. Affecter des reservistes sur des zones de combat\n"
-                        + "3. Visualiser le nombre de points ECTS par zone de combat\n"
-                        + "4. Continuer la bataille",4);
+                input = getUserChoix("\033[0;1m\033[096m"+gagnantTreve.getUserName()+"\033[0;0m\033[0;1m: Que voulez-vous faire? (entrez 1-4)\n"
+                        + "\033[0;31m1.\033[0;1m Affecter des etudiants des zones controlees\n"
+                        + "\033[0;31m2.\033[0;1m Affecter des reservistes sur des zones de combat\n"
+                        + "\033[0;31m3.\033[0;1m Visualiser le nombre de points ECTS par zone de combat\n"
+                        + "\033[0;31m4.\033[0;1m Continuer la bataille\033[0;0m",4);
                 switch(input) {
                     case 1:
                         affecterEtudiantPendantTreve(gagnantTreve);
@@ -385,7 +390,7 @@ public class Partie {
         }
     }
     public static void autoAffecterEtudiantZone(Joueur j) {
-        System.out.println("========AutoAffect:"+j.getUserName()+"=======");
+        System.out.println("Distribution automatique des etudiants de:"+j.getUserName()+"est effectuee");
         int i = 0;
         while (j.getStudentList().size()!=1) {
             i++;
@@ -395,15 +400,16 @@ public class Partie {
             toZone.getEtuDansZoneArrayList().add(studentToMove);
             studentToMove.setIsInZone(toZone);
             j.getStudentList().remove(studentToMove);
-            System.out.println("AutoAffect vers:" + studentToMove.getIsInZone().getZoneName());
+            //System.out.println("AutoAffect vers:" + studentToMove.getIsInZone().getZoneName());
         }
     }
     //Methodes pour Lire les inputs
     public static String getUserInput(String message) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println(message);
+        System.out.println(message+"\033[0;91m");
         
         String userInput = myObj.nextLine();  // Read user input
+        System.out.println("\033[0;0m");
         return userInput;  // Output user input
     }
     
@@ -454,8 +460,11 @@ public class Partie {
     
     //THE MAIN
     public static void main(String[] args) {
-        System.out.println("=+=!!- C'EST DU BRUTAL V1.0 -!!=+=");
-        //CrÃƒÂ©ation de la partie
+        System.out.println("\033[0;1m"+"note: Ce code utilise des couleurs format ANSI, utilisation d'Eclipse est reccomendee\n"
+                + "=+=!!- C'EST DU BRUTAL V1.1 -!!=+="+"\033[0;0m");
+        //Creation de la partie
+        String debug = getUserInput("Mode automatique? (pour debug) y/n ");
+        
         Partie partie;
         partie = Partie.getInstance();
         partie.getConnection();// ne fonctionne que apres un getInstance 
@@ -469,16 +478,26 @@ public class Partie {
         System.out.println("Le joueur 1 s'appelle " +j1.getUserName());   
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
         
-        j1.createStudentList();
-        j2.createStudentList();
-
-        System.out.println("========REPARTITION DES POINTS=======");
-        j1.displayAllStudent();
-        //partie.repartitionPoints(j1);  
-        j2.displayAllStudent();
-        //partie.repartitionPoints(j2); 
+        
+        
+        System.out.println("\033[0;1m"+"========REPARTITION DES POINTS======="+"\033[0;0m");
+        if (debug.equalsIgnoreCase("Y")){
+            System.out.println("> La repartition est automatique");
+            j1.autoCreateStudentList();
+            j2.autoCreateStudentList();
+        }
+        else {
+            j1.createStudentList();
+            j2.createStudentList();
+            
+            j1.displayAllStudent();
+            partie.repartitionPoints(j1);  
+            j2.displayAllStudent();
+            partie.repartitionPoints(j2); 
+        }
        
-        System.out.println("========MISE EN RESERVE=======");
+        System.out.println("\033[0;1m"+"========MISE EN RESERVE======="+"\033[0;0m");
+        
         j1.displayAllStudent();
         partie.putInReserve(j1);
         j1.displayReserveStudent();
@@ -487,17 +506,23 @@ public class Partie {
         partie.putInReserve(j2); 
         j2.displayReserveStudent();
         
-        System.out.println("========DISTRIBUTION DES ETUDIANTS=======");
+        System.out.println("\033[0;1m"+"========DISTRIBUTION DES ETUDIANTS======="+"\033[0;0m");
         
-        //j1.displayAllStudent();
-        //partie.affecterEtudiantZone(j1);  
-        //j2.displayAllStudent();
-        //partie.affecterEtudiantZone(j2);  
-        autoAffecterEtudiantZone(j1);
-        autoAffecterEtudiantZone(j2);
+        
+        if (debug.equalsIgnoreCase("Y")) {
+            autoAffecterEtudiantZone(j1);
+            autoAffecterEtudiantZone(j2);
+        }
+        else {
+          j1.displayAllStudent();
+          partie.affecterEtudiantZone(j1);  
+          j2.displayAllStudent();
+          partie.affecterEtudiantZone(j2);  
+        }
+        
         Zone.displayAllStudentInZones();
        
-        
+        String empty = getUserInput("\n---"+"\033[0;1m"+"Appuyez sur entree pour proceder a la melee"+"\033[0;1m"+"---");
         Zone.melee();        
         System.out.println("exit(0)");
     }

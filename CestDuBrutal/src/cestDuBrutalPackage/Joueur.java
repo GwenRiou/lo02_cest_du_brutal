@@ -54,6 +54,30 @@ public class Joueur {
         setIdForArmy();
        
     }
+public void autoCreateStudentList() {
+        
+        // creer le maiter du gobit
+        Etudiant etuMaitre = new Etudiant("Maitre",this);
+        studentList.add(etuMaitre);
+        
+        //crer les soldats élites
+        for(int i=0 ; i < 4; i++){
+            Etudiant etuElite = new Etudiant("Elite",this);
+            studentList.add(etuElite);            
+        }
+        
+        //creer lest étudiants de basse==================disabled for debug======================
+        
+        for(int i=0 ; i < 15; i++){
+            Etudiant etuNormal = new Etudiant("Base",this);
+            studentList.add(etuNormal);            
+        }
+        
+
+        setIdForArmy();
+       
+    }
+    
     private void setIdForArmy() {// parcourt la liste et seID des étudiants
         for (ListIterator<Etudiant> it = studentList.listIterator(); it.hasNext();) {
              Etudiant s = it.next();
@@ -231,13 +255,17 @@ public class Joueur {
     public void identify() {
         this.setUserName(Partie.getUserInput("Entrez votre nom"));
         if (this.userName.equalsIgnoreCase("xuan")) {
-            System.out.println("!! Quel beau prenom :D !!");
+            System.out.println("\033[0;90m" +
+                                "!! Quel beau prenom :D !!" +
+                                "\033[0;0m");
         }
         else if(this.userName.equalsIgnoreCase("gwen")) {
-            System.out.println("... beurk degeulasse D:   ....");
+            System.out.println("\033[0;90m"+
+                                "... beurk degeulasse D:   ...." +
+                                "\033[0;0m");
         }
         else if(this.userName.equalsIgnoreCase("yves")) {
-            System.out.println("un tres tres beau prof (donnez nous 20 nous vous supplions)");
+            System.out.println("\033[0;90m"+"(un tres tres beau prof)"+"\033[0;0m");
         }
         boolean entryIsntValid = true;
         System.out.println("Entrez votre programme:\n"

@@ -160,7 +160,7 @@ public class Zone {
             if(zoneTemp.getControleZone()==ControleZone.CONTROLEPARJOUEUR2) {numZoneControlByPlayer2++;};
         }
         System.out.println("Le nombre de zone controle par j1 = "+ numZoneControlByPlayer1);
-        System.out.println("Le nombre de zone controle par j2 = "+ numZoneControlByPlayer2);
+        System.out.println("Le nombre de zone controle par j2 = "+ numZoneControlByPlayer2+"\n");
         if(numZoneControlByPlayer1>=numZoneToEndGame) {
             System.out.println( Partie.getNamePlayer(1) +" a gagne");
             return true;
@@ -177,7 +177,7 @@ public class Zone {
 
     public void displayEtudiantDansZoneList() {
         ArrayList<Etudiant>  etulist= this.etuDansZone;
-        System.out.println("\n==Etudiants dans "+this.zoneName+":==");
+        System.out.println("\033[0;1m"+"\n==Etudiants dans "+this.zoneName+":=="+"\033[0;0m");
         for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //scan through all students
             Etudiant s = it.next();
             System.out.println(s);//use the tostring method to print the student's ids

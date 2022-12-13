@@ -25,6 +25,19 @@ public class Etudiant implements Strategie{
             int resistance, int constitution, int initiative,Joueur idJoueur) {
         this.type = type;
         this.ects = ects;
+        this.force = force;
+        this.dexterite = dexterite;
+        this.resistance = resistance;
+        this.constitution = constitution;
+        this.initiative = initiative; //debug line
+        this.belongsTo = idJoueur;
+        this.strategie = enumStrategie.RANDOM;
+        this.isInZone = new Zone("le camion");
+    }
+    
+    public Etudiant(String type,Joueur idJoueur) {
+        this.type = type;
+        this.ects = ects;
         this.force = (int) (Math.random()*10);
         this.dexterite = (int) (Math.random()*20);
         this.resistance = (int) (Math.random()*20);
@@ -103,10 +116,10 @@ public class Etudiant implements Strategie{
         int damageTaken = (int) ((y*(1+damageCoefficient))*damageReference);        
         if (x>0 && x<(40 + 3*this.dexterite)) {
             target.ects -= damageTaken;
-            System.out.println(this.belongsTo.getUserName()+" : "+this.getId()+" attacks "+target.id+", dealing "+ damageTaken + "HP");
+            System.out.println("\033[0;90m"+this.belongsTo.getUserName()+" : "+this.getId()+" attacks "+target.id+", dealing "+ damageTaken + "HP"+"\033[0;0m");
         }
         if (target.ects <= 0) {//kill student
-            System.out.println(target.belongsTo.getUserName()+"'s etu #"+target.getId()+" was killed by"+this.id);//
+            System.out.println("\033[0;90m"+target.belongsTo.getUserName()+"'s etu #"+target.getId()+" was killed by"+this.id+"\033[0;0m");//
             target.isInZone.getEtuDansZoneArrayList().remove(target);
             //=====count number of players alive
             
@@ -155,7 +168,7 @@ public class Etudiant implements Strategie{
             }
         }
         //healing...
-        System.out.println(this.belongsTo.getUserName()+" : "+this.id+" Tente de soigner");
+        System.out.println("\033[0;90m"+this.belongsTo.getUserName()+" : "+this.id+" Tente de soigner"+"\033[0;0m");
         int healAmount;
         int x = (int) (Math.random()*100);
         double y = Math.random()*0.6;//0<y<0,6
@@ -168,9 +181,8 @@ public class Etudiant implements Strategie{
                 healAmount = 30 + this.constitution;
                 target.ects += healAmount;
             }
-            System.out.println("etu #"+target.getId()+" Got healed "+healAmount+" HP!");
+            System.out.println("\033[0;90m"+"etu #"+target.getId()+" Got healed "+healAmount+" HP!"+"\033[0;0m");
         }
-        System.out.println(this.id+"");
     } 
     
     public void agir() {
