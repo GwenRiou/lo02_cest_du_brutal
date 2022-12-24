@@ -3,7 +3,11 @@ package cestDuBrutalPackage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
-
+/**
+ * zone de combat dans laquelle se trouve les etudiants en combat
+ * @author boone
+ *
+ */
 public class ZoneCombat extends Zone implements Runnable{
 
     private ControleZone controleZone; // il renplacera la deuxieme ligne // CONTROLEPARJOUEUR1,CONTROLEPARJOUEUR2,DISPUTE;

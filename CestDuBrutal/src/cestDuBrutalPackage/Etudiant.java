@@ -1,26 +1,71 @@
 package cestDuBrutalPackage;
 import java.lang.Math;
 import java.util.*;
-
+/**
+ * Classe etudiant, qui va combattre dans les zones
+ * @author boone
+ * @implNote Implemente les methodes de {@link Strategie}
+ */
 public class Etudiant implements Strategie{
     
-	
+	/**
+	 * Type de l'etudiant, maitre du gobi, elite ou etudiant
+	 */
     private String type;
+    /**
+     * id de l'etudiant, pour le reperer
+     */
     private int id;
+    /**
+     * points de vie de l'etudiant
+     */
     private int ects=30;
+    /**
+     * statistique de force au combat
+     */
     private int force;
+    /**
+     * Plus il est eleve, plus letudiant a une grande chance d'accomplir son action
+     */
     private int dexterite;
+    /**
+     * Capacite a letudiant de prendre moins de dommages d'attaque d'un autre etudiant
+     */
     private int resistance;
+    /**
+     * plus il est eleve, plus il peut etre soigne facilement
+     */
     private int constitution;
+    /**
+     * L'etudiant avec l'initiative la plus grande agit en premier
+     */
     private int initiative;
-    
+    /*
+     * permet d'apeller le joueur auquel l'etudiant appartient
+     */
     private Joueur belongsTo ; // set 1 pour j1 et set � 2 pour j2
+    /**
+     * permet d'apeller la zone dans laquelle l'etudiant se situe
+     */
     private Zone isInZone;
+    /**
+     * Strategie de l'etudiant, une enumeration de {@link enumStrategie}
+     */
     private enumStrategie strategie;
     
 
     // constructeur 
     //ects = 30 pour tous les �tudiants donc pas dans l'appel construction
+    /**
+     * Constructeur manuelle de la classe
+     * @param type Type de l'etudiant, maitre du gobi, elite ou etudiant
+     * @param force Plus il est eleve, plus letudiant a une grande chance d'accomplir son action
+     * @param dexterite Plus il est eleve, plus letudiant a une grande chance d'accomplir son action
+     * @param resistance Capacite a letudiant de prendre moins de dommages d'attaque d'un autre etudiant
+     * @param constitution plus il est eleve, plus il peut etre soigne facilement
+     * @param initiative L'etudiant avec l'initiative la plus grande agit en premier
+     * @param idJoueur Le joueur auquel l'etudiant appartient
+     */
     public Etudiant(String type, int force, int dexterite, 
             int resistance, int constitution, int initiative,Joueur idJoueur) {
         this.type = type;
@@ -34,7 +79,11 @@ public class Etudiant implements Strategie{
         this.strategie = enumStrategie.RANDOM;
         this.isInZone = new Zone("le camion");
     }
-    
+    /**
+     * Constructeur automatique de la classe
+     * @param type Type de l'etudiant, maitre du gobi, elite ou etudiant
+     * @param idJoueur le joueur auquel l'etudiant appartient
+     */
     public Etudiant(String type,Joueur idJoueur) {
         this.type = type;
         this.ects = ects;
@@ -49,11 +98,16 @@ public class Etudiant implements Strategie{
     }
     
     
-
+    /**
+     * instantie un etudiant 
+     */
     public Etudiant() {
         
     }
     
+    /*
+     * affiche les statistiques de l'etudiant
+     */
     public String toString() {
         StringBuffer sb = new StringBuffer ("L'Etudiant n# ");
         sb.append(this.id);
@@ -81,11 +135,17 @@ public class Etudiant implements Strategie{
     }
     
     
-
+    /**
+     * affiche les caracteristiques d'un etudiant, presque equivalent a tostring
+     */
     public void displayCaracteristics(){
         System.out.println(getType()+getEcts()+getForce()+getDexterite()+getResistance()+getConstitution()+getInitiative()+getStrategieString());
     }
-
+    
+    /**
+     * Tente d'attaquer un etudiant de l'autre joueur. Tue l'etudiant si l'autre n'a plus de vie, et declenche une treve lorsqu'il n'y a plus aucun etudiant de l'autre joueur dans la zones
+     * @param zone permet d'appeler la zone pour compter le nombre d'etudiants dans la zone
+     */
     private void attack(ZoneCombat zone) {//only attack student inside zone
         
         ArrayList<Etudiant> enemyTeam = new ArrayList<Etudiant>();
@@ -147,7 +207,10 @@ public class Etudiant implements Strategie{
         }   
         
     } 
-    
+    /**
+     * permet aux etudiants de soigner un autre etudiant du meme joueur en fonction de ses caracteristiques
+     * @param zone soigne seulement les etudiants dans cette zone
+     */
     private void heal(Zone zone) {//only attack student inside zone
         ArrayList<Etudiant> allyTeam = new ArrayList<Etudiant>();
         Iterator<Etudiant> it = zone.getEtuDansZoneArrayList().iterator();
@@ -184,7 +247,9 @@ public class Etudiant implements Strategie{
             System.out.println("\033[0;90m"+"etu #"+target.getId()+" Got healed "+healAmount+" HP!"+"\033[0;0m");
         }
     } 
-    
+    /**
+     * attaque ou soigne en fonction de la strategie de l'etudiant
+     */
     public void agir() {
         if (this.strategie == strategie.OFFENSIVE) {
             attack((ZoneCombat)this.isInZone);

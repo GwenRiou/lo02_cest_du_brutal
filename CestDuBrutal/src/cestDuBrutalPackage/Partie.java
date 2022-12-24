@@ -1,24 +1,45 @@
 package cestDuBrutalPackage;
 import java.util.*;
 
+/**
+ * Classe partie
+ * Contient le main principal
+ * @author boone, riou
+ *
+ */
 public class Partie {
+    /**
+     * est utilisé pour appeler l'ojet Partie, utile pour récupérer la liste des joueurs
+     */
     private static Partie partieObject;
-    
-    private int etape;
+    /**
+     * Permet de savoir si la treve est declenchee
+     */
     private String treve;
-    private boolean finDePartie;    
+    /**
+     * Permet de savoir si la fin de la partie est déclenchée
+     */
+    private boolean finDePartie;   
+    /**
+     * Une liste qui contient les joueurs. Le jeu est optimisé pour l'utilisation de seulement deux joueurs. il est facilement possible d'étendre l'utilisation de plusieurs joueurs.
+     */
     private static ArrayList<Joueur> listJ;
     
         
-
+    /**
+     * Instancie l'objet partie.
+     */
     private Partie(){ // constructeur en Private car singleton Et pas en void :)
-        this.etape=0;
         this.finDePartie= false;
         this.listJ = new ArrayList<Joueur>();    
         this.treve=null;
     }
     
-    public static Partie getInstance() { //--> mÃƒÂ©thode qui va appeler le constructeur si besoin
+    /**
+     * methode qui va appeler le constructeur lorsque l'on a besoin
+     * @return retourne l'instance de la partie active
+     */
+    public static Partie getInstance() {
         
         //create object if it's not already created
         if(partieObject == null) {
@@ -29,18 +50,25 @@ public class Partie {
         return partieObject;
     }
     
-    // Regarde si l'objet Partie a deja un instance 
+    /**
+     * Regarde si l'objet Partie a deja ete instanciee, elle n'est plus utile.
+     */
     public void getConnection() {
         //System.out.println("You now have a Partie running");
     }
     
-    //Ajoute 1 joueur Ã¯Â¿Â½ la partie
+    /**
+     * instancie un nouveau joueur et l'ajoute a la liste des joueurs
+     */
     public void addPlayer(Joueur joueur){
         System.out.println("--Creation dun nouveau joueur--");
         listJ.add(joueur);
         joueur.identify();
     }
     
+    /*
+     * Methode qui instancie les joueurs automatiquement, il les ajoute a la liste des joueurs
+     */
     public void autoAddPlayers(Joueur j1,Joueur j2){
         System.out.println("--AutoAddPlayersV2.0 IS INITIALIZING, STAND BACK!!!--");
         listJ.add(j1);
@@ -49,6 +77,13 @@ public class Partie {
         j2.identify("Gwen",Programme.A2I);
         
     }
+    
+    /**
+     * Permet au joueur de choisir un etudiant parmi une liste en fonction de leur ID
+     * @param j joueur pour concerner seulement les etudiants d'un joueur
+     * @return retourne le joueur choisi
+     * @throws StudentNotFoundInList erreur lancee lorsqu'aucun etudiant n'est trouvé dans la liste
+     */
     public Etudiant selectStudent(Joueur j)throws StudentNotFoundInList{
         
             ArrayList<Etudiant>  l= j.getStudentList();       
@@ -61,7 +96,12 @@ public class Partie {
             }
             throw new StudentNotFoundInList();          
     }
-    
+    /**
+     * Permet au joueur de choisir une zone parmi une liste en fonction de leur nom
+     * @param id ID de la zone concernée (nom de la zone)
+     * @return retourne la zone choisie
+     * @throws ZoneNotFoundInList erreur lancee lorsqu'aucune zone n'est trouvé dans une liste
+     */
     public Zone selectZone(String id)throws ZoneNotFoundInList{
         
         ArrayList<ZoneCombat>  l= Zone.getZoneList();
@@ -440,9 +480,7 @@ public class Partie {
            
     
     //setter & getter
-    public void setEtape(int etape) {
-        this.etape=etape;
-    }
+    
     
     public ArrayList<Joueur> getListJ() {
         return listJ;
@@ -454,9 +492,6 @@ public class Partie {
         this.listJ = listJ;
     }
 
-    public int getEtape() {
-        return this.etape;
-    }
     
     //THE MAIN
     public static void main(String[] args) {

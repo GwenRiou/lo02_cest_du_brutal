@@ -1,10 +1,10 @@
 package cestDuBrutalPackage;
 import java.util.*;
 
-/**
- * 
- * @author rioug
- *         Tester si le joueur 2 à un le même nom que le joueur 1 avant de
+
+
+/*
+ * Tester si le joueur 2 à un le même nom que le joueur 1 avant de
  *         l'autoriser le nom
  *         Implémentation:
  *         création d’un variable static qui compte le nombre de joueur
@@ -14,6 +14,10 @@ import java.util.*;
  *         si c’est le joueur 1 on autorise tout --> appel de la fonction setter
  *         si c’est le joueur 2 --> regarde si le nom du joueur 1 à le même nom et
  *         si oui on demande un autre non si non on appel setter
+ */
+/**
+ * Classe joueur, chaque joueur a ses etudiants, qui combattent dans les zones 
+ *         @author rioug
  * 
  */
 public class Joueur {
@@ -24,13 +28,19 @@ public class Joueur {
     private ArrayList<Etudiant> studentList; // car on va chercher les étu par leur index
     private Reserve reserve = new Reserve();
     
+    /**
+     * constructeur du joueur
+     * @param id Permet de distinguer joueur 1 et 2 lors du debug
+     */
     public Joueur(int id) {
         this.id=id;
         this.points = points;
         this.userName = "";
         this.studentList = new ArrayList <Etudiant>();        
     }
-    
+    /**
+     * cree la liste d'etudiant (le camion) dans laquelle le joueur peut gerer, modifier et affecter ses etudiants
+     */
     public void createStudentList() {
         
         // creer le maiter du gobit
@@ -54,6 +64,9 @@ public class Joueur {
         setIdForArmy();
        
     }
+    /**
+     * creer la liste des etudiants, differe de {@link #createStudentList()} avec le fait qu'il cree automatiquement tous les etudiants sans avoir besoin de les modifier manuellement
+     */
 public void autoCreateStudentList() {
         
         // creer le maiter du gobit
@@ -77,14 +90,19 @@ public void autoCreateStudentList() {
         setIdForArmy();
        
     }
-    
-    private void setIdForArmy() {// parcourt la liste et seID des étudiants
+    /**
+     * parcourt la liste et set les ID de chaque étudiant
+     * 
+     */
+    private void setIdForArmy() {
         for (ListIterator<Etudiant> it = studentList.listIterator(); it.hasNext();) {
              Etudiant s = it.next();
              s.setId(it.previousIndex()+1);            
         }
     }
-    
+    /**
+     * affiche la liste de tous les etudiants dans le camion / l'inventaire de ce joueur avant l'affection aux zones
+     */
     public void displayAllStudent() {
         System.out.println("Etudiants de: "+this.userName);
         ListIterator<Etudiant> iter = studentList.listIterator();
@@ -104,13 +122,23 @@ public void autoCreateStudentList() {
         }
     }
     
-    // return l'étudiant choisit
+    /**
+     * return l'étudiant choisi
+     * @param index index de l'etudiant donne par l'iterator
+     * @return retourne l'etudiant choisi
+     */
     public Etudiant getStudent(int index) {
         Etudiant etu = studentList.get(index);
         return etu;
     }
     
-    
+    /**
+     * permet de modifier les caracteristiques d'un etudiant choisi
+     * @param etu Etudiant a modifier
+     * @param car caracteristique a changer
+     * @param pointsAttribuee points a attribuer a la caracteristique
+     * @return 0 si erreur, 1 si ca a fonctionne
+     */
     public int modifyCharacteristics(Etudiant etu,String car, int pointsAttribuee) {   
         // methode retourne 0 si on ne peut pas faire la modification
         if (pointsAttribuee>this.points) {
@@ -175,15 +203,23 @@ public void autoCreateStudentList() {
         }
     }
     
-    // Mise en reserve
+    /**
+     * Mise en reserve d'un etudiant
+     * @param etu etudiant a mettre en reserve
+     */
     public void putInReserve(Etudiant etu) {
         this.studentList.remove(etu);// Enleve l'etudiant de la liste 
         reserve.affecterReserve(etu);
     }
-    //remove student from list
+    /**
+     * retire l'etudiant de la liste
+     */
     public void removeStudentFromList(Etudiant etu) {
         this.studentList.remove(etu);
     }
+    /**
+     * Tostring du joueur, affiche son programme et ses points a distribuer
+     */
     public String toString() {
         StringBuffer sb = new StringBuffer ("Le Joueur ");
         sb.append(this.userName);
@@ -199,21 +235,28 @@ public void autoCreateStudentList() {
 
 
     // --------------------------------Getter & Setter--------------------------------
+    /**
+     * getter de {@link #studentList}
+     */
     public ArrayList<Etudiant> getStudentList() {
         return studentList;
     }
 
-    public void setStudentList(ArrayList<Etudiant> studentList) {
-        this.studentList = studentList;
-    }
-    
+    /**
+     * getter de {@link #points}
+     * @return
+     */
     public int getPoints() {
         return points;
     }
-
+    
     public void setPoints(int points) {
         this.points = points;
     }
+    /**
+     * getter de {@link #id}
+     * @return
+     */
     public int getId() {
         return id;
     }
@@ -243,15 +286,25 @@ public void autoCreateStudentList() {
     public void setUserName(String userName) {//jai mis déprécié pour l'identification fonctionnelle  mais on peut tjrs utiliser pour le nom du joueur :D
         this.userName = userName;
     }
+    /**
+     * retourne la liste des etudiants dans la reserve
+     * @return 
+     */
     public ArrayList<Etudiant> getReserveArrayList() {
         return reserve.getListeEtudiantsReserve();
     }
-
+    
+    /**
+     * enleve les points en fonction des modifiations du joueur
+     * @param pointsAenlever nombre de points a enlever
+     */
     public void updatePoints(int pointsAenlever) {
         this.points -= pointsAenlever;
     }
 
-
+    /**
+     * identification du joueur, et instanciation, affiche un message personnalise en fonction du nom
+     */
     public void identify() {
         this.setUserName(Partie.getUserInput("Entrez votre nom"));
         if (this.userName.equalsIgnoreCase("xuan")) {
@@ -261,7 +314,7 @@ public void autoCreateStudentList() {
         }
         else if(this.userName.equalsIgnoreCase("gwen")) {
             System.out.println("\033[0;90m"+
-                                "... beurk degeulasse D:   ...." +
+                                "un autre beau prenom ;)" +
                                 "\033[0;0m");
         }
         else if(this.userName.equalsIgnoreCase("yves")) {
@@ -286,9 +339,18 @@ public void autoCreateStudentList() {
             }
        }
     }
+    /**
+     * identie le joueur instantanement
+     * @param userName nom du joueur
+     * @param programme programme du joueur
+     */
     public void identify(String userName,Programme programme) {
         this.setUserName(userName);
         this.programme = programme;
     }
+    /**
+     * permet de recuperer l'instance de la reserve
+     * @return
+     */
     public Reserve getReserve() {return reserve;}
 }
