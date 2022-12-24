@@ -17,7 +17,11 @@ public class ZoneCombat extends Zone implements Runnable{
     Thread t ;
     int numAction;
     
-
+    
+    /**
+     * Constructeur de la zone de combat, initialise un nouveau thread pour le multithreading
+     * @param name
+     */
     public ZoneCombat(String name) {
         super(name);
         this.controleZone=ControleZone.DISPUTE;
@@ -25,20 +29,32 @@ public class ZoneCombat extends Zone implements Runnable{
         t = new Thread(this, name);
         numAction=0;
     }
-    
+
+    /**
+     * active les threads
+     */
     public void combat() {
         String nom = getZoneName();
         t.start();
     }
-    
+
+    /**
+     * interrompt les theads si besoin
+     */
     public void interrupted() {          
             t.interrupt();
     }
-    
+
+    /**
+     * Trie la liste des etudiants dans la zone de combat
+     */
     public void initialiser() {
         this.sortStudentList(etuDansZone);
     }
-    
+
+    /**
+     * Augmente la force de tout le monde lorsque la bataille se deroule pendant trop longtemps
+     */
     public void frenesie() {
         System.out.println("######################################################################################################");
         System.out.println("                                         FRENESIE                                                     ");
@@ -48,10 +64,13 @@ public class ZoneCombat extends Zone implements Runnable{
             Etudiant etu = it.next();
             etu.setStrategie("OFFENSIVE");
             etu.setForce(etu.getForce()+100);
-        }
-        
+        }   
     }
-            
+    
+    /**
+     * chaque zone fait agir letudiant en haut de la liste, puis le deplace vers la fin lorsqu'il a fini d'agir.
+     * repete cette action jusque lorsqu'un etudiant tue le dernier etudiant de la zone, ou si une autre zone se fait controler        
+     */
     public void run() {
         initialiser();
         int i = 0;
@@ -88,6 +107,11 @@ public class ZoneCombat extends Zone implements Runnable{
         }
     }
     
+    /**
+     * verifie s'il existe au moins un etudiant dans la zone appartenant au joueur 2
+     * @param j
+     * @return
+     */
     public boolean zoneWithTwoEtu(Joueur j) {
         Iterator<Etudiant> it =etuDansZone.iterator();
         while(it.hasNext()){
@@ -96,7 +120,10 @@ public class ZoneCombat extends Zone implements Runnable{
         }
         return false;
     }
-
+    
+    /**
+     * Affiche le nombre total de points ECTS dans cette zone.
+     */
     public void displayECTS() {
         ArrayList<Etudiant>  etulist= this.etuDansZone;
         int nbECTS=0;
@@ -115,10 +142,27 @@ public class ZoneCombat extends Zone implements Runnable{
 
     
     //getters
+    /**
+     * getter de {@link #controleZone}
+     * @return {@link #controleZone}
+     */
     public ControleZone getControleZone() {return this.controleZone;}
+    /**
+     * apelle le joueur qui controle la zone
+     * @return {@link #controlePar}
+     */
     public Joueur getControlePar() {return controlePar;}
     //setters
+    /**
+     * setter de {@link #controleZone}
+     * @param control l'enumeration a remplacer {@link #controleZone}
+     * @param j le joueur qui controle la zone
+     */
     public void setControleZone(ControleZone control,Joueur j) {this.controleZone = control;this.controlePar = j;}
+    /**
+     * setter de {@link #controlePar}
+     * @param controlePar Joueur qui controle la zone
+     */
     public void setControlePar(Joueur controlePar) {this.controlePar = controlePar;}
 
 }

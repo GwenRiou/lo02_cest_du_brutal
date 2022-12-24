@@ -115,7 +115,13 @@ public class Partie {
         throw new ZoneNotFoundInList();          
     }
     
-    
+    /**
+     * Le joueur repartit les points a ses etudiants: il choisit l'etudiant a modifier, et modifie:
+     * - la caracteristique a modifier
+     * - le nombre de points a atribuer
+     * Retourne une erreur lorsque l'etudiant n'est pas trouve
+     * @param j joueur qui attribue les points
+     */
     public void repartitionPoints(Joueur j) {
         System.out.println("Vous allez pouvoir attribuer vos points a vos etudiants. ");        
         int choix=-1;
@@ -164,6 +170,10 @@ public class Partie {
     }
     
  // Mise en reserve
+    /**
+     * mise en reserve de quatre etudiants apres la repartition des points
+     * @param j joueur qui possede les etudiants a mettre dans la reserve. il exite une reserve par joueur
+     */
     public void putInReserve(Joueur j) {
         System.out.print("\n"+"\033[0;1m"+j.getUserName()+": Selectionnez les 5 etudiants a mettre dans la reserve \n"+"\033[0;0m");
         while(j.getReserveArrayList().size()<5) {
@@ -178,7 +188,12 @@ public class Partie {
         }
     }
     
-   //Mise en zones
+   /**
+    * affectation des etudiants dans la zone:
+    * tant qu'il n'y a pas de zone vide / au moins un etudiant de chaque joueur y est, on affecte un etudiant a une zone choisie par le joueur depuis le camion
+    * retourne une erreur lorsuqe la zone choisie n'existe pas ou lorsque l'etudiant choisi n'existe pas / n'est pas dans la liste
+    * @param j
+    */
     public void affecterEtudiantZone(Joueur j) {
         boolean condition=false;
         if(j.getId()==1) condition=Zone.allZoneNotEmpty();// condidtion pour que le j1 a un etu dasn chaque zone 
