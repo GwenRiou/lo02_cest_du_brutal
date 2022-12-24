@@ -38,7 +38,7 @@ public class Reserve extends Zone {
      * @param etudiant
      */
     public void removeReserve(Etudiant etudiant) {
-        this.etuDansZone.remove(etudiant); 
+        this.etuDansZone.remove(etudiant);
     }
   //Getter & setter
     /**
