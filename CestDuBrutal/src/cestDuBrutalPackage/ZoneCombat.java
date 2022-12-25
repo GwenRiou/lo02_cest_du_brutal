@@ -20,7 +20,7 @@ public class ZoneCombat extends Zone implements Runnable{
     
     /**
      * Constructeur de la zone de combat, initialise un nouveau thread pour le multithreading
-     * @param name
+     * @param name nom de la zone de combat, nommera la thread dans laquelle elle est activee
      */
     public ZoneCombat(String name) {
         super(name);
@@ -109,8 +109,8 @@ public class ZoneCombat extends Zone implements Runnable{
     
     /**
      * verifie s'il existe au moins un etudiant dans la zone appartenant au joueur 2
-     * @param j
-     * @return
+     * @param j joueur 2
+     * @return retourne un booleen, true s'il existe au moins un etudiant appartenant au joueur 2, false sinon 
      */
     public boolean zoneWithTwoEtu(Joueur j) {
         Iterator<Etudiant> it =etuDansZone.iterator();

@@ -5,7 +5,10 @@ package cestDuBrutalPackage;
  *
  */
 public class ZoneNotFoundInList extends Exception{
+    /**
+     * affiche le message que la zone n'existe pas
+     */
     public ZoneNotFoundInList() {
-        super("Cette zone n'existe pas.");//TODO changer cette phrase elle est moche
+        super("Cette zone n'existe pas.");
     }
 }

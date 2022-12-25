@@ -6,7 +6,10 @@ package cestDuBrutalPackage;
  *
  */
 public class StudentNotFoundInList extends Exception{
-    public StudentNotFoundInList() {
+    /**
+     * message affiche lorsqu'il y a l'erreur
+     */
+public StudentNotFoundInList() {
         super("Etudiant inexistant dans cette liste \n");
     }
 }

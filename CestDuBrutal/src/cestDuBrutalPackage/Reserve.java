@@ -35,7 +35,7 @@ public class Reserve extends Zone {
     //TODO    /!\ à changer: ID étudiant 
     /**
      * retire un etudiant de la reserve
-     * @param etudiant
+     * @param etudiant etudiant a retirer
      */
     public void removeReserve(Etudiant etudiant) {
         this.etuDansZone.remove(etudiant);
@@ -51,7 +51,7 @@ public class Reserve extends Zone {
     
      /**
       * retourne le nombre d'etudiants dans la reserve
-      * @return
+      * @return retourne la taille de {@link Zone#etuDansZone}
       */
      public int getNombreEtuReserve() {return this.etuDansZone.size();}
 } 

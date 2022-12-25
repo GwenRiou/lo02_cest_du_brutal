@@ -3,8 +3,9 @@ import java.lang.Math;
 import java.util.*;
 /**
  * Classe etudiant, qui va combattre dans les zones
+ * Implemente les methodes de {@link Strategie}
  * @author boone
- * @implNote Implemente les methodes de {@link Strategie}
+ * 
  */
 public class Etudiant implements Strategie{
     
@@ -278,27 +279,109 @@ public class Etudiant implements Strategie{
     
     
     //getters & setters
-    
+    //SETTERS
+    /**
+     * getter de {@link #type}
+     * @return {@link #type}
+     */
     public String getType(){return this.type;}
+    /**
+     * getter de {@link #ects}
+     * @return {@link #ects}
+     */
     public int getEcts(){return this.ects;}
+    /**
+     * getter de {@link #force}
+     * @return {@link #force}
+     */
     public int getForce(){return this.force;}
+    /**
+     * getter de {@link #dexterite}
+     * @return {@link #dexterite}
+     */
     public int getDexterite(){return this.dexterite;}
+    /**
+     * getter de {@link #resistance}
+     * @return {@link #resistance}
+     */
     public int getResistance(){return this.resistance;}
+    /**
+     * getter de {@link #constitution}
+     * @return {@link #constitution}
+     */
     public int getConstitution(){return this.constitution;}
+    /**
+     * getter de {@link #initiative}
+     * @return {@link #initiative}
+     */
     public int getInitiative(){return this.initiative;}
+    /**
+     * getter de {@link #id}
+     * @return {@link #id}
+     */
     public int getId() {return id;}
+    /**
+     * getter de {@link #strategie}
+     * @return {@link #strategie}
+     */
     public enumStrategie getStrategie() {return strategie;}
+    /**
+     * retourne le {@link #toString()} de {@link #strategie} 
+     * @return le toString de {@link #strategie}
+     */
     public String getStrategieString() {return strategie.toString();}
+    /**
+     * getter de {@link #belongsTo}
+     * @return {@link #belongsTo}
+     */
     public Joueur getBelongsTo() {return belongsTo;}
+    /**
+     * getter de {@link #isInZone}
+     * @return {@link #isInZone}
+     */
     public Zone getIsInZone() {return isInZone;}
-
+    
+    //SETTTERS 
+    /**
+     * setter de {@link #isInZone}
+     * @param isInZone valeur qui remplacera la valeur actuelle
+     */
     public void setIsInZone(Zone isInZone) {this.isInZone = isInZone;}
+    /**
+     * setter de {@link #force}
+     * @param newForce valeur qui remplacera la valeur actuelle
+     */
     public void setForce(int newForce){this.force=newForce;}
+    /**
+     * setter de {@link #dexterite}
+     * @param newDexterite valeur qui remplacera la valeur actuelle
+     */
     public void setDexterite(int newDexterite){this.dexterite= newDexterite;}
+    /**
+     * setter de {@link #resistance}
+     * @param newResistance valeur qui remplacera la valeur actuelle
+     */
     public void setResistance(int newResistance){this.resistance= newResistance;}
+    /**
+     * setter de {@link #constitution}
+     * @param newConstisution valeur qui remplacera la valeur actuelle
+     */
     public void setConstitution(int newConstisution){this.constitution= newConstisution;}
+    /**
+     * setter de {@link #initiative}
+     * @param newInitiative valeur qui remplacera la valeur actuelle
+     */
     public void setInitiative(int newInitiative){this.initiative= newInitiative;}
+    /**
+     * setter de {@link #id}
+     * @param id valeur qui remplacera la valeur actuelle
+     */
     public void setId(int id) {this.id = id;}
+    
+    /**
+     * setter de {@link #strategie} a partir d'un String, vers une enumeration
+     * @param strategie String qui sera convertie en enumeration de {@link enumStrategie} qui remplacera la valeur actuelle
+     */
     public void setStrategie(String strategie) {
         try{
             this.strategie = enumStrategie.valueOf(strategie.toUpperCase());

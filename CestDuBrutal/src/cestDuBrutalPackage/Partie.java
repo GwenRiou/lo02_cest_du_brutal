@@ -59,6 +59,7 @@ public class Partie {
     
     /**
      * instancie un nouveau joueur et l'ajoute a la liste des joueurs
+     * @param joueur new joueur
      */
     public void addPlayer(Joueur joueur){
         System.out.println("--Creation dun nouveau joueur--");
@@ -66,8 +67,10 @@ public class Partie {
         joueur.identify();
     }
     
-    /*
+    /**
      * Methode qui instancie les joueurs automatiquement, il les ajoute a la liste des joueurs
+     * @param j1 joueur 1
+     * @param j2 joueur 2
      */
     public void autoAddPlayers(Joueur j1,Joueur j2){
         System.out.println("--AutoAddPlayersV2.0 IS INITIALIZING, STAND BACK!!!--");
@@ -192,7 +195,7 @@ public class Partie {
     * affectation des etudiants dans la zone:
     * tant qu'il n'y a pas de zone vide / au moins un etudiant de chaque joueur y est, on affecte un etudiant a une zone choisie par le joueur depuis le camion
     * retourne une erreur lorsuqe la zone choisie n'existe pas ou lorsque l'etudiant choisi n'existe pas / n'est pas dans la liste
-    * @param j
+    * @param j joueur qui possede les joueurs qu'on veut affecter
     */
     public void affecterEtudiantZone(Joueur j) {
         boolean condition=false;
@@ -222,7 +225,7 @@ public class Partie {
                         studentToMove = fromZone.drawEtudiantDansZone(j);
                     } 
                     
-                    // on choisie la zone de deploiement & on dï¿½polie l'etu choisi
+                    // on choisit la zone de deploiement & on dï¿½polie l'etu choisi
 
                     
                     System.out.println("Vers");
@@ -256,6 +259,11 @@ public class Partie {
             Zone.displayAllStudentInZones();
             System.out.println("la repartition dans les zones est fini");     //TODO    
     }
+    
+    /**
+     * permet d'affecter les etudiants depuis la reserve, vers les zones pendant la treve
+     * @param j joueur qui possede les etudiants que l'on veut bouger
+     */
     public void affecterEtudiantReserveTreve(Joueur j) {
         if(j.getReserveArrayList().size() != 0) {
             boolean stayInLoop = true;
@@ -308,7 +316,10 @@ public class Partie {
             System.out.println("La reserve est vide!");
         }
     }
-    
+    /**
+     * Permet de deplacer les etudiants d'un joueur d'une zone vers une autre zone pendant la treve
+     * @param j joueur qui possede les etudiants que l'on veut deplacer
+     */
     public void affecterEtudiantPendantTreve(Joueur j) {
         boolean stayInLoop = true;
         while (stayInLoop) {
@@ -390,6 +401,13 @@ public class Partie {
             }
         }  
     }
+    /**
+     * declenche la phase de treve apres le controle dune zone
+     * @param gagnantTreve joueur qui vient de gagner le controle dune zone
+     * @param zone zone dans laquelle la treve a ete apelee (zone dans lequel le joueur vient de gagner le controle)
+     * @param etatDeControle etat de controle apres changement
+     * @throws InterruptedException Si le thread se fait interrompre
+     */
     public synchronized void declencherTreve(Joueur gagnantTreve, ZoneCombat zone, String etatDeControle) throws InterruptedException {
        
         while(treve!=null) {// si la treve est en cour
@@ -405,7 +423,12 @@ public class Partie {
             treve(gagnantTreve,zone); // --------------------------------ajout de la treve
         }       
     }
-    
+    /**
+     * la treve: letudiant a l choix d'affecter des etudiants de zones controllees, des reservistes sur des zones de combat, visualiser de nombre de points ects par zones de combat ou de continuer la partie.
+     * il doit entrer 1, 2, 3 ,4 ou 5...
+     * @param gagnantTreve Joueur qui vient de gagner le controle
+     * @param zone zone dans laquelle le joueur vient de gagner le controle
+     */
     public void treve(Joueur gagnantTreve, ZoneCombat zone) {
         
         this.finDePartie = Zone.FinDePartie();
@@ -444,6 +467,11 @@ public class Partie {
             //System.exit(0);
         }
     }
+    
+    /**
+     * permet de distribuer automatiquement les etudiants d'un joueur dans les zones automatiquement et equitablement. Est adapte pour nimporte quelle taille de liste de zone
+     * @param j joueur auquel on veut distribuer les etudiants
+     */
     public static void autoAffecterEtudiantZone(Joueur j) {
         System.out.println("Distribution automatique des etudiants de:"+j.getUserName()+"est effectuee");
         int i = 0;
@@ -458,7 +486,11 @@ public class Partie {
             //System.out.println("AutoAffect vers:" + studentToMove.getIsInZone().getZoneName());
         }
     }
-    //Methodes pour Lire les inputs
+    /**
+     * Methode pour lire l'entree de l'utilisateur
+     * @param message message qui s'affiche avant l'entree de l'utilisateur
+     * @return retourne l'entree de l'utilisateur sous forme de string
+     */
     public static String getUserInput(String message) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         System.out.println(message+"\033[0;91m");
@@ -467,7 +499,11 @@ public class Partie {
         System.out.println("\033[0;0m");
         return userInput;  // Output user input
     }
-    
+    /**
+     * surcharge de {@link #getUserInput(String)}, permet de lire l'entree de l'utilisateur, et retourne un message d'erreur si l'entree n'est pas un nombre entier
+     * @param message message affiche avant l'entree de l'utilisateur
+     * @return retourne l'entree de l'utilisateur
+     */
     public static int getUserInputInt(String message) {        
         while(1==1) { // Attention boucle infini
             
@@ -484,6 +520,12 @@ public class Partie {
         }        
         
     }
+    /**
+     * Permet de lire l'entree de l'utilisateur, retourne une erreur lorsque l'utilisateur rentre un chiffre au dela de max
+     * @param message message que l'on veut afficher avant d'accepter une entree de l'utilisateur
+     * @param max nombre maximum entrable pour l'utilisateur
+     * @return retourne le message de l'utilisateur, un entier entre 0 et max
+     */
     public static int getUserChoix(String message, int max) {
         int num = -5;
         System.out.println("choisissez un nombre entre 1 et " + max );   
@@ -496,19 +538,24 @@ public class Partie {
     
     //setter & getter
     
-    
+    /**
+     * getter de {@link #listJ}
+     * @return retourne la liste de joueur {@link #listJ}
+     */
     public ArrayList<Joueur> getListJ() {
         return listJ;
     }
-    
+    /**
+     * getter de {@link Joueur#getUserName()}
+     * @param j nombre du joueur, 1 pour j1, 2 pour j2
+     * @return retourne le nom du joueur choisi
+     */
     public static String getNamePlayer(int j) { return listJ.get(j-1).getUserName(); }
-
-    public void setListJ(ArrayList<Joueur> listJ) {
-        this.listJ = listJ;
-    }
-
-    
-    //THE MAIN
+ 
+    /**
+     * La boucle Main principale
+     * @param args arguments d'entree
+     */
     public static void main(String[] args) {
         System.out.println("\033[0;1m"+"note: Ce code utilise des couleurs format ANSI, utilisation d'Eclipse est reccomendee\n"
                 + "=+=!!- C'EST DU BRUTAL V1.1 -!!=+="+"\033[0;0m");

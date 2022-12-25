@@ -112,6 +112,9 @@ public void autoCreateStudentList() {
             //System.out.println("L'etudiant n°" + iter.nextIndex() + " a " + iter.next());
         }
     }
+    /**
+     * Affiche tous les etudiants dans la reserve du joueur
+     */
     public void displayReserveStudent() {
         System.out.println(this.userName + ": Les etudiants dans la reserves sont : ");
         ListIterator<Etudiant> iter = this.reserve.getListeEtudiantsReserve().listIterator();
@@ -213,12 +216,13 @@ public void autoCreateStudentList() {
     }
     /**
      * retire l'etudiant de la liste
+     * @param etu etudiant a retirer
      */
     public void removeStudentFromList(Etudiant etu) {
         this.studentList.remove(etu);
     }
     /**
-     * Tostring du joueur, affiche son programme et ses points a distribuer
+     * {@link #toString()} du joueur, affiche son programme et ses points a distribuer
      */
     public String toString() {
         StringBuffer sb = new StringBuffer ("Le Joueur ");
@@ -237,6 +241,7 @@ public void autoCreateStudentList() {
     // --------------------------------Getter & Setter--------------------------------
     /**
      * getter de {@link #studentList}
+     * @return {@link #studentList}
      */
     public ArrayList<Etudiant> getStudentList() {
         return studentList;
@@ -244,38 +249,59 @@ public void autoCreateStudentList() {
 
     /**
      * getter de {@link #points}
-     * @return
+     * @return {@link #points}
      */
     public int getPoints() {
         return points;
     }
-    
+    /**
+     * setter de {@link #points}
+     * @param points {@link #points}
+     */
     public void setPoints(int points) {
         this.points = points;
     }
     /**
      * getter de {@link #id}
-     * @return
+     * @return {@link #id}
      */
     public int getId() {
         return id;
     }
 
-
+    /**
+     * setter de {@link #id}#
+     * @param id valeur qui va remplacer la valeur actuelle
+     */
     public void setId(int id) {
         this.id = id;
     }
     //returns programme as an enum
+    /**
+     * getter de {@link #programme}
+     * @return {@link #programme}
+     */
     public Programme getProgramme() {
         return programme;
     }
     //returns programme but as a string
+    /**
+     * retourne l'enumeration du programme {@link Programme} sous forme de texte 
+     * @return l'enumeration du programme {@link Programme} sous forme de texte
+     */
     public String getProgrammeString() {return programme.toString();}
-    
+    /**
+     * setter de {@link #programme}
+     * @param programme {@link #programme}
+     */
     public void setProgramme(String programme) {
         this.programme = Programme.valueOf(programme.toUpperCase());
     }
-
+    
+    /**
+     * getter de {@link #userName}
+     * @return {@link #userName}
+     */
     public String getUserName() {
         return userName;
     }
@@ -283,12 +309,16 @@ public void autoCreateStudentList() {
 
     // Implémentation plus complexe possible cf doc idée // c'est fait, on utilise des pointeurs vers les Joueurs mtn
     
+    /**
+     * setter de {@link #userName}
+     * @param userName {@link #userName}
+     */
     public void setUserName(String userName) {//jai mis déprécié pour l'identification fonctionnelle  mais on peut tjrs utiliser pour le nom du joueur :D
         this.userName = userName;
     }
     /**
      * retourne la liste des etudiants dans la reserve
-     * @return 
+     * @return retourne la liste des etudiants de la reserve
      */
     public ArrayList<Etudiant> getReserveArrayList() {
         return reserve.getListeEtudiantsReserve();
@@ -350,7 +380,7 @@ public void autoCreateStudentList() {
     }
     /**
      * permet de recuperer l'instance de la reserve
-     * @return
+     * @return {@link #reserve}
      */
     public Reserve getReserve() {return reserve;}
 }

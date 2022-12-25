@@ -30,7 +30,7 @@ public class Zone {
     
     /**
      * affecter un etudiant a la zone
-     * @param etu
+     * @param etu etudiant a ajouter dans la liste de {@link #etuDansZone}
      */
     public void affectation(Etudiant etu) {
         this.etuDansZone.add(etu);
@@ -60,7 +60,7 @@ public class Zone {
    }
     /**
      * affiche toutes les zones deja controlee par le joueur j
-     * @param j permet dafficher que les zones controlees par le joueur {@link j}
+     * @param j permet dafficher que les zones controlees par le joueur j
      */
     public static void displayControlledZones(Joueur j) {
         Iterator<ZoneCombat> it =zoneList.iterator();
@@ -223,7 +223,7 @@ public class Zone {
     }
     /**
      * verifie le nombre detudiants dans chaque zone de chaque joueur, et declenche la fin de la partie si besoin
-     * @return
+     * @return retourne true si la partie est finie, false sinon
      */
     public static boolean FinDePartie() {
         Iterator<ZoneCombat> it =zoneList.iterator();
@@ -276,7 +276,7 @@ public class Zone {
     }
     /**
      * affiche la somme des points ECTS de la zone
-     * @return
+     * @return retourne le nombre total d'ECTS dans la zone
      */
     public static boolean displayECTSPerZone() {
         ListIterator<ZoneCombat> it =zoneList.listIterator();
