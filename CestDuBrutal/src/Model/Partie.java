@@ -49,8 +49,8 @@ public class Partie {
         j2.identify("Gwen",Programme.A2I);
         
     }
-    public Etudiant selectStudent(Joueur j)throws StudentNotFoundInList{
-        
+    
+    public Etudiant selectStudent(Joueur j)throws StudentNotFoundInList{        
             ArrayList<Etudiant>  l= j.getStudentList();       
             int id = getUserInputInt("Entez le numero d'un etudiant");     
             for (ListIterator<Etudiant> it = l.listIterator(); it.hasNext();) {
@@ -59,6 +59,7 @@ public class Partie {
             }
             throw new StudentNotFoundInList();          
     }
+    
     
     public Zone selectZone(String id)throws ZoneNotFoundInList{
         
@@ -119,8 +120,7 @@ public class Partie {
  // Mise en reserve
     public void putInReserve(Joueur j) {
         System.out.print(j.getUserName()+": Selectioner les etudiants a mettre dans la reserve \n");
-        while(j.getReserveArrayList().size()<5) {
-               
+        while(j.getReserveArrayList().size()<5) {               
             try {
                 Etudiant etu = selectStudent(j);
                 j.putInReserve(etu);
