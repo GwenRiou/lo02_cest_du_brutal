@@ -53,7 +53,7 @@ public class RepartitionDesPoints extends JFrame {
 
 	// les composants de la vue
 	private JPanel contentPane;
-	private TextField configPersonnage = new TextField();
+	private Label configPersonnage = new Label();
 	private TextField force;
 	private TextField dexterite;
 	private TextField resistance;
@@ -302,6 +302,8 @@ public class RepartitionDesPoints extends JFrame {
 				joueur.displayAllStudent();
 				// fermer la fenetre graphique				
 				dispose();
+				
+                
 			}
 		});
 		validation.setFont(new Font("Tahoma", Font.PLAIN, 24));

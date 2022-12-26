@@ -88,6 +88,7 @@ public class Joueur {
         Etudiant etu = studentList.get(index);
         return etu;
     }
+    
     public void modifyCharacteristicsGui(Etudiant etu,int newForce, int newDexterite, int newResistance,int newConstitution, int newInitiative,String strategy) {
     	int pointAttribuee = (newForce+newDexterite+ newResistance+newConstitution+ newInitiative-etu.getForce()-etu.getDexterite()-etu.getConstitution()-etu.getResistance()-etu.getInitiative());
     	if (pointAttribuee>this.points) {
@@ -168,7 +169,19 @@ public class Joueur {
 
         }
     }
-    
+    public int putInReserveMVC(int id) {
+        if(reserve.getListeEtudiantsReserve().size()<5) {               
+            try {
+                System.out.print("On met un etu dans la reserve");
+                Etudiant etu = selectStudentMVC(id);
+                putInReserve(etu);
+                return 1;
+            }catch(StudentNotFoundInList e) {
+                System.out.print(e.getMessage());
+            }
+        }
+        return 0;
+    }
     // Mise en reserve
     public void putInReserve(Etudiant etu) {
         this.studentList.remove(etu);// Enleve l'etudiant de la liste 
@@ -178,6 +191,25 @@ public class Joueur {
     public void removeStudentFromList(Etudiant etu) {
         this.studentList.remove(etu);
     }
+    public Etudiant selectStudentMVC(int id)throws StudentNotFoundInList{ 
+        
+        ArrayList<Etudiant>  l= studentList;          
+        for (ListIterator<Etudiant> it = l.listIterator(); it.hasNext();) {
+             Etudiant s = it.next();
+             if(s.getId()==id) return getStudent(it.previousIndex());            
+        }
+        throw new StudentNotFoundInList();          
+    }/*
+    public Etudiant displayStudent(int id){
+        Etudiant etu = new Etudiant("Erreur",-1,-1,-1,-1,-1,this);
+        try {
+            etu= selectStudentMVC(id);
+        }catch(StudentNotFoundInList e) {
+                System.out.print(e.getMessage());         
+        }
+        return etu;
+    }*/
+    
     public String toString() {
         StringBuffer sb = new StringBuffer ("Le Joueur ");
         sb.append(this.userName);
