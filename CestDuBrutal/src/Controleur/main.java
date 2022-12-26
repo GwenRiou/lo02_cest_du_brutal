@@ -15,8 +15,10 @@ public class main {
 			EventQueue.invokeAndWait (new Runnable() {
 				public void run() {
 					Joueur joueur1 = new Joueur(1);
+                    Joueur joueur2 = new Joueur(2);
 					try {
 						RepartitionDesPoints gui1 = new RepartitionDesPoints(joueur1);
+						//RepartitionDesPoints gui2 = new RepartitionDesPoints(joueur2);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
