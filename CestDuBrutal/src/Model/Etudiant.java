@@ -214,6 +214,20 @@ public class Etudiant implements Strategie{
     public String getStrategieString() {return strategie.toString();}
     public Joueur getBelongsTo() {return belongsTo;}
     public Zone getIsInZone() {return isInZone;}
+    
+    public int getStrategieIndex() {
+        switch(strategie.toString()) {
+            case "OFFENSIVE":
+              return 0;
+            case "DEFENSIVE":
+                return 1;
+            case "RANDOM":
+                return 2;
+            default:
+                return -1;
+          }
+
+    }
 
     public void setIsInZone(Zone isInZone) {this.isInZone = isInZone;}
     public void setForce(int newForce){this.force=newForce;}
@@ -230,4 +244,5 @@ public class Etudiant implements Strategie{
             System.out.println("Veuillez entrer une strategie valide");
         }
     }
+    
 }

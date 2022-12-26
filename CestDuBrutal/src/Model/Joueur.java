@@ -88,7 +88,7 @@ public class Joueur {
         Etudiant etu = studentList.get(index);
         return etu;
     }
-    public void modifyCharacteristicsGui(Etudiant etu,int newForce, int newDexterite, int newResistance,int newConstitution, int newInitiative) {
+    public void modifyCharacteristicsGui(Etudiant etu,int newForce, int newDexterite, int newResistance,int newConstitution, int newInitiative,String strategy) {
     	int pointAttribuee = (newForce+newDexterite+ newResistance+newConstitution+ newInitiative-etu.getForce()-etu.getDexterite()-etu.getConstitution()-etu.getResistance()-etu.getInitiative());
     	if (pointAttribuee>this.points) {
             System.out.println("Vous n'avez pas assez de points pour cette modification");
@@ -100,6 +100,7 @@ public class Joueur {
                 etu.setConstitution(newConstitution);                              
                 etu.setInitiative(newInitiative);    
                 points-=pointAttribuee;
+                etu.setStrategie(strategy);
             }
     	}
     }

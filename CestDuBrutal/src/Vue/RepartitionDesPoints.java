@@ -62,6 +62,8 @@ public class RepartitionDesPoints extends JFrame {
 	private TextField pointsDistribuer;
 	private JTextField  nom;
 	private Choice programme;
+	private Choice strategy;
+
 
 	// le joueur
 	private Joueur joueur= new Joueur(0);
@@ -257,7 +259,18 @@ public class RepartitionDesPoints extends JFrame {
 		initiative.setBounds(297, 561, 61, 37);
 		contentPane.add(initiative);
 
-
+		// type de stratégie
+        JLabel lblNewLabel_11 = new JLabel("Stratégie");
+        lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 24));
+        lblNewLabel_11.setBounds(443, 452, 96, 37);
+        contentPane.add(lblNewLabel_11);
+        strategy = new Choice();
+        strategy.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        strategy.setBounds(562, 455, 224, 31);
+        strategy.add("OFFENSIVE");
+        strategy.add("DEFENSIVE");
+        strategy.add("RANDOM");
+        contentPane.add(strategy);
 
 
 		JButton ok = new JButton("OK");
@@ -268,7 +281,8 @@ public class RepartitionDesPoints extends JFrame {
 				int id = Integer.parseInt(key.substring(key.lastIndexOf(" ")+1));		
 				//On modifier l'etudiant
 				Etudiant comb = joueur.getStudent(id);
-				joueur.modifyCharacteristicsGui(comb, Integer.parseInt(force.getText()), Integer.parseInt(dexterite.getText()),Integer.parseInt(resistance.getText()),Integer.parseInt(constitution.getText()), Integer.parseInt(initiative.getText()));
+				joueur.modifyCharacteristicsGui(comb, Integer.parseInt(force.getText()), Integer.parseInt(dexterite.getText()),Integer.parseInt(resistance.getText()),Integer.parseInt(constitution.getText()), Integer.parseInt(initiative.getText()),strategy.getSelectedItem());
+				System.out.println("Strategy : "+strategy.getSelectedItem());
 				//On met a jour l'affichage des points
 				pointsDistribuer.setText(Integer.toString(joueur.getPoints())); 
 				System.out.println(comb);
@@ -323,6 +337,8 @@ public class RepartitionDesPoints extends JFrame {
 			resistance.setText(Integer.toString(comb.getResistance()));
 			constitution.setText(Integer.toString(comb.getConstitution()));
 			initiative.setText(Integer.toString(comb.getInitiative()));
+	        strategy.select(comb.getStrategieIndex());
+
 		}
 	}
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
