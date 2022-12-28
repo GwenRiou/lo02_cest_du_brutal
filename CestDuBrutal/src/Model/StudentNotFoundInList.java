@@ -1,4 +1,4 @@
-package cestDuBrutalPackage;
+package Model;
 
 /**
  * erreur lancee lorsqu'aucun etudiant n'est trouvé dans une liste

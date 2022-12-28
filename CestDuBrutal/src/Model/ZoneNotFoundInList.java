@@ -1,4 +1,4 @@
-package cestDuBrutalPackage;
+package Model;
 /**
  * erreur lancee lorsqu'aucune zone n'est trouvé dans une liste
  * @author boone

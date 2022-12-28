@@ -1,4 +1,4 @@
-package cestDuBrutalPackage;
+package Model;
 import java.lang.Math;
 import java.util.*;
 /**
