@@ -399,4 +399,17 @@ public class Etudiant implements Strategie{
             System.out.println("Veuillez entrer une strategie valide");
         }
     }
+    public int getStrategieIndex() {
+        switch(strategie.toString()) {
+            case "OFFENSIVE":
+              return 0;
+            case "DEFENSIVE":
+                return 1;
+            case "RANDOM":
+                return 2;
+            default:
+                return -1;
+          }
+
+    }
 }
