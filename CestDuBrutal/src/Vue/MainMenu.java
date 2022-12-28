@@ -56,7 +56,7 @@ public class MainMenu extends JFrame {
                 j1.createStudentList();
                 j2.createStudentList();
                 RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);
-                menu.setVisible(false);
+                menu.dispose();
             }
         });
         btnNewButton.setBounds(64, 48, 134, 23);
@@ -73,7 +73,7 @@ public class MainMenu extends JFrame {
                 j1.autoCreateStudentList();
                 j2.autoCreateStudentList();
                 MiseEnReserve gui = new MiseEnReserve(partie);
-                menu.setVisible(false);
+                menu.dispose();
             }
         });
         btnNewButton_1.setBounds(232, 48, 134, 23);
