@@ -96,7 +96,7 @@ public class MiseEnReserve extends JFrame {
         setBounds(100, 100, 1130, 650);
         // +++++++++++++++++++++++++++++++++++++ config personnage  ++++++++++++++++++++++++++++++++++++++++++++
         configPersonnage.setBackground(Color.YELLOW);
-        configPersonnage.setText("Etudiant -1");
+        configPersonnage.setText("Selectionnez un etudiant");
         configPersonnage.setForeground(Color.BLACK);
         configPersonnage.setFont(new Font("Tahoma", Font.ITALIC, 20));
         configPersonnage.setBounds(426, 331, 360, 34);
@@ -191,28 +191,31 @@ public class MiseEnReserve extends JFrame {
         lblNewLabel_5.setBounds(193, 389, 61, 37);
         contentPane.add(lblNewLabel_5);
         force = new Label();
+        force.setBackground(new Color(128, 255, 255));
         force.setFont(new Font("Tahoma", Font.PLAIN, 24));
         force.setText("0");
         force.setBounds(297, 389, 61, 37);
         contentPane.add(force);
 
         // Dext�rit�
-        JLabel lblNewLabel_6 = new JLabel("Dext�rit�");
+        JLabel lblNewLabel_6 = new JLabel("Dexterite");
         lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 24));
         lblNewLabel_6.setBounds(159, 432, 105, 37);
         contentPane.add(lblNewLabel_6);
         dexterite = new Label();
+        dexterite.setBackground(new Color(128, 255, 255));
         dexterite.setFont(new Font("Tahoma", Font.PLAIN, 24));
         dexterite.setText("0");
         dexterite.setBounds(297, 432, 61, 37);
         contentPane.add(dexterite);
 
         // R�sistance
-        JLabel lblNewLabel_7 = new JLabel("R�sistance");
+        JLabel lblNewLabel_7 = new JLabel("Resistance");
         lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 24));
         lblNewLabel_7.setBounds(147, 479, 117, 37);
         contentPane.add(lblNewLabel_7);
         resistance = new Label();
+        resistance.setBackground(new Color(128, 255, 255));
         resistance.setFont(new Font("Tahoma", Font.PLAIN, 24));
         resistance.setText("0");
         resistance.setBounds(297, 475, 61, 37);
@@ -224,6 +227,7 @@ public class MiseEnReserve extends JFrame {
         lblNewLabel_8.setBounds(136, 522, 128, 37);
         contentPane.add(lblNewLabel_8);
         constitution = new Label();
+        constitution.setBackground(new Color(128, 255, 255));
         constitution.setFont(new Font("Tahoma", Font.PLAIN, 24));
         constitution.setText("0");
         constitution.setBounds(297, 518, 61, 37);
@@ -235,24 +239,27 @@ public class MiseEnReserve extends JFrame {
         lblNewLabel_9.setBounds(171, 569, 93, 29);
         contentPane.add(lblNewLabel_9);
         initiative = new Label();
+        initiative.setBackground(new Color(128, 255, 255));
         initiative.setFont(new Font("Tahoma", Font.PLAIN, 24));
         initiative.setText("0");
         initiative.setBounds(297, 561, 61, 37);
         contentPane.add(initiative);
 
         // type de strat�gie
-        JLabel lblNewLabel_11 = new JLabel("Strat�gie");
+        JLabel lblNewLabel_11 = new JLabel("Strategie");
         lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        lblNewLabel_11.setBounds(443, 452, 96, 37);
+        lblNewLabel_11.setBounds(411, 389, 128, 37);
         contentPane.add(lblNewLabel_11);
         strategy = new Label();
+        strategy.setBackground(new Color(128, 255, 255));
         strategy.setText("RANDOM");
         strategy.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        strategy.setBounds(562, 455, 224, 31);
+        strategy.setBounds(562, 389, 224, 31);
         contentPane.add(strategy);
         
      // ++++++++++++++++++++++++++++++++++++++++++R�serviste ++++++++++++++++++++++++++++++
-        reserviste = new JButton("Reserviste");
+        reserviste = new JButton("Deplacer vers la reserve");
+        reserviste.setEnabled(false);
         reserviste.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String key = configPersonnage.getText();
@@ -350,7 +357,7 @@ public class MiseEnReserve extends JFrame {
         reserviste.setBackground(new Color(255, 255, 255));
         reserviste.setForeground(Color.BLACK);
         reserviste.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        reserviste.setBounds(579, 513, 187, 26);
+        reserviste.setBounds(426, 546, 340, 34);
         contentPane.add(reserviste);        
 
         // ++++++++++++++++++++++++++++++++++++++++++ Valider configuration �quipe ++++++++++++++++++++++++++++++
@@ -408,6 +415,7 @@ public class MiseEnReserve extends JFrame {
         public void actionPerformed(ActionEvent e) {//
             configPersonnage.setText(key);
             try {
+                reserviste.setEnabled(true);
                 Etudiant comb = joueur.selectStudentMVC(id);                
                 force.setText(Integer.toString(comb.getForce()));
                 dexterite.setText(Integer.toString(comb.getDexterite()));

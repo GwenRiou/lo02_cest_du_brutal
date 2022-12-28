@@ -61,10 +61,12 @@ public class RepartitionDesPoints extends JFrame {
 	private TextField resistance;
 	private TextField constitution;
 	private TextField initiative;
-	private TextField pointsDistribuer;
+	private JLabel pointsDistribuer;
 	private JTextField  nom;
 	private Choice programme;
 	private Choice strategy;
+	private JButton ok;
+	
 	private static int numJ = 1;
 
 
@@ -73,7 +75,7 @@ public class RepartitionDesPoints extends JFrame {
 	private PartieMVC partie;
 	
 	public RepartitionDesPoints(PartieMVC partie) {
-        setMinimumSize(new Dimension(1200, 700));
+        setMinimumSize(new Dimension(1400, 800));
 	    this.partie=partie;
 		this.joueur = partie.getJoueurToPlay();
 		this.initFenetre();
@@ -91,7 +93,8 @@ public class RepartitionDesPoints extends JFrame {
 		contentPane.setBackground(Color.CYAN);
 		setContentPane(contentPane);
 		contentPane.setLayout(null); // politique de placement des composants dans la fen�tre
-		setBounds(100, 100, 1130, 650);
+		setBounds(100, 100, 1470, 750);
+		configPersonnage.setText("selectionnez un etudiant");
 		// +++++++++++++++++++++++++++++++++++++ config personnage  ++++++++++++++++++++++++++++++++++++++++++++
 		configPersonnage.setBackground(Color.YELLOW);
 		configPersonnage.setForeground(Color.BLACK);
@@ -143,7 +146,7 @@ public class RepartitionDesPoints extends JFrame {
 		JPanel panelEtu = new JPanel();
 		panelEtu.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 		panelEtu.setBackground(Color.CYAN);
-		panelEtu.setBounds(830, 102, 274, 411);
+		panelEtu.setBounds(830, 102, 274, 387);
 		panelEtu.setLayout(new GridLayout(4, 4, 2, 0));
 		contentPane.add(panelEtu);
 		// Etiquette Les �tudiants de base
@@ -160,16 +163,17 @@ public class RepartitionDesPoints extends JFrame {
 			jb2[k].addActionListener(	new MonEcouteurEvenements(joueur.getStudentList(), new String("Etudiant " + (k+5)),k+5));
 		}
 		// +++++++++++++++++++++++++++++++++++++++++ Joueur +++++++++++++++++++++++++++++++++++++++++++++++++++
-		JLabel lblNewLabel_3 = new JLabel("Joueur");
+		JLabel lblNewLabel_3 = new JLabel("Nom du Joueur:");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel_3.setBounds(254, 24, 76, 37);
+		lblNewLabel_3.setBounds(149, 24, 181, 37);
 		contentPane.add(lblNewLabel_3);
 		nom = new JTextField();	  
 		nom.setText("Entrer nom");
 		nom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Nom du Joueur : " +nom.getText());
-				joueur.setUserName(nom.getText());
+				//System.out.println("Nom du Joueur : " +nom.getText());
+				//joueur.setUserName(nom.getText());
+			    //JAI DEPLACE CE CODE VERS LE BOUTON "VALIDER"
 			}
 		});
 		nom.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -200,11 +204,11 @@ public class RepartitionDesPoints extends JFrame {
 		contentPane.add(programme);
 		// ++++++++++++++++++++++++++++++++++++++++++ Configuration des personnages ++++++++++++++++++++++++++++++++
 		// Compteur des points � distribuer
-		JLabel lblNewLabel_4 = new JLabel("Points � distribuer");
+		JLabel lblNewLabel_4 = new JLabel("Points a distribuer");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_4.setBounds(72, 309, 192, 26);
 		contentPane.add(lblNewLabel_4);
-		pointsDistribuer = new TextField();
+		pointsDistribuer = new JLabel();
 		pointsDistribuer.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		pointsDistribuer.setText(Integer.toString(joueur.getPoints())); 
 		pointsDistribuer.setBounds(297, 304, 61, 37);
@@ -216,28 +220,31 @@ public class RepartitionDesPoints extends JFrame {
 		lblNewLabel_5.setBounds(193, 389, 61, 37);
 		contentPane.add(lblNewLabel_5);
 		force = new TextField();
+		force.setEnabled(false);
 		force.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		force.setText("0");
 		force.setBounds(297, 389, 61, 37);
 		contentPane.add(force);
 
 		// Dext�rit�
-		JLabel lblNewLabel_6 = new JLabel("Dext�rit�");
+		JLabel lblNewLabel_6 = new JLabel("Dexterite");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_6.setBounds(159, 432, 105, 37);
 		contentPane.add(lblNewLabel_6);
 		dexterite = new TextField();
+		dexterite.setEnabled(false);
 		dexterite.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		dexterite.setText("0");
 		dexterite.setBounds(297, 432, 61, 37);
 		contentPane.add(dexterite);
 
 		// R�sistance
-		JLabel lblNewLabel_7 = new JLabel("R�sistance");
+		JLabel lblNewLabel_7 = new JLabel("Resistance");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_7.setBounds(147, 479, 117, 37);
 		contentPane.add(lblNewLabel_7);
 		resistance = new TextField();
+		resistance.setEnabled(false);
 		resistance.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		resistance.setText("0");
 		resistance.setBounds(297, 475, 61, 37);
@@ -249,6 +256,7 @@ public class RepartitionDesPoints extends JFrame {
 		lblNewLabel_8.setBounds(136, 522, 128, 37);
 		contentPane.add(lblNewLabel_8);
 		constitution = new TextField();
+		constitution.setEnabled(false);
 		constitution.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		constitution.setText("0");
 		constitution.setBounds(297, 518, 61, 37);
@@ -260,17 +268,19 @@ public class RepartitionDesPoints extends JFrame {
 		lblNewLabel_9.setBounds(171, 569, 93, 29);
 		contentPane.add(lblNewLabel_9);
 		initiative = new TextField();
+		initiative.setEnabled(false);
 		initiative.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		initiative.setText("0");
 		initiative.setBounds(297, 561, 61, 37);
 		contentPane.add(initiative);
 
 		// type de strat�gie
-        JLabel lblNewLabel_11 = new JLabel("Strat�gie");
+        JLabel lblNewLabel_11 = new JLabel("Strategie");
         lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        lblNewLabel_11.setBounds(443, 452, 96, 37);
+        lblNewLabel_11.setBounds(411, 452, 128, 37);
         contentPane.add(lblNewLabel_11);
         strategy = new Choice();
+        strategy.setEnabled(false);
         strategy.setFont(new Font("Tahoma", Font.PLAIN, 20));
         strategy.setBounds(562, 455, 224, 31);
         strategy.add("OFFENSIVE");
@@ -279,7 +289,8 @@ public class RepartitionDesPoints extends JFrame {
         contentPane.add(strategy);
 
 
-		JButton ok = new JButton("OK");
+		ok = new JButton("OK");
+		ok.setEnabled(false);
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//on recup�re l'etudiant
@@ -302,7 +313,10 @@ public class RepartitionDesPoints extends JFrame {
 		JButton validation = new JButton("VALIDER");
 		validation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Affichage des caracteristiques du joueur.
+				//application du username
+			    System.out.println("Nom du Joueur : " +nom.getText());
+                joueur.setUserName(nom.getText());
+                // Affichage des caracteristiques du joueur.
 				System.out.println(joueur);
 				//Affichage des etudiants du joueur
 				joueur.displayAllStudent();
@@ -310,24 +324,25 @@ public class RepartitionDesPoints extends JFrame {
 				    partie.setJoueur1Ajoue(false);
                     //affichie la suite                 
 				    MiseEnReserve gui2 = new MiseEnReserve(partie); 
-                    // fermer la fenetre graphique              
+                    // fermer la fenetre graphique
                     dispose();              
                 }else {// la meme interface 
+                    
                     partie.setJoueur1Ajoue(true);
-                    RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);                     
+                    RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);  
                     dispose();
                 }		
 			}
 		});
 		validation.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		validation.setBounds(830, 523, 270, 83);
+		validation.setBounds(830, 500, 270, 83);
 		contentPane.add(validation);
 		// ++++++++++++++++++++++++++++++++++++++++++ Habillage ++++++++++++++++++++++++++++++++++++++++++++
 		// panneau configuration
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.CYAN);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-		panel.setBounds(51, 345, 769, 261);
+		panel.setBounds(51, 345, 766, 261);
 		contentPane.add(panel);
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	}
@@ -345,6 +360,13 @@ public class RepartitionDesPoints extends JFrame {
 		}
 		
 		public void actionPerformed(ActionEvent e) {
+		    ok.setEnabled(true);
+		    force.setEnabled(true);
+		    dexterite.setEnabled(true);
+		    resistance.setEnabled(true);
+		    constitution.setEnabled(true);
+		    initiative.setEnabled(true);
+		    strategy.setEnabled(true);
 			Etudiant comb = liste.get(id);
 			configPersonnage.setText(key);
 			force.setText(Integer.toString(comb.getForce()));
