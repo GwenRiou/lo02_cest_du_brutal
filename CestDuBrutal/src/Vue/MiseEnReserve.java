@@ -66,7 +66,7 @@ public class MiseEnReserve extends JFrame {
     private Label programme;
     private Label strategy;
 
-    private JCheckBox reserviste;
+    private JButton reserviste;
 
 
     // le joueur
@@ -89,9 +89,9 @@ public class MiseEnReserve extends JFrame {
         this.pack();
         contentPane = new JPanel();
         contentPane.setBorder(new CompoundBorder());
-        contentPane.setBackground(Color.BLUE);
+        contentPane.setBackground(new Color(128, 128, 192));
         setContentPane(contentPane);
-        contentPane.setLayout(null); // politique de placement des composants dans la fenêtre
+        contentPane.setLayout(null); // politique de placement des composants dans la fenï¿½tre
         setBounds(100, 100, 1130, 650);
         // +++++++++++++++++++++++++++++++++++++ config personnage  ++++++++++++++++++++++++++++++++++++++++++++
         configPersonnage.setBackground(Color.YELLOW);
@@ -107,7 +107,7 @@ public class MiseEnReserve extends JFrame {
         panelMaitre.setBackground(Color.CYAN);
         panelMaitre.setBounds(79, 102, 61, 122);
         panelMaitre.setLayout(new GridLayout(1, 1, 0, 0)); // politique de placement des composants dans ce panel
-        JButton jb1 = new JButton(); // pour représenter un personnage, utilisation d'un JButton
+        JButton jb1 = new JButton(); // pour reprï¿½senter un personnage, utilisation d'un JButton
         panelMaitre.add(jb1);
         jb1.setForeground(Color.CYAN);
         Image img1 = new ImageIcon("ressources\\maitre.png").getImage();
@@ -119,8 +119,8 @@ public class MiseEnReserve extends JFrame {
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
         lblNewLabel.setBounds(51, 75, 128, 24);
         contentPane.add(lblNewLabel);
-        // +++++++++++++++++++++++++++++++++++++ Les élites +++++++++++++++++++++++++++++++++++++++++++++++++++
-        // Idem pour les élites
+        // +++++++++++++++++++++++++++++++++++++ Les ï¿½lites +++++++++++++++++++++++++++++++++++++++++++++++++++
+        // Idem pour les ï¿½lites
         JPanel panelElite = new JPanel();
         panelElite.setBorder(new LineBorder(new Color(0, 0, 0), 5));
         panelElite.setBackground(Color.CYAN);
@@ -140,15 +140,15 @@ public class MiseEnReserve extends JFrame {
         lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
         lblNewLabel_1.setBounds(449, 77, 83, 21);
         contentPane.add(lblNewLabel_1);
-        // +++++++++++++++++++++++++++++++++++++ Les étudiants +++++++++++++++++++++++++++++++++++++++++++++++++
-        // Idem pour les étudiants de base
+        // +++++++++++++++++++++++++++++++++++++ Les ï¿½tudiants +++++++++++++++++++++++++++++++++++++++++++++++++
+        // Idem pour les ï¿½tudiants de base
         JPanel panelEtu = new JPanel();
         panelEtu.setBorder(new LineBorder(new Color(0, 0, 0), 5));
         panelEtu.setBackground(Color.CYAN);
         panelEtu.setBounds(830, 102, 274, 411);
         panelEtu.setLayout(new GridLayout(4, 4, 2, 0));
         contentPane.add(panelEtu);
-        // Etiquette Les étudiants de base
+        // Etiquette Les ï¿½tudiants de base
         JLabel lblNewLabel_2 = new JLabel("Les Etudiants de base");
         lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
         lblNewLabel_2.setBounds(885, 76, 192, 20);
@@ -195,8 +195,8 @@ public class MiseEnReserve extends JFrame {
         force.setBounds(297, 389, 61, 37);
         contentPane.add(force);
 
-        // Dextérité
-        JLabel lblNewLabel_6 = new JLabel("Dextérité");
+        // Dextï¿½ritï¿½
+        JLabel lblNewLabel_6 = new JLabel("Dextï¿½ritï¿½");
         lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 24));
         lblNewLabel_6.setBounds(159, 432, 105, 37);
         contentPane.add(lblNewLabel_6);
@@ -206,8 +206,8 @@ public class MiseEnReserve extends JFrame {
         dexterite.setBounds(297, 432, 61, 37);
         contentPane.add(dexterite);
 
-        // Résistance
-        JLabel lblNewLabel_7 = new JLabel("Résistance");
+        // Rï¿½sistance
+        JLabel lblNewLabel_7 = new JLabel("Rï¿½sistance");
         lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 24));
         lblNewLabel_7.setBounds(147, 479, 117, 37);
         contentPane.add(lblNewLabel_7);
@@ -239,8 +239,8 @@ public class MiseEnReserve extends JFrame {
         initiative.setBounds(297, 561, 61, 37);
         contentPane.add(initiative);
 
-        // type de stratégie
-        JLabel lblNewLabel_11 = new JLabel("Stratégie");
+        // type de stratï¿½gie
+        JLabel lblNewLabel_11 = new JLabel("Stratï¿½gie");
         lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 24));
         lblNewLabel_11.setBounds(443, 452, 96, 37);
         contentPane.add(lblNewLabel_11);
@@ -250,14 +250,14 @@ public class MiseEnReserve extends JFrame {
         strategy.setBounds(562, 455, 224, 31);
         contentPane.add(strategy);
         
-     // ++++++++++++++++++++++++++++++++++++++++++Réserviste ++++++++++++++++++++++++++++++
-        reserviste = new JCheckBox("Réserviste");
+     // ++++++++++++++++++++++++++++++++++++++++++Rï¿½serviste ++++++++++++++++++++++++++++++
+        reserviste = new JButton("Reserviste");
         reserviste.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String key = configPersonnage.getText();
                 int id = Integer.parseInt(key.substring(key.lastIndexOf(" ")+1));
                 int resultat = joueur.putInReserveMVC(id);
-                //mise à jour de l'affichage si l'etu est dans la reserve
+                //mise ï¿½ jour de l'affichage si l'etu est dans la reserve
                 if (resultat==1) {
                     Image img1 =new ImageIcon("ressources\\etudiant.png").getImage();
                     switch(id) {
@@ -346,13 +346,13 @@ public class MiseEnReserve extends JFrame {
                 
             }
         });
-        reserviste.setBackground(Color.CYAN);
+        reserviste.setBackground(new Color(255, 255, 255));
         reserviste.setForeground(Color.BLACK);
         reserviste.setFont(new Font("Tahoma", Font.PLAIN, 24));
         reserviste.setBounds(579, 513, 187, 26);
         contentPane.add(reserviste);        
 
-        // ++++++++++++++++++++++++++++++++++++++++++ Valider configuration équipe ++++++++++++++++++++++++++++++
+        // ++++++++++++++++++++++++++++++++++++++++++ Valider configuration ï¿½quipe ++++++++++++++++++++++++++++++
         JButton validation = new JButton("VALIDER");
         validation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -385,7 +385,7 @@ public class MiseEnReserve extends JFrame {
         // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     }
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // classe locale pour écouter les composants associés aux combattants
+    // classe locale pour ï¿½couter les composants associï¿½s aux combattants
     final class MonEcouteurEvenements implements ActionListener {
         private ArrayList<Etudiant> liste;
         private String key;
