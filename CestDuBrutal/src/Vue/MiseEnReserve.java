@@ -382,6 +382,7 @@ public class MiseEnReserve extends JFrame {
                         Zone.melee();
                     }
                     else {
+                        partie.setJoueur1Ajoue(false);
                         DistributionEtudiants gui3 = new DistributionEtudiants(partie);
                     }
                     
