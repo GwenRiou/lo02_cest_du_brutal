@@ -39,7 +39,6 @@ public class Joueur {
         this.userName = ""; 
         this.studentList = new ArrayList <Etudiant>();
         this.programme=Programme.ISI;
-        this.createStudentList();     
     }
     /**
      * cree la liste d'etudiant (le camion) dans laquelle le joueur peut gerer, modifier et affecter ses etudiants

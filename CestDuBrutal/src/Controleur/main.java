@@ -12,6 +12,7 @@ import Model.Joueur;
 import Model.PartieMVC;
 import Model.Zone;
 import Vue.DistributionEtudiants;
+import Vue.MainMenu;
 import Vue.MiseEnReserve;
 import Vue.RepartitionDesPoints;
 
@@ -30,9 +31,12 @@ public class main {
 				        Joueur j2 = new Joueur(2);
 				        partie.addPlayer(j1);
 				        partie.addPlayer(j2);
-				        Zone.setZones(); 			
+
+				        Zone.setZones(); 
 				        
-						RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);	
+				        MainMenu gui0 = new MainMenu(partie,j1,j2);
+				        //RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);
+						//MiseEnReserve gui2 = new MiseEnReserve(partie);	
 						
 					} catch (Exception e) {
 						e.printStackTrace();
