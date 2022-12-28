@@ -32,6 +32,7 @@ import Model.Etudiant;
 import Model.Joueur;
 import Model.PartieMVC;
 import Model.StudentNotFoundInList;
+import Model.Zone;
 
 import javax.swing.border.CompoundBorder;
 import java.awt.Font;
@@ -361,8 +362,15 @@ public class MiseEnReserve extends JFrame {
                 //Affichage des etudiants dans la reserve du joueur
                 joueur.displayReserveStudent();
                 if(partie.isJoueur1Ajoue()==true) {
-                    //affichie la suite                 
-                    DistributionEtudiants gui3 = new DistributionEtudiants(partie);
+                    //affichie la suite
+                    if(partie.getInstance().isAuto()) {
+                        partie.autoAffecterEtudiantZone();
+                        Zone.melee();
+                    }
+                    else {
+                        DistributionEtudiants gui3 = new DistributionEtudiants(partie);
+                    }
+                    
                     // fermer la fenetre graphique              
                     dispose();              
                 }else {

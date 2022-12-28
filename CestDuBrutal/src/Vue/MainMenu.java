@@ -72,6 +72,7 @@ public class MainMenu extends JFrame {
                 j1.autoCreateStudentList();
                 j2.autoCreateStudentList();
                 MiseEnReserve gui = new MiseEnReserve(partie);
+                menu.setVisible(false);
             }
         });
         btnNewButton_1.setBounds(232, 48, 134, 23);

@@ -196,7 +196,7 @@ public class Etudiant implements Strategie{
             Etudiant etu;
             do{//insert all enemies into a list
                etu = iter.next();
-               if(etu.belongsTo.equals(Partie.getInstance().getListJ().get(0))) {
+               if(etu.belongsTo.equals(PartieMVC.getInstance().getListJ().get(0))) {
                    studentCountj1++;
                    //System.out.println(enemyEtu.belongsTo.getUserName()+"etu #"+enemyEtu.getId()+"enemy added");
                }
