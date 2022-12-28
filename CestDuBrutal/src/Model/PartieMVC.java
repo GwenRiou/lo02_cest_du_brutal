@@ -391,6 +391,12 @@ public class PartieMVC {
             //System.exit(0);
         }
     }
+    public static void autoAffecterEtudiantZone() {
+        for (int i = 0;i<listJ.size();i++) {
+            autoAffecterEtudiantZone(listJ.get(i));
+        }
+        
+    }
     public static void autoAffecterEtudiantZone(Joueur j) {
         System.out.println("========AutoAffect:"+j.getUserName()+"=======");
         int i = 0;
