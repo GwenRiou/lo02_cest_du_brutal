@@ -168,8 +168,9 @@ public class RepartitionDesPoints extends JFrame {
 		nom.setText("Entrer nom");
 		nom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Nom du Joueur : " +nom.getText());
-				joueur.setUserName(nom.getText());
+				//System.out.println("Nom du Joueur : " +nom.getText());
+				//joueur.setUserName(nom.getText());
+			    //JAI DEPLACE CE CODE VERS LE BOUTON "VALIDER"
 			}
 		});
 		nom.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -302,7 +303,10 @@ public class RepartitionDesPoints extends JFrame {
 		JButton validation = new JButton("VALIDER");
 		validation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Affichage des caracteristiques du joueur.
+				//application du username
+			    System.out.println("Nom du Joueur : " +nom.getText());
+                joueur.setUserName(nom.getText());
+                // Affichage des caracteristiques du joueur.
 				System.out.println(joueur);
 				//Affichage des etudiants du joueur
 				joueur.displayAllStudent();
@@ -310,11 +314,12 @@ public class RepartitionDesPoints extends JFrame {
 				    partie.setJoueur1Ajoue(false);
                     //affichie la suite                 
 				    MiseEnReserve gui2 = new MiseEnReserve(partie); 
-                    // fermer la fenetre graphique              
+                    // fermer la fenetre graphique
                     dispose();              
                 }else {// la meme interface 
+                    
                     partie.setJoueur1Ajoue(true);
-                    RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);                     
+                    RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);  
                     dispose();
                 }		
 			}
