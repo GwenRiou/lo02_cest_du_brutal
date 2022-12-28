@@ -571,8 +571,8 @@ public class Partie {
      * @param args arguments d'entree
      */
     public static void main(String[] args) {
-        System.out.println("\033[0;1m"+"note: Ce code utilise des couleurs format ANSI, utilisation d'Eclipse est reccomendee\n"
-                + "=+=!!- C'EST DU BRUTAL V1.1 -!!=+="+"\033[0;0m");
+        System.out.println("\033[0;30m"+"note: Ce code utilise des couleurs format ANSI, utilisation d'Eclipse est reccomendee\n"
+                + "=+=!!- C'EST DU BRUTAL V1.1 -!!=+="+"\033[0;30m");
         //Creation de la partie
         String debug = getUserInput("Mode automatique? (pour debug) y/n ");
         if (debug.equalsIgnoreCase("Y")) {
