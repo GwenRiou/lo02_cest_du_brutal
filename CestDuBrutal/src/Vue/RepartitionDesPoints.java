@@ -65,6 +65,7 @@ public class RepartitionDesPoints extends JFrame {
 	private JTextField  nom;
 	private Choice programme;
 	private Choice strategy;
+	private static int numJ = 1;
 
 
 	// le joueur
@@ -89,7 +90,7 @@ public class RepartitionDesPoints extends JFrame {
 		contentPane.setBorder(new CompoundBorder());
 		contentPane.setBackground(Color.CYAN);
 		setContentPane(contentPane);
-		contentPane.setLayout(null); // politique de placement des composants dans la fenêtre
+		contentPane.setLayout(null); // politique de placement des composants dans la fenï¿½tre
 		setBounds(100, 100, 1130, 650);
 		// +++++++++++++++++++++++++++++++++++++ config personnage  ++++++++++++++++++++++++++++++++++++++++++++
 		configPersonnage.setBackground(Color.YELLOW);
@@ -104,7 +105,7 @@ public class RepartitionDesPoints extends JFrame {
 		panelMaitre.setBackground(Color.CYAN);
 		panelMaitre.setBounds(79, 102, 61, 122);
 		panelMaitre.setLayout(new GridLayout(1, 1, 0, 0)); // politique de placement des composants dans ce panel
-		JButton jb1 = new JButton(); // pour représenter un personnage, utilisation d'un JButton
+		JButton jb1 = new JButton(); // pour reprï¿½senter un personnage, utilisation d'un JButton
 		panelMaitre.add(jb1);
 		jb1.setForeground(Color.CYAN);
 		Image img1 = new ImageIcon("ressources\\maitre.png").getImage();
@@ -116,8 +117,8 @@ public class RepartitionDesPoints extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setBounds(51, 75, 128, 24);
 		contentPane.add(lblNewLabel);
-		// +++++++++++++++++++++++++++++++++++++ Les élites +++++++++++++++++++++++++++++++++++++++++++++++++++
-		// Idem pour les élites
+		// +++++++++++++++++++++++++++++++++++++ Les ï¿½lites +++++++++++++++++++++++++++++++++++++++++++++++++++
+		// Idem pour les ï¿½lites
 		JPanel panelElite = new JPanel();
 		panelElite.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 		panelElite.setBackground(Color.CYAN);
@@ -137,15 +138,15 @@ public class RepartitionDesPoints extends JFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel_1.setBounds(449, 77, 83, 21);
 		contentPane.add(lblNewLabel_1);
-		// +++++++++++++++++++++++++++++++++++++ Les étudiants +++++++++++++++++++++++++++++++++++++++++++++++++
-		// Idem pour les étudiants de base
+		// +++++++++++++++++++++++++++++++++++++ Les ï¿½tudiants +++++++++++++++++++++++++++++++++++++++++++++++++
+		// Idem pour les ï¿½tudiants de base
 		JPanel panelEtu = new JPanel();
 		panelEtu.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 		panelEtu.setBackground(Color.CYAN);
 		panelEtu.setBounds(830, 102, 274, 411);
 		panelEtu.setLayout(new GridLayout(4, 4, 2, 0));
 		contentPane.add(panelEtu);
-		// Etiquette Les étudiants de base
+		// Etiquette Les ï¿½tudiants de base
 		JLabel lblNewLabel_2 = new JLabel("Les Etudiants de base");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel_2.setBounds(885, 76, 192, 20);
@@ -198,8 +199,8 @@ public class RepartitionDesPoints extends JFrame {
 		programme.add("MM");
 		contentPane.add(programme);
 		// ++++++++++++++++++++++++++++++++++++++++++ Configuration des personnages ++++++++++++++++++++++++++++++++
-		// Compteur des points à distribuer
-		JLabel lblNewLabel_4 = new JLabel("Points à distribuer");
+		// Compteur des points ï¿½ distribuer
+		JLabel lblNewLabel_4 = new JLabel("Points ï¿½ distribuer");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_4.setBounds(72, 309, 192, 26);
 		contentPane.add(lblNewLabel_4);
@@ -220,8 +221,8 @@ public class RepartitionDesPoints extends JFrame {
 		force.setBounds(297, 389, 61, 37);
 		contentPane.add(force);
 
-		// Dextérité
-		JLabel lblNewLabel_6 = new JLabel("Dextérité");
+		// Dextï¿½ritï¿½
+		JLabel lblNewLabel_6 = new JLabel("Dextï¿½ritï¿½");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_6.setBounds(159, 432, 105, 37);
 		contentPane.add(lblNewLabel_6);
@@ -231,8 +232,8 @@ public class RepartitionDesPoints extends JFrame {
 		dexterite.setBounds(297, 432, 61, 37);
 		contentPane.add(dexterite);
 
-		// Résistance
-		JLabel lblNewLabel_7 = new JLabel("Résistance");
+		// Rï¿½sistance
+		JLabel lblNewLabel_7 = new JLabel("Rï¿½sistance");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_7.setBounds(147, 479, 117, 37);
 		contentPane.add(lblNewLabel_7);
@@ -264,8 +265,8 @@ public class RepartitionDesPoints extends JFrame {
 		initiative.setBounds(297, 561, 61, 37);
 		contentPane.add(initiative);
 
-		// type de stratégie
-        JLabel lblNewLabel_11 = new JLabel("Stratégie");
+		// type de stratï¿½gie
+        JLabel lblNewLabel_11 = new JLabel("Stratï¿½gie");
         lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 24));
         lblNewLabel_11.setBounds(443, 452, 96, 37);
         contentPane.add(lblNewLabel_11);
@@ -281,7 +282,7 @@ public class RepartitionDesPoints extends JFrame {
 		JButton ok = new JButton("OK");
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//on recupère l'etudiant
+				//on recupï¿½re l'etudiant
 				String key = configPersonnage.getText();
 				int id = Integer.parseInt(key.substring(key.lastIndexOf(" ")+1));		
 				//On modifier l'etudiant
@@ -297,7 +298,7 @@ public class RepartitionDesPoints extends JFrame {
 		contentPane.add(ok);
 		ok.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
-		// ++++++++++++++++++++++++++++++++++++++++++ Valider configuration équipe ++++++++++++++++++++++++++++++
+		// ++++++++++++++++++++++++++++++++++++++++++ Valider configuration ï¿½quipe ++++++++++++++++++++++++++++++
 		JButton validation = new JButton("VALIDER");
 		validation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -331,7 +332,7 @@ public class RepartitionDesPoints extends JFrame {
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	}
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	// classe locale pour écouter les composants associés aux combattants
+	// classe locale pour ï¿½couter les composants associï¿½s aux combattants
 	final class MonEcouteurEvenements implements ActionListener {
 		private ArrayList<Etudiant> liste;
 		private String key;

@@ -4,6 +4,9 @@ import java.util.*;
 public class PartieMVC {
     private static PartieMVC partieObject;
     
+    private static boolean auto ;
+    
+
     private boolean Joueur1Ajoue;
     private String treve;
     private boolean finDePartie;    
@@ -446,6 +449,9 @@ public class PartieMVC {
     public boolean isJoueur1Ajoue() {
         return Joueur1Ajoue;
     }
+    public static boolean isAuto() {
+        return auto;
+    }
     
     public static String getNamePlayer(int j) { return listJ.get(j-1).getUserName(); }
 
@@ -453,10 +459,12 @@ public class PartieMVC {
         this.listJ = listJ;
     }
 
-    
-
     public void setJoueur1Ajoue(boolean joueur1Ajoue) {
         Joueur1Ajoue = joueur1Ajoue;
+    }
+    
+    public static void setAuto(boolean auto) {
+        PartieMVC.auto = auto;
     }
 
     //THE MAIN
