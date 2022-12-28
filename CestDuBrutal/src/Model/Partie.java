@@ -1,24 +1,47 @@
 package Model;
 import java.util.*;
 
+
+/**
+ * Classe partie
+ * Contient le main principal
+ * @author boone, riou
+ *
+ */
 public class Partie {
+    /**
+     * est utilisé pour appeler l'ojet Partie, utile pour récupérer la liste des joueurs
+     */
     private static Partie partieObject;
-    
-    private int etape;
+    /**
+     * Permet de savoir si la treve est declenchee
+     */
     private String treve;
-    private boolean finDePartie;    
+    /**
+     * Permet de savoir si la fin de la partie est déclenchée
+     */
+    private boolean finDePartie;   
+    /**
+     * Une liste qui contient les joueurs. Le jeu est optimisé pour l'utilisation de seulement deux joueurs. il est facilement possible d'étendre l'utilisation de plusieurs joueurs.
+     */
     private static ArrayList<Joueur> listJ;
     
         
-
+    /**
+     * Instancie l'objet partie.
+     */
     private Partie(){ // constructeur en Private car singleton Et pas en void :)
-        this.etape=0;
         this.finDePartie= false;
         this.listJ = new ArrayList<Joueur>();    
         this.treve=null;
     }
     
-    public static Partie getInstance() { //--> mÃƒÂ©thode qui va appeler le constructeur si besoin
+    /**
+     * methode qui va appeler le constructeur lorsque l'on a besoin
+     * @return retourne l'instance de la partie active
+     */
+    public static Partie getInstance() {
+
         
         //create object if it's not already created
         if(partieObject == null) {
@@ -29,18 +52,29 @@ public class Partie {
         return partieObject;
     }
     
-    // Regarde si l'objet Partie a deja un instance 
+    /**
+     * Regarde si l'objet Partie a deja ete instanciee, elle n'est plus utile.
+     */
     public void getConnection() {
-        System.out.println("You now have a Partie running");
+        //System.out.println("You now have a Partie running");
     }
     
-    //Ajoute 1 joueur Ã¯Â¿Â½ la partie
+    /**
+     * instancie un nouveau joueur et l'ajoute a la liste des joueurs
+     * @param joueur new joueur
+     */
+
     public void addPlayer(Joueur joueur){
         System.out.println("--Creation dun nouveau joueur--");
         listJ.add(joueur);
         joueur.identify();
     }
     
+    /**
+     * Methode qui instancie les joueurs automatiquement, il les ajoute a la liste des joueurs
+     * @param j1 joueur 1
+     * @param j2 joueur 2
+     */
     public void autoAddPlayers(Joueur j1,Joueur j2){
         System.out.println("--AutoAddPlayersV2.0 IS INITIALIZING, STAND BACK!!!--");
         listJ.add(j1);
@@ -50,17 +84,31 @@ public class Partie {
         
     }
     
-    public Etudiant selectStudent(Joueur j)throws StudentNotFoundInList{        
+    /**
+     * Permet au joueur de choisir un etudiant parmi une liste en fonction de leur ID
+     * @param j joueur pour concerner seulement les etudiants d'un joueur
+     * @return retourne le joueur choisi
+     * @throws StudentNotFoundInList erreur lancee lorsqu'aucun etudiant n'est trouvé dans la liste
+     */
+    public Etudiant selectStudent(Joueur j)throws StudentNotFoundInList{
+        
             ArrayList<Etudiant>  l= j.getStudentList();       
-            int id = getUserInputInt("Entez le numero d'un etudiant");     
+            int id = getUserInputInt("Entrez le numero d'un etudiant");     
             for (ListIterator<Etudiant> it = l.listIterator(); it.hasNext();) {
                  Etudiant s = it.next();
-                 if(s.getId()==id) return j.getStudent(it.previousIndex());            
+                 if(s.getId()==id) {
+                     return j.getStudent(it.previousIndex()); 
+                 }
             }
             throw new StudentNotFoundInList();          
     }
-    
-    
+    /**
+     * Permet au joueur de choisir une zone parmi une liste en fonction de leur nom
+     * @param id ID de la zone concernée (nom de la zone)
+     * @return retourne la zone choisie
+     * @throws ZoneNotFoundInList erreur lancee lorsqu'aucune zone n'est trouvé dans une liste
+     */
+
     public Zone selectZone(String id)throws ZoneNotFoundInList{
         
         ArrayList<ZoneCombat>  l= Zone.getZoneList();
@@ -74,7 +122,13 @@ public class Partie {
         throw new ZoneNotFoundInList();          
     }
     
-    
+    /**
+     * Le joueur repartit les points a ses etudiants: il choisit l'etudiant a modifier, et modifie:
+     * - la caracteristique a modifier
+     * - le nombre de points a atribuer
+     * Retourne une erreur lorsque l'etudiant n'est pas trouve
+     * @param j joueur qui attribue les points
+     */
     public void repartitionPoints(Joueur j) {
         System.out.println("Vous allez pouvoir attribuer vos points a vos etudiants. ");        
         int choix=-1;
@@ -93,7 +147,14 @@ public class Partie {
                     
                     choix=5;
                     while(choix==5 ) {
-                        choix = getUserChoix("Pour continuer a modifier l'etudiant 1! Changer la strategie de l'etudiant 2! Passer a l'etudiant suivante 3!  A l'etape suivante 4! Affichier tous les etudiants 5! ",5);
+
+                        choix = getUserChoix(""
+                                + "1. Continuer a modifier l'etudiant\n"
+                                + "2. Changer la strategie de l'etudiant\n"
+                                + "3. Passer a l'etudiant suivant\n"
+                                + "4. Passer a l'etape suivante\n"
+                                + "5. Affichier tous les etudiants",5);
+
                         if (choix==5) {j.displayAllStudent();}
                         if (choix==2) {
                             try {
@@ -118,19 +179,31 @@ public class Partie {
     }
     
  // Mise en reserve
+    /**
+     * mise en reserve de quatre etudiants apres la repartition des points
+     * @param j joueur qui possede les etudiants a mettre dans la reserve. il exite une reserve par joueur
+     */
     public void putInReserve(Joueur j) {
-        System.out.print(j.getUserName()+": Selectioner les etudiants a mettre dans la reserve \n");
-        while(j.getReserveArrayList().size()<5) {               
+        System.out.print("\n"+"\033[0;1m"+j.getUserName()+": Selectionnez les 5 etudiants a mettre dans la reserve \n"+"\033[0;0m");
+        while(j.getReserveArrayList().size()<5) {
+               
             try {
                 Etudiant etu = selectStudent(j);
                 j.putInReserve(etu);
+                System.out.println("\033[0;90m"+"l'etudiant n#"+etu.getId()+" a bien ete deplace vers la reserve\n"+"\033[0;0m");
+
             }catch(StudentNotFoundInList e) {
                 System.out.print(e.getMessage());
             }
         }
     }
     
-   //Mise en zones
+   /**
+    * affectation des etudiants dans la zone:
+    * tant qu'il n'y a pas de zone vide / au moins un etudiant de chaque joueur y est, on affecte un etudiant a une zone choisie par le joueur depuis le camion
+    * retourne une erreur lorsuqe la zone choisie n'existe pas ou lorsque l'etudiant choisi n'existe pas / n'est pas dans la liste
+    * @param j joueur qui possede les joueurs qu'on veut affecter
+    */
     public void affecterEtudiantZone(Joueur j) {
         boolean condition=false;
         if(j.getId()==1) condition=Zone.allZoneNotEmpty();// condidtion pour que le j1 a un etu dasn chaque zone 
@@ -159,7 +232,8 @@ public class Partie {
                         studentToMove = fromZone.drawEtudiantDansZone(j);
                     } 
                     
-                    // on choisie la zone de deploiement & on dï¿½polie l'etu choisi
+
+                    // on choisit la zone de deploiement & on deploit l'etu choisi
 
                     
                     System.out.println("Vers");
@@ -193,6 +267,11 @@ public class Partie {
             Zone.displayAllStudentInZones();
             System.out.println("la repartition dans les zones est fini");     //TODO    
     }
+    
+    /**
+     * permet d'affecter les etudiants depuis la reserve, vers les zones pendant la treve
+     * @param j joueur qui possede les etudiants que l'on veut bouger
+     */
     public void affecterEtudiantReserveTreve(Joueur j) {
         if(j.getReserveArrayList().size() != 0) {
             boolean stayInLoop = true;
@@ -245,7 +324,10 @@ public class Partie {
             System.out.println("La reserve est vide!");
         }
     }
-    
+    /**
+     * Permet de deplacer les etudiants d'un joueur d'une zone vers une autre zone pendant la treve
+     * @param j joueur qui possede les etudiants que l'on veut deplacer
+     */
     public void affecterEtudiantPendantTreve(Joueur j) {
         boolean stayInLoop = true;
         while (stayInLoop) {
@@ -327,40 +409,51 @@ public class Partie {
             }
         }  
     }
+    /**
+     * declenche la phase de treve apres le controle dune zone
+     * @param gagnantTreve joueur qui vient de gagner le controle dune zone
+     * @param zone zone dans laquelle la treve a ete apelee (zone dans lequel le joueur vient de gagner le controle)
+     * @param etatDeControle etat de controle apres changement
+     * @throws InterruptedException Si le thread se fait interrompre
+     */
     public synchronized void declencherTreve(Joueur gagnantTreve, ZoneCombat zone, String etatDeControle) throws InterruptedException {
        
-        while(treve!=null) {// si la treve est en cour
-            
+        while(treve!=null) {// si la treve est en cour         
             System.out.println(zone.getZoneName() + "est en pause la treve est en cours");
+
             this.wait();
         }
         if(etatDeControle.equalsIgnoreCase("0")) {// si la zone est controlee
             
             System.out.println("La treve est en cours car cette zone " + Thread.currentThread().getName() + " a fini son combat\n\n");
             treve=etatDeControle;//
-            
-            System.out.println("On appel la treve");
+
+       
             treve(gagnantTreve,zone); // --------------------------------ajout de la treve
-        }
-                 
+        }       
     }
-    
+    /**
+     * la treve: letudiant a l choix d'affecter des etudiants de zones controllees, des reservistes sur des zones de combat, visualiser de nombre de points ects par zones de combat ou de continuer la partie.
+     * il doit entrer 1, 2, 3 ,4 ou 5...
+     * @param gagnantTreve Joueur qui vient de gagner le controle
+     * @param zone zone dans laquelle le joueur vient de gagner le controle
+     */
     public void treve(Joueur gagnantTreve, ZoneCombat zone) {
         
         this.finDePartie = Zone.FinDePartie();
-        System.out.println("------La partie est-elle finie ? "+(finDePartie));
         
         if(finDePartie==false) {
             treve=null; // premier trucs
-            System.out.println("C'est la treve ");// on pourra l'enlevé
+            System.out.println("\033[0;1m"+"==TREVE: UNE ZONE A ETE CONTROLEE=="+"\033[0;0m");// on pourra l'enlevé
             int input = 0;
             while (!(input == 4)) {
                 //trucs de la treve
-                input = getUserChoix(gagnantTreve.getUserName()+": Que voulez-vous faire? (entrez 1-4)\n"
-                        + "1. Affecter des etudiants des zones controlees\n"
-                        + "2. Affecter des reservistes sur des zones de combat\n"
-                        + "3. Visualiser le nombre de points ECTS par zone de combat\n"
-                        + "4. Continuer la bataille",4);
+                input = getUserChoix("\033[0;1m\033[096m"+gagnantTreve.getUserName()+"\033[0;0m\033[0;1m: Que voulez-vous faire? (entrez 1-4)\n"
+                        + "\033[0;31m1.\033[0;1m Affecter des etudiants des zones controlees\n"
+                        + "\033[0;31m2.\033[0;1m Affecter des reservistes sur des zones de combat\n"
+                        + "\033[0;31m3.\033[0;1m Visualiser le nombre de points ECTS par zone de combat\n"
+                        + "\033[0;31m4.\033[0;1m Continuer la bataille\033[0;0m",4);
+
                 switch(input) {
                     case 1:
                         affecterEtudiantPendantTreve(gagnantTreve);
@@ -384,8 +477,14 @@ public class Partie {
             //System.exit(0);
         }
     }
+    
+    /**
+     * permet de distribuer automatiquement les etudiants d'un joueur dans les zones automatiquement et equitablement. Est adapte pour nimporte quelle taille de liste de zone
+     * @param j joueur auquel on veut distribuer les etudiants
+     */
     public static void autoAffecterEtudiantZone(Joueur j) {
-        System.out.println("========AutoAffect:"+j.getUserName()+"=======");
+        System.out.println("Distribution automatique des etudiants de:"+j.getUserName()+"est effectuee");
+
         int i = 0;
         while (j.getStudentList().size()!=1) {
             i++;
@@ -395,18 +494,29 @@ public class Partie {
             toZone.getEtuDansZoneArrayList().add(studentToMove);
             studentToMove.setIsInZone(toZone);
             j.getStudentList().remove(studentToMove);
-            System.out.println("AutoAffect vers:" + studentToMove.getIsInZone().getZoneName());
+
+            //System.out.println("AutoAffect vers:" + studentToMove.getIsInZone().getZoneName());
         }
     }
-    //Methodes pour Lire les inputs
+    /**
+     * Methode pour lire l'entree de l'utilisateur
+     * @param message message qui s'affiche avant l'entree de l'utilisateur
+     * @return retourne l'entree de l'utilisateur sous forme de string
+     */
     public static String getUserInput(String message) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println(message);
+        System.out.println(message+"\033[0;91m");
         
         String userInput = myObj.nextLine();  // Read user input
+        System.out.println("\033[0;0m");
         return userInput;  // Output user input
     }
-    
+    /**
+     * surcharge de {@link #getUserInput(String)}, permet de lire l'entree de l'utilisateur, et retourne un message d'erreur si l'entree n'est pas un nombre entier
+     * @param message message affiche avant l'entree de l'utilisateur
+     * @return retourne l'entree de l'utilisateur
+     */
+
     public static int getUserInputInt(String message) {        
         while(1==1) { // Attention boucle infini
             
@@ -423,6 +533,13 @@ public class Partie {
         }        
         
     }
+
+    /**
+     * Permet de lire l'entree de l'utilisateur, retourne une erreur lorsque l'utilisateur rentre un chiffre au dela de max
+     * @param message message que l'on veut afficher avant d'accepter une entree de l'utilisateur
+     * @param max nombre maximum entrable pour l'utilisateur
+     * @return retourne le message de l'utilisateur, un entier entre 0 et max
+     */
     public static int getUserChoix(String message, int max) {
         int num = -5;
         System.out.println("choisissez un nombre entre 1 et " + max );   
@@ -434,51 +551,69 @@ public class Partie {
            
     
     //setter & getter
-    public void setEtape(int etape) {
-        this.etape=etape;
-    }
     
+    /**
+     * getter de {@link #listJ}
+     * @return retourne la liste de joueur {@link #listJ}
+     */
     public ArrayList<Joueur> getListJ() {
         return listJ;
     }
-    
+    /**
+     * getter de {@link Joueur#getUserName()}
+     * @param j nombre du joueur, 1 pour j1, 2 pour j2
+     * @return retourne le nom du joueur choisi
+     */
     public static String getNamePlayer(int j) { return listJ.get(j-1).getUserName(); }
-
-    public void setListJ(ArrayList<Joueur> listJ) {
-        this.listJ = listJ;
-    }
-
-    public int getEtape() {
-        return this.etape;
-    }
-    
-    //THE MAIN
+ 
+    /**
+     * La boucle Main principale
+     * @param args arguments d'entree
+     */
     public static void main(String[] args) {
-        System.out.println("=+=!!- C'EST DU BRUTAL V1.0 -!!=+=");
-        //CrÃƒÂ©ation de la partie
+        System.out.println("\033[0;1m"+"note: Ce code utilise des couleurs format ANSI, utilisation d'Eclipse est reccomendee\n"
+                + "=+=!!- C'EST DU BRUTAL V1.1 -!!=+="+"\033[0;0m");
+        //Creation de la partie
+        String debug = getUserInput("Mode automatique? (pour debug) y/n ");
+        if (debug.equalsIgnoreCase("Y")) {
+            System.out.println("\033[0;90m"+"Mode automatique actif\n"+"\033[0;0m");
+        }
+        else {
+            System.out.println("\033[0;90m"+"Mode automatique inactif\n"+"\033[0;0m");
+        }
+
         Partie partie;
         partie = Partie.getInstance();
         partie.getConnection();// ne fonctionne que apres un getInstance 
+        //TODO créer un constructeur pour l'auto affectation
         Joueur j1 = new Joueur(1);
         Joueur j2 = new Joueur(2);
         partie.addPlayer(j1);
-        partie.addPlayer(j2);//partie.autoAddPlayers(j1, j2);
+        partie.addPlayer(j2);
+        //partie.autoAddPlayers(j1, j2);
         
         Zone.setZones();  
         
         System.out.println("Le joueur 1 s'appelle " +j1.getUserName());   
         System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
         
-        j1.createStudentList();
-        j2.createStudentList();
-
-        System.out.println("========REPARTITION DES POINTS=======");
-        j1.displayAllStudent();
-        //partie.repartitionPoints(j1);  
-        j2.displayAllStudent();
-        //partie.repartitionPoints(j2); 
+        System.out.println("\033[0;1m"+"========REPARTITION DES POINTS======="+"\033[0;0m");
+        if (debug.equalsIgnoreCase("Y")){
+            System.out.println("> La repartition est automatique");
+            j1.autoCreateStudentList();
+            j2.autoCreateStudentList();
+        }
+        else {
+            
+            j1.displayAllStudent();
+            partie.repartitionPoints(j1);  
+            j2.displayAllStudent();
+            partie.repartitionPoints(j2); 
+        }
        
-        System.out.println("========MISE EN RESERVE=======");
+        System.out.println("\033[0;1m"+"========MISE EN RESERVE======="+"\033[0;0m");
+        
+
         j1.displayAllStudent();
         partie.putInReserve(j1);
         j1.displayReserveStudent();
@@ -487,17 +622,24 @@ public class Partie {
         partie.putInReserve(j2); 
         j2.displayReserveStudent();
         
-        System.out.println("========DISTRIBUTION DES ETUDIANTS=======");
+
+        System.out.println("\033[0;1m"+"========DISTRIBUTION DES ETUDIANTS======="+"\033[0;0m");
         
-        //j1.displayAllStudent();
-        //partie.affecterEtudiantZone(j1);  
-        //j2.displayAllStudent();
-        //partie.affecterEtudiantZone(j2);  
-        autoAffecterEtudiantZone(j1);
-        autoAffecterEtudiantZone(j2);
+        
+        if (debug.equalsIgnoreCase("Y")) {
+            autoAffecterEtudiantZone(j1);
+            autoAffecterEtudiantZone(j2);
+        }
+        else {
+          j1.displayAllStudent();
+          partie.affecterEtudiantZone(j1);  
+          j2.displayAllStudent();
+          partie.affecterEtudiantZone(j2);  
+        }
+        
         Zone.displayAllStudentInZones();
        
-        
+        String empty = getUserInput("\n---"+"\033[0;1m"+"Appuyez sur entree pour proceder a la melee"+"\033[0;1m"+"---");
         Zone.melee();        
         System.out.println("exit(0)");
     }
