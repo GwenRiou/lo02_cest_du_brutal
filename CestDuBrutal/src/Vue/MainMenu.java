@@ -52,7 +52,6 @@ public class MainMenu extends JFrame {
         //BOUTON JOUER
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("debugtest");
                 partie.setAuto(false);
                 j1.createStudentList();
                 j2.createStudentList();
@@ -69,6 +68,8 @@ public class MainMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 partie.setAuto(true);
                 System.out.println("> La repartition est automatique");
+                j1.setUserName("Joueur 1");
+                j2.setUserName("Joueur 2");
                 j1.autoCreateStudentList();
                 j2.autoCreateStudentList();
                 MiseEnReserve gui = new MiseEnReserve(partie);
