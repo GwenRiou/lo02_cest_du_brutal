@@ -57,6 +57,7 @@ public class Etudiant implements Strategie{
 
     // constructeur 
     //ects = 30 pour tous les �tudiants donc pas dans l'appel construction
+
     /**
      * Constructeur manuelle de la classe
      * @param type Type de l'etudiant, maitre du gobi, elite ou etudiant
@@ -67,6 +68,7 @@ public class Etudiant implements Strategie{
      * @param initiative L'etudiant avec l'initiative la plus grande agit en premier
      * @param idJoueur Le joueur auquel l'etudiant appartient
      */
+
     public Etudiant(String type, int force, int dexterite, 
             int resistance, int constitution, int initiative,Joueur idJoueur) {
         this.type = type;
@@ -102,6 +104,7 @@ public class Etudiant implements Strategie{
     /**
      * instantie un etudiant 
      */
+
     public Etudiant() {
         
     }
@@ -147,6 +150,7 @@ public class Etudiant implements Strategie{
      * Tente d'attaquer un etudiant de l'autre joueur. Tue l'etudiant si l'autre n'a plus de vie, et declenche une treve lorsqu'il n'y a plus aucun etudiant de l'autre joueur dans la zones
      * @param zone permet d'appeler la zone pour compter le nombre d'etudiants dans la zone
      */
+
     private void attack(ZoneCombat zone) {//only attack student inside zone
         
         ArrayList<Etudiant> enemyTeam = new ArrayList<Etudiant>();
@@ -177,10 +181,12 @@ public class Etudiant implements Strategie{
         int damageTaken = (int) ((y*(1+damageCoefficient))*damageReference);        
         if (x>0 && x<(40 + 3*this.dexterite)) {
             target.ects -= damageTaken;
+
             System.out.println("\033[0;90m"+this.belongsTo.getUserName()+" : "+this.getId()+" attacks "+target.id+", dealing "+ damageTaken + "HP"+"\033[0;0m");
         }
         if (target.ects <= 0) {//kill student
             System.out.println("\033[0;90m"+target.belongsTo.getUserName()+"'s etu #"+target.getId()+" was killed by"+this.id+"\033[0;0m");//
+
             target.isInZone.getEtuDansZoneArrayList().remove(target);
             //=====count number of players alive
             
@@ -233,6 +239,7 @@ public class Etudiant implements Strategie{
         }
         //healing...
         System.out.println("\033[0;90m"+this.belongsTo.getUserName()+" : "+this.id+" Tente de soigner"+"\033[0;0m");
+
         int healAmount;
         int x = (int) (Math.random()*100);
         double y = Math.random()*0.6;//0<y<0,6
@@ -251,6 +258,7 @@ public class Etudiant implements Strategie{
     /**
      * attaque ou soigne en fonction de la strategie de l'etudiant
      */
+
     public void agir() {
         if (this.strategie == strategie.OFFENSIVE) {
             attack((ZoneCombat)this.isInZone);
@@ -382,6 +390,7 @@ public class Etudiant implements Strategie{
      * setter de {@link #strategie} a partir d'un String, vers une enumeration
      * @param strategie String qui sera convertie en enumeration de {@link enumStrategie} qui remplacera la valeur actuelle
      */
+
     public void setStrategie(String strategie) {
         try{
             this.strategie = enumStrategie.valueOf(strategie.toUpperCase());

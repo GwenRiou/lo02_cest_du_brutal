@@ -1,5 +1,6 @@
 package Model;
 import java.util.*;//for EVERYTHIGN
+
 /**
  * Classe mere comprenant les zones de combat et a reserve
  * @author boone, rioug
@@ -23,11 +24,13 @@ public class Zone {
      * constructeur de la zone
      * @param zoneName Nom de la zone pour instancier
      */
+
     public Zone(String zoneName) {
         this.etuDansZone = new ArrayList<Etudiant>();
         this.zoneName = zoneName;
     }
     
+
     /**
      * affecter un etudiant a la zone
      * @param etu etudiant a ajouter dans la liste de {@link #etuDansZone}
@@ -96,7 +99,7 @@ public class Zone {
         Zone zon = zoneList.get(index);
         return zon;
     }
-    
+
     /**
      * est appele dans {@link #drawEtudiantDansZone(Joueur)} pour rattraper l'etudiant sur l'index donne par l'iterator
      * @param index index donne par l'iterator
@@ -144,6 +147,7 @@ public class Zone {
         studentListToSort.sort((etu1,etu2) -> etu2.getInitiative()-(etu1.getInitiative())); //j'ai pas cherche a comprendre en dÃ©tail la syntaxe....
     }
     
+
    /**
     * retire un etudiant de la zone
     * @param etu etudiant a retirer
@@ -151,7 +155,7 @@ public class Zone {
     public void removeStudentFromZone(Etudiant etu) {
         etuDansZone.remove(etu);
     }
-    
+
     /**
      * Verifie si toutes les zones ne sont pas vides. permet d'assurer que l'on peut passer a l'etape suivante
      * @return retourne un booleen. Vrai si aucune zone n'est vide, faux s'il existe une zone non vide
@@ -170,6 +174,7 @@ public class Zone {
      * @param j joueur concerne
      * @return un booleen, vrai s'il existe au moins un etudiant dans chaque zone du j2, faux s'il y a une zone sans etudiant j2.
      */
+
     public static boolean allZoneWithTwoStudent(Joueur j) {
         ListIterator<ZoneCombat> it =zoneList.listIterator();
         while(it.hasNext()){
@@ -257,6 +262,7 @@ public class Zone {
     public void displayEtudiantDansZoneList() {
         ArrayList<Etudiant>  etulist= this.etuDansZone;
         System.out.println("\033[0;1m"+"\n==Etudiants dans "+this.zoneName+":=="+"\033[0;0m");
+
         for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //scan through all students
             Etudiant s = it.next();
             System.out.println(s);//use the tostring method to print the student's ids

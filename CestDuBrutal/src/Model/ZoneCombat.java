@@ -38,6 +38,7 @@ public class ZoneCombat extends Zone implements Runnable{
         t.start();
     }
 
+
     /**
      * interrompt les theads si besoin
      */
@@ -71,6 +72,7 @@ public class ZoneCombat extends Zone implements Runnable{
      * chaque zone fait agir letudiant en haut de la liste, puis le deplace vers la fin lorsqu'il a fini d'agir.
      * repete cette action jusque lorsqu'un etudiant tue le dernier etudiant de la zone, ou si une autre zone se fait controler        
      */
+
     public void run() {
         initialiser();
         int i = 0;
@@ -107,11 +109,13 @@ public class ZoneCombat extends Zone implements Runnable{
         }
     }
     
+
     /**
      * verifie s'il existe au moins un etudiant dans la zone appartenant au joueur 2
      * @param j joueur 2
      * @return retourne un booleen, true s'il existe au moins un etudiant appartenant au joueur 2, false sinon 
      */
+
     public boolean zoneWithTwoEtu(Joueur j) {
         Iterator<Etudiant> it =etuDansZone.iterator();
         while(it.hasNext()){
@@ -142,6 +146,7 @@ public class ZoneCombat extends Zone implements Runnable{
 
     
     //getters
+
     /**
      * getter de {@link #controleZone}
      * @return {@link #controleZone}

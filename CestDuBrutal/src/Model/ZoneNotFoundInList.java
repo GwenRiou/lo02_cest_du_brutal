@@ -10,5 +10,6 @@ public class ZoneNotFoundInList extends Exception{
      */
     public ZoneNotFoundInList() {
         super("Cette zone n'existe pas.");
+
     }
 }

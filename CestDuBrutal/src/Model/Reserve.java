@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
+
 /**
  * herite de zone, est la zone dans laquelle le joueur peut affecter 5 etudiant au debut de la partie
  * @author boone
@@ -28,11 +29,13 @@ public class Reserve extends Zone {
      * affecte un etudiant a la reserve
      * @param etudiant etudiant a affecter
      */
+
     public void affecterReserve(Etudiant etudiant) {
         this.etuDansZone.add(etudiant);
     }
     
     //TODO    /!\ à changer: ID étudiant 
+
     /**
      * retire un etudiant de la reserve
      * @param etudiant etudiant a retirer

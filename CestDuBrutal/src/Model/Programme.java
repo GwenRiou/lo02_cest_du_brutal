@@ -1,4 +1,5 @@
 package Model;
+
 /**
  * enumeration qui caracterise la branche du joueur
  * @author boone
