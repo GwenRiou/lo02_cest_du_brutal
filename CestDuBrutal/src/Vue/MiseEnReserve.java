@@ -266,6 +266,7 @@ public class MiseEnReserve extends JFrame {
                 if(joueur.getReserve().getListeEtudiantsReserve().size() == 4){
                     validation.setEnabled(true);
                 }
+                reserviste.setEnabled(false);
                 String key = configPersonnage.getText();
                 int id = Integer.parseInt(key.substring(key.lastIndexOf(" ")+1));
                 int resultat = joueur.putInReserveMVC(id);
@@ -421,7 +422,9 @@ public class MiseEnReserve extends JFrame {
         public void actionPerformed(ActionEvent e) {//
             configPersonnage.setText(key);
             try {
-                reserviste.setEnabled(true);
+                if(joueur.getReserve().getListeEtudiantsReserve().size() < 5){
+                    reserviste.setEnabled(true);
+                }
                 Etudiant comb = joueur.selectStudentMVC(id);                
                 force.setText(Integer.toString(comb.getForce()));
                 dexterite.setText(Integer.toString(comb.getDexterite()));
