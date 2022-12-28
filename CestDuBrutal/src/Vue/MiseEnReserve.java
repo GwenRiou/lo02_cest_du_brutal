@@ -374,6 +374,7 @@ public class MiseEnReserve extends JFrame {
                 //Affichage des etudiants dans la reserve du joueur
                 joueur.displayReserveStudent();
                 if(partie.isJoueur1Ajoue()==true) {
+
                     //affichie la suite
                     if(partie.getInstance().isAuto()) {
                         partie.autoAffecterEtudiantZone();

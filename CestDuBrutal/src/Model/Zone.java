@@ -138,7 +138,24 @@ public class Zone {
         throw new StudentNotFoundInList();
 
     }
-    
+    public Etudiant drawEtudiantDansZoneMVC(Joueur j,int id) throws StudentNotFoundInList{
+        ArrayList<Etudiant>  etulist= this.etuDansZone;//
+            try {//try finding a student in the zone
+                for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //let's find the student
+                    Etudiant s = it.next();
+                    if((s.getId() == id) & j.equals(s.getBelongsTo())) { //TODO set student isInZone to the zone hes affected in
+                        return drawEtudiantDansZone(it.previousIndex()); //return the student if the id condition is met
+                    }
+                    //if the id matches the student AND the student belongs to the player, return the student
+                }//exits this loop if it hasnt found a student
+            }
+            catch (NumberFormatException e){
+                System.out.println("Veuillez entrer un ID valide \n");               
+            }
+        
+        throw new StudentNotFoundInList();
+
+    }
     /**
      * Trie une liste d'etudiant le la trie en fonction de leur initiative
      * @param studentListToSort liste que l'on veut trier
@@ -331,6 +348,12 @@ public class Zone {
         this.etuDansZone.add(etudiant);
         System.out.println("L'etudiant a bien ete ajoute a la zone");
     }
+
+
+    public ArrayList<Etudiant> getEtuDansZone() {
+        return etuDansZone;
+    }
+
     
 }
 
