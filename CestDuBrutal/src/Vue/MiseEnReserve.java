@@ -66,6 +66,7 @@ public class MiseEnReserve extends JFrame {
     private Label  nom;
     private Label programme;
     private Label strategy;
+    private JButton validation;
 
     private JButton reserviste;
 
@@ -160,7 +161,7 @@ public class MiseEnReserve extends JFrame {
             jb2[k] = new JButton();
             jb2[k].setIcon(new ImageIcon(img3));
             panelEtu.add(jb2[k]);
-            jb2[k].addActionListener(   new MonEcouteurEvenements(joueur.getStudentList(), new String("Etudiant " + (k+6)),k+6));
+            jb2[k].addActionListener(new MonEcouteurEvenements(joueur.getStudentList(), new String("Etudiant " + (k+6)),k+6));
         }
         // +++++++++++++++++++++++++++++++++++++++++ Joueur +++++++++++++++++++++++++++++++++++++++++++++++++++
         JLabel lblNewLabel_3 = new JLabel("Joueur");
@@ -262,6 +263,9 @@ public class MiseEnReserve extends JFrame {
         reserviste.setEnabled(false);
         reserviste.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if(joueur.getReserve().getListeEtudiantsReserve().size() == 4){
+                    validation.setEnabled(true);
+                }
                 String key = configPersonnage.getText();
                 int id = Integer.parseInt(key.substring(key.lastIndexOf(" ")+1));
                 int resultat = joueur.putInReserveMVC(id);
@@ -361,7 +365,8 @@ public class MiseEnReserve extends JFrame {
         contentPane.add(reserviste);        
 
         // ++++++++++++++++++++++++++++++++++++++++++ Valider configuration �quipe ++++++++++++++++++++++++++++++
-        JButton validation = new JButton("VALIDER");
+        validation = new JButton("VALIDER");
+        validation.setEnabled(false);
         validation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Affichage des caracteristiques du joueur.
