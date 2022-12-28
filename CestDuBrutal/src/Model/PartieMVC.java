@@ -4,6 +4,9 @@ import java.util.*;
 public class PartieMVC {
     private static PartieMVC partieObject;
     
+    private static boolean auto ;
+    
+
     private boolean Joueur1Ajoue;
     private String treve;
     private boolean finDePartie;    
@@ -388,6 +391,12 @@ public class PartieMVC {
             //System.exit(0);
         }
     }
+    public static void autoAffecterEtudiantZone() {
+        for (int i = 0;i<listJ.size();i++) {
+            autoAffecterEtudiantZone(listJ.get(i));
+        }
+        
+    }
     public static void autoAffecterEtudiantZone(Joueur j) {
         System.out.println("========AutoAffect:"+j.getUserName()+"=======");
         int i = 0;
@@ -446,6 +455,9 @@ public class PartieMVC {
     public boolean isJoueur1Ajoue() {
         return Joueur1Ajoue;
     }
+    public static boolean isAuto() {
+        return auto;
+    }
     
     public static String getNamePlayer(int j) { return listJ.get(j-1).getUserName(); }
 
@@ -453,10 +465,12 @@ public class PartieMVC {
         this.listJ = listJ;
     }
 
-    
-
     public void setJoueur1Ajoue(boolean joueur1Ajoue) {
         Joueur1Ajoue = joueur1Ajoue;
+    }
+    
+    public static void setAuto(boolean auto) {
+        PartieMVC.auto = auto;
     }
 
     //THE MAIN
