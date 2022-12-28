@@ -9,6 +9,9 @@ import java.util.Scanner;
 import javax.swing.SwingUtilities;
 
 import Model.Joueur;
+import Model.PartieMVC;
+import Model.Zone;
+import Vue.DistributionEtudiants;
 import Vue.MiseEnReserve;
 import Vue.RepartitionDesPoints;
 
@@ -20,13 +23,21 @@ public class main {
 			EventQueue.invokeAndWait (new Runnable() {
 				public void run() {
 					try {
-					    Joueur j1 = new Joueur(1);
-	                    Joueur j2 = new Joueur(2);
-						RepartitionDesPoints gui1 = new RepartitionDesPoints(j1);	
+					    PartieMVC partie;
+				        partie = PartieMVC.getInstance();
+				        partie.getConnection();// ne fonctionne que apres un getInstance 
+				        Joueur j1 = new Joueur(1);
+				        Joueur j2 = new Joueur(2);
+				        partie.addPlayer(j1);
+				        partie.addPlayer(j2);
+				        Zone.setZones(); 
+				        
+				        
+				        
+						RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);	
 						
-						MiseEnReserve gui2 = new MiseEnReserve(j1);
+						//MiseEnReserve gui2 = new MiseEnReserve(partie);					
 						
-	                     //MiseEnReserve hu2 = new MiseEnReserve(joueur1);
 						
 					} catch (Exception e) {
 						e.printStackTrace();

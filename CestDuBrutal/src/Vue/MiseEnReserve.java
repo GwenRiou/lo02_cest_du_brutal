@@ -30,6 +30,7 @@ import javax.swing.border.TitledBorder;
 
 import Model.Etudiant;
 import Model.Joueur;
+import Model.PartieMVC;
 import Model.StudentNotFoundInList;
 
 import javax.swing.border.CompoundBorder;
@@ -48,11 +49,11 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.Dimension;
 
 
 public class MiseEnReserve extends JFrame {
 
-    //TODO changer TextField par Jlabel
     // les composants de la vue
     private JPanel contentPane;
     private Label configPersonnage = new Label();
@@ -70,9 +71,12 @@ public class MiseEnReserve extends JFrame {
 
     // le joueur
     private Joueur joueur= new Joueur(0);
+    private PartieMVC partie;
     
-    public MiseEnReserve(Joueur joueur) {
-        this.joueur = joueur;
+    public MiseEnReserve(PartieMVC partie) {
+        setMinimumSize(new Dimension(1200, 700));
+        this.joueur = partie.getJoueurToPlay();
+        this.partie=partie;
         this.initFenetre();
     }
 
@@ -356,8 +360,16 @@ public class MiseEnReserve extends JFrame {
                 System.out.println(joueur);
                 //Affichage des etudiants dans la reserve du joueur
                 joueur.displayReserveStudent();
-                // fermer la fenetre graphique              
-                dispose();              
+                if(partie.isJoueur1Ajoue()==true) {
+                    //affichie la suite                 
+                    DistributionEtudiants gui3 = new DistributionEtudiants(partie);
+                    // fermer la fenetre graphique              
+                    dispose();              
+                }else {
+                    partie.setJoueur1Ajoue(true);
+                    MiseEnReserve gui2 = new MiseEnReserve(partie); 
+                    dispose();
+                }
             }
         });
         validation.setFont(new Font("Tahoma", Font.PLAIN, 24));
