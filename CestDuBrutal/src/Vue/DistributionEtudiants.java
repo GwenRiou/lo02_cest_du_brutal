@@ -23,8 +23,10 @@ import Model.Joueur;
 import Model.Partie;
 import Model.PartieMVC;
 import Model.StudentNotFoundInList;
+import Model.Zone;
 import Vue.MiseEnReserve.MonEcouteurEvenements;
 import java.awt.Dimension;
+import java.awt.Font;
 
 public class DistributionEtudiants extends JFrame {
 
@@ -33,10 +35,11 @@ public class DistributionEtudiants extends JFrame {
 
     // le joueur
     private Joueur joueur= new Joueur(0);
-
+    private PartieMVC partie;
     public DistributionEtudiants(PartieMVC partie) {
-        setMinimumSize(new Dimension(1400, 700));
+        setMinimumSize(new Dimension(1400, 800));
         this.joueur = partie.getListJ().get(0);// on récuppère le premier joueur
+        this.partie=partie;
         this.initFenetre();
     }
 
@@ -56,15 +59,10 @@ public class DistributionEtudiants extends JFrame {
         contentPane.setLayout(null);
         setBounds(100, 100, 1370, 650);
         
-
-        JLabel lblNewLabel = new JLabel("Distribution des Etudiants dans les Zones");
-        lblNewLabel.setBounds(100, 10, 200, 13);
-        contentPane.add(lblNewLabel);
-        
         JPanel panelCamion = new JPanel();
         panelCamion.setBorder(new LineBorder(new Color(0, 0, 0)));
-        panelCamion.setBounds(20, 59, 1370, 122);        
-        panelCamion.setLayout(new GridLayout(1, 20, 0, 0));
+        panelCamion.setBounds(20, 26, 394, 594);        
+        panelCamion.setLayout(new GridLayout(5, 4, 0, 0));
         contentPane.add(panelCamion);
         
         //Les images
@@ -73,7 +71,7 @@ public class DistributionEtudiants extends JFrame {
         Image img3 = new ImageIcon("ressources\\etudiant.png").getImage();  
         
         JLabel lblNewLabel_1 = new JLabel("Le camion");
-        lblNewLabel_1.setBounds(20, 47, 61, 13);
+        lblNewLabel_1.setBounds(20, 10, 61, 13);
         contentPane.add(lblNewLabel_1);        
          
         ArrayList <Etudiant> listEtu = joueur.getStudentList();
@@ -94,77 +92,205 @@ public class DistributionEtudiants extends JFrame {
                     break;                    
             }
             panelCamion.add(jb[k]);
-            jb[k].addActionListener(   new MonEcouteurEvenements(joueur.getStudentList(), new String("Etudiant " + (k+6)),k+6));
+            Etudiant etu0 = listEtu.get(k);
+            jb[k].addActionListener(   new MonEcouteurEvenements(joueur.getStudentList(),etu0 ));
         }
         
         JLabel lblNewLabel_2 = new JLabel("La Bibliotheque");
-        lblNewLabel_2.setBounds(20, 191, 76, 13);
+        lblNewLabel_2.setBounds(450, 10, 76, 13);
         contentPane.add(lblNewLabel_2);        
         
         JPanel panelBibliotheque = new JPanel();
         panelBibliotheque.setBorder(new LineBorder(new Color(0, 0, 0)));
-        panelBibliotheque.setBounds(20, 206, 1370, 122);
+        panelBibliotheque.setBounds(440, 26, 928, 100);
         contentPane.add(panelBibliotheque);
         panelBibliotheque.setLayout(new GridLayout(1, 20, 0, 0));
-        
-        JLabel lblNewLabel_2_1 = new JLabel("Le BDE");
-        lblNewLabel_2_1.setBounds(20, 340, 61, 13);
-        contentPane.add(lblNewLabel_2_1);
-        
-        JPanel panelBibliotheque_1 = new JPanel();
-        panelBibliotheque_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-        panelBibliotheque_1.setBounds(20, 352, 1370, 122);
-        contentPane.add(panelBibliotheque_1);
-        panelBibliotheque_1.setLayout(new GridLayout(1, 20, 0, 0));
-         
-        /*ArrayList <Etudiant> listeBDE = Zone.getStudentList();
-        int sizeCamion = listEtu.size();
-        JButton[] jb = new JButton[sizeCamion];
-        for (int k = 0; k < sizeCamion; k++) {
-            jb[k] = new JButton();
+      //habiage du panel bibliotheque
+        ArrayList <Etudiant> listeBiblio = Zone.getZone(0).getEtuDansZoneArrayList();        
+        int sizeBiblio = listeBiblio.size();
+        JButton[] jb1 = new JButton[sizeBiblio];
+        for (int k = 0; k < sizeBiblio; k++) {
+            jb1[k] = new JButton();
             //On met l'icon correspondant
-            switch(listEtu.get(k).getType()) {
+            switch(listeBiblio.get(k).getType()) {
                 case "Maitre":
-                    jb[k].setIcon(new ImageIcon(img1));
+                    jb1[k].setIcon(new ImageIcon(img1));
                     break;
                 case "Elite":
-                    jb[k].setIcon(new ImageIcon(img2));
+                    jb1[k].setIcon(new ImageIcon(img2));
                     break;
                 default:
-                    jb[k].setIcon(new ImageIcon(img3));
+                    jb1[k].setIcon(new ImageIcon(img3));
                     break;                    
             }
-            panelCamion.add(jb[k]);
-            jb[k].addActionListener(   new MonEcouteurEvenements(joueur.getStudentList(), new String("Etudiant " + (k+6)),k+6));
-        }*/
+            panelBibliotheque.add(jb1[k]);
+            Etudiant etu = listeBiblio.get(k);
+            jb1[k].addActionListener(   new MonEcouteurEvenements(listeBiblio, etu));
+        }
+        
+        JLabel lblNewLabel_3 = new JLabel("Le BDE");
+        lblNewLabel_3.setBounds(450, 136, 61, 13);
+        contentPane.add(lblNewLabel_3);
+        
+        JPanel panelBDE = new JPanel();
+        panelBDE.setBorder(new LineBorder(new Color(0, 0, 0)));
+        panelBDE.setBounds(440, 148, 922, 100);
+        contentPane.add(panelBDE);
+        panelBDE.setLayout(new GridLayout(1, 20, 0, 0));
+        //habiage du panel BDE
+        ArrayList <Etudiant> listeBDE = Zone.getZone(1).getEtuDansZoneArrayList(); 
+        int sizeBDE = listeBDE.size();
+        JButton[] jb2 = new JButton[sizeBDE];
+        for (int k = 0; k < sizeBDE; k++) {
+            System.out.println("k="+k+" sizeBDE =  "+sizeBDE);
+            jb2[k] = new JButton();
+            //On met l'icon correspondant
+            switch(listeBDE.get(k).getType()) {
+                case "Maitre":
+                    jb2[k].setIcon(new ImageIcon(img1));
+                    break;
+                case "Elite":
+                    jb2[k].setIcon(new ImageIcon(img2));
+                    break;
+                default:
+                    jb2[k].setIcon(new ImageIcon(img3));
+                    break;                    
+            }
+            panelBDE.add(jb2[k]);
+            Etudiant etu = listeBDE.get(k);
+            jb2[k].addActionListener(   new MonEcouteurEvenements(listeBDE, etu));
+        }
+        
+        JLabel lblNewLabel = new JLabel("Le Quartier Administratif");
+        lblNewLabel.setBounds(450, 258, 126, 13);
+        contentPane.add(lblNewLabel);
+        
+        JPanel panelAdministratif = new JPanel();
+        panelAdministratif.setBorder(new LineBorder(new Color(0, 0, 0)));
+        panelAdministratif.setBounds(440, 281, 922, 100);
+        contentPane.add(panelAdministratif);
+        panelAdministratif.setLayout(new GridLayout(1, 20, 0, 0));
+      //habiage du panelAdministratif 
+        ArrayList <Etudiant> listeAdministratif = Zone.getZone(2).getEtuDansZoneArrayList(); 
+        int sizeAdministratif = listeAdministratif.size();
+        JButton[] jb3 = new JButton[sizeAdministratif];
+        for (int k = 0; k < sizeAdministratif; k++) {
+            jb3[k] = new JButton();
+            //On met l'icon correspondant
+            switch(listeAdministratif.get(k).getType()) {
+                case "Maitre":
+                    jb3[k].setIcon(new ImageIcon(img1));
+                    break;
+                case "Elite":
+                    jb3[k].setIcon(new ImageIcon(img2));
+                    break;
+                default:
+                    jb3[k].setIcon(new ImageIcon(img3));
+                    break;                    
+            }
+            panelAdministratif.add(jb3[k]);
+            Etudiant etu = listeAdministratif.get(k);
+            jb3[k].addActionListener(   new MonEcouteurEvenements(listeAdministratif, etu));
+        }
+        JLabel lblNewLabel_4 = new JLabel("Les Halles Industrielles");
+        lblNewLabel_4.setBounds(450, 391, 104, 13);
+        contentPane.add(lblNewLabel_4);
+        
+        JPanel panelIndustrielle = new JPanel();
+        panelIndustrielle.setBorder(new LineBorder(new Color(0, 0, 0)));
+        panelIndustrielle.setBounds(440, 405, 922, 100);
+        contentPane.add(panelIndustrielle);
+        panelIndustrielle.setLayout(new GridLayout(1, 20, 0, 0));
+      //habiage du panelIndustrielle 
+        ArrayList <Etudiant> listeIndustrielle = Zone.getZone(3).getEtuDansZoneArrayList(); 
+        int sizeIndustrielle = listeIndustrielle.size();
+        JButton[] jb4 = new JButton[sizeIndustrielle];
+        for (int k = 0; k < sizeIndustrielle; k++) {
+            jb4[k] = new JButton();
+            //On met l'icon correspondant
+            switch(listeIndustrielle.get(k).getType()) {
+                case "Maitre":
+                    jb4[k].setIcon(new ImageIcon(img1));
+                    break;
+                case "Elite":
+                    jb4[k].setIcon(new ImageIcon(img2));
+                    break;
+                default:
+                    jb4[k].setIcon(new ImageIcon(img3));
+                    break;                    
+            }
+            panelIndustrielle.add(jb4[k]);
+            Etudiant etu = listeIndustrielle.get(k);
+            jb4[k].addActionListener(   new MonEcouteurEvenements(listeIndustrielle, etu));
+        }
+        JLabel lblNewLabel_5 = new JLabel("La Halle Sportive");
+        lblNewLabel_5.setBounds(450, 515, 93, 13);
+        contentPane.add(lblNewLabel_5);
+        
+        JPanel panelSportive = new JPanel();
+        panelSportive.setBorder(new LineBorder(new Color(0, 0, 0)));
+        panelSportive.setBounds(440, 527, 922, 100);
+        contentPane.add(panelSportive);
+        panelSportive.setLayout(new GridLayout(1, 20, 0, 0));
+        ArrayList <Etudiant> listeSportive = Zone.getZone(4).getEtuDansZoneArrayList(); 
+        int sizeSportive = listeSportive.size();
+        JButton[] jb5 = new JButton[sizeSportive];
+        for (int k = 0; k < sizeSportive; k++) {
+            jb5[k] = new JButton();
+            //On met l'icon correspondant
+            switch(listeSportive.get(k).getType()) {
+                case "Maitre":
+                    jb5[k].setIcon(new ImageIcon(img1));
+                    break;
+                case "Elite":
+                    jb5[k].setIcon(new ImageIcon(img2));
+                    break;
+                default:
+                    jb5[k].setIcon(new ImageIcon(img3));
+                    break;                    
+            }
+            panelSportive.add(jb5[k]);
+            Etudiant etu = listeSportive.get(k);
+            jb5[k].addActionListener(   new MonEcouteurEvenements(listeSportive, etu));
+        }
+        
+        
+        JButton validation = new JButton("VALIDER");
+        validation.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+             // Affichage des caracteristiques du joueur.
+                if(partie.isJoueur1Ajoue()==true) {
+                    partie.setJoueur1Ajoue(false);
+                    //affichie la suite                 
+                    //DistributionEtudiants gui3 = new DistributionEtudiants(partie);
+                    // fermer la fenetre graphique              
+                    dispose();              
+                }else {
+                    partie.setJoueur1Ajoue(true);
+                    DistributionEtudiants gui3 = new DistributionEtudiants(partie);
+                    dispose();
+                }
+            
+            }
+        });
+        validation.setFont(new Font("Tahoma", Font.PLAIN, 24));
+        validation.setBounds(1098, 648, 270, 83);
+        contentPane.add(validation);
     }
     final class MonEcouteurEvenements implements ActionListener {
         private ArrayList<Etudiant> liste;
-        private String key;
-        private int id;
+        private Etudiant etu;
 
-        public MonEcouteurEvenements(ArrayList<Etudiant> liste, String key,int id) {
+        public MonEcouteurEvenements(ArrayList<Etudiant> liste, Etudiant etudiant) {
             this.liste = liste;
-            this.key = key;
-            this.id= id;
+            this.etu=etudiant;
         }
         
         public void actionPerformed(ActionEvent e) {//
-            /*ouvre une Joption ? pour montre le soldat + changer son emplacement 
-            configPersonnage.setText(key);
-            try {
-                Etudiant comb = joueur.selectStudentMVC(id);                
-                force.setText(Integer.toString(comb.getForce()));
-                dexterite.setText(Integer.toString(comb.getDexterite()));
-                resistance.setText(Integer.toString(comb.getResistance()));
-                constitution.setText(Integer.toString(comb.getConstitution()));
-                initiative.setText(Integer.toString(comb.getInitiative()));
-                strategy.setText(comb.getStrategieString());
-                reserviste.setSelected(false);
-            }catch(StudentNotFoundInList err) {
-                System.out.print(err.getMessage()); 
-                reserviste.setSelected(true);
-            }*/
+            PopupChoiceZoneForStudent hu = new PopupChoiceZoneForStudent(partie,etu);            
+            hu.setVisible(true);
+            dispose();
+            
         }
     }
 }

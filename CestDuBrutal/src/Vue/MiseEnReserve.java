@@ -361,6 +361,7 @@ public class MiseEnReserve extends JFrame {
                 //Affichage des etudiants dans la reserve du joueur
                 joueur.displayReserveStudent();
                 if(partie.isJoueur1Ajoue()==true) {
+                    partie.setJoueur1Ajoue(false);
                     //affichie la suite                 
                     DistributionEtudiants gui3 = new DistributionEtudiants(partie);
                     // fermer la fenetre graphique              

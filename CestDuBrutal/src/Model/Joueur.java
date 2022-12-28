@@ -101,7 +101,6 @@ public void autoCreateStudentList() {
      * 
      */
     private void setIdForArmy() {
-
         for (ListIterator<Etudiant> it = studentList.listIterator(); it.hasNext();) {
              Etudiant s = it.next();
              s.setId(it.previousIndex()+1);            

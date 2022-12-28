@@ -30,14 +30,9 @@ public class main {
 				        Joueur j2 = new Joueur(2);
 				        partie.addPlayer(j1);
 				        partie.addPlayer(j2);
-				        Zone.setZones(); 
-				        
-				        
+				        Zone.setZones(); 			
 				        
 						RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);	
-						
-						//MiseEnReserve gui2 = new MiseEnReserve(partie);					
-						
 						
 					} catch (Exception e) {
 						e.printStackTrace();

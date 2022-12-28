@@ -8,7 +8,7 @@ public class PartieMVC {
     private String treve;
     private boolean finDePartie;    
     private static ArrayList<Joueur> listJ;
-    
+    private Zone listOfZone ;
         
 
     private PartieMVC(){ // constructeur en Private car singleton Et pas en void :)
@@ -16,6 +16,7 @@ public class PartieMVC {
         this.finDePartie= false;
         this.listJ = new ArrayList<Joueur>();    
         this.treve=null;
+        Zone.setZones();        
     }
     
     public static PartieMVC getInstance() { //--> mÃƒÆ’Ã‚Â©thode qui va appeler le constructeur si besoin
@@ -53,7 +54,14 @@ public class PartieMVC {
         if (Joueur1Ajoue==false) return listJ.get(0);//le joureur1
         else return listJ.get(1);// le joueur 2
     }
-    
+    public Etudiant selectStudentMVC(Joueur j, int id) throws StudentNotFoundInList{
+        ArrayList<Etudiant>  l= j.getStudentList();           
+        for (ListIterator<Etudiant> it = l.listIterator(); it.hasNext();) {
+             Etudiant s = it.next();
+             if(s.getId()==id) return j.getStudent(it.previousIndex());            
+        }
+        throw new StudentNotFoundInList();  
+    }
     public Etudiant selectStudent(Joueur j)throws StudentNotFoundInList{        
             ArrayList<Etudiant>  l= j.getStudentList();       
             int id = getUserInputInt("Entez le numero d'un etudiant");     
@@ -67,12 +75,11 @@ public class PartieMVC {
     
     public Zone selectZone(String id)throws ZoneNotFoundInList{
         
-        ArrayList<ZoneCombat>  l= Zone.getZoneList();
-         
+        ArrayList<ZoneCombat>  l= Zone.getZoneList();         
         for (ListIterator<ZoneCombat> it = l.listIterator(); it.hasNext();) {
              Zone z = it.next();
              if(z.getZoneName().toLowerCase().equals(id.toLowerCase())) {
-                 return Zone.getZone(it.previousIndex());  //fails for some reason          
+                 return Zone.getZone(it.previousIndex());       
              }
         }   
         throw new ZoneNotFoundInList();          
@@ -133,7 +140,41 @@ public class PartieMVC {
             }
         }
     }
-    
+    public void affecterEtudiantZoneMVC(Etudiant etu, String toZoneString) {
+        try {
+            //On récuppère l'etu, la zone de départ, d'arrive et le joueur
+            Joueur j = etu.getBelongsTo();
+            Etudiant studentToMove = new Etudiant();
+            Zone fromZone=new Zone ("zone vide");
+            if(etu.getIsInZone().getZoneName().equalsIgnoreCase("le camion")) {
+                studentToMove = selectStudentMVC(j,etu.getId());    
+                j.removeStudentFromList(etu);
+            }else {
+                fromZone = etu.getIsInZone();//Choisit la zone 
+                studentToMove = fromZone.drawEtudiantDansZoneMVC(j,etu.getId());
+            }              
+            String idToZone = toZoneString;
+            Zone toZone = selectZone(idToZone);    
+            
+//studentToMove = fromZone.drawEtudiantDansZone(j);
+            //on déplace l'etu
+            toZone.addEtudiantDansZone(studentToMove);  
+            // on retire l'etu de la zone d'origine
+            if(etu.getIsInZone().getZoneName().equalsIgnoreCase("le camion")) {
+                j.removeStudentFromList(studentToMove);
+            }else {
+                fromZone.removeStudentFromZone(studentToMove);
+            }
+            //
+            studentToMove.setIsInZone(toZone);// on change la zone ici
+        }
+        catch (ZoneNotFoundInList e){
+            System.out.println("Vous n'avez pas rentre une zone existante.");
+        }
+        catch (StudentNotFoundInList e) {
+            System.out.println("Cet etudiant n'est pas dans cette zone.");
+        }
+    }
    //Mise en zones
     public void affecterEtudiantZone(Joueur j) {
         boolean condition=false;
@@ -151,13 +192,11 @@ public class PartieMVC {
                     
                     //On prend un etudiant dans une zone ou dans le camion
                     String id = getUserInput("Choisissez une zone");
-                    if(id.equalsIgnoreCase("Le camion")) {
-                        
+                    if(id.equalsIgnoreCase("Le camion")) {                        
                         j.displayAllStudent();
-                        studentToMove = selectStudent(j);                            
+                        studentToMove = selectStudent(j);                        
                         
                     }else  { // choix une zone  
-
                         fromZone = selectZone(id);//Choisit la zone                     
                         fromZone.displayEtudiantDansZoneList(j); //Shows a list of students inside the zone                    
                         studentToMove = fromZone.drawEtudiantDansZone(j);
@@ -169,7 +208,7 @@ public class PartieMVC {
                     System.out.println("Vers");
                     String idToZone = getUserInput("Choisissez une zone");
                     Zone toZone = selectZone(idToZone);                              
-                    studentToMove.setIsInZone(toZone);
+                    studentToMove.setIsInZone(toZone);// on change la zone ici
                     toZone.addEtudiantDansZone(studentToMove);
                     
                     
@@ -469,8 +508,7 @@ public class PartieMVC {
         Joueur j1 = new Joueur(1);
         Joueur j2 = new Joueur(2);
         partie.addPlayer(j1);
-        partie.addPlayer(j2);  
-        Zone.setZones();         
+        partie.addPlayer(j2);   
         
         
     }
