@@ -1,6 +1,8 @@
 package Model;
 import java.util.*;
 
+import javax.swing.JButton;
+
 /*
  * Tester si le joueur 2 à un le même nom que le joueur 1 avant de
  *         l'autoriser le nom
@@ -242,6 +244,7 @@ public void autoCreateStudentList() {
                 System.out.print(e.getMessage());
             }
         }
+        
         return 0;
     }
     // Mise en reserve
