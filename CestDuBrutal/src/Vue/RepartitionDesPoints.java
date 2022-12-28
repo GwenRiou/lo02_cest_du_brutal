@@ -23,6 +23,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTable;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Canvas;
 import javax.swing.JLabel;
 import java.awt.Label;
@@ -31,6 +32,7 @@ import javax.swing.border.TitledBorder;
 
 import Model.Etudiant;
 import Model.Joueur;
+import Model.PartieMVC;
 
 import javax.swing.border.CompoundBorder;
 import java.awt.Font;
@@ -67,9 +69,12 @@ public class RepartitionDesPoints extends JFrame {
 
 	// le joueur
 	private Joueur joueur= new Joueur(0);
+	private PartieMVC partie;
 	
-	public RepartitionDesPoints(Joueur joueur) {
-		this.joueur = joueur;
+	public RepartitionDesPoints(PartieMVC partie) {
+        setMinimumSize(new Dimension(1200, 700));
+	    this.partie=partie;
+		this.joueur = partie.getJoueurToPlay();
 		this.initFenetre();
 	}
 
@@ -300,10 +305,17 @@ public class RepartitionDesPoints extends JFrame {
 				System.out.println(joueur);
 				//Affichage des etudiants du joueur
 				joueur.displayAllStudent();
-				// fermer la fenetre graphique				
-				dispose();
-				
-                
+				if(partie.isJoueur1Ajoue()==true) { // la suite
+				    partie.setJoueur1Ajoue(false);
+                    //affichie la suite                 
+				    MiseEnReserve gui2 = new MiseEnReserve(partie); 
+                    // fermer la fenetre graphique              
+                    dispose();              
+                }else {// la meme interface 
+                    partie.setJoueur1Ajoue(true);
+                    RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);                     
+                    dispose();
+                }		
 			}
 		});
 		validation.setFont(new Font("Tahoma", Font.PLAIN, 24));
