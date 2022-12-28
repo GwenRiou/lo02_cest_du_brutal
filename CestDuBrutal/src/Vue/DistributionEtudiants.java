@@ -151,7 +151,7 @@ public class DistributionEtudiants extends JFrame {
         
         public void actionPerformed(ActionEvent e) {//
             /*ouvre une Joption ? pour montre le soldat + changer son emplacement 
-             * configPersonnage.setText(key);
+            configPersonnage.setText(key);
             try {
                 Etudiant comb = joueur.selectStudentMVC(id);                
                 force.setText(Integer.toString(comb.getForce()));

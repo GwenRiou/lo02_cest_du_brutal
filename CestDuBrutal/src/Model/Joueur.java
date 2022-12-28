@@ -4,13 +4,13 @@ import java.util.*;
 /*
  * Tester si le joueur 2 à un le même nom que le joueur 1 avant de
  *         l'autoriser le nom
- *         Implémentation:
- *         création d’un variable static qui compte le nombre de joueur
+ *         Implementation:
+ *         creation d'une variable static qui compte le nombre de joueur
  *         setUsername en Private
- *         Si le joueur veut créer un nom : la méthode regardé : le numéro du
+ *         Si le joueur veut creer un nom : la methode regarde : le numero du
  *         joueur
- *         si c’est le joueur 1 on autorise tout --> appel de la fonction setter
- *         si c’est le joueur 2 --> regarde si le nom du joueur 1 à le même nom et
+ *         si c est le joueur 1 on autorise tout --> appel de la fonction setter
+ *         si c est le joueur 2 --> regarde si le nom du joueur 1 à le même nom et
  *         si oui on demande un autre non si non on appel setter
 
  */
