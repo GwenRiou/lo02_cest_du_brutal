@@ -59,6 +59,11 @@ public class Treve extends JFrame {
         contentPane.add(btnNewButton);
         
         JButton btnNewButton_1 = new JButton("Affecter des reservistes sur des zones de combat");
+        btnNewButton_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AffecteReservistesZoneCombat hui5 =new AffecteReservistesZoneCombat(joueur,zone);
+            }
+        });
         btnNewButton_1.setBounds(83, 122, 303, 23);
         contentPane.add(btnNewButton_1);
         

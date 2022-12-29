@@ -24,22 +24,24 @@ import Model.Partie;
 import Model.Partie;
 import Model.StudentNotFoundInList;
 import Model.Zone;
+import Model.ZoneCombat;
 import Vue.MiseEnReserve.MonEcouteurEvenements;
 import java.awt.Dimension;
 import java.awt.Font;
 
-public class DistributionEtudiants extends JFrame {
+public class AffecteReservistesZoneCombat extends JFrame {
 
     private JPanel contentPane;
     
 
     // le joueur
     private Joueur joueur= new Joueur(0);
-    private Partie partie;
-    public DistributionEtudiants(Partie partie) {
+    private Partie partie; 
+    private Zone zone;
+    public AffecteReservistesZoneCombat(Joueur j,Zone zone) {
         setMinimumSize(new Dimension(1400, 800));
-        this.joueur = partie.getJoueurToPlay();// on r�cupp�re le premier joueur
-        this.partie=partie;
+        this.joueur = j;
+        this.zone = zone;
         this.initFenetre();
     }
 
@@ -70,11 +72,11 @@ public class DistributionEtudiants extends JFrame {
         Image img2 = new ImageIcon("ressources\\elite.png").getImage(); 
         Image img3 = new ImageIcon("ressources\\etudiant.png").getImage();  
         
-        JLabel lblNewLabel_1 = new JLabel("Le camion");
+        JLabel lblNewLabel_1 = new JLabel("La reserve");
         lblNewLabel_1.setBounds(20, 10, 61, 13);
         contentPane.add(lblNewLabel_1);        
          
-        ArrayList <Etudiant> listEtu = joueur.getStudentList();
+        ArrayList <Etudiant> listEtu = joueur.getReserveArrayList();
         int sizeCamion = listEtu.size();
         JButton[] jb = new JButton[sizeCamion];
         for (int k = 0; k < sizeCamion; k++) {
@@ -93,7 +95,7 @@ public class DistributionEtudiants extends JFrame {
             }
             panelCamion.add(jb[k]);
             Etudiant etu0 = listEtu.get(k);
-            jb[k].addActionListener(   new MonEcouteurEvenements(joueur.getStudentList(),etu0 ));
+            jb[k].addActionListener(   new MonEcouteurEvenements(joueur.getReserveArrayList(),etu0 ));
         }
         
         JLabel lblNewLabel_2 = new JLabel("La Bibliotheque");
@@ -105,7 +107,15 @@ public class DistributionEtudiants extends JFrame {
         panelBibliotheque.setBounds(440, 26, 928, 100);
         contentPane.add(panelBibliotheque);
         panelBibliotheque.setLayout(new GridLayout(1, 20, 0, 0));
-      //habiage du panel bibliotheque
+      //habiage du panel bibliotheque 
+
+        //Gere si on peut affecter des etu sur cette zone 
+        /*boolean selectedZoneIsActive = false;
+        ZoneCombat toZone = (ZoneCombat) Zone.getZone(0);
+        if(toZone.getControlePar()==null) {
+            selectedZoneIsActive = true;
+            System.out.println(toZone.getZoneName()+" est en combat");
+        }*/
         ArrayList <Etudiant> listeBiblio = Zone.getZone(0).getEtuDansZoneArrayList(joueur);        
         int sizeBiblio = listeBiblio.size();
         JButton[] jb1 = new JButton[sizeBiblio];
@@ -125,7 +135,8 @@ public class DistributionEtudiants extends JFrame {
             }
             panelBibliotheque.add(jb1[k]);
             Etudiant etu = listeBiblio.get(k);
-            jb1[k].addActionListener(   new MonEcouteurEvenements(listeBiblio, etu));
+          //Gere si on peut affecter des etu sur cette zone AUSSi
+            //if (!selectedZoneIsActive) jb1[k].addActionListener(   new MonEcouteurEvenements(listeBiblio, etu));
         }
         
         JLabel lblNewLabel_3 = new JLabel("Le BDE");
@@ -138,6 +149,8 @@ public class DistributionEtudiants extends JFrame {
         contentPane.add(panelBDE);
         panelBDE.setLayout(new GridLayout(1, 20, 0, 0));
         //habiage du panel BDE
+        
+        
         ArrayList <Etudiant> listeBDE = Zone.getZone(1).getEtuDansZoneArrayList(joueur); 
         int sizeBDE = listeBDE.size();
         JButton[] jb2 = new JButton[sizeBDE];
@@ -157,7 +170,6 @@ public class DistributionEtudiants extends JFrame {
             }
             panelBDE.add(jb2[k]);
             Etudiant etu = listeBDE.get(k);
-            jb2[k].addActionListener(   new MonEcouteurEvenements(listeBDE, etu));
         }
         
         JLabel lblNewLabel = new JLabel("Le Quartier Administratif");
@@ -170,6 +182,7 @@ public class DistributionEtudiants extends JFrame {
         contentPane.add(panelAdministratif);
         panelAdministratif.setLayout(new GridLayout(1, 20, 0, 0));
       //habiage du panelAdministratif 
+      
         ArrayList <Etudiant> listeAdministratif = Zone.getZone(2).getEtuDansZoneArrayList(joueur); 
         int sizeAdministratif = listeAdministratif.size();
         JButton[] jb3 = new JButton[sizeAdministratif];
@@ -189,7 +202,6 @@ public class DistributionEtudiants extends JFrame {
             }
             panelAdministratif.add(jb3[k]);
             Etudiant etu = listeAdministratif.get(k);
-            jb3[k].addActionListener(   new MonEcouteurEvenements(listeAdministratif, etu));
         }
         JLabel lblNewLabel_4 = new JLabel("Les Halles Industrielles");
         lblNewLabel_4.setBounds(450, 391, 104, 13);
@@ -201,6 +213,7 @@ public class DistributionEtudiants extends JFrame {
         contentPane.add(panelIndustrielle);
         panelIndustrielle.setLayout(new GridLayout(1, 20, 0, 0));
       //habiage du panelIndustrielle 
+      
         ArrayList <Etudiant> listeIndustrielle = Zone.getZone(3).getEtuDansZoneArrayList(joueur); 
         int sizeIndustrielle = listeIndustrielle.size();
         JButton[] jb4 = new JButton[sizeIndustrielle];
@@ -220,7 +233,6 @@ public class DistributionEtudiants extends JFrame {
             }
             panelIndustrielle.add(jb4[k]);
             Etudiant etu = listeIndustrielle.get(k);
-            jb4[k].addActionListener(   new MonEcouteurEvenements(listeIndustrielle, etu));
         }
         JLabel lblNewLabel_5 = new JLabel("La Halle Sportive");
         lblNewLabel_5.setBounds(450, 515, 93, 13);
@@ -231,6 +243,7 @@ public class DistributionEtudiants extends JFrame {
         panelSportive.setBounds(440, 527, 922, 100);
         contentPane.add(panelSportive);
         panelSportive.setLayout(new GridLayout(1, 20, 0, 0));
+        
         ArrayList <Etudiant> listeSportive = Zone.getZone(4).getEtuDansZoneArrayList(joueur); 
         int sizeSportive = listeSportive.size();
         JButton[] jb5 = new JButton[sizeSportive];
@@ -250,7 +263,6 @@ public class DistributionEtudiants extends JFrame {
             }
             panelSportive.add(jb5[k]);
             Etudiant etu = listeSportive.get(k);
-            jb5[k].addActionListener(   new MonEcouteurEvenements(listeSportive, etu));
         }
         
         
@@ -262,20 +274,8 @@ public class DistributionEtudiants extends JFrame {
         if( condition) validation.setEnabled(true);//---------------------------------------------> DEBUG
         //if(joueur.getStudentList().size()==0 && condition) validation.setEnabled(true);---------> true version
         validation.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-             // Affichage des caracteristiques du joueur.
-                if(partie.isJoueur1Ajoue()==true) {
-                    partie.setJoueur1Ajoue(false);
-                    //affichie la suite   
-                    Zone.melee();
-                    // fermer la fenetre graphique              
-                    dispose();              
-                }else {
-                    partie.setJoueur1Ajoue(true);
-                    DistributionEtudiants gui3 = new DistributionEtudiants(partie);
-                    dispose();
-                }
-            
+            public void actionPerformed(ActionEvent e) {                
+             dispose();             
             }
         });
         validation.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -292,7 +292,7 @@ public class DistributionEtudiants extends JFrame {
         }
         
         public void actionPerformed(ActionEvent e) {            
-            PopupChoiceZoneForStudent hu = new PopupChoiceZoneForStudent(partie,etu);            
+            PopupChoiceZoneForStudentTreve hu = new PopupChoiceZoneForStudentTreve(joueur,zone,etu);            
             hu.setVisible(true);
             dispose();
             
