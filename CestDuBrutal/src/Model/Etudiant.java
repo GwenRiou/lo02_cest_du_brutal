@@ -91,10 +91,10 @@ public class Etudiant implements Strategie{
         this.type = type;
         this.ects = ects;
         this.force = (int) (Math.random()*10);
-        this.dexterite = (int) (Math.random()*20);
-        this.resistance = (int) (Math.random()*20);
-        this.constitution = (int) (Math.random()*20);
-        this.initiative = (int) (Math.random()*20); //debug line
+        this.dexterite = (int) (Math.random()*10);
+        this.resistance = (int) (Math.random()*10);
+        this.constitution = (int) (Math.random()*10);
+        this.initiative = (int) (Math.random()*10); //debug line
         this.belongsTo = idJoueur;
         this.strategie = enumStrategie.RANDOM;
         this.isInZone = new Zone("le camion");
