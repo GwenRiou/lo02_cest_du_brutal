@@ -49,17 +49,17 @@ public class Treve extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        JLabel lblNewLabel = new JLabel(joueur.getUserName()+": Que voulez-vous faire?");
+        JLabel lblNewLabel = new JLabel(joueur.getUserName()+": vous venez de controller "+zone.getZoneName());
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel.setBounds(104, 38, 248, 14);
+        lblNewLabel.setBounds(20, 38, 406, 14);
         contentPane.add(lblNewLabel);
         
         JButton btnNewButton = new JButton("Affecter des etudiants des zones controllees");
-        btnNewButton.setBounds(83, 63, 303, 23);
+        btnNewButton.setBounds(83, 88, 303, 23);
         contentPane.add(btnNewButton);
         
         JButton btnNewButton_1 = new JButton("Affecter des reservistes sur des zones de combat");
-        btnNewButton_1.setBounds(83, 97, 303, 23);
+        btnNewButton_1.setBounds(83, 122, 303, 23);
         contentPane.add(btnNewButton_1);
         
         JButton btnNewButton_2 = new JButton("Visualiser le nombre de points ECTS par zone de combat");
@@ -68,7 +68,7 @@ public class Treve extends JFrame {
                 Zone.displayECTSPerZone();
             }
         });
-        btnNewButton_2.setBounds(83, 131, 303, 23);
+        btnNewButton_2.setBounds(83, 156, 303, 23);
         contentPane.add(btnNewButton_2);
         
         JButton btnNewButton_3 = new JButton("Continuer la bataille");
@@ -77,12 +77,17 @@ public class Treve extends JFrame {
                
             }
         });
-        btnNewButton_3.setBounds(83, 165, 310, 59);
+        btnNewButton_3.setBounds(83, 193, 303, 59);
         contentPane.add(btnNewButton_3);
         
         JLabel lblNewLabel_1 = new JLabel("TREVE");
         lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel_1.setBounds(203, 13, 47, 14);
         contentPane.add(lblNewLabel_1);
+        
+        JLabel lblNewLabel_2 = new JLabel("Que voulez-vous faire?");
+        lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel_2.setBounds(96, 63, 251, 14);
+        contentPane.add(lblNewLabel_2);
     }
 }
