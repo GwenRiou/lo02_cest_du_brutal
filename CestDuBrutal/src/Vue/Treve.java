@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Model.Joueur;
+import Model.Partie;
 import Model.Zone;
 
 import javax.swing.JLabel;
@@ -72,9 +73,11 @@ public class Treve extends JFrame {
         
         JButton btnNewButton_3 = new JButton("Continuer la bataille");
         btnNewButton_3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-               
-            }
+            public void actionPerformed(ActionEvent e) {                
+                Partie.getInstance().setInputTreve(4);
+                dispose();
+                
+           }
         });
         btnNewButton_3.setBounds(83, 193, 303, 59);
         contentPane.add(btnNewButton_3);

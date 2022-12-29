@@ -261,16 +261,17 @@ public class Zone {
         System.out.println("Le nombre de zone controle par j1 = "+ numZoneControlByPlayer1);
         System.out.println("Le nombre de zone controle par j2 = "+ numZoneControlByPlayer2+"\n");
         if(numZoneControlByPlayer1>=numZoneToEndGame) {
+            //interface de fin de partie
             System.out.println( Partie.getNamePlayer(1) +" a gagne");
             return true;
         }
+        //interface de fin de partie
         if(numZoneControlByPlayer2>=numZoneToEndGame) {
             System.out.println( Partie.getNamePlayer(2) +" a gagne");
             
             return true;
         };
-        return false;
-        
+        return false;        
     }
 
     /**
@@ -310,7 +311,18 @@ public class Zone {
             }
         return true;
     }
-    
+    public ArrayList<Etudiant> getEtuDansZoneArrayList(Joueur j) {
+        ArrayList<Etudiant>  etulist= this.etuDansZone;
+        ArrayList<Etudiant>  etulistJ= new ArrayList<Etudiant>();
+        System.out.println("\n==Etudiants dans "+this.zoneName+":==");
+        for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //scan through all students
+            Etudiant s = it.next();
+            if(s.getBelongsTo()==j) {
+                etulistJ.add(s);
+            }
+        }
+        return etulistJ;
+    }
     //getters
     /**
      * getter de {@link #zoneList}
