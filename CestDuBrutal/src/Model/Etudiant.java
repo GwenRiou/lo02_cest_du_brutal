@@ -91,10 +91,10 @@ public class Etudiant implements Strategie{
         this.type = type;
         this.ects = ects;
         this.force = (int) (Math.random()*10);
-        this.dexterite = (int) (Math.random()*20);
-        this.resistance = (int) (Math.random()*20);
-        this.constitution = (int) (Math.random()*20);
-        this.initiative = (int) (Math.random()*20); //debug line
+        this.dexterite = (int) (Math.random()*10);
+        this.resistance = (int) (Math.random()*10);
+        this.constitution = (int) (Math.random()*10);
+        this.initiative = (int) (Math.random()*10); //debug line
         this.belongsTo = idJoueur;
         this.strategie = enumStrategie.RANDOM;
         this.isInZone = new Zone("le camion");
@@ -196,7 +196,7 @@ public class Etudiant implements Strategie{
             Etudiant etu;
             do{//insert all enemies into a list
                etu = iter.next();
-               if(etu.belongsTo.equals(PartieMVC.getInstance().getListJ().get(0))) {
+               if(etu.belongsTo.equals(Partie.getInstance().getListJ().get(0))) {
                    studentCountj1++;
                    //System.out.println(enemyEtu.belongsTo.getUserName()+"etu #"+enemyEtu.getId()+"enemy added");
                }

@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import Model.Etudiant;
 import Model.Joueur;
-import Model.PartieMVC;
+import Model.Partie;
 import Model.Zone;
 
 import javax.swing.JLabel;
@@ -29,9 +29,9 @@ public class PopupChoiceZoneForStudent extends JFrame {
 
  // le joueur
     private Joueur joueur= new Joueur(0);
-    private PartieMVC partie;
+    private Partie partie;
     private Etudiant etu;
-    public PopupChoiceZoneForStudent(PartieMVC partie, Etudiant etudiant) {
+    public PopupChoiceZoneForStudent(Partie partie, Etudiant etudiant) {
         setMinimumSize(new Dimension(800, 500));
         this.joueur = partie.getJoueurToPlay();
         this.partie=partie;
@@ -143,7 +143,7 @@ public class PopupChoiceZoneForStudent extends JFrame {
         JButton ok = new JButton("OK");
         ok.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //les éléments  aux quel j'ai accès 
+                //les ï¿½lï¿½ments  aux quel j'ai accï¿½s 
                 /*
                  * l'Etudiant qui change de zone
                  * Un String avec le nom de la toZOne

@@ -8,7 +8,6 @@ import javax.swing.border.EmptyBorder;
 
 import Model.Joueur;
 import Model.Partie;
-import Model.PartieMVC;
 
 import javax.swing.JTextPane;
 import javax.swing.Box;
@@ -33,7 +32,7 @@ public class MainMenu extends JFrame {
      * Create the frame.
      */
     
-    public MainMenu(PartieMVC partie, Joueur j1, Joueur j2) {
+    public MainMenu(Partie partie, Joueur j1, Joueur j2) {
         this.setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 451, 185);

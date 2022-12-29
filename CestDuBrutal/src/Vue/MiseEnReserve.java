@@ -30,7 +30,7 @@ import javax.swing.border.TitledBorder;
 
 import Model.Etudiant;
 import Model.Joueur;
-import Model.PartieMVC;
+import Model.Partie;
 import Model.StudentNotFoundInList;
 import Model.Zone;
 
@@ -73,9 +73,9 @@ public class MiseEnReserve extends JFrame {
 
     // le joueur
     private Joueur joueur= new Joueur(0);
-    private PartieMVC partie;
+    private Partie partie;
     
-    public MiseEnReserve(PartieMVC partie) {
+    public MiseEnReserve(Partie partie) {
         setMinimumSize(new Dimension(1200, 700));
         this.joueur = partie.getJoueurToPlay();
         this.partie=partie;
@@ -367,7 +367,6 @@ public class MiseEnReserve extends JFrame {
 
         // ++++++++++++++++++++++++++++++++++++++++++ Valider configuration �quipe ++++++++++++++++++++++++++++++
         validation = new JButton("VALIDER");
-        validation.setEnabled(false);
         validation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Affichage des caracteristiques du joueur.
@@ -382,6 +381,7 @@ public class MiseEnReserve extends JFrame {
                         Zone.melee();
                     }
                     else {
+                        partie.setJoueur1Ajoue(false);
                         DistributionEtudiants gui3 = new DistributionEtudiants(partie);
                     }
                     

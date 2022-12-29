@@ -9,7 +9,7 @@ import java.util.Scanner;
 import javax.swing.SwingUtilities;
 
 import Model.Joueur;
-import Model.PartieMVC;
+import Model.Partie;
 import Model.Zone;
 import Vue.DistributionEtudiants;
 import Vue.MainMenu;
@@ -24,8 +24,8 @@ public class main {
 			EventQueue.invokeAndWait (new Runnable() {
 				public void run() {
 					try {
-					    PartieMVC partie;
-				        partie = PartieMVC.getInstance();
+					    Partie partie;
+				        partie = Partie.getInstance();
 				        partie.getConnection();// ne fonctionne que apres un getInstance 
 				        Joueur j1 = new Joueur(1);
 				        Joueur j2 = new Joueur(2);
