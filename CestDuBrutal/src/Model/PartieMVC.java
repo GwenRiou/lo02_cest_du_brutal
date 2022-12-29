@@ -1,6 +1,9 @@
 package Model;
 import java.util.*;
 
+import Vue.MainMenu;
+import Vue.Treve;
+
 public class PartieMVC {
     private static PartieMVC partieObject;
     
@@ -145,7 +148,7 @@ public class PartieMVC {
     }
     public void affecterEtudiantZoneMVC(Etudiant etu, String toZoneString) {
         try {
-            //On récuppère l'etu, la zone de départ, d'arrive et le joueur
+            //On rï¿½cuppï¿½re l'etu, la zone de dï¿½part, d'arrive et le joueur
             Joueur j = etu.getBelongsTo();
             Etudiant studentToMove = new Etudiant();
             Zone fromZone=new Zone ("zone vide");
@@ -160,7 +163,7 @@ public class PartieMVC {
             Zone toZone = selectZone(idToZone);    
             
 //studentToMove = fromZone.drawEtudiantDansZone(j);
-            //on déplace l'etu
+            //on dï¿½place l'etu
             toZone.addEtudiantDansZone(studentToMove);  
             // on retire l'etu de la zone d'origine
             if(etu.getIsInZone().getZoneName().equalsIgnoreCase("le camion")) {
@@ -392,7 +395,12 @@ public class PartieMVC {
     }
     
     public void treve(Joueur gagnantTreve, ZoneCombat zone) {
-        
+        try {
+            Treve guiTreve = new Treve(gagnantTreve,zone);
+            guiTreve.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         this.finDePartie = Zone.FinDePartie();
         System.out.println("------La partie est-elle finie ? "+(finDePartie));
         
@@ -430,6 +438,7 @@ public class PartieMVC {
             //System.exit(0);
         }
     }
+  
     public static void autoAffecterEtudiantZone() {
         for (int i = 0;i<listJ.size();i++) {
             autoAffecterEtudiantZone(listJ.get(i));

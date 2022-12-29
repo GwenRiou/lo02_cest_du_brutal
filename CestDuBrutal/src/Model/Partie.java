@@ -429,7 +429,7 @@ public class Partie {
             treve=etatDeControle;//
 
        
-            treve(gagnantTreve,zone); // --------------------------------ajout de la treve
+            PartieMVC.getInstance().treve(gagnantTreve,zone); // --------------------------------ajout de la treve
         }       
     }
     /**
