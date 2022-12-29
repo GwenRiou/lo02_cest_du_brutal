@@ -32,7 +32,7 @@ import javax.swing.border.TitledBorder;
 
 import Model.Etudiant;
 import Model.Joueur;
-import Model.PartieMVC;
+import Model.Partie;
 
 import javax.swing.border.CompoundBorder;
 import java.awt.Font;
@@ -72,9 +72,9 @@ public class RepartitionDesPoints extends JFrame {
 
 	// le joueur
 	private Joueur joueur= new Joueur(0);
-	private PartieMVC partie;
+	private Partie partie;
 	
-	public RepartitionDesPoints(PartieMVC partie) {
+	public RepartitionDesPoints(Partie partie) {
         setMinimumSize(new Dimension(1400, 800));
 	    this.partie=partie;
 		this.joueur = partie.getJoueurToPlay();

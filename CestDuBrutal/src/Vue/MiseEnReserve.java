@@ -30,7 +30,7 @@ import javax.swing.border.TitledBorder;
 
 import Model.Etudiant;
 import Model.Joueur;
-import Model.PartieMVC;
+import Model.Partie;
 import Model.StudentNotFoundInList;
 import Model.Zone;
 
@@ -73,9 +73,9 @@ public class MiseEnReserve extends JFrame {
 
     // le joueur
     private Joueur joueur= new Joueur(0);
-    private PartieMVC partie;
+    private Partie partie;
     
-    public MiseEnReserve(PartieMVC partie) {
+    public MiseEnReserve(Partie partie) {
         setMinimumSize(new Dimension(1200, 700));
         this.joueur = partie.getJoueurToPlay();
         this.partie=partie;

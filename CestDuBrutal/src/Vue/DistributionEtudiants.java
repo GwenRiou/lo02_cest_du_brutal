@@ -21,7 +21,7 @@ import javax.swing.border.LineBorder;
 import Model.Etudiant;
 import Model.Joueur;
 import Model.Partie;
-import Model.PartieMVC;
+import Model.Partie;
 import Model.StudentNotFoundInList;
 import Model.Zone;
 import Vue.MiseEnReserve.MonEcouteurEvenements;
@@ -35,10 +35,10 @@ public class DistributionEtudiants extends JFrame {
 
     // le joueur
     private Joueur joueur= new Joueur(0);
-    private PartieMVC partie;
-    public DistributionEtudiants(PartieMVC partie) {
+    private Partie partie;
+    public DistributionEtudiants(Partie partie) {
         setMinimumSize(new Dimension(1400, 800));
-        this.joueur = partie.getListJ().get(0);// on récuppère le premier joueur
+        this.joueur = partie.getListJ().get(0);// on rï¿½cuppï¿½re le premier joueur
         this.partie=partie;
         this.initFenetre();
     }

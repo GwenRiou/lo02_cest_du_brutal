@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Model.Joueur;
-import Model.PartieMVC;
 import Model.Zone;
 
 import javax.swing.JLabel;
