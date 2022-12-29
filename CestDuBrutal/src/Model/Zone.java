@@ -1,6 +1,8 @@
 package Model;
 import java.util.*;//for EVERYTHIGN
 
+import Vue.AfficheVainqueur;
+
 /**
  * Classe mere comprenant les zones de combat et a reserve
  * @author boone, rioug
@@ -262,11 +264,15 @@ public class Zone {
         System.out.println("Le nombre de zone controle par j2 = "+ numZoneControlByPlayer2+"\n");
         if(numZoneControlByPlayer1>=numZoneToEndGame) {
             //interface de fin de partie
+            AfficheVainqueur gui5 = new AfficheVainqueur(Partie.getInstance().getListJ().get(0));
+            gui5.setVisible(true);
             System.out.println( Partie.getNamePlayer(1) +" a gagne");
             return true;
         }
         //interface de fin de partie
         if(numZoneControlByPlayer2>=numZoneToEndGame) {
+            AfficheVainqueur gui5 = new AfficheVainqueur(Partie.getInstance().getListJ().get(1));
+            gui5.setVisible(true);
             System.out.println( Partie.getNamePlayer(2) +" a gagne");
             
             return true;
