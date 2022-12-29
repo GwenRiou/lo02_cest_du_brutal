@@ -38,7 +38,7 @@ public class DistributionEtudiants extends JFrame {
     private Partie partie;
     public DistributionEtudiants(Partie partie) {
         setMinimumSize(new Dimension(1400, 800));
-        this.joueur = partie.getListJ().get(0);// on r�cupp�re le premier joueur
+        this.joueur = partie.getJoueurToPlay();// on r�cupp�re le premier joueur
         this.partie=partie;
         this.initFenetre();
     }
@@ -106,7 +106,7 @@ public class DistributionEtudiants extends JFrame {
         contentPane.add(panelBibliotheque);
         panelBibliotheque.setLayout(new GridLayout(1, 20, 0, 0));
       //habiage du panel bibliotheque
-        ArrayList <Etudiant> listeBiblio = Zone.getZone(0).getEtuDansZoneArrayList();        
+        ArrayList <Etudiant> listeBiblio = Zone.getZone(0).getEtuDansZoneArrayList(joueur);        
         int sizeBiblio = listeBiblio.size();
         JButton[] jb1 = new JButton[sizeBiblio];
         for (int k = 0; k < sizeBiblio; k++) {
@@ -138,7 +138,7 @@ public class DistributionEtudiants extends JFrame {
         contentPane.add(panelBDE);
         panelBDE.setLayout(new GridLayout(1, 20, 0, 0));
         //habiage du panel BDE
-        ArrayList <Etudiant> listeBDE = Zone.getZone(1).getEtuDansZoneArrayList(); 
+        ArrayList <Etudiant> listeBDE = Zone.getZone(1).getEtuDansZoneArrayList(joueur); 
         int sizeBDE = listeBDE.size();
         JButton[] jb2 = new JButton[sizeBDE];
         for (int k = 0; k < sizeBDE; k++) {
@@ -171,7 +171,7 @@ public class DistributionEtudiants extends JFrame {
         contentPane.add(panelAdministratif);
         panelAdministratif.setLayout(new GridLayout(1, 20, 0, 0));
       //habiage du panelAdministratif 
-        ArrayList <Etudiant> listeAdministratif = Zone.getZone(2).getEtuDansZoneArrayList(); 
+        ArrayList <Etudiant> listeAdministratif = Zone.getZone(2).getEtuDansZoneArrayList(joueur); 
         int sizeAdministratif = listeAdministratif.size();
         JButton[] jb3 = new JButton[sizeAdministratif];
         for (int k = 0; k < sizeAdministratif; k++) {
@@ -202,7 +202,7 @@ public class DistributionEtudiants extends JFrame {
         contentPane.add(panelIndustrielle);
         panelIndustrielle.setLayout(new GridLayout(1, 20, 0, 0));
       //habiage du panelIndustrielle 
-        ArrayList <Etudiant> listeIndustrielle = Zone.getZone(3).getEtuDansZoneArrayList(); 
+        ArrayList <Etudiant> listeIndustrielle = Zone.getZone(3).getEtuDansZoneArrayList(joueur); 
         int sizeIndustrielle = listeIndustrielle.size();
         JButton[] jb4 = new JButton[sizeIndustrielle];
         for (int k = 0; k < sizeIndustrielle; k++) {
@@ -232,7 +232,7 @@ public class DistributionEtudiants extends JFrame {
         panelSportive.setBounds(440, 527, 922, 100);
         contentPane.add(panelSportive);
         panelSportive.setLayout(new GridLayout(1, 20, 0, 0));
-        ArrayList <Etudiant> listeSportive = Zone.getZone(4).getEtuDansZoneArrayList(); 
+        ArrayList <Etudiant> listeSportive = Zone.getZone(4).getEtuDansZoneArrayList(joueur); 
         int sizeSportive = listeSportive.size();
         JButton[] jb5 = new JButton[sizeSportive];
         for (int k = 0; k < sizeSportive; k++) {
@@ -256,13 +256,19 @@ public class DistributionEtudiants extends JFrame {
         
         
         JButton validation = new JButton("VALIDER");
+        validation.setEnabled(false);
+        boolean condition=false;
+        if(joueur.getId()==1) condition=Zone.allZoneNotEmpty();// condidtion pour que le j1 a un etu dasn chaque zone 
+        else condition=Zone.allZoneWithTwoStudent(joueur);
+        if( condition) validation.setEnabled(true);//---------------------------------------------> DEBUG
+        //if(joueur.getStudentList().size()==0 && condition) validation.setEnabled(true);---------> true version
         validation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
              // Affichage des caracteristiques du joueur.
                 if(partie.isJoueur1Ajoue()==true) {
                     partie.setJoueur1Ajoue(false);
-                    //affichie la suite                 
-                    //DistributionEtudiants gui3 = new DistributionEtudiants(partie);
+                    //affichie la suite   
+                    Zone.melee();
                     // fermer la fenetre graphique              
                     dispose();              
                 }else {
@@ -286,7 +292,7 @@ public class DistributionEtudiants extends JFrame {
             this.etu=etudiant;
         }
         
-        public void actionPerformed(ActionEvent e) {//
+        public void actionPerformed(ActionEvent e) {            
             PopupChoiceZoneForStudent hu = new PopupChoiceZoneForStudent(partie,etu);            
             hu.setVisible(true);
             dispose();

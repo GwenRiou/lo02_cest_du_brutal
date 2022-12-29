@@ -24,6 +24,15 @@ public class Partie {
      * Permet de savoir si la treve est declenchee
      */
     private String treve;
+    private int inputTreve;
+    public String getTreve() {
+        return treve;
+    }
+
+    public void setTreve(String treve) {
+        this.treve = treve;
+    }
+
     /**
      * Permet de savoir si la fin de la partie est déclenchée
      */
@@ -40,6 +49,7 @@ public class Partie {
      */
     private Partie(){ // constructeur en Private car singleton Et pas en void :)
         this.Joueur1Ajoue=false;
+        this.inputTreve=0;
         this.finDePartie= false;
         this.listJ = new ArrayList<Joueur>();    
         this.treve=null;
@@ -495,27 +505,30 @@ public class Partie {
      * @param zone zone dans laquelle le joueur vient de gagner le controle
      */
     public void treve(Joueur gagnantTreve, ZoneCombat zone) {
-        try {   
-            Treve guiTreve = new Treve(gagnantTreve,zone);  
-            guiTreve.setVisible(true);  
-        } catch (Exception e) { 
-            e.printStackTrace();    
-        }
+        
         this.finDePartie = Zone.FinDePartie();
         
         if(finDePartie==false) {
             treve=null; // premier trucs
-            System.out.println("\033[0;1m"+"==TREVE: UNE ZONE A ETE CONTROLEE=="+"\033[0;0m");// on pourra l'enlevé
-            int input = 0;
-            while (!(input == 4)) {
+            System.out.println("\033[0;1m"+"==TREVE: UNE ZONE A ETE CONTROLEE=="+"\033[0;0m");// on pourra l'enleve
+            try {   
+                Treve guiTreve = new Treve(gagnantTreve,zone);  
+                guiTreve.setVisible(true);  
+            } catch (Exception e) { 
+                e.printStackTrace();    
+            }
+            inputTreve = 0;
+            while (!(inputTreve == 4)) {   
+                //TODO
                 //trucs de la treve
-                input = getUserChoix("\033[0;1m\033[096m"+gagnantTreve.getUserName()+"\033[0;0m\033[0;1m: Que voulez-vous faire? (entrez 1-4)\n"
+                /*input = getUserChoix("\033[0;1m\033[096m"+gagnantTreve.getUserName()+"\033[0;0m\033[0;1m: Que voulez-vous faire? (entrez 1-4)\n"
                         + "\033[0;31m1.\033[0;1m Affecter des etudiants des zones controlees\n"
                         + "\033[0;31m2.\033[0;1m Affecter des reservistes sur des zones de combat\n"
                         + "\033[0;31m3.\033[0;1m Visualiser le nombre de points ECTS par zone de combat\n"
                         + "\033[0;31m4.\033[0;1m Continuer la bataille\033[0;0m",4);
-
-                switch(input) {
+                */
+                System.out.print("");//NE PAS ENLEVER ( le code marche pas sans )
+                switch(inputTreve) {
                     case 1:
                         affecterEtudiantPendantTreve(gagnantTreve);
                         break;
@@ -538,6 +551,14 @@ public class Partie {
             //System.exit(0);
         }
     }
+    public int getInputTreve() {
+        return inputTreve;
+    }
+
+    public void setInputTreve(int inputTreve) {
+        this.inputTreve = inputTreve;
+    }
+
     /**
      * permet d'activer la methode {@link #autoAffecterEtudiantZone(Joueur)} pour chaque joueur
      */
