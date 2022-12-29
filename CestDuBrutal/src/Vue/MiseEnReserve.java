@@ -367,6 +367,7 @@ public class MiseEnReserve extends JFrame {
 
         // ++++++++++++++++++++++++++++++++++++++++++ Valider configuration �quipe ++++++++++++++++++++++++++++++
         validation = new JButton("VALIDER");
+        validation.setEnabled(partie.isAuto()); //hehehehe jen suis sur que ca tenerve ca
         validation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Affichage des caracteristiques du joueur.
