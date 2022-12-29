@@ -245,7 +245,6 @@ public class Partie {
         String idToZone = toZoneString; 
         Zone toZone = selectZone(idToZone);     
             
-//studentToMove = fromZone.drawEtudiantDansZone(j); 
         //on d�place l'etu  
         toZone.addEtudiantDansZone(studentToMove);      
         // on retire l'etu de la zone d'origine 
@@ -334,6 +333,7 @@ public class Partie {
             System.out.println("la repartition dans les zones est fini");     //TODO    
     }
     
+    
     /**
      * permet d'affecter les etudiants depuis la reserve, vers les zones pendant la treve
      * @param j joueur qui possede les etudiants que l'on veut bouger
@@ -354,7 +354,7 @@ public class Partie {
                         //On prend un etudiant dans une zone 
                         studentToMove = reserve.drawEtudiantDansZone(j);
                         
-                        // on choisie la zone de deploiement & on d�polie l'etu choisi
+                        // on choisie la zone de deploiement & on deploie l'etu choisi
                         System.out.println("Vers");
                         String idToZone = "";
                         Zone.displayActiveZones(j);  
@@ -390,6 +390,30 @@ public class Partie {
             System.out.println("La reserve est vide!");
         }
     }
+    public void affecterEtudiantReserveTreveMVC(Joueur j,Etudiant etu,String toZoneString) {
+        
+                    try {
+                        Etudiant studentToMove = etu;
+                        Zone reserve = j.getReserve();
+                        
+                        //On prend un etudiant dans une zone 
+                        studentToMove =etu;
+                        
+                        //on deplace l'etu  
+                        Zone toZone = selectZone(toZoneString);
+                        toZone.addEtudiantDansZone(studentToMove);      
+                        reserve.removeStudentFromZone(studentToMove);  
+                          
+                        studentToMove.setIsInZone(toZone);// on change la zone ici  
+                        
+                        
+                    }
+                    catch (ZoneNotFoundInList e){
+                        System.out.println("Vous n'avez pas rentre une zone existante.");
+                    }
+              
+    }
+    
     /**
      * Permet de deplacer les etudiants d'un joueur d'une zone vers une autre zone pendant la treve
      * @param j joueur qui possede les etudiants que l'on veut deplacer
