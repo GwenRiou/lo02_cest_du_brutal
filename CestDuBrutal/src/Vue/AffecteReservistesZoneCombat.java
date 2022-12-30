@@ -73,7 +73,7 @@ public class AffecteReservistesZoneCombat extends JFrame {
         Image img3 = new ImageIcon("ressources\\etudiant.png").getImage();  
         
         JLabel lblNewLabel_1 = new JLabel("La reserve");
-        lblNewLabel_1.setBounds(20, 10, 61, 13);
+        lblNewLabel_1.setBounds(20, 10, 93, 13);
         contentPane.add(lblNewLabel_1);        
          
         ArrayList <Etudiant> listEtu = joueur.getReserveArrayList();
@@ -99,7 +99,7 @@ public class AffecteReservistesZoneCombat extends JFrame {
         }
         
         JLabel lblNewLabel_2 = new JLabel("La Bibliotheque");
-        lblNewLabel_2.setBounds(450, 10, 76, 13);
+        lblNewLabel_2.setBounds(450, 10, 126, 13);
         contentPane.add(lblNewLabel_2);        
         
         JPanel panelBibliotheque = new JPanel();
@@ -173,7 +173,7 @@ public class AffecteReservistesZoneCombat extends JFrame {
         }
         
         JLabel lblNewLabel = new JLabel("Le Quartier Administratif");
-        lblNewLabel.setBounds(450, 258, 126, 13);
+        lblNewLabel.setBounds(450, 258, 209, 13);
         contentPane.add(lblNewLabel);
         
         JPanel panelAdministratif = new JPanel();
@@ -204,7 +204,7 @@ public class AffecteReservistesZoneCombat extends JFrame {
             Etudiant etu = listeAdministratif.get(k);
         }
         JLabel lblNewLabel_4 = new JLabel("Les Halles Industrielles");
-        lblNewLabel_4.setBounds(450, 391, 104, 13);
+        lblNewLabel_4.setBounds(450, 391, 167, 13);
         contentPane.add(lblNewLabel_4);
         
         JPanel panelIndustrielle = new JPanel();
@@ -235,7 +235,7 @@ public class AffecteReservistesZoneCombat extends JFrame {
             Etudiant etu = listeIndustrielle.get(k);
         }
         JLabel lblNewLabel_5 = new JLabel("La Halle Sportive");
-        lblNewLabel_5.setBounds(450, 515, 93, 13);
+        lblNewLabel_5.setBounds(450, 515, 146, 13);
         contentPane.add(lblNewLabel_5);
         
         JPanel panelSportive = new JPanel();
@@ -267,12 +267,6 @@ public class AffecteReservistesZoneCombat extends JFrame {
         
         
         JButton validation = new JButton("VALIDER");
-        validation.setEnabled(false);
-        boolean condition=false;
-        if(joueur.getId()==1) condition=Zone.allZoneNotEmpty();// condidtion pour que le j1 a un etu dasn chaque zone 
-        else condition=Zone.allZoneWithTwoStudent(joueur);
-        if( condition) validation.setEnabled(true);//---------------------------------------------> DEBUG
-        //if(joueur.getStudentList().size()==0 && condition) validation.setEnabled(true);---------> true version
         validation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {                
              dispose();             
