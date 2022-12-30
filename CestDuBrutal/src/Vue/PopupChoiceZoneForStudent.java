@@ -143,12 +143,6 @@ public class PopupChoiceZoneForStudent extends JFrame {
         JButton ok = new JButton("OK");
         ok.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //les �l�ments  aux quel j'ai acc�s 
-                /*
-                 * l'Etudiant qui change de zone
-                 * Un String avec le nom de la toZOne
-                 * L'ancienne Zone avec Etu.getIsInZone?
-                 */
                 partie.affecterEtudiantZoneMVC(etu,choice.getSelectedItem());
                 Zone.displayAllStudentInZones();
                 DistributionEtudiants gui4 = new DistributionEtudiants(partie);

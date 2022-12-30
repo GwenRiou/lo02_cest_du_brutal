@@ -330,7 +330,7 @@ public class Partie {
             Zone.displayAllZones();
             // affiche toutes les ï¿½tudiants par zones
             Zone.displayAllStudentInZones();
-            System.out.println("la repartition dans les zones est fini");     //TODO    
+            System.out.println("la repartition dans les zones est fini");      
     }
     
     

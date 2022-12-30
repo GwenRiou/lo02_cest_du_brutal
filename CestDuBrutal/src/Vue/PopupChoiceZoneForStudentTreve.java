@@ -137,23 +137,23 @@ public class PopupChoiceZoneForStudentTreve extends JFrame {
         choice.setFont(new Font("Tahoma", Font.PLAIN, 20));
         choice.setBounds(461, 131, 345, 30);
         ZoneCombat toZone = (ZoneCombat) Zone.getZone(0);
-        if(toZone.getControlePar()==joueur) {
+        if(toZone.getControlePar()==null) {
             choice.add("la Bibliotheque");
         }
         toZone = (ZoneCombat) Zone.getZone(1);
-        if(toZone.getControlePar()==joueur) {
+        if(toZone.getControlePar()==null) {
             choice.add("le BDE");
         }
         toZone = (ZoneCombat) Zone.getZone(2);
-        if(toZone.getControlePar()==joueur) {
+        if(toZone.getControlePar()==null) {
             choice.add("le Quartier administratif");
         }
         toZone = (ZoneCombat) Zone.getZone(3);
-        if(toZone.getControlePar()==joueur) {
+        if(toZone.getControlePar()==null) {
             choice.add("Les Halles Industrielles");
         }
         toZone = (ZoneCombat) Zone.getZone(4);
-        if(toZone.getControlePar()==joueur) {
+        if(toZone.getControlePar()==null) {
             choice.add("la Halle sportive");
         }
         contentPane.add(choice);
