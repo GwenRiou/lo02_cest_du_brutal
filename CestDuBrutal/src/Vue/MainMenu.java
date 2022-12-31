@@ -86,7 +86,7 @@ public class MainMenu extends JFrame {
         contentPane.add(btnNewButton_1);
         
         JLabel lblNewLabel_1 = new JLabel("Gwen Riou, Xuan Boone, UTT A22");
-        lblNewLabel_1.setBounds(0, 183, 175, 14);
+        lblNewLabel_1.setBounds(0, 183, 329, 14);
         contentPane.add(lblNewLabel_1);
     }
 }
