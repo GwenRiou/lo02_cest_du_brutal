@@ -182,10 +182,10 @@ public class Etudiant implements Strategie{
         if (x>0 && x<(40 + 3*this.dexterite)) {
             target.ects -= damageTaken;
 
-            System.out.println("\033[0;90m"+this.belongsTo.getUserName()+" : "+this.getId()+" attacks "+target.id+", dealing "+ damageTaken + "HP"+"\033[0;0m");
+            System.out.println(this.isInZone.getZoneName()+": "+this.belongsTo.getUserName()+" : "+this.getId()+" attaque "+target.id+", infligeant "+ damageTaken + " points ECTS de degats!");
         }
         if (target.ects <= 0) {//kill student
-            System.out.println("\033[0;90m"+target.belongsTo.getUserName()+"'s etu #"+target.getId()+" was killed by"+this.id+"\033[0;0m");//
+            System.out.println(this.isInZone.getZoneName()+": "+"etu #"+target.getId()+" de "+target.belongsTo.getUserName()+" a ete tue par etu #"+ this.id +" de son adversaire!");//
 
             target.isInZone.getEtuDansZoneArrayList().remove(target);
             //=====count number of players alive
@@ -238,7 +238,7 @@ public class Etudiant implements Strategie{
             }
         }
         //healing...
-        System.out.println("\033[0;90m"+this.belongsTo.getUserName()+" : "+this.id+" Tente de soigner"+"\033[0;0m");
+        System.out.println(this.isInZone.getZoneName()+": "+""+this.belongsTo.getUserName()+" : "+this.id+" Tente de soigner");
 
         int healAmount;
         int x = (int) (Math.random()*100);
@@ -252,7 +252,7 @@ public class Etudiant implements Strategie{
                 healAmount = 30 + this.constitution;
                 target.ects += healAmount;
             }
-            System.out.println("\033[0;90m"+"etu #"+target.getId()+" Got healed "+healAmount+" HP!"+"\033[0;0m");
+            System.out.println(this.isInZone.getZoneName()+": "+"etu #"+target.getId()+" A ete soigne de "+healAmount+" points ECTS");
         }
     } 
     /**

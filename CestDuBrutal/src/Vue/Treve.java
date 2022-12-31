@@ -86,6 +86,7 @@ public class Treve extends JFrame {
         btnNewButton_3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {                
                 Partie.getInstance().setInputTreve(4);
+                new showCombatConsole();
                 dispose();
                 
            }

@@ -2,7 +2,7 @@ package Model;
 import java.util.*;
 
 import Vue.Treve;
-
+import Vue.showCombatConsole;
 
 /**
  * Classe partie
@@ -522,6 +522,8 @@ public class Partie {
             treve(gagnantTreve,zone); // --------------------------------ajout de la treve
         }       
     }
+   
+    
     /**
      * la treve: letudiant a l choix d'affecter des etudiants de zones controllees, des reservistes sur des zones de combat, visualiser de nombre de points ects par zones de combat ou de continuer la partie.
      * il doit entrer 1, 2, 3 ,4 ou 5...
@@ -534,13 +536,19 @@ public class Partie {
         
         if(finDePartie==false) {
             treve=null; // premier trucs
-            System.out.println("\033[0;1m"+"==TREVE: UNE ZONE A ETE CONTROLEE=="+"\033[0;0m");// on pourra l'enleve
+            System.out.println("==TREVE: UNE ZONE A ETE CONTROLEE==");// on pourra l'enleve
+            
+            showCombatConsole.getInstance().setDerniereZoneTreve(zone);
+            showCombatConsole.getInstance().setGagnantDerniereTreve(gagnantTreve);
+            showCombatConsole.getInstance().setTreveButtonEnabled(true);
+            /*
             try {   
                 Treve guiTreve = new Treve(gagnantTreve,zone);  
                 guiTreve.setVisible(true);  
             } catch (Exception e) { 
                 e.printStackTrace();    
             }
+            */
             inputTreve = 0;
             while (!(inputTreve == 4)) {   
                 //TODO

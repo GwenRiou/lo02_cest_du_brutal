@@ -28,6 +28,7 @@ import java.awt.Label;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import Controleur.main;
 import Model.Etudiant;
 import Model.Joueur;
 import Model.Partie;
@@ -379,6 +380,7 @@ public class MiseEnReserve extends JFrame {
                     //affichie la suite
                     if(partie.getInstance().isAuto()) {
                         partie.autoAffecterEtudiantZone();
+                        main.showConsole();
                         Zone.melee();
                     }
                     else {

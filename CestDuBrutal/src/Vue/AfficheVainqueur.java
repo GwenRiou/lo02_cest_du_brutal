@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import Controleur.main;
 import Model.Joueur;
 import Model.Partie;
 import javax.swing.JLabel;

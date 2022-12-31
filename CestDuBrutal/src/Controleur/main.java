@@ -12,39 +12,47 @@ import Model.Joueur;
 import Model.Partie;
 import Model.Zone;
 import Vue.AfficheVainqueur;
+import Vue.showCombatConsole;
 import Vue.DistributionEtudiants;
 import Vue.MainMenu;
 import Vue.MiseEnReserve;
 import Vue.RepartitionDesPoints;
+import Vue.Treve;
 
 public class main {
+    static showCombatConsole guiConsole;
     public void NextInterface() {
     }
-    		public static void main(String[] args) throws InvocationTargetException, InterruptedException, IOException {
-			Scanner sc = new Scanner(System.in);
-			EventQueue.invokeAndWait (new Runnable() {
-				public void run() {
-					try {
-					    Partie partie;
-				        partie = Partie.getInstance();
-				        partie.getConnection();// ne fonctionne que apres un getInstance 
-				        Joueur j1 = new Joueur(1);
-				        Joueur j2 = new Joueur(2);
-				        partie.addPlayer(j1);
-				        partie.addPlayer(j2);
-
-				        Zone.setZones(); 
-				        
-				        MainMenu gui0 = new MainMenu(partie,j1,j2);
-				        //AfficheVainqueur gui5 = new AfficheVainqueur(j1);
-				        //gui5.setVisible(true);
-				        //RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);
-						//MiseEnReserve gui2 = new MiseEnReserve(partie);	
-						
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});		
-		}
+	public static void main(String[] args) throws InvocationTargetException, InterruptedException, IOException {
+    	Scanner sc = new Scanner(System.in);
+    	EventQueue.invokeAndWait (new Runnable() {
+    		public void run() {
+    			try {
+    			    Partie partie;
+    		        partie = Partie.getInstance();
+    		        partie.getConnection();// ne fonctionne que apres un getInstance 
+    		        Joueur j1 = new Joueur(1);
+    		        Joueur j2 = new Joueur(2);
+    		        partie.addPlayer(j1);
+    		        partie.addPlayer(j2);
+    
+    		        Zone.setZones(); 
+    		        
+    		        MainMenu gui0 = new MainMenu(partie,j1,j2);
+    		        //AfficheVainqueur gui5 = new AfficheVainqueur(j1);
+    		        //gui5.setVisible(true);
+    		        //RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);
+    				//MiseEnReserve gui2 = new MiseEnReserve(partie);	
+    				
+    			} catch (Exception e) {
+    				e.printStackTrace();
+    			}
+    		}
+    	});		
+	}
+	public static void showConsole() {
+	   guiConsole = new showCombatConsole();
+	}
+	
+	
 }

@@ -101,7 +101,7 @@ public class ZoneCombat extends Zone implements Runnable{
                 }
                 
                 //sleep present pour ralentir l'execution 
-                Thread.sleep((long)(Math.random()*20));               
+                Thread.sleep((long)(Math.random()*500));               
             } catch (InterruptedException e) {
                 //e.printStackTrace();
                 break;// on sort du while
