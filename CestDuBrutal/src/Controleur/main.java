@@ -39,6 +39,7 @@ public class main {
     		        Zone.setZones(); 
     		        
     		        MainMenu gui0 = new MainMenu(partie,j1,j2);
+    		        
     		        //AfficheVainqueur gui5 = new AfficheVainqueur(j1);
     		        //gui5.setVisible(true);
     		        //RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);

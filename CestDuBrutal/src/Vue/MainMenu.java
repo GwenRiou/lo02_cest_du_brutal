@@ -19,6 +19,8 @@ import java.awt.Window.Type;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class MainMenu extends JFrame {
 
@@ -33,18 +35,23 @@ public class MainMenu extends JFrame {
      */
     
     public MainMenu(Partie partie, Joueur j1, Joueur j2) {
-        this.setVisible(true);
+        //this.pack();
+        setTitle("Menu Principal");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 451, 185);
+        setBounds(100, 100, 451, 217);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
         contentPane = new JPanel();
-        contentPane.setBackground(new Color(0, 255, 255));
+        contentPane.setBackground(new Color(192, 192, 192));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
         JLabel lblNewLabel = new JLabel("C'EST DU BRUTAL");
-        lblNewLabel.setBounds(168, 11, 115, 14);
+        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 32));
+        lblNewLabel.setBounds(10, 24, 415, 30);
         contentPane.add(lblNewLabel);
         MainMenu menu = this;
         JButton btnNewButton = new JButton("Jouer");
@@ -58,7 +65,7 @@ public class MainMenu extends JFrame {
                 menu.dispose();
             }
         });
-        btnNewButton.setBounds(64, 48, 134, 23);
+        btnNewButton.setBounds(89, 82, 254, 51);
         contentPane.add(btnNewButton);
         
         JButton btnNewButton_1 = new JButton("Mode automatique");
@@ -75,7 +82,7 @@ public class MainMenu extends JFrame {
                 menu.dispose();
             }
         });
-        btnNewButton_1.setBounds(232, 48, 134, 23);
+        btnNewButton_1.setBounds(133, 144, 162, 23);
         contentPane.add(btnNewButton_1);
     }
 }

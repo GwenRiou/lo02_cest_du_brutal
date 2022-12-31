@@ -52,6 +52,7 @@ public class AffecteEntreZoneCombat extends JFrame {
         this.zoneList = (ArrayList<ZoneCombat>) Zone.getZoneList();
         conditionsAreMet();
         Zone.displayAllStudentInZones();
+        
         this.initFenetre();
     }
 
@@ -71,13 +72,15 @@ public class AffecteEntreZoneCombat extends JFrame {
      * Create the frame.
      */
     public void initFenetre() {
+        setTitle("Deplacer un etudiant");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(192, 192, 192));
         contentPane.setBorder(new CompoundBorder());
-        
-        this.setVisible(true);
         this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+       
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
@@ -85,29 +88,7 @@ public class AffecteEntreZoneCombat extends JFrame {
         Image img1 = new ImageIcon("ressources\\maitre.png").getImage(); 
         Image img2 = new ImageIcon("ressources\\elite.png").getImage(); 
         Image img3 = new ImageIcon("ressources\\etudiant.png").getImage();
-        /*
-        ArrayList <Etudiant> listEtu = joueur.getStudentList();
-        int sizeCamion = listEtu.size();
-        JButton[] jb = new JButton[sizeCamion];
-        for (int k = 0; k < sizeCamion; k++) {
-            jb[k] = new JButton();
-            //On met l'icon correspondant
-            switch(listEtu.get(k).getType()) {
-                case "Maitre":
-                    jb[k].setIcon(new ImageIcon(img1));
-                    break;
-                case "Elite":
-                    jb[k].setIcon(new ImageIcon(img2));
-                    break;
-                default:
-                    jb[k].setIcon(new ImageIcon(img3));
-                    break;                    
-            }
-            
-            Etudiant etu0 = listEtu.get(k);
-            jb[k].addActionListener(   new MonEcouteurEvenements(joueur.getStudentList(),etu0 ));
-        }
-        */
+        
         JLabel lblNewLabel_2 = new JLabel("La Bibliotheque");
         lblNewLabel_2.setBounds(40, 11, 375, 13);
         contentPane.add(lblNewLabel_2);        

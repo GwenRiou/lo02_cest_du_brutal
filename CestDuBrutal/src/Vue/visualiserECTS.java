@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 public class visualiserECTS extends JFrame {
 
@@ -25,13 +26,17 @@ public class visualiserECTS extends JFrame {
      * Create the frame.
      */
     public visualiserECTS() {
+        setTitle("Visualisation des points ECTS");
+        setMinimumSize(new Dimension(450, 300));
         this.setVisible(true);
         zoneList = Zone.getZoneList();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
         setContentPane(contentPane);
         contentPane.setLayout(null);
         initFenetre();

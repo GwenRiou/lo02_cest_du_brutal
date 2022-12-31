@@ -86,18 +86,20 @@ public class MiseEnReserve extends JFrame {
     public void initFenetre() {
         // ++++++++++++++++++++++++++++++++++++++ Panneau principal +++++++++++++++++++++++++++++++++++++++++++
         setForeground(Color.BLUE);
-        setTitle("Configuration Equipe");
+        setTitle("Mise en Reserve du joueur "+joueur.getId());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.pack();
         contentPane = new JPanel();
         contentPane.setBorder(new CompoundBorder());
-        contentPane.setBackground(new Color(128, 128, 192));
+        contentPane.setBackground(new Color(197, 169, 118));
         setContentPane(contentPane);
         contentPane.setLayout(null); // politique de placement des composants dans la fen�tre
         setBounds(100, 100, 1130, 650);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
         // +++++++++++++++++++++++++++++++++++++ config personnage  ++++++++++++++++++++++++++++++++++++++++++++
-        configPersonnage.setBackground(Color.YELLOW);
+        configPersonnage.setBackground(new Color(255, 240, 230));
         configPersonnage.setText("Selectionnez un etudiant");
         configPersonnage.setForeground(Color.BLACK);
         configPersonnage.setFont(new Font("Tahoma", Font.ITALIC, 20));
@@ -111,6 +113,7 @@ public class MiseEnReserve extends JFrame {
         panelMaitre.setBounds(79, 102, 61, 122);
         panelMaitre.setLayout(new GridLayout(1, 1, 0, 0)); // politique de placement des composants dans ce panel
         JButton jb1 = new JButton(); // pour repr�senter un personnage, utilisation d'un JButton
+        jb1.setBackground(new Color(216, 192, 120));
         panelMaitre.add(jb1);
         jb1.setForeground(Color.CYAN);
         Image img1 = new ImageIcon("ressources\\maitre.png").getImage();
@@ -126,7 +129,7 @@ public class MiseEnReserve extends JFrame {
         // Idem pour les �lites
         JPanel panelElite = new JPanel();
         panelElite.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-        panelElite.setBackground(Color.CYAN);
+        panelElite.setBackground(new Color(216, 192, 120));
         panelElite.setBounds(354, 102, 274, 122);
         panelElite.setLayout(new GridLayout(1, 4, 0, 0));
         Image img2 = new ImageIcon("ressources\\elite.png").getImage();
@@ -147,7 +150,7 @@ public class MiseEnReserve extends JFrame {
         // Idem pour les �tudiants de base
         JPanel panelEtu = new JPanel();
         panelEtu.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-        panelEtu.setBackground(Color.CYAN);
+        panelEtu.setBackground(new Color(216, 192, 120));
         panelEtu.setBounds(830, 102, 274, 411);
         panelEtu.setLayout(new GridLayout(4, 4, 2, 0));
         contentPane.add(panelEtu);
@@ -193,7 +196,7 @@ public class MiseEnReserve extends JFrame {
         lblNewLabel_5.setBounds(193, 389, 61, 37);
         contentPane.add(lblNewLabel_5);
         force = new Label();
-        force.setBackground(new Color(128, 255, 255));
+        force.setBackground(new Color(216, 192, 120));
         force.setFont(new Font("Tahoma", Font.PLAIN, 24));
         force.setText("0");
         force.setBounds(297, 389, 61, 37);
@@ -205,7 +208,7 @@ public class MiseEnReserve extends JFrame {
         lblNewLabel_6.setBounds(159, 432, 105, 37);
         contentPane.add(lblNewLabel_6);
         dexterite = new Label();
-        dexterite.setBackground(new Color(128, 255, 255));
+        dexterite.setBackground(new Color(216, 192, 120));
         dexterite.setFont(new Font("Tahoma", Font.PLAIN, 24));
         dexterite.setText("0");
         dexterite.setBounds(297, 432, 61, 37);
@@ -217,7 +220,7 @@ public class MiseEnReserve extends JFrame {
         lblNewLabel_7.setBounds(147, 479, 117, 37);
         contentPane.add(lblNewLabel_7);
         resistance = new Label();
-        resistance.setBackground(new Color(128, 255, 255));
+        resistance.setBackground(new Color(216, 192, 120));
         resistance.setFont(new Font("Tahoma", Font.PLAIN, 24));
         resistance.setText("0");
         resistance.setBounds(297, 475, 61, 37);
@@ -229,7 +232,7 @@ public class MiseEnReserve extends JFrame {
         lblNewLabel_8.setBounds(136, 522, 128, 37);
         contentPane.add(lblNewLabel_8);
         constitution = new Label();
-        constitution.setBackground(new Color(128, 255, 255));
+        constitution.setBackground(new Color(216, 192, 120));
         constitution.setFont(new Font("Tahoma", Font.PLAIN, 24));
         constitution.setText("0");
         constitution.setBounds(297, 518, 61, 37);
@@ -241,7 +244,7 @@ public class MiseEnReserve extends JFrame {
         lblNewLabel_9.setBounds(171, 569, 93, 29);
         contentPane.add(lblNewLabel_9);
         initiative = new Label();
-        initiative.setBackground(new Color(128, 255, 255));
+        initiative.setBackground(new Color(216, 192, 120));
         initiative.setFont(new Font("Tahoma", Font.PLAIN, 24));
         initiative.setText("0");
         initiative.setBounds(297, 561, 61, 37);
@@ -253,7 +256,7 @@ public class MiseEnReserve extends JFrame {
         lblNewLabel_11.setBounds(411, 389, 128, 37);
         contentPane.add(lblNewLabel_11);
         strategy = new Label();
-        strategy.setBackground(new Color(128, 255, 255));
+        strategy.setBackground(new Color(216, 192, 120));
         strategy.setText("RANDOM");
         strategy.setFont(new Font("Tahoma", Font.PLAIN, 20));
         strategy.setBounds(562, 389, 224, 31);
@@ -403,7 +406,7 @@ public class MiseEnReserve extends JFrame {
         // ++++++++++++++++++++++++++++++++++++++++++ Habillage ++++++++++++++++++++++++++++++++++++++++++++
         // panneau configuration
         JPanel panel = new JPanel();
-        panel.setBackground(Color.CYAN);
+        panel.setBackground(new Color(255, 215, 155));
         panel.setBorder(new LineBorder(new Color(0, 0, 0), 5));
         panel.setBounds(51, 345, 769, 261);
         contentPane.add(panel);

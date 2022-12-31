@@ -43,11 +43,14 @@ public class PopupChoiceZoneForStudent extends JFrame {
      * Create the frame.
      */
     public void initFenetre() {
+        setTitle("Deplacer un etudiant");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 728, 408);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
@@ -132,7 +135,7 @@ public class PopupChoiceZoneForStudent extends JFrame {
         
         Choice choice = new Choice();
         choice.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        choice.setBounds(461, 131, 345, 30);
+        choice.setBounds(461, 131, 313, 31);
         choice.add("la Bibliotheque");
         choice.add("le BDE");
         choice.add("le Quartier administratif");
@@ -151,7 +154,7 @@ public class PopupChoiceZoneForStudent extends JFrame {
             }
         });
         ok.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        ok.setBounds(439, 213, 59, 45);
+        ok.setBounds(461, 213, 59, 45);
         contentPane.add(ok);
     }
 }

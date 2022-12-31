@@ -45,11 +45,15 @@ public class PopupChoiceZoneForStudentTreve extends JFrame {
      * Create the frame.
      */
     public void initFenetre() {
+        setTitle("Deplacer un etudiant");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 728, 408);
         contentPane = new JPanel();
         contentPane.setBackground(Color.GREEN);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
@@ -162,7 +166,7 @@ public class PopupChoiceZoneForStudentTreve extends JFrame {
         ok.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 partie.affecterEtudiantReserveTreveMVC(joueur,etu,choice.getSelectedItem());
-                System.out.println("affecttaion Réussite");
+                System.out.println("affecttaion Rï¿½ussite");
                 AffecteReservistesZoneCombat hui5 =new AffecteReservistesZoneCombat(joueur,zone);
                 dispose();                
             }

@@ -29,11 +29,12 @@ public class showCombatConsole extends JFrame {
     private JButton btnNewButton;
     
     public showCombatConsole() {
+        setTitle("Combat");
         currentGUI = this;
         textArea = new JTextArea();
         textArea.setDragEnabled(true);
         textArea.setEditable(false);
-
+        
         JScrollPane scrollPane = new JScrollPane(textArea);
         
         btnNewButton = new JButton("TREVE");
@@ -41,7 +42,7 @@ public class showCombatConsole extends JFrame {
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {   
-                    Treve guiTreve = new Treve(gagnantDerniereTreve,derniereZoneTreve);  
+                    Treve guiTreve = new Treve(gagnantDerniereTreve,derniereZoneTreve);
                     guiTreve.setVisible(true);  
                     dispose();
                 } catch (Exception e1) { 

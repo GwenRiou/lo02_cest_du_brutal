@@ -531,7 +531,12 @@ public class Partie {
      * @param zone zone dans laquelle le joueur vient de gagner le controle
      */
     public void treve(Joueur gagnantTreve, ZoneCombat zone) {
-        
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         this.finDePartie = Zone.FinDePartie();
         
         if(finDePartie==false) {

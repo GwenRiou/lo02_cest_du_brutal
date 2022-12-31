@@ -75,28 +75,31 @@ public class RepartitionDesPoints extends JFrame {
 	private Partie partie;
 	
 	public RepartitionDesPoints(Partie partie) {
-        setMinimumSize(new Dimension(1400, 800));
+        setMinimumSize(new Dimension(1150, 680));
 	    this.partie=partie;
 		this.joueur = partie.getJoueurToPlay();
+		
 		this.initFenetre();
 	}
 
 	public void initFenetre() {
 		// ++++++++++++++++++++++++++++++++++++++ Panneau principal +++++++++++++++++++++++++++++++++++++++++++
 		setForeground(Color.BLACK);
-		setTitle("Configuration Equipe");
+		setTitle("Configuration Equipe du Joueur "+joueur.getId());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.pack();
 		contentPane = new JPanel();
 		contentPane.setBorder(new CompoundBorder());
-		contentPane.setBackground(Color.CYAN);
+		contentPane.setBackground(new Color(192, 192, 192));
 		setContentPane(contentPane);
 		contentPane.setLayout(null); // politique de placement des composants dans la fen�tre
-		setBounds(100, 100, 1470, 750);
+		setBounds(100, 100, 1000, 50);
+		this.setLocationRelativeTo(null);
+        this.setVisible(true);
 		configPersonnage.setText("selectionnez un etudiant");
 		// +++++++++++++++++++++++++++++++++++++ config personnage  ++++++++++++++++++++++++++++++++++++++++++++
-		configPersonnage.setBackground(Color.YELLOW);
+		configPersonnage.setBackground(new Color(242, 242, 242));
 		configPersonnage.setForeground(Color.BLACK);
 		configPersonnage.setFont(new Font("Tahoma", Font.ITALIC, 20));
 		configPersonnage.setBounds(426, 331, 360, 34);
@@ -124,7 +127,7 @@ public class RepartitionDesPoints extends JFrame {
 		// Idem pour les �lites
 		JPanel panelElite = new JPanel();
 		panelElite.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-		panelElite.setBackground(Color.CYAN);
+		panelElite.setBackground(new Color(128, 128, 128));
 		panelElite.setBounds(354, 102, 274, 122);
 		panelElite.setLayout(new GridLayout(1, 4, 0, 0));
 		Image img2 = new ImageIcon("ressources\\elite.png").getImage();
@@ -145,7 +148,7 @@ public class RepartitionDesPoints extends JFrame {
 		// Idem pour les �tudiants de base
 		JPanel panelEtu = new JPanel();
 		panelEtu.setBorder(new LineBorder(new Color(0, 0, 0), 5));
-		panelEtu.setBackground(Color.CYAN);
+		panelEtu.setBackground(new Color(128, 128, 128));
 		panelEtu.setBounds(830, 102, 274, 387);
 		panelEtu.setLayout(new GridLayout(4, 4, 2, 0));
 		contentPane.add(panelEtu);
@@ -340,7 +343,7 @@ public class RepartitionDesPoints extends JFrame {
 		// ++++++++++++++++++++++++++++++++++++++++++ Habillage ++++++++++++++++++++++++++++++++++++++++++++
 		// panneau configuration
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.CYAN);
+		panel.setBackground(new Color(128, 128, 128));
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 5));
 		panel.setBounds(51, 345, 766, 261);
 		contentPane.add(panel);

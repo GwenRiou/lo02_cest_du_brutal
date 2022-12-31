@@ -49,17 +49,18 @@ public class AffecteReservistesZoneCombat extends JFrame {
      * Create the frame.
      */
     public void initFenetre() {
+        setTitle("Affecter depuis la reserve");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1286, 505);
         contentPane = new JPanel();
         contentPane.setBackground(Color.GRAY);
         contentPane.setBorder(new CompoundBorder());
-        
-        this.setVisible(true);
-        this.pack();
         setContentPane(contentPane);
         contentPane.setLayout(null);
         setBounds(100, 100, 1370, 650);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
         
         JPanel panelCamion = new JPanel();
         panelCamion.setBorder(new LineBorder(new Color(0, 0, 0)));

@@ -34,11 +34,13 @@ public class AfficheVainqueur extends JFrame {
     }
 
     public void initFenetre() {
+        setTitle("Victoire!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
         setContentPane(contentPane);
         contentPane.setLayout(null);
         

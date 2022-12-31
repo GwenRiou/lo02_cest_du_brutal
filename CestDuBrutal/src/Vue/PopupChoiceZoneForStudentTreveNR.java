@@ -45,11 +45,15 @@ public class PopupChoiceZoneForStudentTreveNR extends JFrame {
      * Create the frame.
      */
     public void initFenetre() {
+        setTitle("Deplacer un etudiant");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 728, 408);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(128, 128, 192));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
 
         setContentPane(contentPane);
         contentPane.setLayout(null);

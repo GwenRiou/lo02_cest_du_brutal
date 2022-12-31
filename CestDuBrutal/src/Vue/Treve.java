@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 public class Treve extends JFrame {
 
@@ -40,12 +41,17 @@ public class Treve extends JFrame {
      * Create the frame.
      */
     public Treve(Joueur joueur, Zone zone) {
+        setTitle("TREVE");
+        setMinimumSize(new Dimension(500, 350));
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 469, 307);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+        
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
         setContentPane(contentPane);
         contentPane.setLayout(null);
         

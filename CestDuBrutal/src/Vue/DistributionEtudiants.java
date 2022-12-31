@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import javax.swing.border.LineBorder;
 
+import Controleur.main;
 import Model.Etudiant;
 import Model.Joueur;
 import Model.Partie;
@@ -47,18 +48,19 @@ public class DistributionEtudiants extends JFrame {
      * Create the frame.
      */
     public void initFenetre() {
+        setTitle("Distribution des etudiants du Joueur"+ joueur.getId());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1286, 505);
         contentPane = new JPanel();
         contentPane.setBackground(Color.GRAY);
         contentPane.setBorder(new CompoundBorder());
         
-        this.setVisible(true);
-        this.pack();
         setContentPane(contentPane);
         contentPane.setLayout(null);
         setBounds(100, 100, 1370, 650);
-        
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.pack();
         JPanel panelCamion = new JPanel();
         panelCamion.setBorder(new LineBorder(new Color(0, 0, 0)));
         panelCamion.setBounds(20, 26, 394, 594);        
@@ -259,14 +261,15 @@ public class DistributionEtudiants extends JFrame {
         boolean condition=false;
         if(joueur.getId()==1) condition=Zone.allZoneNotEmpty();// condidtion pour que le j1 a un etu dasn chaque zone 
         else condition=Zone.allZoneWithTwoStudent(joueur);
-        if( condition) validation.setEnabled(true);//---------------------------------------------> DEBUG
-        //if(joueur.getStudentList().size()==0 && condition) validation.setEnabled(true);---------> true version
+        //if( condition) validation.setEnabled(true);//---------------------------------------------> DEBUG
+        if(joueur.getStudentList().size()==0 && condition) validation.setEnabled(true);//---------> true version
         validation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
              // Affichage des caracteristiques du joueur.
                 if(partie.isJoueur1Ajoue()==true) {
                     partie.setJoueur1Ajoue(false);
                     //affichie la suite   
+                    main.showConsole();
                     Zone.melee();
                     // fermer la fenetre graphique              
                     dispose();              
