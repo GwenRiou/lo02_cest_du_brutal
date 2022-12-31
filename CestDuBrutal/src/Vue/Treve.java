@@ -55,13 +55,18 @@ public class Treve extends JFrame {
         contentPane.add(lblNewLabel);
         
         JButton btnNewButton = new JButton("Affecter des etudiants des zones controllees");
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AffecteEntreZoneCombat gui6  = new AffecteEntreZoneCombat(Partie.getInstance(), zone, joueur);
+            }
+        });
         btnNewButton.setBounds(83, 88, 303, 23);
         contentPane.add(btnNewButton);
         
         JButton btnNewButton_1 = new JButton("Affecter des reservistes sur des zones de combat");
         btnNewButton_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                AffecteReservistesZoneCombat hui5 =new AffecteReservistesZoneCombat(joueur,zone);
+                AffecteReservistesZoneCombat gui5 =new AffecteReservistesZoneCombat(joueur,zone);
             }
         });
         btnNewButton_1.setBounds(83, 122, 303, 23);
@@ -70,6 +75,7 @@ public class Treve extends JFrame {
         JButton btnNewButton_2 = new JButton("Visualiser le nombre de points ECTS par zone de combat");
         btnNewButton_2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                visualiserECTS gui0 = new visualiserECTS();
                 Zone.displayECTSPerZone();
             }
         });

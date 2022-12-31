@@ -52,7 +52,7 @@ public class AfficheVainqueur extends JFrame {
         lblNewLabel_1.setText(joueur.getUserName());        
         contentPane.add(lblNewLabel_1);
         
-        JButton validation = new JButton("VALIDER");
+        JButton validation = new JButton("Mettre fin au jeu");
         validation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();

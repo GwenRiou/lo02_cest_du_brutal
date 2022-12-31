@@ -142,7 +142,27 @@ public class ZoneCombat extends Zone implements Runnable{
         System.out.println("nombre d'etudiant dans la zone "+nbEtu);
         System.out.println();
     }
-   
+    /**
+     * Retourne le nombre d'Etudiants ou le nombre total de points ECTS dans la zone
+     * @param ECTS vrai pour retourner le nombre d'ECTS, faux pour le nombre d'etudiants
+     * @return nbECTS ou nbEtu
+     */
+    public int getTotalECTS(boolean ECTS) {
+        ArrayList<Etudiant>  etulist= this.etuDansZone;
+        int nbECTS=0;
+        int nbEtu=0;
+        for (ListIterator<Etudiant> it = etulist.listIterator(); it.hasNext();) { //scan through all students
+            Etudiant s = it.next();
+            nbECTS+=s.getEcts();
+            nbEtu++;
+        }
+        if(ECTS) {
+            return nbECTS;
+        }
+        else {
+            return nbEtu;
+        } 
+    }
 
     
     //getters
