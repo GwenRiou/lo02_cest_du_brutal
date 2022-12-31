@@ -38,7 +38,7 @@ public class MainMenu extends JFrame {
         //this.pack();
         setTitle("Menu Principal");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 451, 217);
+        setBounds(100, 100, 451, 236);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         contentPane = new JPanel();
@@ -84,5 +84,9 @@ public class MainMenu extends JFrame {
         });
         btnNewButton_1.setBounds(133, 144, 162, 23);
         contentPane.add(btnNewButton_1);
+        
+        JLabel lblNewLabel_1 = new JLabel("Gwen Riou, Xuan Boone, UTT A22");
+        lblNewLabel_1.setBounds(0, 183, 175, 14);
+        contentPane.add(lblNewLabel_1);
     }
 }
