@@ -50,30 +50,80 @@ import java.awt.event.KeyEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
-
+/**
+ * 
+ * Interface graphique pour distribuer les points aux etudiants d'un joueur
+ * @author rioug
+ *
+ */
 public class RepartitionDesPoints extends JFrame {
 
 	// les composants de la vue
+    /**
+     * JPanel qui contient tout l'affichage
+     */
 	private JPanel contentPane;
+	/**
+     *  Label qui presente l'etudiant
+     */
 	private Label configPersonnage = new Label();
+	/**
+     * statistique de force au combat
+     */
 	private TextField force;
+	/**
+     * Plus il est eleve, plus letudiant a une grande chance d'accomplir son action
+     */
 	private TextField dexterite;
+	/**
+     * Capacite a l etudiant de prendre moins de dommages d'attaque d'un autre etudiant
+     */
 	private TextField resistance;
+	/**
+     * plus il est eleve, plus il peut etre soigne facilement
+     */
 	private TextField constitution;
+	/**
+     * L'etudiant avec l'initiative la plus grande agit en premier
+     */
 	private TextField initiative;
+	/**
+	 * Affiche les points restant du joueur
+	 */
 	private JLabel pointsDistribuer;
+	/**
+     * repurer le nom du joueur
+     */
 	private JTextField  nom;
+	/**
+     * le programme choisit par le joueur
+     */
 	private Choice programme;
+	/**
+     * Strategie de l'etudiant,
+     */
 	private Choice strategy;
+	/**
+	 * bouton pour valider un etudiant
+	 */
 	private JButton ok;
 	
 	private static int numJ = 1;
 
 
-	// le joueur
-	private Joueur joueur= new Joueur(0);
+	/**
+     * joueur qui est conserne par l'interface 
+     */
+	private Joueur joueur;
+	/**
+     * est utilise pour appeler l'objet Partie en cours
+     */
 	private Partie partie;
-	
+	/**
+	 * Interface graphique pour distribuer les points aux etudiants d'un joueur
+	 * @param partie , reccuper la partie en cours
+	 *
+	 */
 	public RepartitionDesPoints(Partie partie) {
         setMinimumSize(new Dimension(1150, 680));
 	    this.partie=partie;
@@ -81,7 +131,9 @@ public class RepartitionDesPoints extends JFrame {
 		
 		this.initFenetre();
 	}
-
+	/**
+     * Create the frame.
+     */
 	public void initFenetre() {
 		// ++++++++++++++++++++++++++++++++++++++ Panneau principal +++++++++++++++++++++++++++++++++++++++++++
 		setForeground(Color.BLACK);
@@ -229,7 +281,7 @@ public class RepartitionDesPoints extends JFrame {
 		force.setBounds(297, 389, 61, 37);
 		contentPane.add(force);
 
-		// Dext�rit�
+		// Dexterite
 		JLabel lblNewLabel_6 = new JLabel("Dexterite");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_6.setBounds(159, 432, 105, 37);
@@ -241,7 +293,7 @@ public class RepartitionDesPoints extends JFrame {
 		dexterite.setBounds(297, 432, 61, 37);
 		contentPane.add(dexterite);
 
-		// R�sistance
+		// Resistance
 		JLabel lblNewLabel_7 = new JLabel("Resistance");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblNewLabel_7.setBounds(147, 479, 117, 37);

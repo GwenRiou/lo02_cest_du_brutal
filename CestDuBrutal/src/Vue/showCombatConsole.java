@@ -19,15 +19,30 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Model.Joueur;
 import Model.ZoneCombat;
-
+/**
+ * Interface graphique qui montre le derouler du combat 
+ */
 public class showCombatConsole extends JFrame {
+    /**
+     * Zone d'affichage d'un style console
+     */
     private JTextArea textArea;
+    /**
+     * joueur gagnant de la zone qui declanche la treve
+     */
     private Joueur gagnantDerniereTreve;
+    /**
+     *  recuper la derniere zone qui lance la treve
+     */
     private ZoneCombat derniereZoneTreve;
     private static showCombatConsole currentGUI;
-    
+    /**
+     * bouton pour lancer la nouvelle interface, une fois le combat en treve
+     */
     private JButton btnNewButton;
-    
+    /**
+     * constructeur de l'interface  
+     */
     public showCombatConsole() {
         setTitle("Combat");
         currentGUI = this;
@@ -88,28 +103,51 @@ public class showCombatConsole extends JFrame {
         System.setOut(new PrintStream(out, true));
         System.setErr(new PrintStream(out, true));
     }
+    /**
+     * Active le bouton de la treve
+     * @param bool active le bouton de la treve
+     */
     public void setTreveButtonEnabled(boolean bool) {
         btnNewButton.setEnabled(bool);
     }
-    
+    /**
+     * recupere le joueur gagnant
+     * @return le joueur gagnant
+     */
     public Joueur getGagnantDerniereTreve() {
         return gagnantDerniereTreve;
     }
-
+    /**
+     * affecte le joueur gagne de la treve
+     * @param joueur prends le joueur qui a gagne la derniere zone mise en treve
+     */
     public void setGagnantDerniereTreve(Joueur joueur) {
         gagnantDerniereTreve = joueur;
     }
-
+    /**
+     * redonne la zone qui declanche la treve
+     * @return la zone qui a declanche la treve
+     */
     public ZoneCombat getDerniereZoneTreve() {
         return derniereZoneTreve;
     }
-
+    /**
+     * donnne la zone qui declanche la treve
+     * @param zone set la zone qui a declancher la treve
+     */
     public void setDerniereZoneTreve(ZoneCombat zone) {
         derniereZoneTreve = zone;
     }
+    /**
+     * ferme l'interface graphique 
+     */
     public void disposeConsole() {
         currentGUI.dispose();
     }
+    /**
+     * return l'interface graphique en cours
+     * @return recupere l'interface graphique en cours ( le combat ici)
+     */
     public static showCombatConsole getInstance() {
         return currentGUI;
     }

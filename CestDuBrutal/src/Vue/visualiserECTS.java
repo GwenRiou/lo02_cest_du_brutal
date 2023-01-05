@@ -17,10 +17,17 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
-
+/**
+ * Interfache graphique qui permet de visualiser les ECTS et le nombre de joueur dans chaque zone 
+ */
 public class visualiserECTS extends JFrame {
-
+    /**
+     * JPanel qui contient tout l'affichage
+     */
     private JPanel contentPane;
+    /**
+     * zoneList qui contient toutes les zone de combats de la partie
+     */
     private ArrayList<ZoneCombat> zoneList;
     /**
      * Create the frame.
@@ -41,6 +48,9 @@ public class visualiserECTS extends JFrame {
         contentPane.setLayout(null);
         initFenetre();
     }
+    /**
+     * Permet d'initialiser la fenetre
+     */
     public void initFenetre() {
         JLabel lblNewLabel = new JLabel("Nombre de points ECTS total dans chaque zone");
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));

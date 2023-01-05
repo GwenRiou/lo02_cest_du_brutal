@@ -30,18 +30,35 @@ import Vue.MiseEnReserve.MonEcouteurEvenements;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-
+/**
+ * Interface graphique de l'affectation des  etudiants lors de la treve
+ *
+ */
 public class AffecteEntreZoneCombat extends JFrame {
-
+    /**
+     * JPanel qui contient tout l'affichage
+     */
     private JPanel contentPane;
 
     /**
      * Launch the application.
      */
     private boolean[] zoneBoxAppearsCondition = new boolean[Zone.getZoneList().size()];
-    private Joueur joueur= new Joueur(0);
+    /**
+     * joueur qui est conserne par l'interface 
+     */
+    private Joueur joueur;
+    /**
+     * est utilise pour appeler l'objet Partie en cours
+     */
     private Partie partie;
+    /**
+     * Permet de recuperer les zones qui sont controlee par un joueur
+     */
     private Zone zonecontrolee;
+    /**
+     * zoneList qui contient toutes les zone de combats de la partie
+     */
     private ArrayList<ZoneCombat> zoneList;
     public AffecteEntreZoneCombat(Partie partie, Zone zonecontrolee, Joueur joueur) {
         setBackground(new Color(192, 192, 192));

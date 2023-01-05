@@ -18,6 +18,9 @@ import Vue.MainMenu;
 import Vue.MiseEnReserve;
 import Vue.RepartitionDesPoints;
 import Vue.Treve;
+/**
+ * La boucle Main principale; controleur de notre modele
+ */
 
 public class main {
     static showCombatConsole guiConsole;
@@ -39,11 +42,6 @@ public class main {
     		        Zone.setZones(); 
     		        
     		        MainMenu gui0 = new MainMenu(partie,j1,j2);
-    		        
-    		        //AfficheVainqueur gui5 = new AfficheVainqueur(j1);
-    		        //gui5.setVisible(true);
-    		        //RepartitionDesPoints gui1 = new RepartitionDesPoints(partie);
-    				//MiseEnReserve gui2 = new MiseEnReserve(partie);	
     				
     			} catch (Exception e) {
     				e.printStackTrace();

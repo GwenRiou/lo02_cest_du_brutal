@@ -28,14 +28,24 @@ import Model.Zone;
 import Vue.MiseEnReserve.MonEcouteurEvenements;
 import java.awt.Dimension;
 import java.awt.Font;
-
+/**
+ * Interface graphique pour affecter les etudiants au debut de la partie 
+ *
+ */
 public class DistributionEtudiants extends JFrame {
-
+    /**
+     * JPanel qui contient tout l'affichage
+     */
     private JPanel contentPane;
     
 
-    // le joueur
-    private Joueur joueur= new Joueur(0);
+    /**
+     * joueur qui est conserne par l'interface 
+     */
+    private Joueur joueur;
+    /**
+     * est utilise pour appeler l'objet Partie en cours
+     */
     private Partie partie;
     public DistributionEtudiants(Partie partie) {
         setMinimumSize(new Dimension(1400, 800));

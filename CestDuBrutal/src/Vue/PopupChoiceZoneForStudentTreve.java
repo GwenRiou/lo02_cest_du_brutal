@@ -23,14 +23,38 @@ import java.awt.Label;
 import java.awt.Choice;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * Fenetre popup qui permet deplacer un etudiant de la reserve vers une zone (durant la treve) 
+ * @author rioug
+ *
+ */
 public class PopupChoiceZoneForStudentTreve extends JFrame {
-
+    /**
+     * JPanel qui contient tout l'affichage
+     */
     private JPanel contentPane;
-    private Joueur joueur= new Joueur(0);
+    /**
+     * joueur qui est conserne par l'interface 
+     */
+    private Joueur joueur;
+    /**
+     * est utilise pour appeler l'objet Partie en cours
+     */
     private Partie partie;
+    /**
+     * Etudiant a affecte
+     */
     private Etudiant etu;
+    /**
+     * Permet de recuperer les zones de la partie
+     */
     private Zone zone;
+    /**
+     * Fenetre popup qui permet deplacer un etudiant de la reserve vers une zone (durant la treve) 
+     * @param joueur recupere le joueur de l'etudiant
+     * @param zone recupere les zones de la partie
+     * @param etu recupere de l'etudiant a affecte
+     */
     public PopupChoiceZoneForStudentTreve(Joueur joueur,Zone zone, Etudiant etudiant) {
         setMinimumSize(new Dimension(800, 500));
         this.joueur = joueur;

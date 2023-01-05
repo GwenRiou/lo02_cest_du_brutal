@@ -28,16 +28,34 @@ import Model.ZoneCombat;
 import Vue.MiseEnReserve.MonEcouteurEvenements;
 import java.awt.Dimension;
 import java.awt.Font;
-
+/**
+ * Affecter les etudiants dans les zones depuis la reserve
+ *
+ */
 public class AffecteReservistesZoneCombat extends JFrame {
-
+    /**
+     * JPanel qui contient tout l'affichage
+     */
     private JPanel contentPane;
     
 
-    // le joueur
-    private Joueur joueur= new Joueur(0);
+    /**
+     * joueur qui est conserne par l'interface 
+     */
+    private Joueur joueur;
+    /**
+     * est utilise pour appeler l'objet Partie en cours
+     */
     private Partie partie; 
+    /**
+     * Permet de recuperer les zones de la partie
+     */
     private Zone zone;
+    /**
+     * Affecter les etudiants dans les zones depuis la reserve
+     * @param j recupere le joueur de l'etudiant
+     * @param zone recupere les zones de la partie
+     */
     public AffecteReservistesZoneCombat(Joueur j,Zone zone) {
         setMinimumSize(new Dimension(1400, 800));
         this.joueur = j;
