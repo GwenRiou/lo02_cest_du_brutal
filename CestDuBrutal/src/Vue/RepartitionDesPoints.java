@@ -353,7 +353,16 @@ public class RepartitionDesPoints extends JFrame {
 				int id = Integer.parseInt(key.substring(key.lastIndexOf(" ")+1));		
 				//On modifier l'etudiant
 				Etudiant comb = joueur.getStudent(id);
-				joueur.modifyCharacteristicsGui(comb, Integer.parseInt(force.getText()), Integer.parseInt(dexterite.getText()),Integer.parseInt(resistance.getText()),Integer.parseInt(constitution.getText()), Integer.parseInt(initiative.getText()),strategy.getSelectedItem());
+				try {
+				    int forceInt = Integer.parseInt(force.getText());
+				    int dexteriteInt = Integer.parseInt(dexterite.getText());
+				    int resistanceInt = Integer.parseInt(resistance.getText());
+                    int constitutionInt =Integer.parseInt(constitution.getText());
+                    int initiativeInt = Integer.parseInt(initiative.getText());
+				    joueur.modifyCharacteristicsGui(comb, forceInt, dexteriteInt,resistanceInt,constitutionInt, initiativeInt,strategy.getSelectedItem());
+				}catch(NumberFormatException e1){
+				    System.out.println("Erreur: ce n est pas un nombre");
+				}
 				System.out.println("Strategy : "+strategy.getSelectedItem());
 				//On met a jour l'affichage des points
 				pointsDistribuer.setText(Integer.toString(joueur.getPoints())); 

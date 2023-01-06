@@ -294,9 +294,6 @@ public class AffecteEntreZoneCombat extends JFrame {
         //if(joueur.getStudentList().size()==0 && condition) validation.setEnabled(true);---------> true version
         validation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-             // Affichage des caracteristiques du joueur.
-             //affichie la suite   
-             Treve gui1 = new Treve(joueur,zonecontrolee);
              // fermer la fenetre graphique              
              dispose();              
                            
