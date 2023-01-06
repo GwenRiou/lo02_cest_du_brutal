@@ -22,14 +22,28 @@ import java.awt.Label;
 import java.awt.Choice;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * Fenetre popup qui permet deplacer un etudiant (au debut de la partie) 
+ * @author rioug
+ *
+ */
 public class PopupChoiceZoneForStudent extends JFrame {
-
+    /**
+     * JPanel qui contient tout l'affichage
+     */
     private JPanel contentPane;
 
- // le joueur
-    private Joueur joueur= new Joueur(0);
+    /**
+     * joueur qui est conserne par l'interface 
+     */
+    private Joueur joueur;
+    /**
+     * est utilise pour appeler l'objet Partie en cours
+     */
     private Partie partie;
+    /**
+     * Etudiant a affecte
+     */
     private Etudiant etu;
     public PopupChoiceZoneForStudent(Partie partie, Etudiant etudiant) {
         setMinimumSize(new Dimension(800, 500));

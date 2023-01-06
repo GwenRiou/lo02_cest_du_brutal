@@ -17,7 +17,7 @@ public class Partie {
     
     private boolean Joueur1Ajoue;
     /**
-     * est utilisé pour appeler l'ojet Partie, utile pour récupérer la liste des joueurs
+     * est utilise pour appeler l'objet Partie, utile pour recuperer la liste des joueurs
      */
     private static Partie partieObject;
     /**
@@ -41,7 +41,6 @@ public class Partie {
      * Une liste qui contient les joueurs. Le jeu est optimisé pour l'utilisation de seulement deux joueurs. il est facilement possible d'étendre l'utilisation de plusieurs joueurs.
      */
     private static ArrayList<Joueur> listJ;
-    private Zone listOfZone ;
     
         
     /**

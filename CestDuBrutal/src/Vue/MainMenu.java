@@ -21,9 +21,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-
+/**
+ * Premier Interface graphique du jeu
+ *
+ */
 public class MainMenu extends JFrame {
-
+    /**
+     * JPanel qui contient tout l'affichage
+     */
     private JPanel contentPane;
 
     /**

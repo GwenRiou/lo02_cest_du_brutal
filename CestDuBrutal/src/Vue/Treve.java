@@ -16,13 +16,22 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
-
+/**
+ * 
+ * Interface graphique pour choisir l'action a effectue durant la treve
+ * @author rioug
+ *
+ */
 public class Treve extends JFrame {
-
+    /**
+     * JPanel qui contient tout l'affichage
+     */
     private JPanel contentPane;
 
     /**
      * Launch the application.
+     * La boucle Main principale
+     * @param args arguments d'entree
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -39,6 +48,8 @@ public class Treve extends JFrame {
 
     /**
      * Create the frame.
+     * @param joueur, recupper le joueur qui vient de gaganer la zone 
+     * @param zone ensemble des zones de la partie
      */
     public Treve(Joueur joueur, Zone zone) {
         setTitle("TREVE");

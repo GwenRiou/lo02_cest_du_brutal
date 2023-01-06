@@ -34,6 +34,7 @@ import Model.Joueur;
 import Model.Partie;
 import Model.StudentNotFoundInList;
 import Model.Zone;
+import Model.enumStrategie;
 
 import javax.swing.border.CompoundBorder;
 import java.awt.Font;
@@ -53,27 +54,71 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.awt.Dimension;
 
-
+/**
+ * Interface graphique qui permet de choisir les étudiants a mettre en reserve
+ * @author rioug
+ *
+ */
 public class MiseEnReserve extends JFrame {
 
     // les composants de la vue
+    /**
+     * JPanel qui contient tout l'affichage
+     */
     private JPanel contentPane;
+    /**
+     *  Label qui presente l'etudiant
+     */
     private Label configPersonnage = new Label();
+    /**
+     * statistique de force au combat
+     */
     private Label force;
+    /**
+     * Plus il est eleve, plus letudiant a une grande chance d'accomplir son action
+     */
     private Label dexterite;
+    /**
+     * Capacite a l etudiant de prendre moins de dommages d'attaque d'un autre etudiant
+     */
     private Label resistance;
+    /**
+     * plus il est eleve, plus il peut etre soigne facilement
+     */
     private Label constitution;
+    /**
+     * L'etudiant avec l'initiative la plus grande agit en premier
+     */
     private Label initiative;
+    /**
+     * le nom du joueur
+     */
     private Label  nom;
+    /**
+     * le programme choisit par le joueur
+     */
     private Label programme;
+    /**
+     * Strategie de l'etudiant,
+     */
     private Label strategy;
+    /**
+     * bouton pour passer a l'etape suivante
+     */
     private JButton validation;
-
+    /**
+     * bouton pour mettre un etudiant en reserve
+     */
     private JButton reserviste;
 
 
-    // le joueur
-    private Joueur joueur= new Joueur(0);
+    /**
+     * joueur qui est conserne par l'interface 
+     */
+    private Joueur joueur;
+    /**
+     * est utilise pour appeler l'objet Partie en cours
+     */
     private Partie partie;
     
     public MiseEnReserve(Partie partie) {

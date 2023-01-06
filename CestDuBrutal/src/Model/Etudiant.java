@@ -30,7 +30,7 @@ public class Etudiant implements Strategie{
      */
     private int dexterite;
     /**
-     * Capacite a letudiant de prendre moins de dommages d'attaque d'un autre etudiant
+     * Capacite a l etudiant de prendre moins de dommages d'attaque d'un autre etudiant
      */
     private int resistance;
     /**

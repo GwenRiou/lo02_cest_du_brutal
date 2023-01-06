@@ -16,9 +16,14 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * Interface graphique qui affiche le vainqueur 
+ *
+ */
 public class AfficheVainqueur extends JFrame {
-
+    /**
+     * JPanel qui contient tout l'affichage
+     */
     private JPanel contentPane;
 
     /**
