@@ -49,6 +49,12 @@ public class PopupChoiceZoneForStudentTreveNR extends JFrame {
      * Permet de recuperer les zones de la partie
      */
     private Zone zone;
+    /**
+     * 
+     * @param joueur joueur qui affecter ses etudiants 
+     * @param zone liste des zones 
+     * @param etudiant etudiant a affecter
+     */
     public PopupChoiceZoneForStudentTreveNR(Joueur joueur,Zone zone, Etudiant etudiant) {
         setMinimumSize(new Dimension(800, 500));
         this.joueur = joueur;
@@ -184,7 +190,6 @@ public class PopupChoiceZoneForStudentTreveNR extends JFrame {
         ok.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 partie.affecterEtudiantZoneMVC(etu,choice.getSelectedItem());
-                //Zone.displayAllStudentInZones();
                 AffecteEntreZoneCombat hui5 =new AffecteEntreZoneCombat(partie,zone, joueur);
                 dispose();                
             }

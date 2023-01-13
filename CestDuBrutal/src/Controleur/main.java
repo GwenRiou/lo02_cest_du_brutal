@@ -23,9 +23,17 @@ import Vue.Treve;
  */
 
 public class main {
+    /**
+     * Interface graphique qui montre le derouler du combat 
+     */
     static showCombatConsole guiConsole;
-    public void NextInterface() {
-    }
+    /**
+     * La boucle Main principale
+     * @param args arguments d'entree
+     * @throws InvocationTargetException erreur pouvant etre leve par l'interface 
+     * @throws InterruptedException erreur pouvant etre leve par l'interface 
+     * @throws IOException erreur pouvant etre leve par l'interface 
+     */
 	public static void main(String[] args) throws InvocationTargetException, InterruptedException, IOException {
     	Scanner sc = new Scanner(System.in);
     	EventQueue.invokeAndWait (new Runnable() {
@@ -49,6 +57,9 @@ public class main {
     		}
     	});		
 	}
+	/**
+	 * lance l'interface de la zone de combat
+	 */
 	public static void showConsole() {
 	   guiConsole = new showCombatConsole();
 	}

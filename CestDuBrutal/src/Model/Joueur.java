@@ -143,7 +143,16 @@ public void autoCreateStudentList() {
         return etu;
     }
     
-
+    /**
+     * permet de modifier les caracteristiques d'un etudiant choisi
+     * @param etu Etudiant a modifier
+     * @param newForce  valeur de la nouvelle force de l'etuidant
+     * @param newDexterite valeur de la nouvelle Dexterite de l'etuidant
+     * @param newResistance valeur de la nouvelle Resistance de l'etuidant
+     * @param newConstitution valeur de la nouvelle Constitution de l'etuidant
+     * @param newInitiative valeur de la nouvelle Initiative de l'etuidant
+     * @param strategy nouevelle strategie de l'eutidant 
+     */
     public void modifyCharacteristicsGui(Etudiant etu,int newForce, int newDexterite, int newResistance,int newConstitution, int newInitiative,String strategy) {
     	int pointAttribuee = (newForce+newDexterite+ newResistance+newConstitution+ newInitiative-etu.getForce()-etu.getDexterite()-etu.getConstitution()-etu.getResistance()-etu.getInitiative());
     	if (pointAttribuee>this.points) {
@@ -231,7 +240,12 @@ public void autoCreateStudentList() {
 
         }
     }
-
+    /**
+     * 
+     * Mise en reserve d'un etudiant
+     * @param id id de l'etudiant a mettre en reserve
+     * @return 1 si l'etudiant est mise en reserve 0 si l'etudiant n'est pas mis en reserve
+     */
     public int putInReserveMVC(int id) {
         if(reserve.getListeEtudiantsReserve().size()<5) {               
             try {
@@ -280,7 +294,12 @@ public void autoCreateStudentList() {
         return sb.toString();
         }
    
-  
+    /**
+     * 
+     * @param id  id de l'etudiant a selectionner
+     * @return l'etudiant selectionne 
+     * @throws StudentNotFoundInList erreur si l'etudiant n'est pas dans la liste du joueur 
+     */
     public Etudiant selectStudentMVC(int id)throws StudentNotFoundInList{ 
         
         ArrayList<Etudiant>  l= studentList;          
@@ -369,7 +388,7 @@ public void autoCreateStudentList() {
     }
     
 
-    // Implémentation plus complexe possible cf doc idée // c'est fait, on utilise des pointeurs vers les Joueurs mtn
+    // Implementation plus complexe possible cf doc idee // c'est fait, on utilise des pointeurs vers les Joueurs mtn
 
     /**
      * setter de {@link #userName}

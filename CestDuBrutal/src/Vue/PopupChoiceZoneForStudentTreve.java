@@ -53,7 +53,7 @@ public class PopupChoiceZoneForStudentTreve extends JFrame {
      * Fenetre popup qui permet deplacer un etudiant de la reserve vers une zone (durant la treve) 
      * @param joueur recupere le joueur de l'etudiant
      * @param zone recupere les zones de la partie
-     * @param etu recupere de l'etudiant a affecte
+     * @param etudiant recupere de l'etudiant a affecte
      */
     public PopupChoiceZoneForStudentTreve(Joueur joueur,Zone zone, Etudiant etudiant) {
         setMinimumSize(new Dimension(800, 500));

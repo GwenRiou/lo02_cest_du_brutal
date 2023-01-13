@@ -120,14 +120,19 @@ public class MiseEnReserve extends JFrame {
      * est utilise pour appeler l'objet Partie en cours
      */
     private Partie partie;
-    
+    /**
+     * Creation de l'interface pour la mise en reserve
+     * @param partie la partie en cour
+     */
     public MiseEnReserve(Partie partie) {
         setMinimumSize(new Dimension(1200, 700));
         this.joueur = partie.getJoueurToPlay();
         this.partie=partie;
         this.initFenetre();
     }
-
+    /**
+     * Inisialisation de l'interface
+     */
     public void initFenetre() {
         // ++++++++++++++++++++++++++++++++++++++ Panneau principal +++++++++++++++++++++++++++++++++++++++++++
         setForeground(Color.BLUE);

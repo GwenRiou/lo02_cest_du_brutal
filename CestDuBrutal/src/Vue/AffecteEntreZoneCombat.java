@@ -41,7 +41,7 @@ public class AffecteEntreZoneCombat extends JFrame {
     private JPanel contentPane;
 
     /**
-     * Launch the application.
+     * tableau qui contient des booleens, indiquant quelles zones doivent etre affichees.
      */
     private boolean[] zoneBoxAppearsCondition = new boolean[Zone.getZoneList().size()];
     /**
@@ -60,6 +60,12 @@ public class AffecteEntreZoneCombat extends JFrame {
      * zoneList qui contient toutes les zone de combats de la partie
      */
     private ArrayList<ZoneCombat> zoneList;
+    /**
+     * Constructeur de la classe 
+     * @param partie la partie en cours
+     * @param zonecontrolee liste des zones controlees par le joueur 
+     * @param joueur le joueur qui controle les zones
+     */
     public AffecteEntreZoneCombat(Partie partie, Zone zonecontrolee, Joueur joueur) {
         setBackground(new Color(192, 192, 192));
         setMinimumSize(new Dimension(1000, 800));
@@ -72,15 +78,15 @@ public class AffecteEntreZoneCombat extends JFrame {
         
         this.initFenetre();
     }
-
+    /**
+    * Cree un tableau qui contient des booleens, indiquant si les zones doivent etre affichees.
+    * 
+    */
    private void conditionsAreMet() {
        for (int i = 0; i<Zone.getZoneList().size(); i++) {
            
            zoneBoxAppearsCondition[i] = (zoneList.get(i).getControlePar() == null || zoneList.get(i).getControlePar() == joueur);
-           //DEBUG
-           //System.out.println((zoneList.get(i).getControlePar() == null) +" and "+ (zoneList.get(i).getControlePar() == joueur)+ ""
-           //        + " by "+zoneList.get(i).getControlePar()+ "with"+joueur.getUserName() );
-           //System.out.println(zoneBoxAppearsCondition[i]);
+           
        }
        
    }
@@ -328,6 +334,11 @@ public class AffecteEntreZoneCombat extends JFrame {
         lblNewLabel_1_1_1_1_1.setBounds(720, 514, 227, 14);
         contentPane.add(lblNewLabel_1_1_1_1_1);
     }
+    /**
+     * Annonce qui controle la zone
+     * @param zone une zone de la partie 
+     * @return l'etat de la zone 
+     */
     public String zoneControlString(ZoneCombat zone) {
         if (zone.getControlePar() == null) {
             return "En Dispute";

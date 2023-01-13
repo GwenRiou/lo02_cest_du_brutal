@@ -31,13 +31,18 @@ public class AfficheVainqueur extends JFrame {
      */
  // le joueur
     private Joueur joueur;
-    
+    /**
+     * interface qui indique le joueur gagnant
+     * @param j joueur qui a gagne la partie
+     */
     public AfficheVainqueur(Joueur j) {
         setMinimumSize(new Dimension(1000, 500));
         joueur = j;
         this.initFenetre();
     }
-
+    /**
+     * Initialisa l'interface
+     */
     public void initFenetre() {
         setTitle("Victoire!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

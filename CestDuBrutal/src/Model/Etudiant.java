@@ -399,6 +399,10 @@ public class Etudiant implements Strategie{
             System.out.println("Veuillez entrer une strategie valide");
         }
     }
+    /**
+     * Permet de donner l'index pour afficher la bonne strategie dans l'interface
+     * @return 0 si la strategie est OFFENSIVE; 1 si DEFENSIVE, 2 si RANDOM et -1 dans les autres cas 
+     */
     public int getStrategieIndex() {
         switch(strategie.toString()) {
             case "OFFENSIVE":

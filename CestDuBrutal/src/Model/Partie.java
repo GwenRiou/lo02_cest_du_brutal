@@ -12,7 +12,9 @@ import Vue.showCombatConsole;
  */
 public class Partie {
     
-
+    /**
+     *  variable pour indique si le mode auto est declanche
+     */
     private static boolean auto ;   
     
     private boolean Joueur1Ajoue;
@@ -24,11 +26,21 @@ public class Partie {
      * Permet de savoir si la treve est declenchee
      */
     private String treve;
+    /**
+     * Permet de savoir quelle choix l'utilisateur a choisit lors de la treve
+     */
     private int inputTreve;
+    /**
+     * Permet de savoir l'état de la treve
+     * @return treve Permet de savoir si la treve est declenchee
+     */
     public String getTreve() {
         return treve;
     }
-
+    /**
+     * Permet de changer l'etat du parametre treve
+     * @param treve Permet de savoir si la treve est declenchee
+     */
     public void setTreve(String treve) {
         this.treve = treve;
     }
@@ -82,7 +94,6 @@ public class Partie {
      * instancie un nouveau joueur et l'ajoute a la liste des joueurs
      * @param joueur new joueur
      */
-
     public void addPlayer(Joueur joueur){
         System.out.println("--Creation dun nouveau joueur--");
         listJ.add(joueur);
@@ -102,10 +113,22 @@ public class Partie {
         j2.identify("Gwen",Programme.A2I);
         
     }
+    /**
+     * Permet de return le joueur qui doit jouer
+     * @return Joueur le joueur qui doit jouer
+     */
     public Joueur getJoueurToPlay() {  
         if (Joueur1Ajoue==false) return listJ.get(0);//le joureur1  
         else return listJ.get(1);// le joueur 2 
     }   
+    /**
+     * Permet au joueur de choisir un etudiant parmi une liste en fonction de leur ID
+     * @param j joueur pour concerner seulement les etudiants d'un joueur
+     
+     * @param id l'id de l'etudiant choisie
+     * @return l'etudiant choisie par l'utilisateur 
+     * @throws StudentNotFoundInList  erreur lancee lorsqu'aucun etudiant n'est trouve dans la liste
+     */
     public Etudiant selectStudentMVC(Joueur j, int id) throws StudentNotFoundInList{   //USED TO BE selectStudentMVC 
         ArrayList<Etudiant>  l= j.getStudentList();             
         for (ListIterator<Etudiant> it = l.listIterator(); it.hasNext();) { 
@@ -228,9 +251,13 @@ public class Partie {
             }
         }
     }
+    /**
+     * affectation des etudiants dans la zone:
+     * @param etu etudiant affectee
+     * @param toZoneString nom de la zone ou l'etudiant va etre envoie 
+     */
     public void affecterEtudiantZoneMVC(Etudiant etu, String toZoneString) {    
-    try {   
-        //On rï¿½cuppï¿½re l'etu, la zone de dï¿½part, d'arrive et le joueur  
+    try {    
         Joueur j = etu.getBelongsTo();  
         Etudiant studentToMove = new Etudiant();    
         Zone fromZone=new Zone ("zone vide");   
@@ -244,7 +271,7 @@ public class Partie {
         String idToZone = toZoneString; 
         Zone toZone = selectZone(idToZone);     
             
-        //on dï¿½place l'etu  
+        //on deplace l'etu  
         toZone.addEtudiantDansZone(studentToMove);      
         // on retire l'etu de la zone d'origine 
         if(etu.getIsInZone().getZoneName().equalsIgnoreCase("le camion")) { 
@@ -389,6 +416,12 @@ public class Partie {
             System.out.println("La reserve est vide!");
         }
     }
+    /**
+     * Permet de deplacer les etudiants d'un joueur d'une zone vers une autre zone pendant la treve pour l'interface
+     * @param j joueur qui possede les etudiants que l'on veut deplacer
+     * @param etu etudiant affectee
+     * @param toZoneString nom de la zone ou l'etudiant va etre envoie 
+     */
     public void affecterEtudiantReserveTreveMVC(Joueur j,Etudiant etu,String toZoneString) {
         
                     try {
@@ -533,7 +566,6 @@ public class Partie {
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         this.finDePartie = Zone.FinDePartie();
@@ -545,24 +577,10 @@ public class Partie {
             showCombatConsole.getInstance().setDerniereZoneTreve(zone);
             showCombatConsole.getInstance().setGagnantDerniereTreve(gagnantTreve);
             showCombatConsole.getInstance().setTreveButtonEnabled(true);
-            /*
-            try {   
-                Treve guiTreve = new Treve(gagnantTreve,zone);  
-                guiTreve.setVisible(true);  
-            } catch (Exception e) { 
-                e.printStackTrace();    
-            }
-            */
+           
             inputTreve = 0;
             while (!(inputTreve == 4)) {   
-                //TODO
-                //trucs de la treve
-                /*input = getUserChoix("\033[0;1m\033[096m"+gagnantTreve.getUserName()+"\033[0;0m\033[0;1m: Que voulez-vous faire? (entrez 1-4)\n"
-                        + "\033[0;31m1.\033[0;1m Affecter des etudiants des zones controlees\n"
-                        + "\033[0;31m2.\033[0;1m Affecter des reservistes sur des zones de combat\n"
-                        + "\033[0;31m3.\033[0;1m Visualiser le nombre de points ECTS par zone de combat\n"
-                        + "\033[0;31m4.\033[0;1m Continuer la bataille\033[0;0m",4);
-                */
+                
                 System.out.print("");//NE PAS ENLEVER ( le code marche pas sans )
                 switch(inputTreve) {
                     case 1:
@@ -583,14 +601,20 @@ public class Partie {
             }
         }else {
             Zone.interrupteAll();
-            System.out.println("-------------La Partie est finie----------------------");
-            //System.exit(0);
+            System.out.println("-------------La Partie est finie----------------------");            
         }
     }
+    /**
+     * Permet de savoir quel choix l'utilisateur a choisit lors de la treve
+     * @return inputTreve  choix l'utilisateur  lors de la treve
+     */
     public int getInputTreve() {
         return inputTreve;
     }
-
+    /**
+     * Permet de'enregistre quel choix l'utilisateur a choisit lors de la treve
+     * @param inputTreve Permet de savoir quelle choix l'utilisateur a choisit lors de la treve
+     */
     public void setInputTreve(int inputTreve) {
         this.inputTreve = inputTreve;
     }
@@ -699,16 +723,7 @@ public class Partie {
     public static void main(String[] args) {
         System.out.println("\033[0;30m"+"note: Ce code utilise des couleurs format ANSI, utilisation d'Eclipse est reccomendee\n"
                 + "=+=!!- C'EST DU BRUTAL V1.1 -!!=+="+"\033[0;30m");
-        //sans MVC:
-        /*
-        String debug = getUserInput("Mode automatique? (pour debug) y/n ");
-        if (debug.equalsIgnoreCase("Y")) {
-            System.out.println("\033[0;90m"+"Mode automatique actif\n"+"\033[0;0m");
-        }
-        else {
-            System.out.println("\033[0;90m"+"Mode automatique inactif\n"+"\033[0;0m");
-        }
-        */
+        
         //Creation de la partie,
         Partie partie;
         partie = Partie.getInstance();
@@ -717,73 +732,35 @@ public class Partie {
         Joueur j2 = new Joueur(2);
         partie.addPlayer(j1);
         partie.addPlayer(j2);
-        //partie.autoAddPlayers(j1, j2);
         
         
-        /*
-        System.out.println("Le joueur 1 s'appelle " +j1.getUserName());   
-        System.out.println("Le joueur 2 s'appelle " +j2.getUserName());
-        
-        System.out.println("\033[0;1m"+"========REPARTITION DES POINTS======="+"\033[0;0m");
-        
-        if (debug.equalsIgnoreCase("Y")){
-            System.out.println("> La repartition est automatique");
-            j1.autoCreateStudentList();
-            j2.autoCreateStudentList();
-        }
-        else {
-            
-            j1.displayAllStudent();
-            partie.repartitionPoints(j1);  
-            j2.displayAllStudent();
-            partie.repartitionPoints(j2); 
-        }
-        
-        System.out.println("\033[0;1m"+"========MISE EN RESERVE======="+"\033[0;0m");
-        
-
-        j1.displayAllStudent();
-        partie.putInReserve(j1);
-        j1.displayReserveStudent();
-        System.out.println("\n");
-        j2.displayAllStudent();
-        partie.putInReserve(j2); 
-        j2.displayReserveStudent();
-        
-
-        System.out.println("\033[0;1m"+"========DISTRIBUTION DES ETUDIANTS======="+"\033[0;0m");
-        
-        
-        if (debug.equalsIgnoreCase("Y")) {
-            autoAffecterEtudiantZone(j1);
-            autoAffecterEtudiantZone(j2);
-        }
-        else {
-          j1.displayAllStudent();
-          partie.affecterEtudiantZone(j1);  
-          j2.displayAllStudent();
-          partie.affecterEtudiantZone(j2);  
-        }
-        
-        Zone.displayAllStudentInZones();
-       
-        String empty = getUserInput("\n---"+"\033[0;1m"+"Appuyez sur entree pour proceder a la melee"+"\033[0;1m"+"---");
-        Zone.melee();        
-        System.out.println("exit(0)");
-        */
     }
-
+    /**
+     *  methode qui donne le joueur qui doit jouer
+     * @return le joueur qui doit joue a ce tour 
+     */
     public boolean isJoueur1Ajoue() {
         return Joueur1Ajoue;
     }
-
+    /**
+     * Change le joueur qui joue 
+     * @param joueur1Ajoue le joueur qui est le prochain a jouer 
+     */
     public void setJoueur1Ajoue(boolean joueur1Ajoue) {
         Joueur1Ajoue = joueur1Ajoue;
     }
+    /**
+     * indique si le mode automatique est enclanche
+     * @return true si mode autommatique a ete choisie , sinon false
+     */
     public static boolean isAuto() {
         return auto;
     }
-
+    
+    /**
+     * permet de declanche le mode auto si le joueur le choisit
+     * @param auto boolean qui indique si le monde auto est lancee
+     */
     public static void setAuto(boolean auto) {
         Partie.auto = auto;
     }

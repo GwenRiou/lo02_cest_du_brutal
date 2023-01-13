@@ -36,11 +36,12 @@ public class MainMenu extends JFrame {
      */
     
     /**
-     * Create the frame.
+     * Create the frame.=
+     * @param partie la partie en cour
+     * @param j1 le joueur 1
+     * @param j2 le joueur 2 
      */
-    
     public MainMenu(Partie partie, Joueur j1, Joueur j2) {
-        //this.pack();
         setTitle("Menu Principal");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 451, 236);

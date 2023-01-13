@@ -142,6 +142,13 @@ public class Zone {
         throw new StudentNotFoundInList();
 
     }
+    /**
+     * Retire un etudiant d'une zone 
+     * @param j joueur qui va retire sons étudiant 
+     * @param id id de l'etudiant a enleve
+     * @return un etudiant enleve
+     * @throws StudentNotFoundInList letudiant n'a pas ete trouve dans la liste
+     */
     public Etudiant drawEtudiantDansZoneMVC(Joueur j,int id) throws StudentNotFoundInList{
         ArrayList<Etudiant>  etulist= this.etuDansZone;//
             try {//try finding a student in the zone
@@ -320,6 +327,11 @@ public class Zone {
             }
         return true;
     }
+    /**
+     * Return la liste des etudiants d'un joueur dans le zone
+     * @param j le joueur qui veut regarde ses etudiants
+     * @return la liste des etudiants du joueur j
+     */
     public ArrayList<Etudiant> getEtuDansZoneArrayList(Joueur j) {
         ArrayList<Etudiant>  etulist= this.etuDansZone;
         ArrayList<Etudiant>  etulistJ= new ArrayList<Etudiant>();
@@ -370,7 +382,10 @@ public class Zone {
         System.out.println("L'etudiant a bien ete ajoute a la zone");
     }
 
-
+    /**
+     * return tous les etudiants present dans la zone
+     * @return la liste des etudiants dans la zone 
+     */
     public ArrayList<Etudiant> getEtuDansZone() {
         return etuDansZone;
     }

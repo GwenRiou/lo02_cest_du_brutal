@@ -45,6 +45,11 @@ public class PopupChoiceZoneForStudent extends JFrame {
      * Etudiant a affecte
      */
     private Etudiant etu;
+    /**
+     * Creation de la popup pour affecter un etudiant
+     * @param partie la partie en cour
+     * @param etudiant l'etudiant qui va etre affecter
+     */
     public PopupChoiceZoneForStudent(Partie partie, Etudiant etudiant) {
         setMinimumSize(new Dimension(800, 500));
         this.joueur = partie.getJoueurToPlay();

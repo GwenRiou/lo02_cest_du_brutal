@@ -1,6 +1,6 @@
 package Model;
 /**
- * erreur lancee lorsqu'aucune zone n'est trouvé dans une liste
+ * erreur lancee lorsqu'aucune zone n'est trouve dans une liste
  * @author boone
  *
  */

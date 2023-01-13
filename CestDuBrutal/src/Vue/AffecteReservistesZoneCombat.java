@@ -128,13 +128,7 @@ public class AffecteReservistesZoneCombat extends JFrame {
         panelBibliotheque.setLayout(new GridLayout(1, 20, 0, 0));
       //habiage du panel bibliotheque 
 
-        //Gere si on peut affecter des etu sur cette zone 
-        /*boolean selectedZoneIsActive = false;
-        ZoneCombat toZone = (ZoneCombat) Zone.getZone(0);
-        if(toZone.getControlePar()==null) {
-            selectedZoneIsActive = true;
-            System.out.println(toZone.getZoneName()+" est en combat");
-        }*/
+        
         ArrayList <Etudiant> listeBiblio = Zone.getZone(0).getEtuDansZoneArrayList(joueur);        
         int sizeBiblio = listeBiblio.size();
         JButton[] jb1 = new JButton[sizeBiblio];
@@ -154,8 +148,6 @@ public class AffecteReservistesZoneCombat extends JFrame {
             }
             panelBibliotheque.add(jb1[k]);
             Etudiant etu = listeBiblio.get(k);
-          //Gere si on peut affecter des etu sur cette zone AUSSi
-            //if (!selectedZoneIsActive) jb1[k].addActionListener(   new MonEcouteurEvenements(listeBiblio, etu));
         }
         
         JLabel lblNewLabel_3 = new JLabel("Le BDE");

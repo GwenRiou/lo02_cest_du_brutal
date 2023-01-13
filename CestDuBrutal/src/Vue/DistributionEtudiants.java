@@ -47,6 +47,10 @@ public class DistributionEtudiants extends JFrame {
      * est utilise pour appeler l'objet Partie en cours
      */
     private Partie partie;
+    /**
+     * inisialise les parametres de l'objet et lance l'initialisation
+     * @param partie la partie en cour
+     */
     public DistributionEtudiants(Partie partie) {
         setMinimumSize(new Dimension(1400, 800));
         this.joueur = partie.getJoueurToPlay();// on r�cupp�re le premier joueur
@@ -271,8 +275,7 @@ public class DistributionEtudiants extends JFrame {
         boolean condition=false;
         if(joueur.getId()==1) condition=Zone.allZoneNotEmpty();// condidtion pour que le j1 a un etu dasn chaque zone 
         else condition=Zone.allZoneWithTwoStudent(joueur);
-        //if( condition) validation.setEnabled(true);//---------------------------------------------> DEBUG
-        if(joueur.getStudentList().size()==0 && condition) validation.setEnabled(true);//---------> true version
+        if(joueur.getStudentList().size()==0 && condition) validation.setEnabled(true);
         validation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
              // Affichage des caracteristiques du joueur.

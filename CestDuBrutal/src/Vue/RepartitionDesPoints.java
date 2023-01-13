@@ -224,13 +224,7 @@ public class RepartitionDesPoints extends JFrame {
 		contentPane.add(lblNewLabel_3);
 		nom = new JTextField();	  
 		nom.setText("Entrer nom");
-		nom.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//System.out.println("Nom du Joueur : " +nom.getText());
-				//joueur.setUserName(nom.getText());
-			    //JAI DEPLACE CE CODE VERS LE BOUTON "VALIDER"
-			}
-		});
+		
 		nom.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		nom.setBounds(336, 24, 152, 37);
 		contentPane.add(nom);
